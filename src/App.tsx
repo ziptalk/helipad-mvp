@@ -1,25 +1,22 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import * as React from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Login from "./components/login/Login";
+import AssetList from "./components/asset_list/AssetList";
+import AssetDetail from "./components/asset_detail/AssetDetail";
+import SignUp from "./components/login/SignUp";
+import Landing from "./components/landing/Landing";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src ={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <Router>
+        <Switch>
+          <Route exact path={"/login"} component={Login} />
+          <Route exact path={"/sign-up"} component={SignUp} />
+          <Route exact path={"/asset-list"} component={AssetList} />
+          <Route exact path={"/asset-detail"} component={AssetDetail} />
+          <Route exact path={"/landing"} component={Landing} />
+        </Switch>
+      </Router>
   );
 }
 

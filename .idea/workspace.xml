@@ -1,7 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4c74c76f-7eff-450a-8c2b-109a3515f2d3" name="Default Changelist" comment="" />
+    <list default="true" id="4c74c76f-7eff-450a-8c2b-109a3515f2d3" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/components/landing/Landing.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/landing/Landing.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/login/Login.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/login/LoginForm.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/login/LoginForm.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/login/SignUp.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -11,6 +22,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="TypeScript JSX File" />
+        <option value="CSS File" />
       </list>
     </option>
   </component>
@@ -28,6 +40,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="js.linters.configure.manually.selectedeslint" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.standard" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -40,6 +53,11 @@
     <property name="settings.editor.selected.configurable" value="settings.javascript.linters.eslint" />
     <property name="ts.external.directory.path" value="$PROJECT_DIR$/node_modules/typescript/lib" />
   </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -50,7 +68,9 @@
       <updated>1616654132945</updated>
       <workItem from="1616654134100" duration="2044000" />
       <workItem from="1616664690952" duration="721000" />
-      <workItem from="1616666563177" duration="1285000" />
+      <workItem from="1616666563177" duration="3999000" />
+      <workItem from="1616671018298" duration="71000" />
+      <workItem from="1616671091239" duration="7924000" />
     </task>
     <servers />
   </component>
@@ -66,5 +86,13 @@
       <screen x="-822" y="-1440" width="3440" height="1440" />
     </state>
     <state x="407" y="-1081" key="SettingsEditor/-822.-1440.3440.1440/0.0.1680.1050@-822.-1440.3440.1440" timestamp="1616667205966" />
+    <state x="563" y="-374" key="run.anything.popup" timestamp="1616681597287">
+      <screen x="-822" y="-1440" width="3440" height="1440" />
+    </state>
+    <state x="563" y="-374" key="run.anything.popup/-822.-1440.3440.1440/0.0.1680.1050@-822.-1440.3440.1440" timestamp="1616681597287" />
+    <state x="563" y="-1109" width="670" height="676" key="search.everywhere.popup" timestamp="1616681516024">
+      <screen x="-822" y="-1440" width="3440" height="1440" />
+    </state>
+    <state x="563" y="-1109" width="670" height="676" key="search.everywhere.popup/-822.-1440.3440.1440/0.0.1680.1050@-822.-1440.3440.1440" timestamp="1616681516024" />
   </component>
 </project>

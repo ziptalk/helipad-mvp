@@ -1,0 +1,21 @@
+.form {
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+}
+
+.loginRow {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.emailInput {
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+.passwordInput {
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
