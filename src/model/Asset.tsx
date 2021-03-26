@@ -6,7 +6,8 @@ export default class Asset {
         readonly price: string,
         readonly nBedrooms: number,
         readonly nBathrooms: number,
-        readonly square: number
+        readonly square: number,
+        readonly purpose: number
     ) {}
 
     static fromMap(map: Map<string, any>): Asset {
@@ -17,7 +18,8 @@ export default class Asset {
             map.get("price") as string,
             map.get("nBedrooms") as number,
             map.get("nBathrooms") as number,
-            map.get("square") as number
+            map.get("square") as number,
+            map.get("purpose") as number
         );
     }
 }
