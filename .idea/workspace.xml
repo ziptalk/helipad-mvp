@@ -2,19 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4c74c76f-7eff-450a-8c2b-109a3515f2d3" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/components/process/Process.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/domain/ContactToAgent.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/domain/DownloadUnsignedDocument.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/domain/GetEscrowCompany.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/domain/GetMortgageLender.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/domain/GetStatus.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/domain/Login.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/domain/SaveAsset.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/domain/SetBankAccount.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/domain/UploadSignedDocument.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/domain/GetAssetList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/GetAssetList.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Asset.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Asset.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/process/Process.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/process/Process.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/domain/SaveAsset.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/SaveAsset.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -111,7 +101,7 @@
       <workItem from="1616664690952" duration="721000" />
       <workItem from="1616666563177" duration="3999000" />
       <workItem from="1616671018298" duration="71000" />
-      <workItem from="1616671091239" duration="14428000" />
+      <workItem from="1616671091239" duration="15213000" />
     </task>
     <servers />
   </component>
