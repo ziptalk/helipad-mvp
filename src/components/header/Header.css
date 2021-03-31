@@ -1,0 +1,23 @@
+.headerWrapper {
+    margin-top: 66px;
+}
+
+.headerTitle {
+    margin-left: 250px;
+    margin-bottom: 66px;
+    font-size: 45px;
+    font-family: termina;
+}
+
+.headerRow {
+    margin-right: 250px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.headerMenu {
+    margin-left: 25px;
+    margin-right: 25px;
+    font-size: 18px;
+}

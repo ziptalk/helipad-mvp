@@ -2,9 +2,41 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4c74c76f-7eff-450a-8c2b-109a3515f2d3" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/components/Footer.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/asset_detail/Amenties.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/asset_detail/BuiildingInfo.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/asset_detail/Contact.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/asset_detail/Detail.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/asset_detail/Location.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/asset_detail/Summary.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/asset_list/AssetCard.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/asset_list/AssetCard.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/asset_list/AssetList.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/header/Header.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/header/Header.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/header/HeaderContainer.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/login/InputField.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/login/SignUp.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/images/example_background1.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/images/ic_contact.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/images/ic_facebook.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/images/ic_save.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/model/BuildingInformation.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/process/Process.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/process/Process.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/domain/SaveAsset.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/SaveAsset.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/asset_detail/AssetDetail.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/asset_detail/AssetDetail.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/asset_list/AssetList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/asset_list/AssetList.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/login/Login.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/login/Login.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/login/Login.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/login/Login.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/login/LoginForm.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/login/LoginForm.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/login/LoginForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/login/LoginForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/login/SignUp.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/login/SignUp.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/Asset.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Asset.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -14,8 +46,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="CSS File" />
         <option value="TypeScript File" />
+        <option value="CSS File" />
         <option value="TypeScript JSX File" />
       </list>
     </option>
@@ -24,6 +56,9 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1qEoVIQQ9ec49CKsWlReJnIqOYW" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -45,11 +80,13 @@
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="yarn" />
-    <property name="settings.editor.selected.configurable" value="settings.javascript.linters.eslint" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
     <property name="ts.external.directory.path" value="$PROJECT_DIR$/node_modules/typescript/lib" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/components" />
+      <recent name="$PROJECT_DIR$/src/components/header" />
       <recent name="$PROJECT_DIR$/src" />
     </key>
   </component>
@@ -101,7 +138,8 @@
       <workItem from="1616664690952" duration="721000" />
       <workItem from="1616666563177" duration="3999000" />
       <workItem from="1616671018298" duration="71000" />
-      <workItem from="1616671091239" duration="15213000" />
+      <workItem from="1616671091239" duration="24956000" />
+      <workItem from="1617119910464" duration="16326000" />
     </task>
     <servers />
   </component>
@@ -113,33 +151,45 @@
       <screen x="-822" y="-1440" width="3440" height="1440" />
     </state>
     <state x="767" y="-822" key="#ESLint/-822.-1440.3440.1440/0.0.1680.1050@-822.-1440.3440.1440" timestamp="1616664670720" />
-    <state width="3419" height="419" key="GridCell.Tab.0.bottom" timestamp="1616729486675">
+    <state x="639" y="-915" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1617123888022">
       <screen x="-822" y="-1440" width="3440" height="1440" />
     </state>
-    <state width="3419" height="419" key="GridCell.Tab.0.bottom/-822.-1440.3440.1440/0.0.1680.1050@-822.-1440.3440.1440" timestamp="1616729486675" />
-    <state width="3419" height="419" key="GridCell.Tab.0.center" timestamp="1616729486673">
+    <state x="639" y="-915" key="#com.intellij.fileTypes.FileTypeChooser/-822.-1440.3440.1440/0.0.1680.1050@-822.-1440.3440.1440" timestamp="1617123888022" />
+    <state x="636" y="-966" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1617119059440">
       <screen x="-822" y="-1440" width="3440" height="1440" />
     </state>
-    <state width="3419" height="419" key="GridCell.Tab.0.center/-822.-1440.3440.1440/0.0.1680.1050@-822.-1440.3440.1440" timestamp="1616729486673" />
-    <state width="3419" height="419" key="GridCell.Tab.0.left" timestamp="1616729486672">
+    <state x="636" y="-966" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/-822.-1440.3440.1440/0.0.1680.1050@-822.-1440.3440.1440" timestamp="1617119059440" />
+    <state width="3419" height="419" key="GridCell.Tab.0.bottom" timestamp="1617119895088">
       <screen x="-822" y="-1440" width="3440" height="1440" />
     </state>
-    <state width="3419" height="419" key="GridCell.Tab.0.left/-822.-1440.3440.1440/0.0.1680.1050@-822.-1440.3440.1440" timestamp="1616729486672" />
-    <state width="3419" height="419" key="GridCell.Tab.0.right" timestamp="1616729486674">
+    <state width="3419" height="419" key="GridCell.Tab.0.bottom/-822.-1440.3440.1440/0.0.1680.1050@-822.-1440.3440.1440" timestamp="1617119895088" />
+    <state width="3419" height="419" key="GridCell.Tab.0.center" timestamp="1617119895086">
       <screen x="-822" y="-1440" width="3440" height="1440" />
     </state>
-    <state width="3419" height="419" key="GridCell.Tab.0.right/-822.-1440.3440.1440/0.0.1680.1050@-822.-1440.3440.1440" timestamp="1616729486674" />
-    <state x="407" y="-1081" key="SettingsEditor" timestamp="1616667205966">
+    <state width="3419" height="419" key="GridCell.Tab.0.center/-822.-1440.3440.1440/0.0.1680.1050@-822.-1440.3440.1440" timestamp="1617119895086" />
+    <state width="3419" height="419" key="GridCell.Tab.0.left" timestamp="1617119895086">
       <screen x="-822" y="-1440" width="3440" height="1440" />
     </state>
-    <state x="407" y="-1081" key="SettingsEditor/-822.-1440.3440.1440/0.0.1680.1050@-822.-1440.3440.1440" timestamp="1616667205966" />
+    <state width="3419" height="419" key="GridCell.Tab.0.left/-822.-1440.3440.1440/0.0.1680.1050@-822.-1440.3440.1440" timestamp="1617119895086" />
+    <state width="3419" height="419" key="GridCell.Tab.0.right" timestamp="1617119895087">
+      <screen x="-822" y="-1440" width="3440" height="1440" />
+    </state>
+    <state width="3419" height="419" key="GridCell.Tab.0.right/-822.-1440.3440.1440/0.0.1680.1050@-822.-1440.3440.1440" timestamp="1617119895087" />
+    <state x="407" y="-1081" key="SettingsEditor" timestamp="1617120274899">
+      <screen x="-822" y="-1440" width="3440" height="1440" />
+    </state>
+    <state x="407" y="-1081" key="SettingsEditor/-822.-1440.3440.1440/0.0.1680.1050@-822.-1440.3440.1440" timestamp="1617120274899" />
+    <state x="606" y="-981" width="584" height="522" key="find.popup" timestamp="1617220804635">
+      <screen x="-822" y="-1440" width="3440" height="1440" />
+    </state>
+    <state x="606" y="-981" width="584" height="522" key="find.popup/-822.-1440.3440.1440/0.0.1680.1050@-822.-1440.3440.1440" timestamp="1617220804635" />
     <state x="563" y="-374" key="run.anything.popup" timestamp="1616681597287">
       <screen x="-822" y="-1440" width="3440" height="1440" />
     </state>
     <state x="563" y="-374" key="run.anything.popup/-822.-1440.3440.1440/0.0.1680.1050@-822.-1440.3440.1440" timestamp="1616681597287" />
-    <state x="563" y="-1109" width="670" height="676" key="search.everywhere.popup" timestamp="1616681516024">
+    <state x="563" y="-1109" width="670" height="676" key="search.everywhere.popup" timestamp="1617208572288">
       <screen x="-822" y="-1440" width="3440" height="1440" />
     </state>
-    <state x="563" y="-1109" width="670" height="676" key="search.everywhere.popup/-822.-1440.3440.1440/0.0.1680.1050@-822.-1440.3440.1440" timestamp="1616681516024" />
+    <state x="563" y="-1109" width="670" height="676" key="search.everywhere.popup/-822.-1440.3440.1440/0.0.1680.1050@-822.-1440.3440.1440" timestamp="1617208572288" />
   </component>
 </project>

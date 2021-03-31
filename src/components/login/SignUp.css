@@ -1,0 +1,60 @@
+.signUpWrapper {
+    margin-top: 200px;
+    width: 460px;
+    display: flex;
+    flex-direction: column;
+}
+
+.signUpRow {
+    width: 100%;
+}
+
+.signUpTitle {
+    font-size: 30px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.signUpDivider {
+    width: 100%;
+    border: 1px solid #000000;
+}
+
+.signUpName {
+    display: grid;
+    grid-template-columns: 220px 220px;
+    grid-gap: 24px;
+}
+
+.signUpAgent {
+    margin-top: 15px;
+    padding-left: 10px;
+    padding-right: 10px;
+    display: flex;
+    flex-direction: row;
+    background: #EBEBEB;
+    border: 1px solid #D7D7D7;
+    height: 45px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.agentText {
+    font-size: 20px;
+    color: #4542E2;
+}
+
+.agentCheckBox {
+    width: 20px;
+    height: 20px;
+}
+
+.signUpButton {
+    margin-top: 10px;
+    width: 100%;
+    height: 45px;
+    background-color: #4542E2;
+    color: #ffffff;
+    font-size: 20px;
+}
