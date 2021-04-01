@@ -1,0 +1,9 @@
+[
+  {
+    "price": 1234567890,
+    "status": "Active",
+    "daysOnMarket": 30,
+    "textPerMonth": 1000,
+    "commonChargePerMonth": 10
+  }
+]
