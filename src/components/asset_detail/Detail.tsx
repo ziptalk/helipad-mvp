@@ -6,6 +6,9 @@ import Amenities from './Amenties';
 import Location from './Location';
 import BuildingInfo from './BuiildingInfo';
 import InvestmentProfile from './InvestmentProfile';
+import SchoolNearby from './SchoolNearby';
+import IDontKnow from './IDontKnow';
+import Neighborhood from './Neighborhood';
 import Footer from '../Footer';
 
 type DetailProps = {
@@ -45,6 +48,9 @@ const Detail: React.FC<DetailProps> = ({ data }) => {
           <Location address={data.buildingInformation.street} />
           <BuildingInfo buildingInformation={data.buildingInformation} />
           <InvestmentProfile />
+          <SchoolNearby />
+          <IDontKnow />
+          <Neighborhood />
         </LeftBody>
         <RightBody>
           <StatusContainer>

@@ -2,6 +2,7 @@ import BuildingInformation from './BuildingInformation';
 
 export default class Asset {
   constructor(
+    readonly investment: boolean,
     readonly price: number,
     readonly status: string,
     readonly daysOnMarket: number,
@@ -19,6 +20,7 @@ export default class Asset {
 
   static fromMap(map: Map<string, any>): Asset {
     return new Asset(
+      map.get('investment') as boolean,
       map.get('price') as number,
       map.get('status') as string,
       map.get('daysOnMarket') as number,

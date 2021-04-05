@@ -12,60 +12,88 @@ const InvestmentProfile: React.FC<any> = ({ InvestmentProfileProps }) => {
     <Container>
       <Title>Investment Profile</Title>
       <SubTitle>Payment Calculator</SubTitle>
-      <CalculatorContainer>
-        <PaymentList>
-          <PaymentList_Dollar>$10,000 per month</PaymentList_Dollar>
-          <PaymentList_Won>(W 10,000,000)</PaymentList_Won>
-          <PaymentList_PeriodInterest>
-            30 year fixed, 2.95% interest
-          </PaymentList_PeriodInterest>
-        </PaymentList>
-        <ChargeList>
-          <ChargeList_Interest>
-            <ChargeList_Title>Principal and interest</ChargeList_Title>
-            <ChargeList_Content>$ 5,652</ChargeList_Content>
-          </ChargeList_Interest>
-          <ChargeList_Taxes>
-            <ChargeList_Title>Property Taxes</ChargeList_Title>
-            <ChargeList_Content>$ 63</ChargeList_Content>
-          </ChargeList_Taxes>
-          <ChargeList_Maintenance>
-            <ChargeList_Title>Maintenance/Common Charges</ChargeList_Title>
-            <ChargeList_Content>$ 904</ChargeList_Content>
-          </ChargeList_Maintenance>
-        </ChargeList>
-      </CalculatorContainer>
-      <SettingContainer>
-        <Setting>
-          <Setting_title>Term</Setting_title>
-          <Setting_select value="Input Box"></Setting_select>
-        </Setting>
-        <Setting>
-          <Setting_title>Interest</Setting_title>
-          <Setting_select value="2.95%"></Setting_select>
-        </Setting>
-        <Setting>
-          <Setting_title>Home Price</Setting_title>
-          <Setting_input value="$1,499,000"></Setting_input>
-        </Setting>
-        <Setting>
-          <Setting_title>Down Payment</Setting_title>
-          <Setting_input value="$149,000"></Setting_input>
-          <Setting_input value="10%"></Setting_input>
-        </Setting>
-        <Setting>
-          <Setting_title>Expected monthly rent</Setting_title>
-          <Setting_input value="$1,499,000"></Setting_input>
-        </Setting>
-        <Setting>
-          <Setting_title>Yield</Setting_title>
-          <Setting_input value="10%"></Setting_input>
-        </Setting>
-      </SettingContainer>
+      <PaymentContainer>
+        <Block>
+          <PaymentItem>
+            <PaymentCategory>Home Price</PaymentCategory>
+            <PaymentContent placeholder={'$1,499,000'}></PaymentContent>
+          </PaymentItem>
+          <PaymentItem>
+            <PaymentCategory>Expected monthly rent</PaymentCategory>
+            <PaymentContent placeholder={'$1,499,000'}></PaymentContent>
+          </PaymentItem>
+          <PaymentItem>
+            <PaymentCategory>Yield</PaymentCategory>
+            <PaymentContent placeholder={'10%'}></PaymentContent>
+          </PaymentItem>
+        </Block>
+        <Block>
+          <TaxItem>
+            <TaxCategory id="first">Property Taxes</TaxCategory>
+            <TaxContent>$ 63</TaxContent>
+          </TaxItem>
+          <TaxItem>
+            <TaxCategory id="second">Maintenance / Common Charges</TaxCategory>
+            <TaxContent id="third">$ 904</TaxContent>
+          </TaxItem>
+        </Block>
+      </PaymentContainer>
     </Container>
   );
 };
 
+const Block = styled.div`
+  width: 100%;
+`;
+const PaymentItem = styled.div`
+  margin-bottom: 25px;
+`;
+const PaymentCategory = styled.div``;
+const PaymentContent = styled.input.attrs((props) => ({
+  type: 'text',
+  placeholder: props.placeholder,
+}))`
+  &:focus {
+    outline: 1px solid gray;
+  }
+  font-size: 18px;
+  width: 95%;
+  height: 42px;
+  margin: 8px 0;
+  padding: 3px 5px;
+  border: 1px solid #e9e9e9;
+  box-sizing: border-box;
+
+  #price {
+    placeholder: '123';
+  }
+`;
+const TaxItem = styled.div`
+  /* 공통 스타일 */
+  border-bottom: 1px solid #e9e9e9;
+  display: flex;
+
+  #first {
+    color: #80b2ff;
+  }
+  #second {
+    color: gray;
+    padding: 9px 0px;
+  }
+  #third {
+    padding: 9px 0px;
+  }
+`;
+const TaxCategory = styled.div`
+  width: 70%;
+
+  padding-bottom: 10px;
+`;
+const TaxContent = styled.div`
+  width: 30%;
+`;
+
+//////////////////////!
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -73,23 +101,23 @@ const Container = styled.div`
 `;
 
 const Title = styled.div`
-  border: 1px solid black;
-  font-size: 30px;
+  font-size: 18px;
+  font-weight: bold;
   margin-bottom: 15px;
 `;
 
 const SubTitle = styled.div`
-  border: 1px solid black;
-  font-size: 25px;
+  font-size: 15px;
+  font-weight: bold;
   margin-bottom: 15px;
 `;
 
-const CalculatorContainer = styled.div`
+const PaymentContainer = styled.div`
   display: flex;
-  border: 1px solid black;
+
   margin-bottom: 45px;
 
-  height: 150px;
+  height: 300px;
 `;
 
 const PaymentList = styled.div`
