@@ -1,50 +1,58 @@
 import React from 'react';
 import './AssetCard.css';
 import Asset from '../../model/Asset';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 type AssetCardProps = {
   data: Asset;
 };
 
-const AssetCard: React.FC<any> = ({ asset }) => {
-  let url = asset.thumbnailUrl;
+const AssetCard = ({ asset }: any) => {
+  let url = asset.buildingInformation.thumbnailUrl;
+  console.log(asset.buildingInformation.thumbnailUrl);
   return (
-    <Container abc="abc">
+    <Container background={url}>
       <ContainerGradient>
-        <LeftSide>
-          <PriceBlock>
-            <PriceDollar>($){asset.price}</PriceDollar>
-            <PriceWon>(₩){asset.price}</PriceWon>
-          </PriceBlock>
-          <PlaceInfoBlock>
-            <StreetInfo>{asset.street}</StreetInfo>
-            <AddressInfo>{asset.street}</AddressInfo>
-          </PlaceInfoBlock>
-        </LeftSide>
-        <Divider></Divider>
-        <RightSide>
-          <RoomInfoBlock>
-            <RoomInfo>{asset.nBedrooms} Bedrooms</RoomInfo>
-            <RoomInfo>{asset.nBathrooms} Bathrooms</RoomInfo>
-            <RoomInfo>{asset.square} Sq m</RoomInfo>
-            <RoomInfo>{Math.round(asset.square / 3.3)} Pyung</RoomInfo>
-          </RoomInfoBlock>
-        </RightSide>
+        <ContainerContent>
+          <LeftSide>
+            <PriceBlock>
+              <PriceDollar>($){asset.price}</PriceDollar>
+              <PriceWon>(₩){asset.price}</PriceWon>
+            </PriceBlock>
+            <PlaceInfoBlock>
+              <StreetInfo>{asset.buildingInformation.street}</StreetInfo>
+              <AddressInfo>{asset.buildingInformation.address}</AddressInfo>
+            </PlaceInfoBlock>
+          </LeftSide>
+          <Divider></Divider>
+          <RightSide>
+            <RoomInfoBlock>
+              <RoomInfo>
+                {asset.buildingInformation.nBedrooms} Bedrooms
+              </RoomInfo>
+              <RoomInfo>
+                {asset.buildingInformation.nBathrooms} Bathrooms
+              </RoomInfo>
+              <RoomInfo>{asset.buildingInformation.square} Sq m</RoomInfo>
+              <RoomInfo>
+                {Math.round(asset.buildingInformation.square / 3.3)} Pyung
+              </RoomInfo>
+            </RoomInfoBlock>
+          </RightSide>
+        </ContainerContent>
       </ContainerGradient>
     </Container>
   );
 };
 
-const Container = styled.div`
-  border: 1px solid black;
+const Container: any = styled.div`
   width: 470px;
   height: 353px;
 
-  background: url(${(props) => props.abc});
-  background: url('../../images/example_background1.svg');
-  border: 1px solid #000000;
+  background: url(${(props: any) => props.background});
+  background-size: cover;
 `;
+
 const ContainerGradient = styled.div`
   width: 100%;
   height: 100%;
@@ -59,25 +67,48 @@ const ContainerGradient = styled.div`
   flex-direction: column;
 `;
 
-const LeftSide = styled.div`
-  border: 1px solid black;
+const ContainerContent = styled.div`
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 25px;
+  display: flex;
+  padding: 20px 20px;
 `;
-const PriceBlock = styled.div``;
+const LeftSide = styled.div`
+  width: 60%;
+`;
+const PriceBlock = styled.div`
+  font-size: 22px;
+  font-weight: 600;
+  padding-bottom: 10px;
+`;
 const PriceDollar = styled.div``;
 const PriceWon = styled.div``;
-const PlaceInfoBlock = styled.div``;
+const PlaceInfoBlock = styled.div`
+  font-family: 'Helvetica Neue';
+  font-size: 15px;
+  font-weight: 500;
+  padding: 8px 0;
+`;
 const StreetInfo = styled.div``;
 const AddressInfo = styled.div``;
 
 const Divider = styled.div`
-  border: 1px solid black;
+  border-right: 1px solid #ffffff;
+  margin: 0px 20px;
 `;
 
 const RightSide = styled.div`
-  border: 1px solid black;
+  width: 35%;
 `;
-const RoomInfoBlock = styled.div``;
-const RoomInfo = styled.div``;
+const RoomInfoBlock = styled.div`
+  font-family: 'Helvetica Neue';
+  font-size: 18px;
+  font-weight: 400;
+`;
+const RoomInfo = styled.div`
+  margin: 5px 0;
+`;
 export default AssetCard;
 
 // export default class AssetCard extends React.Component<any, any> {
