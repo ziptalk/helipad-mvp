@@ -1,6 +1,6 @@
 [
   {
-    "investment": false,
+    "forInvestment": false,
     "price": 1234567801,
     "status": "Active",
     "daysOnMarket": 30,

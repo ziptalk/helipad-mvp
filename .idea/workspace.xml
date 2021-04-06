@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4c74c76f-7eff-450a-8c2b-109a3515f2d3" name="Default Changelist" comment="" />
+    <list default="true" id="4c74c76f-7eff-450a-8c2b-109a3515f2d3" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/asset/mock_data.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/asset/mock_data.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/asset_list/AssetList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/asset_list/AssetList.tsx" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -133,7 +137,7 @@
       <workItem from="1616671018298" duration="71000" />
       <workItem from="1616671091239" duration="24956000" />
       <workItem from="1617119910464" duration="18839000" />
-      <workItem from="1617683895159" duration="1363000" />
+      <workItem from="1617683895159" duration="4781000" />
     </task>
     <servers />
   </component>
@@ -169,29 +173,29 @@
       <screen x="-822" y="-1440" width="3440" height="1440" />
     </state>
     <state width="3419" height="419" key="GridCell.Tab.0.right/-822.-1440.3440.1440/0.0.1680.1050@-822.-1440.3440.1440" timestamp="1617267484164" />
-    <state x="226" y="-1151" width="1847" height="862" key="MergeDialog" timestamp="1617685956756">
+    <state x="226" y="-1151" width="1847" height="862" key="MergeDialog" timestamp="1617703529493">
       <screen x="-822" y="-1440" width="3440" height="1440" />
     </state>
-    <state x="226" y="-1151" width="1847" height="862" key="MergeDialog/-822.-1440.3440.1440/0.0.1680.1050@-822.-1440.3440.1440" timestamp="1617685956756" />
-    <state x="534" y="-959" key="MultipleFileMergeDialog" timestamp="1617685956787">
+    <state x="226" y="-1151" width="1847" height="862" key="MergeDialog/-822.-1440.3440.1440/0.0.1680.1050@-822.-1440.3440.1440" timestamp="1617703529493" />
+    <state x="534" y="-959" key="MultipleFileMergeDialog" timestamp="1617703529534">
       <screen x="-822" y="-1440" width="3440" height="1440" />
     </state>
-    <state x="534" y="-959" key="MultipleFileMergeDialog/-822.-1440.3440.1440/0.0.1680.1050@-822.-1440.3440.1440" timestamp="1617685956787" />
+    <state x="534" y="-959" key="MultipleFileMergeDialog/-822.-1440.3440.1440/0.0.1680.1050@-822.-1440.3440.1440" timestamp="1617703529534" />
     <state x="407" y="-1081" key="SettingsEditor" timestamp="1617120274899">
       <screen x="-822" y="-1440" width="3440" height="1440" />
     </state>
     <state x="407" y="-1081" key="SettingsEditor/-822.-1440.3440.1440/0.0.1680.1050@-822.-1440.3440.1440" timestamp="1617120274899" />
-    <state x="606" y="-981" width="584" height="522" key="find.popup" timestamp="1617685457494">
+    <state x="606" y="-981" width="584" height="522" key="find.popup" timestamp="1617705389381">
       <screen x="-822" y="-1440" width="3440" height="1440" />
     </state>
-    <state x="606" y="-981" width="584" height="522" key="find.popup/-822.-1440.3440.1440/0.0.1680.1050@-822.-1440.3440.1440" timestamp="1617685457494" />
+    <state x="606" y="-981" width="584" height="522" key="find.popup/-822.-1440.3440.1440/0.0.1680.1050@-822.-1440.3440.1440" timestamp="1617705389381" />
     <state x="563" y="-374" key="run.anything.popup" timestamp="1616681597287">
       <screen x="-822" y="-1440" width="3440" height="1440" />
     </state>
     <state x="563" y="-374" key="run.anything.popup/-822.-1440.3440.1440/0.0.1680.1050@-822.-1440.3440.1440" timestamp="1616681597287" />
-    <state x="563" y="-1109" width="670" height="676" key="search.everywhere.popup" timestamp="1617208572288">
+    <state x="563" y="-1109" width="670" height="676" key="search.everywhere.popup" timestamp="1617703307649">
       <screen x="-822" y="-1440" width="3440" height="1440" />
     </state>
-    <state x="563" y="-1109" width="670" height="676" key="search.everywhere.popup/-822.-1440.3440.1440/0.0.1680.1050@-822.-1440.3440.1440" timestamp="1617208572288" />
+    <state x="563" y="-1109" width="670" height="676" key="search.everywhere.popup/-822.-1440.3440.1440/0.0.1680.1050@-822.-1440.3440.1440" timestamp="1617703307649" />
   </component>
 </project>

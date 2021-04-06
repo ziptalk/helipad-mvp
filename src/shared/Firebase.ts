@@ -1,7 +1,8 @@
-import firebase from 'firebase/app';
+import firebase from 'firebase';
+import firestore from 'firebase/firestore';
 
 // Initialize Firebase
-firebase.initializeApp(
+const app = firebase.initializeApp(
     {
         apiKey: "AIzaSyBVFAr_6d_n1MJehUvQ9ZvgRr-2JA4jLMs",
         authDomain: "helipad-mvp.firebaseapp.com",
@@ -13,6 +14,6 @@ firebase.initializeApp(
     }
 );
 
-const store = firebase.firestore().collection("assets");
+const store = firebase.app().firestore().collection("assets");
 
 export {firebase, store};
