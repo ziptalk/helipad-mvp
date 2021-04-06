@@ -24,7 +24,7 @@ const AssetCard = ({ asset }: any) => {
               <AddressInfo>{asset.buildingInformation.address}</AddressInfo>
             </PlaceInfoBlock>
           </LeftSide>
-          <Divider></Divider>
+          <Divider />
           <RightSide>
             <RoomInfoBlock>
               <RoomInfo>
