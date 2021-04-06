@@ -16,11 +16,11 @@ import './App.css';
 import Footer from './components/Footer';
 
 function App() {
-  const [loginToggle, SetLoginToggle] = useState(false);
-
-  const toggle = () => {
-    SetLoginToggle(!loginToggle);
-  };
+  // const [loginToggle, SetLoginToggle] = useState(false);
+  //
+  // const toggle = () => {
+  //   SetLoginToggle(!loginToggle);
+  // };
   return (
     <Router>
       <Switch>
@@ -29,16 +29,17 @@ function App() {
             name="viewport"
             content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"
           />
-          <HeaderContainer loginToggle={loginToggle} toggle={toggle} />
+          {/*<HeaderContainer loginToggle={loginToggle} toggle={toggle} />*/}
+          <HeaderContainer />
           <div className="routingContainer">
             <Route exact path={'/login'} component={Login} />
             <Route exact path={'/sign-up'} component={SignUp} />
             <Route exact path={'/asset-list'} component={AssetList} />
-            {loginToggle ? (
-              <Redirect to="/asset-list" />
-            ) : (
-              <Redirect to="/login" />
-            )}
+            {/*{loginToggle ? (*/}
+            {/*  <Redirect to="/asset-list" />*/}
+            {/*) : (*/}
+            {/*  <Redirect to="/login" />*/}
+            {/*)}*/}
             <Route exact path={'/asset-detail'} component={AssetDetail} />
             <Route exact path={'/landing'} component={Landing} />
           </div>

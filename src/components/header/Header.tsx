@@ -3,27 +3,27 @@ import './Header.css';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-export const Header = ({ loginToggle, toggle }: any) => {
+export const Header = () => {
   return (
     <Container>
       <LeftSide>
         <Title>HELIPAD</Title>
       </LeftSide>
       <RightSide>
-        <FakeLoginButton
-          onClick={() => {
-            toggle();
-          }}
-        >
-          로그인 버튼
-        </FakeLoginButton>
+        {/*<FakeLoginButton*/}
+        {/*  onClick={() => {*/}
+        {/*    toggle();*/}
+        {/*  }}*/}
+        {/*>*/}
+        {/*  로그인 버튼*/}
+        {/*</FakeLoginButton>*/}
         <Category>
           <Link to="/landing" className="headerMenu">
             Home
           </Link>
         </Category>
         <Category>
-          {loginToggle ? (
+          {true ? (
             <Link to="/logout" className="headerMenu">
               Logout
             </Link>
@@ -34,7 +34,7 @@ export const Header = ({ loginToggle, toggle }: any) => {
           )}
         </Category>
         <Category>
-          {loginToggle ? (
+          {true ? (
             <Link to="/mypage" className="headerMenu">
               MyPage
             </Link>

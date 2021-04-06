@@ -7,6 +7,6 @@ import { Header } from './Header';
 //   }
 // }
 
-export const HeaderContainer = ({ loginToggle, toggle }: any) => {
-  return <Header loginToggle={loginToggle} toggle={toggle}></Header>;
+export const HeaderContainer = () => {
+  return <Header />;
 };
