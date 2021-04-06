@@ -1,22 +1,22 @@
-import * as React from "react";
-import styled from "styled-components";
-import Header from "../header/Header";
+import * as React from 'react';
+import styled from 'styled-components';
+import { Header } from '../header/Header';
 
 type LocationProps = {
-    address: string
-}
+  address: string;
+};
 
-const Location: React.FC<LocationProps> = ({address}) => {
-    return (
-        <Container>
-            <TitleWrapper>
-                <Title>Location</Title>
-                <Address>{address}</Address>
-            </TitleWrapper>
-            <Map />
-        </Container>
-    )
-}
+const Location: React.FC<LocationProps> = ({ address }) => {
+  return (
+    <Container>
+      <TitleWrapper>
+        <Title>Location</Title>
+        <Address>{address}</Address>
+      </TitleWrapper>
+      <Map />
+    </Container>
+  );
+};
 
 const Container = styled.div`
   display: flex;
@@ -34,15 +34,14 @@ const Title = styled.div`
   width: 300px;
   font-size: 18px;
   font-weight: bold;
-`
+`;
 
-const Address = styled.div`
-`
+const Address = styled.div``;
 
 const Map = styled.div`
   width: 100%;
   height: 250px;
   border: 1px solid #000000;
-`
+`;
 
 export default Location;

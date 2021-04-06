@@ -16,8 +16,10 @@ const AssetCard = ({ asset }: any) => {
         <ContainerContent>
           <LeftSide>
             <PriceBlock>
-              <PriceDollar>($){asset.price}</PriceDollar>
-              <PriceWon>(₩){asset.price}</PriceWon>
+              <PriceDollar>
+                ($){(asset.price * 1000).toLocaleString('en-US')}
+              </PriceDollar>
+              <PriceWon>(₩){asset.price.toLocaleString('ko-KR')}</PriceWon>
             </PriceBlock>
             <PlaceInfoBlock>
               <StreetInfo>{asset.buildingInformation.street}</StreetInfo>

@@ -1,91 +1,67 @@
 import styled from 'styled-components';
-import React from "react";
-import Asset from "../../model/Asset";
-import SaveImage from "../../images/ic_save.svg";
-import ContactImage from "../../images/ic_contact.svg";
+import React from 'react';
+import Asset from '../../model/Asset';
+import SaveImage from '../../images/ic_save.svg';
+import ContactImage from '../../images/ic_contact.svg';
 
 type SummaryProps = {
-    data: Asset
-}
+  data: Asset;
+};
 
-const Summary: React.FC<SummaryProps> = ({data}) => {
-    return (
-        <Container>
-            <AddressWrapper>
-                <Street>
-                    {data.buildingInformation.street}
-                </Street>
-                <Address>
-                    <Company>
-                        {data.buildingInformation.buildingName}
-                    </Company>
-                    <City>
-                        {data.buildingInformation.address}
-                    </City>
-                </Address>
-            </AddressWrapper>
-            <Price>
-                <Dollar>
-                    ${data.price.toLocaleString("en-US")}
-                </Dollar>
-                <Won>
-                    ₩{data.price.toLocaleString("ko-KR")}
-                </Won>
-            </Price>
-            <Divider />
-            <Rooms>
-                <RoomInfo>
-                    <RoomInfoContent>
-                        {data.buildingInformation.nBedrooms}
-                    </RoomInfoContent>
-                    <RoomInfoTitle>
-                        Beds
-                    </RoomInfoTitle>
-                </RoomInfo>
-                <RoomInfo>
-                    <RoomInfoContent>
-                        {data.buildingInformation.nBathrooms}
-                    </RoomInfoContent>
-                    <RoomInfoTitle>
-                        Baths
-                    </RoomInfoTitle>
-                </RoomInfo>
-                <RoomInfo>
-                    <RoomInfoContent>
-                        {data.buildingInformation.square}
-                    </RoomInfoContent>
-                    <RoomInfoTitle>
-                        Square
-                    </RoomInfoTitle>
-                </RoomInfo>
-                <RoomInfo>
-                    <RoomInfoContent>
-                        {Math.floor(data.buildingInformation.square / 3.3)}
-                    </RoomInfoContent>
-                    <RoomInfoTitle>
-                        Pyung
-                    </RoomInfoTitle>
-                </RoomInfo>
-                <RoomInfo>
-                    <RoomInfoContent>
-                        <Save />
-                    </RoomInfoContent>
-                    <RoomInfoTitle>
-                        Save
-                    </RoomInfoTitle>
-                </RoomInfo>
-                <RoomInfo>
-                    <RoomInfoContent>
-                        <Contact />
-                    </RoomInfoContent>
-                    <RoomInfoTitle>
-                        Contact
-                    </RoomInfoTitle>
-                </RoomInfo>
-            </Rooms>
-        </Container>
-    )
-}
+const Summary: React.FC<SummaryProps> = ({ data }) => {
+  return (
+    <Container>
+      <AddressWrapper>
+        <Street>{data.buildingInformation.street}</Street>
+        <Address>
+          <Company>{data.buildingInformation.buildingName}</Company>
+          <City>{data.buildingInformation.address}</City>
+        </Address>
+      </AddressWrapper>
+      <Price>
+        <Dollar>${data.price.toLocaleString('en-US')}</Dollar>
+        <Won>₩{data.price.toLocaleString('ko-KR')}</Won>
+      </Price>
+      <Divider />
+      <Rooms>
+        <RoomInfo>
+          <RoomInfoContent>
+            {data.buildingInformation.nBedrooms}
+          </RoomInfoContent>
+          <RoomInfoTitle>Beds</RoomInfoTitle>
+        </RoomInfo>
+        <RoomInfo>
+          <RoomInfoContent>
+            {data.buildingInformation.nBathrooms}
+          </RoomInfoContent>
+          <RoomInfoTitle>Baths</RoomInfoTitle>
+        </RoomInfo>
+        <RoomInfo>
+          <RoomInfoContent>{data.buildingInformation.square}</RoomInfoContent>
+          <RoomInfoTitle>Square</RoomInfoTitle>
+        </RoomInfo>
+        <RoomInfo>
+          <RoomInfoContent>
+            {Math.floor(data.buildingInformation.square / 3.3)}
+          </RoomInfoContent>
+          <RoomInfoTitle>Pyung</RoomInfoTitle>
+        </RoomInfo>
+        <RoomInfo>
+          <RoomInfoContent>
+            <Save />
+          </RoomInfoContent>
+          <RoomInfoTitle>Save</RoomInfoTitle>
+        </RoomInfo>
+        <RoomInfo>
+          <RoomInfoContent>
+            <Contact />
+          </RoomInfoContent>
+          <RoomInfoTitle>Contact</RoomInfoTitle>
+        </RoomInfo>
+      </Rooms>
+    </Container>
+  );
+};
 
 const Container = styled.div`
   display: flex;
@@ -101,9 +77,9 @@ const AddressWrapper = styled.div`
 `;
 
 const Street = styled.div`
-  color: #4542E2;
+  color: #4542e2;
   font-size: 30px;
-`
+`;
 const Address = styled.div`
   display: flex;
   flex-direction: row;
@@ -116,7 +92,7 @@ const Company = styled.div`
 
 const City = styled.div`
   font-size: 18px;
-`
+`;
 
 const Price = styled.div`
   width: 250px;

@@ -1,29 +1,30 @@
 .assetListWrapper {
-    width: 1444px;
-    margin-top: 70px;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
+  width: 1444px;
+  margin-top: 70px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
 
 .assetCategory {
-    width: 860px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    font-size: 24px;
+  width: 860px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font-size: 24px;
 }
 
 .sortWrapper {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
 }
 
 .assetListGrid {
-    width: 100%;
-    display: grid;
-    grid-template-columns: 470px 470px 470px;
-    grid-gap: 15px;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 470px 470px 470px;
+  grid-gap: 15px;
 }

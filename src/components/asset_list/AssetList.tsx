@@ -3,20 +3,17 @@ import './AssetList.css';
 import AssetCard from './AssetCard';
 import styled from 'styled-components';
 import { Process } from '../../service/MockAssetReader';
-import { MdKeyboardArrowDown, MdKeyboardArrowUp } from 'react-icons/md';
-// export default class AssetList extends React.Component<any, any> {
-//     render() {
-//         return (
-//
-//         );
-//     }
-// }
+import { ReactComponent as ArrowUp } from '../../images/ic_down.svg';
+import { ReactComponent as ArrowDown } from '../../images/ic_up.svg';
 
 type AssetListProperties = {};
 
 const AssetList: React.FC<AssetListProperties> = () => {
   const [toInvestment, setInvestment] = useState(true);
   const [ascend, setAscend] = useState(true);
+
+  let assetList = Process();
+
   /**
    *
    * mock data 읽어오기 => state로 관리
@@ -27,7 +24,6 @@ const AssetList: React.FC<AssetListProperties> = () => {
    * default === ascending
    * ascending toggle로 관리.
    */
-  const assetList = Process();
 
   // 투자 목적 리스트
   const getInvestmentList = () => {
@@ -39,9 +35,12 @@ const AssetList: React.FC<AssetListProperties> = () => {
     setInvestment(false);
   };
 
+  // 오름 차순 정렬
   const setAscending = () => {
     setAscend(true);
   };
+
+  // 내림 차순 정렬
   const setDescending = () => {
     setAscend(false);
   };
@@ -56,20 +55,23 @@ const AssetList: React.FC<AssetListProperties> = () => {
           Living Recommendations
         </LivingBlock>
       </Category>
-      <div className="sortWrapper">
-        Sort by Price
-        <MdKeyboardArrowUp
-          onClick={() => {
-            setAscending();
-          }}
-        />
-        <MdKeyboardArrowDown
+      <SortBlock>
+        <ArrowTitle>Sort by Price</ArrowTitle>
+        <ArrowBlock>
+          <ArrowUp
+            onClick={() => {
+              setAscending();
+            }}
+          />
+        </ArrowBlock>
+        <ArrowDown
           onClick={() => {
             setDescending();
           }}
         />
-      </div>
-      <div className="assetListGrid">
+      </SortBlock>
+
+      <AssetListGrid>
         {assetList
           .filter((asset) =>
             toInvestment ? asset.investment : !asset.investment
@@ -78,7 +80,7 @@ const AssetList: React.FC<AssetListProperties> = () => {
           .map((asset, idx) => (
             <AssetCard key={idx} asset={asset} />
           ))}
-      </div>
+      </AssetListGrid>
     </Container>
   );
 };
@@ -91,12 +93,59 @@ const Category = styled.div`
   font-weight: 300;
   font-size: 24px;
 `;
-const InvestmentBlock = styled.div`
+const InvestmentBlock = styled.button`
+  background: none;
+  border: none;
+  outline: none;
   padding: 0 100px;
+  font-size: 24px;
+  font-weight: 300;
+  line-height: 30.29px;
+  &:focus {
+    font-weight: bold;
+  }
 `;
 const Divider = styled.div``;
-const LivingBlock = styled.div`
+const LivingBlock = styled.button`
+  background: none;
+  border: none;
+  outline: none;
   padding: 0 100px;
+  font-size: 24px;
+  font-weight: 300;
+  line-height: 30.29px;
+  &:focus {
+    font-weight: bold;
+  }
+`;
+
+const SortBlock = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  margin-bottom: 10px;
+`;
+const ArrowTitle = styled.div`
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 22.71px;
+  margin-right: 10px;
+`;
+const ArrowBlock = styled.div`
+  padding: 5px 0;
+
+  &:focus {
+    color: red;
+  }
+`;
+
+const AssetListGrid = styled.div`
+  width: 100%;
+  display: grid;
+  grid-template-columns: 470px 470px 470px;
+  grid-gap: 15px;
 `;
 
 export default AssetList;

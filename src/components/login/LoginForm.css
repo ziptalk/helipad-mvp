@@ -1,61 +1,64 @@
 .loginForm {
-    width: 100%;
-    margin-top: 40px;
-    display: flex;
-    flex-direction: column;
-    font-size: 20px;
+  width: 100%;
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  font-size: 20px;
 }
 
 .loginRow {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .emailInput {
-    margin-top: 5px;
-    margin-bottom: 10px;
-    height: 45px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  height: 45px;
 }
 
 .passwordInput {
-    margin-top: 5px;
-    margin-bottom: 10px;
-    height: 45px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  height: 45px;
 }
 
 .rememberMeBox {
-    width: 20px;
-    height: 20px;
+  width: 20px;
+  height: 20px;
 }
 
 .submitButton {
-    height: 45px;
-    background-color: #4542E2;
-    color: #ffffff;
-    font-size: 20px;
+  height: 45px;
+  background-color: #4542e2;
+  color: #ffffff;
+  font-size: 20px;
 }
 
 .loginRow {
-    margin-top: 10px;
+  margin-top: 10px;
 }
 
 .facebookLoginContainer {
-    margin-top: 25px;
+  margin-top: 25px;
 }
 
 .facebookLoginButton {
-    width: 100%;
-    height: 45px;
-    background-color: #000000;
-    color: #ffffff;
-    font-size: 20px;
+  width: 100%;
+  height: 45px;
+  background-color: #000000;
+  color: #ffffff;
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .facebookIcon {
-    background: url(../../images/ic_facebook.svg);
+  background: url(../../images/ic_facebook.svg);
 }
 
 .rememberMeTitle {
-    color: #999999;
+  color: #999999;
 }
