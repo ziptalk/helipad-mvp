@@ -9,7 +9,7 @@ type AssetCardProps = {
 
 const AssetCard = ({ asset }: any) => {
   let url = asset.buildingInformation.thumbnailUrl;
-  console.log(asset.buildingInformation.thumbnailUrl);
+
   return (
     <Container background={url}>
       <ContainerGradient>
