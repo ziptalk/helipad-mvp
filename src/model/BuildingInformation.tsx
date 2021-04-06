@@ -1,3 +1,22 @@
+export const COLUMNS = {
+    THUMBNAIL_URL: "thumbnailUrl",
+    ADDRESS: "address",
+    STREET: "street",
+    N_BED_ROOMS: "nBedrooms",
+    N_BATH_ROOMS: "nBathrooms",
+    N_ROOMS: "nRooms",
+    SQUARE: "square",
+    COUNTRY: "country",
+    BUILDING_NAME: "buildingName",
+    FLOOR: "floor",
+    STORIES: "stories",
+    RESIDENCES: "residences",
+    PET_POLICY: "petPolicy",
+    YEAR_BUILT: "yearBuilt",
+    BUILDING_AGE: "buildingAge",
+    BUILDING_TYPE: "buildingType"
+};
+
 export default class BuildingInformation {
     constructor(
         readonly thumbnailUrl: string,
@@ -21,22 +40,22 @@ export default class BuildingInformation {
 
     static fromMap(map: Map<string, any>): BuildingInformation {
         return new BuildingInformation(
-            map.get("thumbnailUrl") as string,
-            map.get("address") as string,
-            map.get("street") as string,
-            map.get("nBedrooms") as number,
-            map.get("nBathrooms") as number,
-            map.get("nRooms") as number,
-            map.get("square") as number,
-            map.get("country") as string,
-            map.get("buildingName") as string,
-            map.get("floor") as number,
-            map.get("stories") as number,
-            map.get("residences") as number,
-            map.get("petPolicy") as string,
-            map.get("yearBuilt") as number,
-            map.get("buildingAge") as string,
-            map.get("buildingType") as string
+            map.get(COLUMNS.THUMBNAIL_URL) as string,
+            map.get(COLUMNS.ADDRESS) as string,
+            map.get(COLUMNS.STREET) as string,
+            map.get(COLUMNS.N_BED_ROOMS) as number,
+            map.get(COLUMNS.N_BATH_ROOMS) as number,
+            map.get(COLUMNS.N_ROOMS) as number,
+            map.get(COLUMNS.SQUARE) as number,
+            map.get(COLUMNS.COUNTRY) as string,
+            map.get(COLUMNS.BUILDING_NAME) as string,
+            map.get(COLUMNS.FLOOR) as number,
+            map.get(COLUMNS.STORIES) as number,
+            map.get(COLUMNS.RESIDENCES) as number,
+            map.get(COLUMNS.PET_POLICY) as string,
+            map.get(COLUMNS.YEAR_BUILT) as number,
+            map.get(COLUMNS.BUILDING_AGE) as string,
+            map.get(COLUMNS.BUILDING_TYPE) as string
         );
     }
 

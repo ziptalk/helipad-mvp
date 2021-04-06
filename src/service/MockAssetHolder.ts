@@ -66,7 +66,7 @@ export function toInvestmentList(): Asset[] {
   let map = new Map<string, any>();
   let asset: Asset;
   let assetList: Asset[] = [];
-  let investmentList = assetList.filter((file) => file.investment);
+  let investmentList = assetList.filter((file) => file.forInvestment);
 
   for (let file of investmentList) {
     // 배열 순회
@@ -92,7 +92,7 @@ export function toLiveList(): Asset[] {
   let map = new Map<string, any>();
   let asset: Asset;
   let assetList: Asset[] = [];
-  let liveList = assetList.filter((file) => !file.investment);
+  let liveList = assetList.filter((file) => !file.forInvestment);
 
   for (let file of liveList) {
     // 배열 순회

@@ -5,6 +5,8 @@ import styled from 'styled-components';
 import { Process } from '../../service/MockAssetReader';
 import { ReactComponent as ArrowUp } from '../../images/ic_down.svg';
 import { ReactComponent as ArrowDown } from '../../images/ic_up.svg';
+import FirebaseService from "../../service/FirebaseService";
+import GetAssetList from "../../domain/GetAssetList";
 
 type AssetListProperties = {};
 
@@ -13,7 +15,7 @@ const AssetList: React.FC<AssetListProperties> = () => {
   const [ascend, setAscend] = useState(true);
 
   let assetList = Process();
-
+  new GetAssetList().getAssetList();
   /**
    *
    * mock data 읽어오기 => state로 관리
@@ -72,14 +74,16 @@ const AssetList: React.FC<AssetListProperties> = () => {
       </SortBlock>
 
       <AssetListGrid>
-        {assetList
-          .filter((asset) =>
-            toInvestment ? asset.investment : !asset.investment
+        {
+          assetList.filter((asset) =>
+              toInvestment ? asset.forInvestment : !asset.forInvestment
+            ).sort((a, b) =>
+                (ascend ? a.price - b.price : b.price - a.price)
+            ).map((asset, idx) => (
+              <AssetCard key={idx} asset={asset} />
+            )
           )
-          .sort((a, b) => (ascend ? a.price - b.price : b.price - a.price))
-          .map((asset, idx) => (
-            <AssetCard key={idx} asset={asset} />
-          ))}
+        }
       </AssetListGrid>
     </Container>
   );

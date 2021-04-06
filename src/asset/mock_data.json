@@ -42,7 +42,7 @@
     }
   },
   {
-    "investment": false,
+    "forInvestment": false,
     "price": 1234567802,
     "status": "Active",
     "daysOnMarket": 30,
@@ -84,7 +84,7 @@
     }
   },
   {
-    "investment": false,
+    "forInvestment": false,
     "price": 1234567803,
     "status": "Active",
     "daysOnMarket": 30,
@@ -126,7 +126,7 @@
     }
   },
   {
-    "investment": false,
+    "forInvestment": false,
     "price": 1234567804,
     "status": "Active",
     "daysOnMarket": 30,
@@ -168,7 +168,7 @@
     }
   },
   {
-    "investment": false,
+    "forInvestment": false,
     "price": 1234567805,
     "status": "Active",
     "daysOnMarket": 30,
@@ -210,7 +210,7 @@
     }
   },
   {
-    "investment": false,
+    "forInvestment": false,
     "price": 1234567806,
     "status": "Active",
     "daysOnMarket": 30,
@@ -252,7 +252,7 @@
     }
   },
   {
-    "investment": true,
+    "forInvestment": true,
     "price": 1234567807,
     "status": "Active",
     "daysOnMarket": 30,
@@ -294,7 +294,7 @@
     }
   },
   {
-    "investment": true,
+    "forInvestment": true,
     "price": 1234567808,
     "status": "Active",
     "daysOnMarket": 30,
@@ -336,7 +336,7 @@
     }
   },
   {
-    "investment": true,
+    "forInvestment": true,
     "price": 1234567809,
     "status": "Active",
     "daysOnMarket": 30,
@@ -378,7 +378,7 @@
     }
   },
   {
-    "investment": true,
+    "forInvestment": true,
     "price": 1234567810,
     "status": "Active",
     "daysOnMarket": 30,
@@ -420,7 +420,7 @@
     }
   },
   {
-    "investment": true,
+    "forInvestment": true,
     "price": 1234567811,
     "status": "Active",
     "daysOnMarket": 30,
@@ -462,7 +462,7 @@
     }
   },
   {
-    "investment": true,
+    "forInvestment": true,
     "price": 1234567812,
     "status": "Active",
     "daysOnMarket": 30,
@@ -504,7 +504,7 @@
     }
   },
   {
-    "investment": true,
+    "forInvestment": true,
     "price": 1234567813,
     "status": "Active",
     "daysOnMarket": 30,
