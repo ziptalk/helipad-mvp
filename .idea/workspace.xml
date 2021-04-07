@@ -6,16 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="4c74c76f-7eff-450a-8c2b-109a3515f2d3" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/asset/mock_data.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/asset/mock_data.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/asset_list/AssetList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/asset_list/AssetList.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/header/Header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/header/Header.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/header/HeaderContainer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/header/HeaderContainer.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/domain/GetAssetList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/GetAssetList.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Asset.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Asset.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/BuildingInformation.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/BuildingInformation.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/service/FirebaseService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/FirebaseService.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/service/MockAssetHolder.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/MockAssetHolder.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
