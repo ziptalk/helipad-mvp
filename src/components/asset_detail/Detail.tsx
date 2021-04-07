@@ -21,8 +21,6 @@ const Detail: React.FC<DetailProps> = ({ data }) => {
       <Category>
         <CategoryItem>Location</CategoryItem>
         <CategoryDivider />
-        <CategoryItem>Property History</CategoryItem>
-        <CategoryDivider />
         <CategoryItem>Schools</CategoryItem>
         <CategoryDivider />
         <CategoryItem>Neighborhood</CategoryItem>
@@ -63,10 +61,10 @@ const Detail: React.FC<DetailProps> = ({ data }) => {
                 <StatusCategory>Days on Market</StatusCategory>
                 <StatusContent>{data.daysOnMarket}</StatusContent>
               </StatusItem>
-              <StatusItem>
+              {/* <StatusItem>
                 <StatusCategory>Taxes</StatusCategory>
                 <StatusContent>${data.taxPerMonth} / month</StatusContent>
-              </StatusItem>
+              </StatusItem> */}
               <StatusItem>
                 <StatusCategory>Common Charges</StatusCategory>
                 <StatusContent>
@@ -74,16 +72,18 @@ const Detail: React.FC<DetailProps> = ({ data }) => {
                 </StatusContent>
               </StatusItem>
               <StatusItem>
-                <StatusCategory>Min.Down pymt</StatusCategory>
-                <StatusContent>{data.minDownPymt}%</StatusContent>
+                <StatusCategory>Estimated Property Tax</StatusCategory>
+                <StatusContent>
+                  {data.commonChargePerMonth} / month
+                </StatusContent>
               </StatusItem>
               <StatusItem>
-                <StatusCategory>Total Rooms</StatusCategory>
-                <StatusContent>{data.buildingInformation.nRooms}</StatusContent>
+                <StatusCategory>HOA Fees</StatusCategory>
+                <StatusContent></StatusContent>
               </StatusItem>
               <StatusItem>
-                <StatusCategory>Compass Type</StatusCategory>
-                <StatusContent>{data.compassType}</StatusContent>
+                <StatusCategory>Lot Size</StatusCategory>
+                <StatusContent></StatusContent>
               </StatusItem>
               <StatusItem>
                 <StatusCategory>MLS Type</StatusCategory>
@@ -95,16 +95,16 @@ const Detail: React.FC<DetailProps> = ({ data }) => {
                   {data.buildingInformation.yearBuilt}
                 </StatusContent>
               </StatusItem>
-              <StatusItem>
+              {/* <StatusItem>
                 <StatusCategory>Country</StatusCategory>
                 <StatusContent>
                   {data.buildingInformation.country}
                 </StatusContent>
-              </StatusItem>
-              <StatusItem>
+              </StatusItem> */}
+              {/* <StatusItem>
                 <StatusCategory>Expected monthly payment</StatusCategory>
                 <StatusContent>${data.expectedMonthlyPayment}</StatusContent>
-              </StatusItem>
+              </StatusItem> */}
               <StatusItem>
                 <StatusCategory>Expected monthly rent</StatusCategory>
                 <StatusContent>${data.expectedMonthlyRent}</StatusContent>
@@ -186,7 +186,7 @@ const StatusItem = styled.div`
 
 const StatusCategory = styled.div`
   font-weight: bold;
-  width: 217px;
+  width: 260px;
 `;
 
 const StatusContent = styled.div``;

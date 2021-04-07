@@ -14,7 +14,7 @@ const Summary: React.FC<SummaryProps> = ({ data }) => {
       <AddressWrapper>
         <Street>{data.buildingInformation.street}</Street>
         <Address>
-          <Company>{data.buildingInformation.buildingName}</Company>
+          {/* <Company>{data.buildingInformation.buildingName}</Company> */}
           <City>{data.buildingInformation.address}</City>
         </Address>
       </AddressWrapper>
@@ -57,6 +57,7 @@ const Summary: React.FC<SummaryProps> = ({ data }) => {
             <Contact />
           </RoomInfoContent>
           <RoomInfoTitle>Contact</RoomInfoTitle>
+          <RoomInfoTitle>Helipad</RoomInfoTitle>
         </RoomInfo>
       </Rooms>
     </Container>
