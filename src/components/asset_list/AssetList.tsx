@@ -15,7 +15,10 @@ const AssetList: React.FC<AssetListProperties> = () => {
   const [toInvestment, setInvestment] = useState(true);
   const [ascend, setAscend] = useState(true);
   const [assets, setAssets] = useState<Asset[]>([]);
-  new GetAssetList().getAssetList().then((value) => setAssets(value));
+  new GetAssetList().getAssetList().then((value) => {
+    setAssets(value);
+    console.log("data", value[0].buildingInformation);
+  });
   /**
    *
    * mock data 읽어오기 => state로 관리
@@ -80,7 +83,7 @@ const AssetList: React.FC<AssetListProperties> = () => {
           )
           .sort((a, b) => (ascend ? a.price - b.price : b.price - a.price))
           .map((asset, idx) => (
-            <AssetCard key={idx} asset={asset} />
+            <AssetCard data={asset} />
           ))}
       </AssetListGrid>
     </Container>

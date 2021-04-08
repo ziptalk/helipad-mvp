@@ -1,5 +1,5 @@
 export const COLUMNS = {
-    THUMBNAIL_URL: "thumbnailUrl",
+    THUMBNAIL: "thumbnail",
     ADDRESS: "address",
     STREET: "street",
     N_BED_ROOMS: "nBedrooms",
@@ -19,7 +19,7 @@ export const COLUMNS = {
 
 export default class BuildingInformation {
     constructor(
-        readonly thumbnailUrl: string,
+        readonly thumbnail: string,
         readonly address: string,
         readonly street: string,
         readonly nBedrooms: number,
@@ -40,7 +40,7 @@ export default class BuildingInformation {
 
     static fromMap(map: Map<string, any>): BuildingInformation {
         return new BuildingInformation(
-            map.get(COLUMNS.THUMBNAIL_URL) as string,
+            map.get(COLUMNS.THUMBNAIL) as string,
             map.get(COLUMNS.ADDRESS) as string,
             map.get(COLUMNS.STREET) as string,
             map.get(COLUMNS.N_BED_ROOMS) as number,
@@ -61,7 +61,7 @@ export default class BuildingInformation {
 
     toMap(): Map<string, any> {
         let map = new Map<string, any>();
-        map.set(COLUMNS.THUMBNAIL_URL, this.thumbnailUrl);
+        map.set(COLUMNS.THUMBNAIL, this.thumbnail);
         map.set(COLUMNS.ADDRESS, this.address);
         map.set(COLUMNS.STREET, this.street);
         map.set(COLUMNS.N_BED_ROOMS, this.nBedrooms);
