@@ -53,4 +53,23 @@ export default class Asset {
       BuildingInformation.fromMap(map.get(COLUMNS.BUILDING_INFORMATION))
     );
   }
+
+  toMap(): Map<string, any> {
+    let map = new Map<string, any>();
+    map.set(COLUMNS.FOR_INVESTMENT, this.forInvestment);
+    map.set(COLUMNS.PRICE, this.price);
+    map.set(COLUMNS.STATUS, this.status);
+    map.set(COLUMNS.DAYS_ON_MARKET, this.daysOnMarket);
+    map.set(COLUMNS.TAX_PER_MONTH, this.taxPerMonth);
+    map.set(COLUMNS.COMMON_CHARGE_PER_MONTH, this.commonChargePerMonth);
+    map.set(COLUMNS.MIN_DOWN_PYMT, this.minDownPymt);
+    map.set(COLUMNS.COMPASS_TYPE, this.compassType);
+    map.set(COLUMNS.MLS_TYPE, this.mlsType);
+    map.set(COLUMNS.EXPECTED_MONTHLY_PAYMENT, this.expectedMonthlyPayment);
+    map.set(COLUMNS.EXPECTED_MONTHLY_RENT, this.expectedMonthlyRent);
+    map.set(COLUMNS.INFORMATION, this.information);
+    map.set(COLUMNS.AMENITIES, this.amenities);
+    map.set(COLUMNS.BUILDING_INFORMATION, this.buildingInformation.toMap());
+    return map;
+  }
 }

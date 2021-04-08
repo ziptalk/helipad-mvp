@@ -1,5 +1,6 @@
 import files from '../asset/mock_data.json';
 import Asset from '../model/Asset';
+import FirebaseService from "./FirebaseService";
 
 //////////? key값이 "buildingInformation" 인 경우 해당 객체안에 값을 다시 Map에 저장하는 메소드
 
@@ -31,6 +32,11 @@ export function Process(param: any[] = files): Asset[] {
   }
   return assetList;
   //! console.log(assetList);
+}
+
+export function saveToFirestore() {
+  let assets = Process()
+  console.log(assets);
 }
 
 // // 내림차순 정렬
