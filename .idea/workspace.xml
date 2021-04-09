@@ -6,12 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="4c74c76f-7eff-450a-8c2b-109a3515f2d3" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/asset_detail/AssetDetail.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/asset_detail/AssetDetail.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/asset_list/AssetCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/asset_list/AssetCard.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/asset_list/AssetList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/asset_list/AssetList.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/domain/GetAssetList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/GetAsset.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Asset.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Asset.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/domain/GetAsset.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/GetAsset.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/service/FirebaseService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/FirebaseService.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -181,14 +176,14 @@
       <screen x="-822" y="-1440" width="3440" height="1440" />
     </state>
     <state width="3419" height="419" key="GridCell.Tab.0.right/-822.-1440.3440.1440/0.0.1680.1050@-822.-1440.3440.1440" timestamp="1617267484164" />
-    <state x="226" y="-1151" width="1847" height="862" key="MergeDialog" timestamp="1617707111435">
+    <state x="226" y="-1151" width="1847" height="862" key="MergeDialog" timestamp="1617968535317">
       <screen x="-822" y="-1440" width="3440" height="1440" />
     </state>
-    <state x="226" y="-1151" width="1847" height="862" key="MergeDialog/-822.-1440.3440.1440/0.0.1680.1050@-822.-1440.3440.1440" timestamp="1617707111435" />
-    <state x="534" y="-959" key="MultipleFileMergeDialog" timestamp="1617707111473">
+    <state x="226" y="-1151" width="1847" height="862" key="MergeDialog/-822.-1440.3440.1440/0.0.1680.1050@-822.-1440.3440.1440" timestamp="1617968535317" />
+    <state x="534" y="-959" key="MultipleFileMergeDialog" timestamp="1617968535369">
       <screen x="-822" y="-1440" width="3440" height="1440" />
     </state>
-    <state x="534" y="-959" key="MultipleFileMergeDialog/-822.-1440.3440.1440/0.0.1680.1050@-822.-1440.3440.1440" timestamp="1617707111473" />
+    <state x="534" y="-959" key="MultipleFileMergeDialog/-822.-1440.3440.1440/0.0.1680.1050@-822.-1440.3440.1440" timestamp="1617968535369" />
     <state x="407" y="-1081" key="SettingsEditor" timestamp="1617120274899">
       <screen x="-822" y="-1440" width="3440" height="1440" />
     </state>
@@ -205,9 +200,9 @@
       <screen x="-822" y="-1440" width="3440" height="1440" />
     </state>
     <state x="563" y="-374" key="run.anything.popup/-822.-1440.3440.1440/0.0.1680.1050@-822.-1440.3440.1440" timestamp="1616681597287" />
-    <state x="563" y="-1109" width="670" height="676" key="search.everywhere.popup" timestamp="1617966886081">
+    <state x="563" y="-1109" width="670" height="676" key="search.everywhere.popup" timestamp="1617968964799">
       <screen x="-822" y="-1440" width="3440" height="1440" />
     </state>
-    <state x="563" y="-1109" width="670" height="676" key="search.everywhere.popup/-822.-1440.3440.1440/0.0.1680.1050@-822.-1440.3440.1440" timestamp="1617966886081" />
+    <state x="563" y="-1109" width="670" height="676" key="search.everywhere.popup/-822.-1440.3440.1440/0.0.1680.1050@-822.-1440.3440.1440" timestamp="1617968964799" />
   </component>
 </project>
