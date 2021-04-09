@@ -4,8 +4,7 @@ import Summary from './Summary';
 import Asset from '../../model/Asset';
 import Detail from './Detail';
 import { RouteComponentProps } from "react-router-dom";
-import BuildingInformation from '../../model/BuildingInformation';
-import {useEffect, useState} from "react";
+import { useState } from "react";
 import GetAsset from "../../domain/GetAsset";
 
 interface MatchParams {
