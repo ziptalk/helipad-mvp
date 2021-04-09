@@ -8,7 +8,7 @@ type AssetCardProps = {
 };
 
 const SavedAssetCard = ({ asset }: any) => {
-  let url = asset.buildingInformation.thumbnailUrl;
+  let url = asset.buildingInformation.thumbnail;
   const { price, buildingInformation } = asset;
   const {
     street,
@@ -20,7 +20,7 @@ const SavedAssetCard = ({ asset }: any) => {
 
   return (
     <Container background={url}>
-      <LikeFlag className="flag"></LikeFlag>
+      <LikeFlag className="flag" />
       <ContainerGradient>
         <ContainerContent>
           <LeftSide>

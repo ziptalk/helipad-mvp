@@ -61,10 +61,6 @@ const Detail: React.FC<DetailProps> = ({ data }) => {
                 <StatusCategory>Days on Market</StatusCategory>
                 <StatusContent>{data.daysOnMarket}</StatusContent>
               </StatusItem>
-              {/* <StatusItem>
-                <StatusCategory>Taxes</StatusCategory>
-                <StatusContent>${data.taxPerMonth} / month</StatusContent>
-              </StatusItem> */}
               <StatusItem>
                 <StatusCategory>Common Charges</StatusCategory>
                 <StatusContent>
