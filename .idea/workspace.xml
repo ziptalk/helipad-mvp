@@ -6,7 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="4c74c76f-7eff-450a-8c2b-109a3515f2d3" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/asset_detail/Detail.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/asset_detail/Detail.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/process/Process.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/process/Process.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/domain/GetAsset.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/GetAsset.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/domain/GetAssetList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/GetAssetList.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/service/FirebaseService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/FirebaseService.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -192,17 +196,17 @@
       <screen x="-822" y="-1440" width="3440" height="1440" />
     </state>
     <state x="-722" y="-1340" width="3240" height="1240" key="dock-window-1/-822.-1440.3440.1440/0.0.1680.1050@-822.-1440.3440.1440" timestamp="1617963719187" />
-    <state x="606" y="-981" width="584" height="522" key="find.popup" timestamp="1617968454557">
+    <state x="606" y="-981" width="584" height="522" key="find.popup" timestamp="1617985864863">
       <screen x="-822" y="-1440" width="3440" height="1440" />
     </state>
-    <state x="606" y="-981" width="584" height="522" key="find.popup/-822.-1440.3440.1440/0.0.1680.1050@-822.-1440.3440.1440" timestamp="1617968454557" />
+    <state x="606" y="-981" width="584" height="522" key="find.popup/-822.-1440.3440.1440/0.0.1680.1050@-822.-1440.3440.1440" timestamp="1617985864863" />
     <state x="563" y="-374" key="run.anything.popup" timestamp="1616681597287">
       <screen x="-822" y="-1440" width="3440" height="1440" />
     </state>
     <state x="563" y="-374" key="run.anything.popup/-822.-1440.3440.1440/0.0.1680.1050@-822.-1440.3440.1440" timestamp="1616681597287" />
-    <state x="563" y="-1109" width="670" height="676" key="search.everywhere.popup" timestamp="1617968964799">
+    <state x="563" y="-1109" width="670" height="676" key="search.everywhere.popup" timestamp="1617988384820">
       <screen x="-822" y="-1440" width="3440" height="1440" />
     </state>
-    <state x="563" y="-1109" width="670" height="676" key="search.everywhere.popup/-822.-1440.3440.1440/0.0.1680.1050@-822.-1440.3440.1440" timestamp="1617968964799" />
+    <state x="563" y="-1109" width="670" height="676" key="search.everywhere.popup/-822.-1440.3440.1440/0.0.1680.1050@-822.-1440.3440.1440" timestamp="1617988384820" />
   </component>
 </project>

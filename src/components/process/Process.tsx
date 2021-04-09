@@ -8,6 +8,7 @@ type ProcessProps = {};
 
 const Process: React.FC<ProcessProps> = () => {
   const testAsset = new Asset(
+      "test_id",
     true,
     12345000,
     'Active',

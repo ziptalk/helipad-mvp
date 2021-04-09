@@ -27,7 +27,7 @@ const Detail: React.FC<DetailProps> = ({ data }) => {
       </Category>
       <Body>
         <LeftBody>
-          <Thumbnail />
+          <Thumbnail src={data.buildingInformation.thumbnail}/>
           <Information>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
             ligula sapien, rutrum sed vestibulum eget, rhoncus ac erat. Aliquam
@@ -153,8 +153,7 @@ const LeftBody = styled.div`
 `;
 
 const Thumbnail = styled.img.attrs((props) => ({
-  src:
-    'https://d3mi7e2vp4lzjl.cloudfront.net/LISTING_EDITOR/putImages/a556ec7f-d697-459a-85ee-943a77acc8be/33410b94-f019-49a3-a74e-375586a4fa51/1500x1000.jpg',
+  src: props.src
 }))`
   width: 100%;
   height: 624px;
