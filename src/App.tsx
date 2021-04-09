@@ -43,7 +43,7 @@ function App() {
             {/*) : (*/}
             {/*  <Redirect to="/login" />*/}
             {/*)}*/}
-            <Route exact path={'/asset-detail'} component={AssetDetail} />
+            <Route exact path={'/asset-detail/:assetId'} component={AssetDetail} />
             <Route exact path={'/landing'} component={Landing} />
             <Route exact path={'/mypage'} component={Mypage} />
             <Route exact path={'/process'} component={Process} />

@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 import './AssetCard.css';
 import Asset from '../../model/Asset';
 import styled, { css } from 'styled-components';
@@ -9,39 +10,41 @@ type AssetCardProps = {
 
 const AssetCard = ({ data }: AssetCardProps) => {
   return (
-    <Container background={data.buildingInformation.thumbnail}>
-      <ContainerGradient>
-        <ContainerContent>
-          <LeftSide>
-            <PriceBlock>
-              <PriceDollar>
-                ($){(data.price * 1000).toLocaleString('en-US')}
-              </PriceDollar>
-              <PriceWon>(₩){data.price.toLocaleString('ko-KR')}</PriceWon>
-            </PriceBlock>
-            <PlaceInfoBlock>
-              <StreetInfo>{data.buildingInformation.street}</StreetInfo>
-              <AddressInfo>{data.buildingInformation.address}</AddressInfo>
-            </PlaceInfoBlock>
-          </LeftSide>
-          <Divider />
-          <RightSide>
-            <RoomInfoBlock>
-              <RoomInfo>
-                {data.buildingInformation.nBedrooms} Bedrooms
-              </RoomInfo>
-              <RoomInfo>
-                {data.buildingInformation.nBathrooms} Bathrooms
-              </RoomInfo>
-              <RoomInfo>{data.buildingInformation.square} Sq m</RoomInfo>
-              <RoomInfo>
-                {Math.round(data.buildingInformation.square / 3.3)} Pyung
-              </RoomInfo>
-            </RoomInfoBlock>
-          </RightSide>
-        </ContainerContent>
-      </ContainerGradient>
-    </Container>
+    <Link to={"/asset-detail/" + data.id} >
+      <Container background={data.buildingInformation.thumbnail}>
+        <ContainerGradient>
+          <ContainerContent>
+            <LeftSide>
+              <PriceBlock>
+                <PriceDollar>
+                  ($){(data.price * 1000).toLocaleString('en-US')}
+                </PriceDollar>
+                <PriceWon>(₩){data.price.toLocaleString('ko-KR')}</PriceWon>
+              </PriceBlock>
+              <PlaceInfoBlock>
+                <StreetInfo>{data.buildingInformation.street}</StreetInfo>
+                <AddressInfo>{data.buildingInformation.address}</AddressInfo>
+              </PlaceInfoBlock>
+            </LeftSide>
+            <Divider />
+            <RightSide>
+              <RoomInfoBlock>
+                <RoomInfo>
+                  {data.buildingInformation.nBedrooms} Bedrooms
+                </RoomInfo>
+                <RoomInfo>
+                  {data.buildingInformation.nBathrooms} Bathrooms
+                </RoomInfo>
+                <RoomInfo>{data.buildingInformation.square} Sq m</RoomInfo>
+                <RoomInfo>
+                  {Math.round(data.buildingInformation.square / 3.3)} Pyung
+                </RoomInfo>
+              </RoomInfoBlock>
+            </RightSide>
+          </ContainerContent>
+        </ContainerGradient>
+      </Container>
+    </Link>
   );
 };
 

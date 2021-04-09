@@ -1,12 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './AssetList.css';
 import AssetCard from './AssetCard';
 import styled from 'styled-components';
-// import {Process, saveToFirestore} from '../../service/MockAssetReader';
 import { ReactComponent as ArrowUp } from '../../images/ic_down.svg';
 import { ReactComponent as ArrowDown } from '../../images/ic_up.svg';
-import FirebaseService from '../../service/FirebaseService';
-import GetAssetList from '../../domain/GetAssetList';
+import GetAsset from '../../domain/GetAsset';
 import Asset from '../../model/Asset';
 
 type AssetListProperties = {};
@@ -15,7 +13,7 @@ const AssetList: React.FC<AssetListProperties> = () => {
   const [toInvestment, setInvestment] = useState(true);
   const [ascend, setAscend] = useState(true);
   const [assets, setAssets] = useState<Asset[]>([]);
-  new GetAssetList().getAssetList().then((value) => {
+  new GetAsset().getAssetList().then((value) => {
     setAssets(value);
     // console.log('data', value[0].buildingInformation);
   });

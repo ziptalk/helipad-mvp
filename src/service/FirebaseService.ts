@@ -6,6 +6,10 @@ export default class FirebaseService {
         return (await store.get()).docs;
     }
 
+    async getAsset(id: string) {
+        return await store.where("id", "==", id).get();
+    }
+
     // async saveAssetList(list: Asset[]) {
     //     list.forEach((asset) => {
     //         store.add({

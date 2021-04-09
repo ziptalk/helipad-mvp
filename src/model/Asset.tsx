@@ -1,6 +1,7 @@
 import BuildingInformation from './BuildingInformation';
 
 export const COLUMNS = {
+  ID: "id",
   FOR_INVESTMENT: "forInvestment",
   PRICE: "price",
   STATUS: "status",
@@ -19,6 +20,7 @@ export const COLUMNS = {
 
 export default class Asset {
   constructor(
+    readonly id: string,
     readonly forInvestment: boolean,
     readonly price: number,
     readonly status: string,
@@ -37,6 +39,7 @@ export default class Asset {
 
   static fromMap(map: Map<string, any>): Asset {
     return new Asset(
+      map.get(COLUMNS.ID) as string,
       map.get(COLUMNS.FOR_INVESTMENT) as boolean,
       map.get(COLUMNS.PRICE) as number,
       map.get(COLUMNS.STATUS) as string,
@@ -51,6 +54,43 @@ export default class Asset {
       map.get(COLUMNS.INFORMATION) as string,
       map.get(COLUMNS.AMENITIES) as string[],
       BuildingInformation.fromMap(map.get(COLUMNS.BUILDING_INFORMATION))
+    );
+  }
+
+  static emptyAsset(): Asset {
+    return new Asset(
+        "test_id",
+        false,
+        0,
+        "No",
+        0,
+        0,
+        0,
+        0,
+        "",
+        "",
+        0,
+        0,
+        "",
+        [],
+        new BuildingInformation(
+            "",
+            "",
+            "",
+            0,
+            0,
+            0,
+            0,
+            "",
+            "",
+            0,
+            0,
+            0,
+            "",
+            0,
+            "",
+            ""
+        )
     );
   }
 
