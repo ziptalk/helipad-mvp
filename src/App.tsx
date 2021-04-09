@@ -10,6 +10,9 @@ import AssetList from './components/asset_list/AssetList';
 import AssetDetail from './components/asset_detail/AssetDetail';
 import SignUp from './components/login/SignUp';
 import Landing from './components/landing/Landing';
+import Mypage from './components/mypage/Mypage';
+import Process from './components/process/Process';
+
 import { Header } from './components/header/Header';
 import { HeaderContainer } from './components/header/HeaderContainer';
 import './App.css';
@@ -42,6 +45,8 @@ function App() {
             {/*)}*/}
             <Route exact path={'/asset-detail'} component={AssetDetail} />
             <Route exact path={'/landing'} component={Landing} />
+            <Route exact path={'/mypage'} component={Mypage} />
+            <Route exact path={'/process'} component={Process} />
           </div>
           <Footer />
         </section>

@@ -3,12 +3,13 @@ import React from 'react';
 import Asset from '../../model/Asset';
 import SaveImage from '../../images/ic_save.svg';
 import ContactImage from '../../images/ic_contact.svg';
+import ViewDetailImage from '../../images/ic_viewDetail.svg';
 
-type SummaryProps = {
+type ProcessSummaryProps = {
   data: Asset;
 };
 
-const Summary: React.FC<SummaryProps> = ({ data }) => {
+const ProcessSummary: React.FC<ProcessSummaryProps> = ({ data }) => {
   return (
     <Container>
       <AddressWrapper>
@@ -19,8 +20,8 @@ const Summary: React.FC<SummaryProps> = ({ data }) => {
         </Address>
       </AddressWrapper>
       <Price>
-        <Dollar>${data.price.toLocaleString('en-US')}</Dollar>
-        <Won>₩{data.price.toLocaleString('ko-KR')}</Won>
+        <Dollar>($){data.price.toLocaleString('en-US')}</Dollar>
+        <Won>(₩){data.price.toLocaleString('ko-KR')}</Won>
       </Price>
       <Divider />
       <Rooms>
@@ -54,10 +55,9 @@ const Summary: React.FC<SummaryProps> = ({ data }) => {
         </RoomInfo>
         <RoomInfo>
           <RoomInfoContent>
-            <Contact />
+            <ViewDetail></ViewDetail>
           </RoomInfoContent>
-          <RoomInfoTitle>Contact</RoomInfoTitle>
-          <RoomInfoTitle>Helipad</RoomInfoTitle>
+          <RoomInfoTitle>View Detail</RoomInfoTitle>
         </RoomInfo>
       </Rooms>
     </Container>
@@ -110,7 +110,6 @@ const Price = styled.div`
     line-height: 28.8px;
   }
 `;
-
 const Divider = styled.div`
   border: 1px solid #000000;
 `;
@@ -142,10 +141,11 @@ const Save = styled.div`
   background-image: url(${SaveImage});
 `;
 
-const Contact = styled.div`
+const ViewDetail = styled.div`
+  position: relative;
   width: 32px;
   height: 33px;
-  background-image: url(${ContactImage});
+  background-image: url(${ViewDetailImage});
 `;
 
-export default Summary;
+export default ProcessSummary;

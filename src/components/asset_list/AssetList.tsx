@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './AssetList.css';
 import AssetCard from './AssetCard';
 import styled from 'styled-components';
-import {Process, saveToFirestore} from '../../service/MockAssetReader';
+// import {Process, saveToFirestore} from '../../service/MockAssetReader';
 import { ReactComponent as ArrowUp } from '../../images/ic_down.svg';
 import { ReactComponent as ArrowDown } from '../../images/ic_up.svg';
 import FirebaseService from '../../service/FirebaseService';
@@ -17,7 +17,7 @@ const AssetList: React.FC<AssetListProperties> = () => {
   const [assets, setAssets] = useState<Asset[]>([]);
   new GetAssetList().getAssetList().then((value) => {
     setAssets(value);
-    console.log("data", value[0].buildingInformation);
+    // console.log('data', value[0].buildingInformation);
   });
   /**
    *
@@ -83,7 +83,7 @@ const AssetList: React.FC<AssetListProperties> = () => {
           )
           .sort((a, b) => (ascend ? a.price - b.price : b.price - a.price))
           .map((asset, idx) => (
-            <AssetCard data={asset} />
+            <AssetCard key={idx} data={asset} />
           ))}
       </AssetListGrid>
     </Container>
