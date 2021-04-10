@@ -27,21 +27,21 @@ export default class LoginForm extends React.Component<any, any> {
     };
 
     return (
-      <form className="loginForm">
+      <LoginForm>
         <label>Email Address</label>
-        <input className="emailInput" type="text" name="email" />
+        <Email type="text" name="email" />
         <label>Password</label>
-        <input className="passwordInput" type="password" name="password" />
-        <input className="submitButton" type="submit" value="LOGIN" />
-        <div className="loginRow rememberMeTitle">
+        <Password type="password" name="password" />
+        <Submit type="submit" value="LOGIN" />
+        <Row>
           Remember Me
           <input className="rememberMeBox" type="checkbox" />
-        </div>
-        <div className="loginRow">
+        </Row>
+        <Row>
           Forgot your password?
           <Link to={{ pathname: '/sign-up' }}>Sign-up</Link>
-        </div>
-        <div className="facebookLoginContainer">
+        </Row>
+        <FacebookLoginContainer>
           <ReactFacebookLogin
             cssClass="facebookLoginButton"
             appId="484464982933400"
@@ -53,10 +53,58 @@ export default class LoginForm extends React.Component<any, any> {
             onFailure={onLoginFailed}
             icon={<FaceBook style={{ marginRight: '10px' }} />}
           />
-        </div>
-      </form>
+        </FacebookLoginContainer>
+      </LoginForm>
     );
   }
 }
 
-const Div = styled.div``;
+const Form = styled.form`
+  width: 100%;
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  font-size: 20px;
+`;
+
+const Row = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+`;
+
+const Email = styled.input`
+  margin-top: 5px;
+  margin-bottom: 10px;
+  height: 45px;
+`
+
+const Password = styled.input`
+  matgin-top: 50px;
+  margin-bottom: 10px;
+  height: 45px;
+`;
+
+const Remember = styled.input`
+  width: 20px;
+  height: 20px;
+`;
+
+const Submit = styled.input`
+  height: 45px;
+  background-color: #4542e2;
+  color: #ffffff;
+  font-size: 20px;
+`;
+
+const FacebookLoginContainer = styled.div`
+  margin-top: 25px;
+`;
+
+const FacebookIcon = styled.div`
+  background: url(../../images/ic_facebook.svg);
+`;
+
+const rememberTitle = styled.div`
+  color: #999999;
+`;
