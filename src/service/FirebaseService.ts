@@ -18,6 +18,17 @@ export default class FirebaseService {
         }
     }
 
+    async signUpWithEmailAndPassword(email: string, password: string) {
+        firebase.auth().signInWithEmailAndPassword(email, password)
+            .then((userCredential) => {
+                let user = userCredential.user;
+            }).catch((error) => {
+            let errorCode = error.code;
+            let errorMessage = error.message;
+            console.log("error during signup with email: ", errorMessage);
+        });
+    }
+
     private static parseAsset(asset: firebase.firestore.DocumentData): Asset {
         let assetMap = new Map(Object.entries(asset));
         let buildingInfoObject = asset.buildingInformation;

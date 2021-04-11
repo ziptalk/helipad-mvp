@@ -1,24 +1,42 @@
-import React from "react";
+import React, {useState} from "react";
 import styled from 'styled-components';
-import InputField from "./InputField";
+import {InputField, InputType} from "./InputField";
+import SignUpUseCase from "../../domain/SignUpUseCase";
 
 const SignUp = () => {
+    const [lastName, setLastName] = useState("");
+    const [firstName, setFirstName] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [passwordConfirm, setPasswordConfirm] = useState("");
+
+    const handleSignUp = () => {
+        console.log("handleSignUp");
+        SignUpUseCase.withEmail(email, password).then(value => {
+            console.log(value);
+        });
+    }
+
     return (
         <Container>
-            <Title>Sign up</Title>
-            <Divider />
-            <Name>
-                <InputField title="last name" />
-                <InputField title="first name" />
-            </Name>
-            <InputField title="email" />
-            <InputField title="password" />
-            <InputField title="password confirmation" />
-            <Agent>
-                <AgentText>I'm a private banker of real estate agent</AgentText>
-                <AgentCheckBox type="checkbox" />
-            </Agent>
-            <Button type="submit">SIGN UP</Button>
+            <form>
+                <Title>Sign up</Title>
+                <Divider />
+                <Name>
+                    <InputField type={InputType.TEXT} title="last name" onChange={(name) => setLastName(name)} />
+                    <InputField type={InputType.TEXT} title="first name" onChange={(name) => setFirstName(name)} />
+                </Name>
+                <InputField type={InputType.EMAIL} title="email" onChange={(email) => setEmail(email)} />
+                <InputField type={InputType.PASSWORD} title="password" onChange={(password) => {
+                    setPassword(password);
+                }} />
+                <InputField type={InputType.PASSWORD} title="password confirmation" onChange={(password) => setPasswordConfirm(password)} />
+                <Agent>
+                    <AgentText>I'm a private banker of real estate agent</AgentText>
+                    <AgentCheckBox type="checkbox" />
+                </Agent>
+                <Button type="submit" onClick={handleSignUp}>SIGN UP</Button>
+            </form>
         </Container>
     );
 }
