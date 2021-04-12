@@ -1,20 +1,39 @@
 import React, {useState} from "react";
 import styled from 'styled-components';
+import SignUpUseCase, {ErrorCode} from "../../domain/SignUpUseCase";
 import {InputField, InputType} from "./InputField";
-import SignUpUseCase from "../../domain/SignUpUseCase";
 
 const SignUp = () => {
-    const [lastName, setLastName] = useState("");
-    const [firstName, setFirstName] = useState("");
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [passwordConfirm, setPasswordConfirm] = useState("");
+    const [lastName, setLastName] = useState<string>("");
+    const [firstName, setFirstName] = useState<string>("");
+    const [email, setEmail] = useState<string>("");
+    const [password, setPassword] = useState<string>("");
+    const [passwordConfirm, setPasswordConfirm] = useState<string>("");
 
-    const handleSignUp = () => {
+    const handleSignUpError = (error: any) => {
+        console.log("error code: ", error.code);
+        console.log("error message: ", error.message);
+
+        switch (error.code) {
+            case ErrorCode.EMAIL_ALREADY_IN_USE:
+                alert("This email is already in-use. Please use other account.");
+                break;
+            default:
+                break;
+        }
+    }
+
+    const handleSignUp = (e: any) => {
         console.log("handleSignUp");
+        e.preventDefault();
+
+        if (password !== passwordConfirm) {
+            alert("Password != PasswordConfirmation");
+            return;
+        }
         SignUpUseCase.withEmail(email, password).then(value => {
             console.log(value);
-        });
+        }).catch((error) => handleSignUpError(error));
     }
 
     return (
@@ -23,19 +42,19 @@ const SignUp = () => {
                 <Title>Sign up</Title>
                 <Divider />
                 <Name>
-                    <InputField type={InputType.TEXT} title="last name" onChange={(name) => setLastName(name)} />
-                    <InputField type={InputType.TEXT} title="first name" onChange={(name) => setFirstName(name)} />
+                    <InputField type={InputType.TEXT} title="last name" onChange={(name: string) => setLastName(name)} />
+                    <InputField type={InputType.TEXT} title="first name" onChange={(name: string) => setFirstName(name)} />
                 </Name>
-                <InputField type={InputType.EMAIL} title="email" onChange={(email) => setEmail(email)} />
-                <InputField type={InputType.PASSWORD} title="password" onChange={(password) => {
+                <InputField type={InputType.EMAIL} title="email" onChange={(email: string) => setEmail(email)} />
+                <InputField type={InputType.PASSWORD} title="password" onChange={(password: string) => {
                     setPassword(password);
                 }} />
-                <InputField type={InputType.PASSWORD} title="password confirmation" onChange={(password) => setPasswordConfirm(password)} />
+                <InputField type={InputType.PASSWORD} title="password confirmation" onChange={(password: string) => setPasswordConfirm(password)} />
                 <Agent>
                     <AgentText>I'm a private banker of real estate agent</AgentText>
                     <AgentCheckBox type="checkbox" />
                 </Agent>
-                <Button type="submit" onClick={handleSignUp}>SIGN UP</Button>
+                <Button onClick={handleSignUp}>SIGN UP</Button>
             </form>
         </Container>
     );
