@@ -1,7 +1,11 @@
 import FirebaseService from "../service/FirebaseService";
 
 export default class SignUpUseCase {
-    static async withEmail(email: string, password: string) {
-        await new FirebaseService().signUpWithEmailAndPassword(email, password);
+    static withEmail(email: string, password: string) {
+        return new FirebaseService().signUpWithEmailAndPassword(email, password);
     }
+}
+
+export enum ErrorCode {
+    EMAIL_ALREADY_IN_USE = "auth/email-already-in-use",
 }

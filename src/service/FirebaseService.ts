@@ -19,14 +19,13 @@ export default class FirebaseService {
     }
 
     async signUpWithEmailAndPassword(email: string, password: string) {
-        firebase.auth().signInWithEmailAndPassword(email, password)
-            .then((userCredential) => {
-                let user = userCredential.user;
-            }).catch((error) => {
-            let errorCode = error.code;
-            let errorMessage = error.message;
-            console.log("error during signup with email: ", errorMessage);
-        });
+        console.log("signUpWithEmailAndPassword");
+        return firebase.auth().createUserWithEmailAndPassword(email, password);
+    }
+
+    async logInWithEmailAndPassword(email: string, password: string) {
+        console.log("logInWithEmailAndPassword");
+        return firebase.auth().signInWithEmailAndPassword(email, password);
     }
 
     private static parseAsset(asset: firebase.firestore.DocumentData): Asset {
