@@ -6,64 +6,6 @@ import { ReactComponent as FaceBook } from '../../images/ic_facebook.svg';
 import LoginUseCase, {ErrorCode} from "../../domain/LoginUseCase";
 import {useState} from "react";
 
-// export default class LoginForm extends React.Component<any, any> {
-//   render() {
-//     let onClickedLogin = (event: React.MouseEvent<HTMLDivElement>) => {
-//       event.preventDefault();
-//       console.log(event);
-//       LoginUseCase.execute(email, password).then((result) => {
-//
-//       }).catch((error) => onLoginFailed(error));
-//     };
-//
-//     let onLoginSuccess = (userInfo: ReactFacebookLoginInfo) => {
-//       console.log(userInfo);
-//     };
-//
-//     let onLoginFailed = (response: ReactFacebookFailureResponse) => {
-//       console.log('login failed: ', response);
-//     };
-//
-//     let onClickedSignUp = () => {
-//       console.log('onClickedSignUp');
-//     };
-//
-//     const [email, setEmail] = useState<string>("");
-//     const [password, setPassword] = useState<string>("");
-//
-//     return (
-//       <Form>
-//         <label>Email Address</label>
-//         <Email type="text" name="email" value={email} onChange={(email) => setEmail(email)} />
-//         <label>Password</label>
-//         <Password type="password" name="password" value={password} onChange={(password) => setPassword(password)} />
-//         <Submit value="LOGIN" onClick={onClickedLogin} />
-//         <Row>
-//           Remember Me
-//           <input className="rememberMeBox" type="checkbox" />
-//         </Row>
-//         <Row>
-//           Forgot your password?
-//           <Link to={{ pathname: '/sign-up' }}>Sign-up</Link>
-//         </Row>
-//         <FacebookLoginContainer>
-//           <ReactFacebookLogin
-//             cssClass="facebookLoginButton"
-//             appId="484464982933400"
-//             autoLoad={true}
-//             fields="name,email,picture"
-//             textButton="Login with facebook"
-//             onClick={onClickedLogin}
-//             callback={onLoginSuccess}
-//             onFailure={onLoginFailed}
-//             icon={<FaceBook style={{ marginRight: '10px' }} />}
-//           />
-//         </FacebookLoginContainer>
-//       </Form>
-//     );
-//   }
-// }
-
 const LoginForm = () => {
     let onClickedLogin = (event: React.MouseEvent<HTMLDivElement>) => {
         event.preventDefault();

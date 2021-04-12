@@ -29,7 +29,7 @@ function App() {
           />
           <HeaderContainer />
           <div className="routingContainer">
-            <Route exact path={'/log-in'} component={Login} />
+            <Route exact path={'/login'} component={Login} />
             <Route exact path={'/sign-up'} component={SignUp} />
             <Route exact path={'/asset-list'} component={AssetList} />
             <Route exact path={'/asset-detail/:assetId'} component={AssetDetail} />
