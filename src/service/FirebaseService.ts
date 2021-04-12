@@ -23,6 +23,11 @@ export default class FirebaseService {
         return firebase.auth().createUserWithEmailAndPassword(email, password);
     }
 
+    async logInWithEmailAndPassword(email: string, password: string) {
+        console.log("logInWithEmailAndPassword");
+        return firebase.auth().signInWithEmailAndPassword(email, password);
+    }
+
     private static parseAsset(asset: firebase.firestore.DocumentData): Asset {
         let assetMap = new Map(Object.entries(asset));
         let buildingInfoObject = asset.buildingInformation;
