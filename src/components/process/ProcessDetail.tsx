@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled, { css } from 'styled-components';
 import CompletedImage from '../../images/ic_completed.svg';
 import ProgressImage from '../../images/ic_progress.svg';
-import { lengthChecker, dividerChecker, stepChecker } from './processService';
+import CheckProcessData from '../../domain/CheckProcessData';
 
 /**
  * 변경 가능한 mock data
@@ -28,59 +28,24 @@ import { lengthChecker, dividerChecker, stepChecker } from './processService';
  *  process => 'due date' 데이터가 같이 넘어와야 한다.
  */
 
-type ProcessInfoProps = {
+type ProcessInfo = {
+  divider?: string;
   id: number;
-  step: number;
   title: string;
-  status: string;
-};
-type ProcessDetailProps = {
-  mockData: {
-    processInfo: ProcessInfoProps[];
-    dueDateInfo: {
-      title: string;
-      content: string;
-    };
-  };
+  statusInfo: { step: number; status: string };
 };
 
-const ProcessDetail = ({ mockData }: ProcessDetailProps) => {
-  const { processInfo, dueDateInfo } = mockData;
-
-  const validate = () => {
-    let result = stepChecker(processInfo);
-    if (!result) console.log('error');
+type assetsProps = {
+  assetId: number;
+  processInfo: ProcessInfo[];
+  dueDateInfo: {
+    title: string;
+    content: string;
   };
-
-  useEffect(() => {
-    validate();
-  });
-
-  //!
-  // return (
-  //   <Container>
-  //     <DateBlock>
-  //       <DateTitle>{dueDateInfo.title}</DateTitle>
-  //       <DateContent>{dueDateInfo.content}</DateContent>
-  //     </DateBlock>
-  //     {validator(processInfo) ? (
-  //       processInfo.map((data: ProcessInfoProps, idx: number) => (
-  //         <ProcessBlock key={idx}>
-  //           <Processes>
-  //             {lengthChecker(data.title).map((title: string) => (
-  //               <Process status={data.status}>{title}</Process>
-  //             ))}
-  //             <Check status={data.status}></Check>
-  //           </Processes>
-  //           {dividerChecker({ idx, processInfo }) && <Divider />}
-  //         </ProcessBlock>
-  //       ))
-  //     ) : (
-  //       <>{console.log('error')}</>
-  //     )}
-  //   </Container>
-  // );
-  //!
+};
+const ProcessDetail = () => {
+  let assetInformation: assetsProps = new CheckProcessData().getProcessedInfo();
+  let { assetId, processInfo, dueDateInfo } = assetInformation;
 
   return (
     <Container>
@@ -88,71 +53,23 @@ const ProcessDetail = ({ mockData }: ProcessDetailProps) => {
         <DateTitle>{dueDateInfo.title}</DateTitle>
         <DateContent>{dueDateInfo.content}</DateContent>
       </DateBlock>
-      {processInfo.map((data: ProcessInfoProps, idx: number) => (
-        <ProcessBlock key={idx}>
-          <Processes>
-            {lengthChecker(data.title).map((title: string) => (
-              <Process status={data.status}>{title}</Process>
-            ))}
-            <Check status={data.status}></Check>
-          </Processes>
-          {dividerChecker({ idx, processInfo }) && <Divider />}
-        </ProcessBlock>
-      ))}
+      <ProcessBlock>
+        {processInfo.map((info: ProcessInfo) => (
+          <>
+            <Processes>
+              <Content status={info.statusInfo.status}>{info.title}</Content>
+              <Check status={info.statusInfo.status}></Check>
+            </Processes>
+            <Div status={info.statusInfo.status}>{info.divider}</Div>
+          </>
+        ))}
+      </ProcessBlock>
     </Container>
   );
 };
 
-//? default props
-ProcessDetail.defaultProps = {
-  mockData: {
-    processInfo: [
-      {
-        id: 1,
-        step: 1,
-        title: 'Setup local bank account',
-        status: 'completed',
-      },
-      {
-        id: 2,
-        step: 3,
-        title: 'Find laywer',
-        status: 'completed',
-      },
-      {
-        id: 3,
-        step: 2,
-        title: 'Find mortgage lender',
-        status: 'progress',
-      },
-      {
-        id: 4,
-        step: 1,
-        title: 'Find escrow company',
-        status: 'not yet',
-      },
-      {
-        id: 5,
-        step: 1,
-        title:
-          'Inspection contingency, loan contingency, engineer survey schedulings',
-        status: 'not yet',
-      },
-      {
-        id: 6,
-        step: 1,
-        title: 'Inspection contingency',
-        status: 'not yet',
-      },
-    ],
-    dueDateInfo: {
-      title: 'Due Date',
-      content: 'April, 1st, 2021',
-    },
-  },
-};
-
 //? styled-components
+
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -188,15 +105,20 @@ const ProcessBlock: any = styled.div`
 
 const Processes = styled.div`
   display: flex;
-  flex-direction: column;
+  text-align: center;
+
   position: relative;
 `;
 
-const Process: any = styled.div`
+const Divider = styled.div`
+  margin: 10px 0px;
+  height: 35px;
+  border-right: 2px solid black;
+`;
+
+const Content: any = styled.div`
   /* default */
   color: #c4c4c4;
-  margin-left: 50px;
-  margin-right: 20px;
 
   /* status에 따라 다른 style 적용 */
   ${(props: any) =>
@@ -222,41 +144,50 @@ const Process: any = styled.div`
           line-height: 46.8px;
           font-family: 'Helvetica Neue';
           font-size: 26px;
-          margin: 0 auto;
         `}
 `;
+
 const Check: any = styled.div`
+  width: 30px;
+  height: 30px;
+
   ${(props: any) =>
     props.status === 'completed'
       ? css`
-          width: 30px;
-          height: 30px;
           background-image: url(${CompletedImage});
           background-repeat: no-repeat;
           line-height: 46.8px;
           position: absolute;
-          right: -25px;
+          right: -70px;
           top: 10px;
         `
       : props.status === 'progress'
       ? css`
           background-image: url(${ProgressImage});
           background-repeat: no-repeat;
-          width: 30px;
-          height: 30px;
           line-height: 57.6px;
           position: absolute;
-          right: -25px;
+          right: -70px;
           top: 10px;
         `
-      : css`
-          background: none;
-        `}
-`;
-const Divider = styled.div`
-  margin: 10px 0px;
-  height: 35px;
-  border-right: 2px solid black;
+      : css``}
 `;
 
+const Div: any = styled.div`
+  width: 45px;
+  font-size: 45px;
+
+  ${(props: any) =>
+    props.status === 'completed'
+      ? css`
+          color: #000000;
+        `
+      : props.status === 'progress'
+      ? css`
+          color: #000000;
+        `
+      : css`
+          color: #c4c4c4;
+        `}
+`;
 export default ProcessDetail;
