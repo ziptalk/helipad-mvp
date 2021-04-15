@@ -28,6 +28,10 @@ export default class FirebaseService {
         return firebase.auth().signInWithEmailAndPassword(email, password);
     }
 
+    async registerAuthStateChangeListener(onChange: (user: any) => void) {
+        firebase.auth().onAuthStateChanged(onChange);
+    }
+
     private static parseAsset(asset: firebase.firestore.DocumentData): Asset {
         let assetMap = new Map(Object.entries(asset));
         let buildingInfoObject = asset.buildingInformation;

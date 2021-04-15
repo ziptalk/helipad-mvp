@@ -1,0 +1,1 @@
+export { MyPageRoutes } from "./config/MyPageRoutes";
