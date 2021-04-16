@@ -1,14 +1,25 @@
-import React, { useEffect, useState } from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import styled from 'styled-components';
 import SavedAssetCard from './SavedAssetCard';
 import Asset from '../../../../model/Asset';
 import { Process } from '../../../../service/MockAssetReader';
+import SaveAsset from "../../../../domain/SaveAsset";
+import {AuthContext} from "../../../../AuthProvider";
 // import GetAssetList from '../../domain/GetAssetList';
 
 type MyPageProps = {};
 const MyPage: React.FC<MyPageProps> = () => {
   let mockAssets = Process();
+  const {user} = useContext(AuthContext);
   const [assets, setAssets] = useState<Asset[]>(mockAssets);
+
+  useEffect(() => {
+      if (user != null) {
+          SaveAsset.getSavedAsset(user.uid).then((assets) => {
+             console.log("my assets : ", assets);
+          });
+      }
+  }, []);
 
   return (
     <Container>

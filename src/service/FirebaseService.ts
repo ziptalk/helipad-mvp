@@ -53,14 +53,16 @@ export default class FirebaseService {
     static async isSavedAsset(userId: string, assetId: string) {
         let userDocument = userStore.doc(userId);
         let original = (await userDocument.get());
-        console.log("isSavedAsset: ", original);
         if (original !== undefined && original.data() !== undefined) {
             let likesField = original.get("likes");
-            console.log("likesField: ", likesField);
             return likesField.includes(assetId);
         }
-
         return false;
+    }
+
+    static async getSavedAsset(userId: string) {
+        let userDocument = userStore.doc(userId);
+        return (await userDocument.get()).get("likes");
     }
 
     private static parseAsset(asset: firebase.firestore.DocumentData): Asset {

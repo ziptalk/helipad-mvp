@@ -15,4 +15,8 @@ export default class SaveAsset {
   static async isSaved(assetId: string, userId: string) {
     return await FirebaseService.isSavedAsset(userId, assetId);
   }
+
+  static async getSavedAsset(userId: string) {
+    return await FirebaseService.getSavedAsset(userId);
+  }
 }
