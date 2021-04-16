@@ -1,16 +1,16 @@
 import Asset, {COLUMNS} from "../model/Asset";
-import {store} from "../shared/Firebase";
+import {assetStore, userStore} from "../shared/Firebase";
 import firebase from "firebase";
 
 export default class FirebaseService {
     async getAssetList(): Promise<Asset[]> {
-        return (await store.get()).docs.map((rawData) => {
+        return (await assetStore.get()).docs.map((rawData) => {
             return FirebaseService.parseAsset(rawData.data());
         });
     }
 
     async getAsset(id: string): Promise<Asset> {
-        let firebaseResult = await store.where("id", "==", id).get();
+        let firebaseResult = await assetStore.where("id", "==", id).get();
         if (firebaseResult.docs.length === 1) {
             return FirebaseService.parseAsset(firebaseResult.docs[0].data());
         } else {
@@ -30,6 +30,37 @@ export default class FirebaseService {
 
     async registerAuthStateChangeListener(onChange: (user: any) => void) {
         firebase.auth().onAuthStateChanged(onChange);
+    }
+
+    static async saveOrUnSaveAsset(userId: string, assetId: string) {
+        let userDocument = userStore.doc(userId);
+        let original = (await userDocument.get());
+        if (original === undefined || original.data() === undefined) {
+            return undefined;
+        }
+
+        let likesField = original.get("likes");
+        if (likesField.includes(assetId)) {
+            let updatedData = likesField.slice();
+            let deletedData = updatedData.filter((item: string) => item !== assetId);
+            await userDocument.set({"likes": deletedData});
+        } else {
+            let updatedData = likesField.slice();
+            await userDocument.set({"likes": updatedData});
+        }
+    }
+
+    static async isSavedAsset(userId: string, assetId: string) {
+        let userDocument = userStore.doc(userId);
+        let original = (await userDocument.get());
+        console.log("isSavedAsset: ", original);
+        if (original !== undefined && original.data() !== undefined) {
+            let likesField = original.get("likes");
+            console.log("likesField: ", likesField);
+            return likesField.includes(assetId);
+        }
+
+        return false;
     }
 
     private static parseAsset(asset: firebase.firestore.DocumentData): Asset {

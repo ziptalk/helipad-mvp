@@ -9,6 +9,7 @@ import {Login, SignUp} from "./views/Auth/components";
 import AssetDetail from "./views/Asset/components/asset_detail/AssetDetail";
 import MyPage from "./views/MyPage/components/mypage/MyPage";
 import AssetList from "./views/Asset/components/asset_list/AssetList";
+import Process from "./views/MyPage/components/process/Process";
 
 const ApplicationRoutes = () => {
     return (
@@ -18,10 +19,11 @@ const ApplicationRoutes = () => {
                     <HeaderContainer />
                     <div className="routingContainer">
                         {/*<PrivateRoutes exact path="/asset-detail/:assetId" component={AssetDetail} />*/}
+                        <PrivateRoutes path="/asset" component={AssetRoutes} />
                         <Route path="/login" component={Login} />
                         <Route path="/signup" component={SignUp} />
                         <Route path="/mypage" component={MyPage} />
-                        <PrivateRoutes path="/asset" component={AssetRoutes} />
+                        <Route path="/process" component={Process} />
                         <Redirect to="/asset" from="/" />
                     </div>
                 </section>

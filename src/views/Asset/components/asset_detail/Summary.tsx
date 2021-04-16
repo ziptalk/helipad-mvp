@@ -1,14 +1,32 @@
 import styled from 'styled-components';
-import React from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import Asset from '../../../../model/Asset';
 import SaveImage from '../../../../images/ic_save.svg';
 import ContactImage from '../../../../images/ic_contact.svg';
+import SaveAsset from "../../../../domain/SaveAsset";
+import {AuthContext} from "../../../../AuthProvider";
 
 type SummaryProps = {
   data: Asset;
 };
 
 const Summary: React.FC<SummaryProps> = ({ data }) => {
+  const {user} = useContext(AuthContext);
+  const [isSavedAsset, setSavedAsset] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (user != null) {
+      SaveAsset.isSaved(data.id, user.uid).then((result) => setSavedAsset(result));
+    }
+  }, []);
+
+  const onClickSave = async (e: any) => {
+
+    if (user != null) {
+      await SaveAsset.saveOrUnSaveAsset(data.id, user.uid);
+    }
+  }
+
   return (
     <Container>
       <AddressWrapper>
@@ -46,7 +64,7 @@ const Summary: React.FC<SummaryProps> = ({ data }) => {
           </RoomInfoContent>
           <RoomInfoTitle>Pyung</RoomInfoTitle>
         </RoomInfo>
-        <RoomInfo>
+        <RoomInfo onClick={onClickSave}>
           <RoomInfoContent>
             <Save />
           </RoomInfoContent>
