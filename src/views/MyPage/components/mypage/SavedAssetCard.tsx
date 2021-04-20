@@ -2,6 +2,7 @@ import React from 'react';
 import Asset from '../../../../model/Asset';
 import styled, { css } from 'styled-components';
 import { ReactComponent as LikeFlag } from '../../../../images/ic_like.svg';
+import { Link } from 'react-router-dom';
 
 type AssetCardProps = {
   data: Asset;
@@ -19,34 +20,36 @@ const SavedAssetCard = ({ asset }: any) => {
   } = buildingInformation;
 
   return (
-    <Container background={url}>
-      <LikeFlag className="flag" />
-      <ContainerGradient>
-        <ContainerContent>
-          <LeftSide>
-            <PriceBlock>
-              <PriceDollar>
-                ($){(price * 1000).toLocaleString('en-US')}
-              </PriceDollar>
-              <PriceWon>(₩){price.toLocaleString('ko-KR')}</PriceWon>
-            </PriceBlock>
-            <PlaceInfoBlock>
-              <StreetInfo>{street}</StreetInfo>
-              <AddressInfo>{address}</AddressInfo>
-            </PlaceInfoBlock>
-          </LeftSide>
-          <Divider />
-          <RightSide>
-            <RoomInfoBlock>
-              <RoomInfo>{nBedrooms} Bedrooms</RoomInfo>
-              <RoomInfo>{nBathrooms} Bathrooms</RoomInfo>
-              <RoomInfo>{square} Sq m</RoomInfo>
-              <RoomInfo>{Math.round(square / 3.3)} Pyung</RoomInfo>
-            </RoomInfoBlock>
-          </RightSide>
-        </ContainerContent>
-      </ContainerGradient>
-    </Container>
+    <Link to={`/asset/${asset.id}`}>
+      <Container background={url}>
+        <LikeFlag className="flag" />
+        <ContainerGradient>
+          <ContainerContent>
+            <LeftSide>
+              <PriceBlock>
+                <PriceDollar>
+                  ($){(price * 1000).toLocaleString('en-US')}
+                </PriceDollar>
+                <PriceWon>(₩){price.toLocaleString('ko-KR')}</PriceWon>
+              </PriceBlock>
+              <PlaceInfoBlock>
+                <StreetInfo>{street}</StreetInfo>
+                <AddressInfo>{address}</AddressInfo>
+              </PlaceInfoBlock>
+            </LeftSide>
+            <Divider />
+            <RightSide>
+              <RoomInfoBlock>
+                <RoomInfo>{nBedrooms} Bedrooms</RoomInfo>
+                <RoomInfo>{nBathrooms} Bathrooms</RoomInfo>
+                <RoomInfo>{square} Sq m</RoomInfo>
+                <RoomInfo>{Math.round(square / 3.3)} Pyung</RoomInfo>
+              </RoomInfoBlock>
+            </RightSide>
+          </ContainerContent>
+        </ContainerGradient>
+      </Container>
+    </Link>
   );
 };
 
