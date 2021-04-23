@@ -39,44 +39,70 @@ export default class FirebaseService {
       return undefined;
     }
 
-    let likesField = original.get('likes');
-    console.log(likesField);
-    if (likesField.includes(assetId)) {
-      let updatedData = likesField.slice();
-      let deletedData = updatedData.filter((item: string) => item !== assetId);
-
-      await userDocument.set({ likes: deletedData });
-    } else {
-      //! let updatedData = likesField.slice();
-      let updatedData = likesField.slice();
-      updatedData.push(assetId);
-
-      await userDocument.set({ likes: updatedData });
+        let likesField = original.get("likes").map((item: any) => item.id);
+        let assetDocumentId = await this.getAssetDocumentId(assetId);
+        if (likesField.includes(assetDocumentId)) {
+            await userDocument.update({
+                likes: firebase.firestore.FieldValue.arrayRemove(assetStore.doc(assetDocumentId))
+            });
+        } else {
+            await userDocument.update({
+                likes: firebase.firestore.FieldValue.arrayUnion(assetStore.doc(assetDocumentId))
+            });
+        }
     }
-  }
 
-  static async isSavedAsset(userId: string, assetId: string) {
-    let userDocument = userStore.doc(userId);
-    let original = await userDocument.get();
-    if (original !== undefined && original.data() !== undefined) {
-      let likesField = original.get('likes');
-      return likesField.includes(assetId);
+    static async isSavedAsset(userId: string, assetId: string) {
+        console.log("isSavedAsset");
+        let userDocument = userStore.doc(userId);
+        let original = (await userDocument.get());
+
+        if (original !== undefined && original.data() !== undefined) {
+            let likesField = original.get("likes");
+            console.log("isSavedAsset-likesField : " + likesField);
+            return likesField[assetId] !== undefined;
+        }
+        return false;
     }
-    return false;
-  }
 
-  static async getSavedAsset(userId: string) {
-    let userDocument = userStore.doc(userId);
-    return (await userDocument.get()).get('likes');
-  }
+    private static async getAssetDocumentId(assetId: string) {
+        console.log("find asset : " + assetId);
+        let assetDocument = await assetStore.where("id", "==", assetId).get();
+        if (assetDocument.size === 0) {
+            throw Error("Cannot find asset id " + assetId);
+        }
+        return assetDocument.docs[0].id;
+    }
 
-  private static parseAsset(asset: firebase.firestore.DocumentData): Asset {
-    let assetMap = new Map(Object.entries(asset));
-    let buildingInfoObject = asset.buildingInformation;
-    assetMap.set(
-      COLUMNS.BUILDING_INFORMATION,
-      new Map(Object.entries(buildingInfoObject))
-    );
-    return Asset.fromMap(assetMap);
-  }
+    static async getSavedAsset(userId: string) {
+        let userDocument = userStore.doc(userId);
+        let likesField = (await userDocument.get()).get("likes");
+        return this.getMapOrEmpty(likesField);
+    }
+
+    private static parseAsset(asset: firebase.firestore.DocumentData): Asset {
+        let assetMap = new Map(Object.entries(asset));
+        let buildingInfoObject = asset.buildingInformation;
+        assetMap.set(COLUMNS.BUILDING_INFORMATION, new Map(Object.entries(buildingInfoObject)));
+        return Asset.fromMap(assetMap);
+    }
+
+    static async getLikesField() {
+
+    }
+
+    static getMapOrEmpty(map: any): any {
+        console.log("getMapOrEmpty : ", map);
+        if (map === null || map === undefined || map === {}) {
+            console.log("null");
+            return {};
+        }
+        console.log("getMapOrEmpty: " + map + ", " + map.size);
+        if (map.size === 0) {
+            console.log("empty");
+            return {};
+        }
+        console.log("not anything");
+        return map;
+    }
 }
