@@ -1,4 +1,5 @@
 import FirebaseService from '../service/FirebaseService';
+import Asset from "../model/Asset";
 
 type SaveAssetProps = {
   userId: number;
@@ -16,8 +17,8 @@ export default class SaveAsset {
     return await FirebaseService.isSavedAsset(userId, assetId);
   }
 
-  static async getSavedAsset(userId: string) {
-    return await FirebaseService.getSavedAsset(userId);
+  static async getSavedAsset(userId: string): Promise<Asset[]> {
+    return FirebaseService.getSavedAsset(userId);
   }
 
   static async getAsset(id: string) {

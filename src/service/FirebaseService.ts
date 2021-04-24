@@ -1,54 +1,50 @@
-import Asset, { COLUMNS } from '../model/Asset';
-import { assetStore, userStore } from '../shared/Firebase';
+import Asset, {COLUMNS} from '../model/Asset';
+import {assetStore, userStore} from '../shared/Firebase';
 import firebase from 'firebase';
 
 export default class FirebaseService {
-  async getAssetList(): Promise<Asset[]> {
-    return (await assetStore.get()).docs.map((rawData) => {
-      return FirebaseService.parseAsset(rawData.data());
-    });
-  }
-
-  async getAsset(id: string): Promise<Asset> {
-    let firebaseResult = await assetStore.where('id', '==', id).get();
-    if (firebaseResult.docs.length === 1) {
-      return FirebaseService.parseAsset(firebaseResult.docs[0].data());
-    } else {
-      return Asset.emptyAsset();
+    async getAssetList(): Promise<Asset[]> {
+        return (await assetStore.get()).docs.map((rawData) => {
+            return FirebaseService.parseAsset(rawData.data());
+        });
     }
-  }
 
-  async signUpWithEmailAndPassword(email: string, password: string) {
-    console.log('signUpWithEmailAndPassword');
-    return firebase.auth().createUserWithEmailAndPassword(email, password);
-  }
-
-  async logInWithEmailAndPassword(email: string, password: string) {
-    console.log('logInWithEmailAndPassword');
-    return firebase.auth().signInWithEmailAndPassword(email, password);
-  }
-
-  async registerAuthStateChangeListener(onChange: (user: any) => void) {
-    firebase.auth().onAuthStateChanged(onChange);
-  }
-
-  static async saveOrUnSaveAsset(userId: string, assetId: string) {
-    let userDocument = userStore.doc(userId);
-    let original = await userDocument.get();
-    if (original === undefined || original.data() === undefined) {
-      return undefined;
+    async getAsset(id: string): Promise<Asset> {
+        let firebaseResult = await assetStore.where('id', '==', id).get();
+        if (firebaseResult.docs.length === 1) {
+            return FirebaseService.parseAsset(firebaseResult.docs[0].data());
+        } else {
+            return Asset.emptyAsset();
+        }
     }
+
+    async signUpWithEmailAndPassword(email: string, password: string) {
+        console.log('signUpWithEmailAndPassword');
+        return firebase.auth().createUserWithEmailAndPassword(email, password);
+    }
+
+    async logInWithEmailAndPassword(email: string, password: string) {
+        console.log('logInWithEmailAndPassword');
+        return firebase.auth().signInWithEmailAndPassword(email, password);
+    }
+
+    async registerAuthStateChangeListener(onChange: (user: any) => void) {
+        firebase.auth().onAuthStateChanged(onChange);
+    }
+
+    static async saveOrUnSaveAsset(userId: string, assetId: string) {
+        let userDocument = userStore.doc(userId);
+        let original = await userDocument.get();
+        if (original === undefined || original.data() === undefined) {
+            return undefined;
+        }
 
         let likesField = original.get("likes").map((item: any) => item.id);
         let assetDocumentId = await this.getAssetDocumentId(assetId);
         if (likesField.includes(assetDocumentId)) {
-            await userDocument.update({
-                likes: firebase.firestore.FieldValue.arrayRemove(assetStore.doc(assetDocumentId))
-            });
+            await userDocument.update({likes: firebase.firestore.FieldValue.arrayRemove(assetStore.doc(assetDocumentId))});
         } else {
-            await userDocument.update({
-                likes: firebase.firestore.FieldValue.arrayUnion(assetStore.doc(assetDocumentId))
-            });
+            await userDocument.update({likes: firebase.firestore.FieldValue.arrayUnion(assetStore.doc(assetDocumentId))});
         }
     }
 
@@ -74,10 +70,13 @@ export default class FirebaseService {
         return assetDocument.docs[0].id;
     }
 
-    static async getSavedAsset(userId: string) {
+    static async getSavedAsset(userId: string): Promise<Asset[]> {
         let userDocument = userStore.doc(userId);
-        let likesField = (await userDocument.get()).get("likes");
-        return this.getMapOrEmpty(likesField);
+        let myAssetDocumentIds = (await userDocument.get()).get("likes");
+        return Promise.all(myAssetDocumentIds.map(async (docRef: any) => {
+            let ref = await docRef.get();
+            return this.parseAsset(ref.data());
+        }));
     }
 
     private static parseAsset(asset: firebase.firestore.DocumentData): Asset {
@@ -85,10 +84,6 @@ export default class FirebaseService {
         let buildingInfoObject = asset.buildingInformation;
         assetMap.set(COLUMNS.BUILDING_INFORMATION, new Map(Object.entries(buildingInfoObject)));
         return Asset.fromMap(assetMap);
-    }
-
-    static async getLikesField() {
-
     }
 
     static getMapOrEmpty(map: any): any {

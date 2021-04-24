@@ -2,31 +2,18 @@ import React, { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import SavedAssetCard from './SavedAssetCard';
 import Asset from '../../../../model/Asset';
-import { Process } from '../../../../service/MockAssetReader';
 import SaveAsset from '../../../../domain/SaveAsset';
 import { AuthContext } from '../../../../AuthProvider';
-// import GetAssetList from '../../domain/GetAssetList';
 
 type MyPageProps = {};
 const MyPage: React.FC<MyPageProps> = () => {
-  // let mockAssets = Process();
   const { user } = useContext(AuthContext);
   const [assets, setAssets] = useState<Asset[]>([]);
 
-  //   useEffect(() => {
-  //     if (user != null) {
-  //         SaveAsset.getSavedAsset(user.uid).then((assets) => {
-  //            console.log("my assets : ", assets);
-  //         });
-  //     }
-  // }, []);
-
   useEffect(() => {
     if (user != null) {
-      SaveAsset.getSavedAsset(user.uid).then((assets) => {
-        SaveAsset.getLikedAssets(assets).then((info) => {
-          setAssets(info);
-        });
+      SaveAsset.getSavedAsset(user.uid).then((assets: Asset[]) => {
+          setAssets(assets);
       });
     }
   }, []);
@@ -71,20 +58,6 @@ const SavedHomesBlock = styled.div`
 `;
 const ContactHistoryBlock = styled(SavedHomesBlock)``; // 상속!
 const Divider = styled.div``;
-
-// const ContactHistoryBlock = styled.div`
-//   background: none;
-//   border: none;
-//   outline: none;
-//   padding: 0 100px;
-//   font-size: 24px;
-//   font-weight: 300;
-//   line-height: 30.29px;
-//   &:focus {
-//     font-weight: bold;
-//   }
-// `;
-
 const SavedAssetListBlock = styled.div`
   width: 100%;
   display: grid;
