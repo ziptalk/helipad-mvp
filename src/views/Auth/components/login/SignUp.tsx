@@ -26,6 +26,9 @@ const SignUp = () => {
             case ErrorCode.EMAIL_ALREADY_IN_USE:
                 alert("This email is already in-use. Please use other account.");
                 break;
+            case ErrorCode.WEAK_PASSWORD:
+                alert("You should use stronger password");
+                break;
             default:
                 break;
         }

@@ -8,4 +8,5 @@ export default class SignUpUseCase {
 
 export enum ErrorCode {
     EMAIL_ALREADY_IN_USE = "auth/email-already-in-use",
+    WEAK_PASSWORD = "auth/weak-password"
 }
