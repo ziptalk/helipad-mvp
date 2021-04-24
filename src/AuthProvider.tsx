@@ -17,20 +17,8 @@ export const AuthProvider = ({ children }: any) => {
   const [loadingAuthState, setLoadingAuthState] = useState(true);
 
   useEffect(() => {
-    // LoginUseCase.registerAuthStateChangeListener((user: any) => {
-    //    console.log("result of registerAuthStateChangeListener");
-    //    setUser(user);
-    //    console.log("user: ", user);
-    //    setLoadingAuthState(false);
-    // }).then((result) => {
-    //     console.log("success to authorization: ", result);
-    // }).catch((error) => {
-    //     console.log("error during authorization: ", error);
-    // });
     firebase.auth().onAuthStateChanged((user: any) => {
-      if (user != null) {
-        setUser(user);
-      }
+      setUser(user);
       setLoadingAuthState(false);
       console.log(user, 'ap user');
       console.log(user !== null, 'ap authenticated');

@@ -5,7 +5,7 @@ import PrivateRoutes from "./PrivateRoutes";
 import {AssetDetailRoutes, AssetRoutes} from "./views/Asset";
 import {HeaderContainer} from "./components/header/HeaderContainer";
 import {AuthProvider} from "./AuthProvider";
-import {Login, SignUp} from "./views/Auth/components";
+import {Login, Logout, SignUp} from "./views/Auth/components";
 import AssetDetail from "./views/Asset/components/asset_detail/AssetDetail";
 import MyPage from "./views/MyPage/components/mypage/MyPage";
 import AssetList from "./views/Asset/components/asset_list/AssetList";
@@ -18,9 +18,9 @@ const ApplicationRoutes = () => {
                 <section className="container">
                     <HeaderContainer />
                     <div className="routingContainer">
-                        {/*<PrivateRoutes exact path="/asset-detail/:assetId" component={AssetDetail} />*/}
                         <PrivateRoutes path="/asset" component={AssetRoutes} />
                         <Route path="/login" component={Login} />
+                        <Route path="/logout" component={Logout} />
                         <Route path="/signup" component={SignUp} />
                         <Route path="/mypage" component={MyPage} />
                         <Route path="/process" component={Process} />

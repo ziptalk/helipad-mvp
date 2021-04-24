@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import styled from 'styled-components';
 import SignUpUseCase, {ErrorCode} from "../../../../domain/SignUpUseCase";
 import {InputField, InputType} from "./InputField";
+import {useHistory} from "react-router";
 
 const SignUp = () => {
     const [lastName, setLastName] = useState<string>("");
@@ -10,7 +11,14 @@ const SignUp = () => {
     const [password, setPassword] = useState<string>("");
     const [passwordConfirm, setPasswordConfirm] = useState<string>("");
 
-    const handleSignUpError = (error: any) => {
+    const history = useHistory();
+
+    const onSuccess = () => {
+        alert("Sign-up success. Please login again.");
+        history.push("/login");
+    }
+
+    const onError = (error: any) => {
         console.log("error code: ", error.code);
         console.log("error message: ", error.message);
 
@@ -23,17 +31,19 @@ const SignUp = () => {
         }
     }
 
-    const handleSignUp = (e: any) => {
-        console.log("handleSignUp");
+    const onSignUp = (e: any) => {
+        console.log("onSignUp");
         e.preventDefault();
 
         if (password !== passwordConfirm) {
             alert("Password != PasswordConfirmation");
             return;
         }
-        SignUpUseCase.withEmail(email, password).then(value => {
-            console.log(value);
-        }).catch((error) => handleSignUpError(error));
+        SignUpUseCase.withEmail(email, password)
+            .then(value => {
+                console.log(value);
+                onSuccess();
+            }).catch((error) => onError(error));
     }
 
     return (
@@ -54,7 +64,7 @@ const SignUp = () => {
                     <AgentText>I'm a private banker of real estate agent</AgentText>
                     <AgentCheckBox type="checkbox" />
                 </Agent>
-                <Button onClick={handleSignUp}>SIGN UP</Button>
+                <Button onClick={onSignUp}>SIGN UP</Button>
             </form>
         </Container>
     );

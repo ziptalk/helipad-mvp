@@ -28,6 +28,10 @@ export default class FirebaseService {
         return firebase.auth().signInWithEmailAndPassword(email, password);
     }
 
+    static logout() {
+        return firebase.auth().signOut();
+    }
+
     async registerAuthStateChangeListener(onChange: (user: any) => void) {
         firebase.auth().onAuthStateChanged(onChange);
     }
@@ -73,6 +77,8 @@ export default class FirebaseService {
     static async getSavedAsset(userId: string): Promise<Asset[]> {
         let userDocument = userStore.doc(userId);
         let myAssetDocumentIds = (await userDocument.get()).get("likes");
+        console.log("userId : " + userId);
+        console.log("myAssetDocumentIds : " + myAssetDocumentIds);
         return Promise.all(myAssetDocumentIds.map(async (docRef: any) => {
             let ref = await docRef.get();
             return this.parseAsset(ref.data());

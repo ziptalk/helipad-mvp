@@ -10,15 +10,8 @@ export const Header = () => {
         <Title>HELIPAD</Title>
       </LeftSide>
       <RightSide>
-        {/*<FakeLoginButton*/}
-        {/*  onClick={() => {*/}
-        {/*    toggle();*/}
-        {/*  }}*/}
-        {/*>*/}
-        {/*  로그인 버튼*/}
-        {/*</FakeLoginButton>*/}
         <Category>
-          <Link to="/landing" className="headerMenu">
+          <Link to="/asset" className="headerMenu">
             Home
           </Link>
         </Category>

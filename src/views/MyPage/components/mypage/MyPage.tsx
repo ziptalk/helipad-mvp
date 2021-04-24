@@ -12,6 +12,7 @@ const MyPage: React.FC<MyPageProps> = () => {
 
   useEffect(() => {
     if (user != null) {
+      console.log("user : " + user);
       SaveAsset.getSavedAsset(user.uid).then((assets: Asset[]) => {
           setAssets(assets);
       });

@@ -25,7 +25,7 @@ const LoginForm = () => {
     };
 
     const onLoginSuccess = (userInfo: any) => {
-        authContext.setUser(userInfo);
+        authContext.setUser(userInfo.user);
         console.log("onLoginSuccess: ", userInfo);
         history.push("/asset");
     };
@@ -34,10 +34,10 @@ const LoginForm = () => {
         console.log('onLoginFailed: ', response);
         switch (response) {
             case ErrorCode.WRONG_PASSWORD:
-                alert("Wrong password!");
+                alert("You should enter right password.");
                 break;
             case ErrorCode.USER_NOT_FOUND:
-                alert("Wrong Email!");
+                alert("Email address not found.");
                 break;
             default:
                 alert("Some error was occurred!");
@@ -58,7 +58,7 @@ const LoginForm = () => {
             </Row>
             <Row>
                 Forgot your password?
-                <Link to={{ pathname: '/auth/sign-up' }}>Sign-up</Link>
+                <Link to={{ pathname: '/signup' }}>Sign-up</Link>
             </Row>
             <FacebookLoginContainer>
                 {/*<ReactFacebookLogin*/}

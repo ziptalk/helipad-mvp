@@ -8,6 +8,10 @@ export default class LoginUseCase {
     static registerAuthStateChangeListener(onChange: (user: any) => void) {
         return new FirebaseService().registerAuthStateChangeListener(onChange);
     }
+
+    static logout() {
+        return FirebaseService.logout();
+    }
 }
 
 export enum ErrorCode {
