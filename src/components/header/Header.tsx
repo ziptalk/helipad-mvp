@@ -1,45 +1,47 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import './Header.css';
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import styled from 'styled-components';
+import {AuthContext} from "../../AuthProvider";
 
 export const Header = () => {
-  return (
-    <Container>
-      <LeftSide>
-        <Title>HELIPAD</Title>
-      </LeftSide>
-      <RightSide>
-        <Category>
-          <Link to="/asset" className="headerMenu">
-            Home
-          </Link>
-        </Category>
-        <Category>
-          {true ? (
-            <Link to="/logout" className="headerMenu">
-              Logout
-            </Link>
-          ) : (
-            <Link to="/sign-up" className="headerMenu">
-              Sign up
-            </Link>
-          )}
-        </Category>
-        <Category>
-          {true ? (
-            <Link to="/mypage" className="headerMenu">
-              MyPage
-            </Link>
-          ) : (
-            <Link to="/login" className="headerMenu">
-              Login
-            </Link>
-          )}
-        </Category>
-      </RightSide>
-    </Container>
-  );
+    const {authenticated} = useContext(AuthContext);
+    return (
+        <Container>
+            <LeftSide>
+                <Title>HELIPAD</Title>
+            </LeftSide>
+            <RightSide>
+                <Category>
+                    <Link to="/asset" className="headerMenu">
+                        Home
+                    </Link>
+                </Category>
+                <Category>
+                    {authenticated ? (
+                        <Link to="/logout" className="headerMenu">
+                            Logout
+                        </Link>
+                    ) : (
+                        <Link to="/sign-up" className="headerMenu">
+                            Sign up
+                        </Link>
+                    )}
+                </Category>
+                <Category>
+                    {authenticated ? (
+                        <Link to="/mypage" className="headerMenu">
+                            MyPage
+                        </Link>
+                    ) : (
+                        <Link to="/login" className="headerMenu">
+                            Login
+                        </Link>
+                    )}
+                </Category>
+            </RightSide>
+        </Container>
+    );
 };
 
 const Container = styled.div`
