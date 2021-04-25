@@ -18,9 +18,24 @@ export default class FirebaseService {
         }
     }
 
-    async signUpWithEmailAndPassword(email: string, password: string) {
+    static async signUpWithEmailAndPassword(email: string, password: string, firstName: string, lastName: string, isAgent: boolean) {
         console.log('signUpWithEmailAndPassword');
-        return firebase.auth().createUserWithEmailAndPassword(email, password);
+        let credential = await firebase.auth().createUserWithEmailAndPassword(email, password);
+        if (credential == null || credential.user == null) {
+            throw Error("Credential is null...Please try again.");
+        }
+        await this.initializeAccount(credential.user.uid, email, firstName, lastName, isAgent);
+    }
+
+    private static async initializeAccount(uid: string, email: string, firstName: string, lastName: string, isAgent: boolean) {
+        console.log("initializeAccount");
+        await userStore.doc(uid).set({
+            "firstName": firstName,
+            "lastName": lastName,
+            "email": email,
+            "likes": []
+        });
+
     }
 
     async logInWithEmailAndPassword(email: string, password: string) {

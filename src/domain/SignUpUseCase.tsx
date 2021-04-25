@@ -1,8 +1,8 @@
 import FirebaseService from "../service/FirebaseService";
 
 export default class SignUpUseCase {
-    static withEmail(email: string, password: string) {
-        return new FirebaseService().signUpWithEmailAndPassword(email, password);
+    static async withEmail(email: string, password: string, firstName: string, lastName: string, isAgent: boolean) {
+        await FirebaseService.signUpWithEmailAndPassword(email, password, firstName, lastName, isAgent);
     }
 }
 

@@ -10,6 +10,7 @@ const SignUp = () => {
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
     const [passwordConfirm, setPasswordConfirm] = useState<string>("");
+    const [isAgent, setIsAgent] = useState<boolean>(false);
 
     const history = useHistory();
 
@@ -19,9 +20,6 @@ const SignUp = () => {
     }
 
     const onError = (error: any) => {
-        console.log("error code: ", error.code);
-        console.log("error message: ", error.message);
-
         switch (error.code) {
             case ErrorCode.EMAIL_ALREADY_IN_USE:
                 alert("This email is already in-use. Please use other account.");
@@ -34,15 +32,15 @@ const SignUp = () => {
         }
     }
 
-    const onSignUp = (e: any) => {
-        console.log("onSignUp");
+    const onTrySignUp = (e: any) => {
         e.preventDefault();
 
         if (password !== passwordConfirm) {
             alert("Password != PasswordConfirmation");
             return;
         }
-        SignUpUseCase.withEmail(email, password)
+
+        SignUpUseCase.withEmail(email, password, firstName, lastName, isAgent)
             .then(value => {
                 console.log(value);
                 onSuccess();
@@ -65,9 +63,9 @@ const SignUp = () => {
                 <InputField type={InputType.PASSWORD} title="password confirmation" onChange={(password: string) => setPasswordConfirm(password)} />
                 <Agent>
                     <AgentText>I'm a private banker of real estate agent</AgentText>
-                    <AgentCheckBox type="checkbox" />
+                    <AgentCheckBox type="checkbox" onChange={(e) => {setIsAgent(e.target.checked)}} />
                 </Agent>
-                <Button onClick={onSignUp}>SIGN UP</Button>
+                <Button onClick={onTrySignUp}>SIGN UP</Button>
             </form>
         </Container>
     );
