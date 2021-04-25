@@ -1,8 +1,6 @@
 import * as React from 'react';
 import {Link, useHistory} from 'react-router-dom';
-import ReactFacebookLogin, {ReactFacebookFailureResponse, ReactFacebookLoginInfo,} from 'react-facebook-login';
 import styled from 'styled-components';
-import { ReactComponent as FaceBook } from '../../../../images/ic_facebook.svg';
 import LoginUseCase, {ErrorCode} from "../../../../domain/LoginUseCase";
 import {useContext, useState} from "react";
 import {AuthContext} from "../../../../AuthProvider";
@@ -51,7 +49,7 @@ const LoginForm = () => {
             <Email type="text" name="email" value={email} onChange={(e) => setEmail(e.currentTarget.value)} />
             <label>Password</label>
             <Password type="password" name="password" value={password} onChange={(e) => setPassword(e.currentTarget.value)} />
-            <Submit value="LOGIN" onClick={onClickedLogin} />
+            <Submit type="submit" value="LOGIN" onClick={onClickedLogin} />
             <Row>
                 Remember Me
                 <input className="rememberMeBox" type="checkbox" />

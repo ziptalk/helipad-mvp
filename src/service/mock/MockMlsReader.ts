@@ -1,6 +1,6 @@
 // const fff = require('../asset/mls_data.json');
-import files from '../asset/mls_data.json';
-import Mls from '../model/MLS';
+import files from '../../asset/mls_data.json';
+import Mls from '../../model/MLS';
 type Media = {
   MediaURL: string;
   MediaObjectID: string;

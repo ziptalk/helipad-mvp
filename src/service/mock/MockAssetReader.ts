@@ -1,6 +1,6 @@
-import files from '../asset/mock_data.json';
-import Asset from '../model/Asset';
-import FirebaseService from "./FirebaseService";
+import files from '../../asset/mock_data.json';
+import Asset from '../../model/Asset';
+import FirebaseService from "../FirebaseService";
 
 //////////? key값이 "buildingInformation" 인 경우 해당 객체안에 값을 다시 Map에 저장하는 메소드
 

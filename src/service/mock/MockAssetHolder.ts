@@ -1,5 +1,5 @@
 import { Process } from './MockAssetReader';
-import Asset from '../model/Asset';
+import Asset from '../../model/Asset';
 export const assetList = Process();
 
 // 내림차순 정렬
