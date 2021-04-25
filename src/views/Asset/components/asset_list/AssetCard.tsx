@@ -10,7 +10,7 @@ type AssetCardProps = {
 
 const AssetCard = ({ data }: AssetCardProps) => {
   return (
-      <Link to={`/asset/${data.id}`}>
+      <Link to={`/asset/${data.id}`} style={{ textDecoration: 'none' }}>
         <Container background={data.buildingInformation.thumbnail}>
           <ContainerGradient>
             <ContainerContent>
@@ -54,6 +54,7 @@ const Container: any = styled.div`
 
   background: url(${(props: any) => props.background});
   background-size: cover;
+  text-decoration: none;
 `;
 
 const ContainerGradient = styled.div`
@@ -111,6 +112,7 @@ const RoomInfoBlock = styled.div`
 `;
 const RoomInfo = styled.div`
   margin: 5px 0;
+  text-decoration: none;
 `;
 
 export default AssetCard;

@@ -2,11 +2,11 @@ import Asset from "../model/Asset";
 import FirebaseService from "../service/FirebaseService";
 
 export default class GetAsset {
-    async getAssetList(): Promise<Asset[]> {
-        return await new FirebaseService().getAssetList();
+    static async getAssetList(): Promise<Asset[]> {
+        return await FirebaseService.getAssetList();
     }
 
-    async getAsset(id: string): Promise<Asset> {
-        return await new FirebaseService().getAsset(id);
+    static async getAsset(id: string): Promise<Asset> {
+        return await FirebaseService.getAsset(id);
     }
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import Asset from '../../../../model/Asset';
 import styled, { css } from 'styled-components';
-import { ReactComponent as LikeFlag } from '../../../../images/ic_like.svg';
+import { ReactComponent as LikeFlag } from '../../../../images/ic_saved_flag.svg';
 import { Link } from 'react-router-dom';
 
 type AssetCardProps = {

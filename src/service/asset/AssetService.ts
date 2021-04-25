@@ -37,9 +37,11 @@ export default class AssetService {
     static async isSavedAsset(userId: string, assetId: string): Promise<boolean> {
         let userDocument = userStore.doc(userId);
         let user = await userDocument.get();
+        let thisAssetDocumentId = await this.getAssetDocumentId(assetId);
         if (user !== undefined && user.data() !== undefined) {
             let likesField = user.get("likes");
-            return likesField[assetId] !== undefined;
+            let idList = likesField.map((like: any) => like.id);
+            return idList.includes(thisAssetDocumentId);
         }
         return false;
     }

@@ -3,11 +3,11 @@ import AssetService from "./asset/AssetService";
 import UserService from "./user/UserService";
 
 export default class FirebaseService {
-    async getAssetList(): Promise<Asset[]> {
+    static async getAssetList(): Promise<Asset[]> {
         return AssetService.getAssetList();
     }
 
-    async getAsset(id: string): Promise<Asset> {
+    static async getAsset(id: string): Promise<Asset> {
         return AssetService.getAsset(id);
     }
 
@@ -15,7 +15,7 @@ export default class FirebaseService {
         return UserService.signUpWithEmailAndPassword(email, password, firstName, lastName, isAgent);
     }
 
-    async logInWithEmailAndPassword(email: string, password: string) {
+    static async logInWithEmailAndPassword(email: string, password: string) {
         return UserService.logInWithEmailAndPassword(email, password);
     }
 
@@ -23,7 +23,7 @@ export default class FirebaseService {
         return UserService.logout();
     }
 
-    async registerAuthStateChangeListener(onChange: (user: any) => void) {
+    static async registerAuthStateChangeListener(onChange: (user: any) => void) {
         return UserService.registerAuthStateChangeListener(onChange);
     }
 

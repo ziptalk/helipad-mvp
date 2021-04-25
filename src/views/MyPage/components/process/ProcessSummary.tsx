@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import React from 'react';
 import Asset from '../../../../model/Asset';
-import SaveImage from '../../../../images/ic_save.svg';
+import SaveImage from '../../../../images/ic_unsaved_flag.svg';
 import ContactImage from '../../../../images/ic_contact.svg';
 import ViewDetailImage from '../../../../images/ic_viewDetail.svg';
 

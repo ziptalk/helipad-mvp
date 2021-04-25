@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useContext} from 'react';
+import React, {useContext} from 'react';
 import './Header.css';
 import {Link} from 'react-router-dom';
 import styled from 'styled-components';
@@ -9,7 +9,9 @@ export const Header = () => {
     return (
         <Container>
             <LeftSide>
-                <Title>HELIPAD</Title>
+                <Link to="/asset" className="headerMenu">
+                    <Title>HELIPAD</Title>
+                </Link>
             </LeftSide>
             <RightSide>
                 <Category>
@@ -57,8 +59,8 @@ const LeftSide = styled.div`
 `;
 const Title = styled.div`
   font-size: 45px;
-  font-family: termina;
   padding-left: 230px;
+  text-decoration: none;
 `;
 
 const RightSide = styled.div`

@@ -12,13 +12,11 @@ interface MatchParams {
 }
 
 const AssetDetail = ({ match }: RouteComponentProps<MatchParams>) => {
-    console.log("AssetDetail!");
     let id = match.params.assetId;
-    console.log("asset id : ", id);
     const [asset, setAsset] = useState<Asset>(Asset.emptyAsset());
 
     useEffect(() => {
-        new GetAsset().getAsset(id).then(value => {
+        GetAsset.getAsset(id).then(value => {
             setAsset(value);
         });
     }, []);

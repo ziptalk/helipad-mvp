@@ -22,14 +22,13 @@ export default class SaveAsset {
   }
 
   static async getAsset(id: string) {
-    return await new FirebaseService().getAsset(id);
+    return await FirebaseService.getAsset(id);
   }
 
   static async getLikedAssets(assetsId: string[]) {
-    let firebase = new FirebaseService();
     return await Promise.all(
       assetsId.map((id) => {
-        return firebase.getAsset(id).then((info) => info);
+        return FirebaseService.getAsset(id).then((info) => info);
       })
     );
   }

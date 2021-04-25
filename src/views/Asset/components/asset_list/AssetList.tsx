@@ -9,68 +9,84 @@ import Asset from '../../../../model/Asset';
 
 type AssetListProperties = {};
 
+enum Definition {
+  FOR_INVESTMENT = 0,
+  FOR_LIVING = 1,
+}
+
 const AssetList: React.FC<AssetListProperties> = () => {
-  const [toInvestment, setInvestment] = useState(true);
+  const [definition, setDefinition] = useState<Definition>(Definition.FOR_INVESTMENT);
   const [ascend, setAscend] = useState(true);
   const [assets, setAssets] = useState<Asset[]>([]);
 
   useEffect(() => {
-    new GetAsset().getAssetList().then((value) => {
+    GetAsset.getAssetList().then((value) => {
       setAssets(value);
       console.log('data', value);
     });
   }, []);
-  /*
-   *
-   * mock data 읽어오기 => state로 관리
-   * investment, living 에 따른 toggle 관리 (toInvestment) => default === true
-   * toggle에 따라 필터링 조건을 변경하여 AssetCard로 넘김
-   *
-   * 오름차순, 내림차순?
-   * default === ascending
-   * ascending toggle로 관리.
-   */
 
-  // 투자 목적 리스트
   const getInvestmentList = () => {
-    setInvestment(true);
+    setDefinition(Definition.FOR_INVESTMENT);
   };
 
-  // 거주 목적 리스트
   const getLivingList = () => {
-    setInvestment(false);
+    setDefinition(Definition.FOR_LIVING);
   };
 
-  // 오름 차순 정렬
   const setAscending = () => {
     setAscend(true);
   };
 
-  // 내림 차순 정렬
   const setDescending = () => {
     setAscend(false);
   };
+
   return (
     <Container>
       <Category>
         <InvestmentBlock onClick={() => getInvestmentList()}>
-          Investment Recommendations
+          {
+            definition === Definition.FOR_INVESTMENT ?
+                (
+                    <Selected>
+                      Investment Recommendations
+                    </Selected>
+                ) : (
+                    <Unselected>
+                      Investment Recommendations
+                    </Unselected>
+                )
+          }
         </InvestmentBlock>
         <Divider>|</Divider>
         <LivingBlock onClick={() => getLivingList()}>
-          Living Recommendations
+          {
+            definition === Definition.FOR_LIVING ?
+                (
+                    <Selected>
+                      Living Recommendations
+                    </Selected>
+                ) : (
+                    <Unselected>
+                      Living Recommendations
+                    </Unselected>
+                )
+          }
         </LivingBlock>
       </Category>
       <SortBlock>
         <ArrowTitle>Sort by Price</ArrowTitle>
         <ArrowBlock>
           <ArrowUp
+            style={{ cursor: "pointer" }}
             onClick={() => {
               setAscending();
             }}
           />
         </ArrowBlock>
         <ArrowDown
+          style={{ cursor: "pointer" }}
           onClick={() => {
             setDescending();
           }}
@@ -79,11 +95,18 @@ const AssetList: React.FC<AssetListProperties> = () => {
 
       <AssetListGrid>
         {assets
-          .filter((asset) =>
-            toInvestment ? asset.forInvestment : !asset.forInvestment
-          )
-          .sort((a, b) => (ascend ? a.price - b.price : b.price - a.price))
-          .map((asset, idx) => (
+          .filter((asset) => {
+            switch (definition) {
+              case Definition.FOR_INVESTMENT:
+                return asset.forInvestment;
+              case Definition.FOR_LIVING:
+                return !asset.forInvestment;
+              default:
+                return asset.forInvestment;
+            }
+          }).sort((a, b) => (
+              ascend ? a.price - b.price : b.price - a.price)
+          ).map((asset, idx) => (
             <AssetCard key={idx} data={asset} />
           ))}
       </AssetListGrid>
@@ -107,10 +130,16 @@ const InvestmentBlock = styled.button`
   font-size: 24px;
   font-weight: 300;
   line-height: 30.29px;
-  &:focus {
-    font-weight: bold;
-  }
+  cursor: pointer;
 `;
+
+const Selected = styled.div`
+  font-weight: bold;
+`
+const Unselected = styled.div`
+  font-weight: 300;
+`;
+
 const Divider = styled.div``;
 const LivingBlock = styled.button`
   background: none;
@@ -120,6 +149,7 @@ const LivingBlock = styled.button`
   font-size: 24px;
   font-weight: 300;
   line-height: 30.29px;
+  cursor: pointer;
   &:focus {
     font-weight: bold;
   }

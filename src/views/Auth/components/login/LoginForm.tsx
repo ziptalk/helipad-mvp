@@ -114,6 +114,7 @@ const Submit = styled.input`
   color: #ffffff;
   font-size: 20px;
   text-align: center;
+  cursor: pointer;
 `;
 
 const FacebookLoginContainer = styled.div`

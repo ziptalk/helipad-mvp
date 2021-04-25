@@ -2,11 +2,11 @@ import FirebaseService from "../service/FirebaseService";
 
 export default class LoginUseCase {
     static execute(email: string, password: string) {
-        return new FirebaseService().logInWithEmailAndPassword(email, password);
+        return FirebaseService.logInWithEmailAndPassword(email, password);
     }
 
     static registerAuthStateChangeListener(onChange: (user: any) => void) {
-        return new FirebaseService().registerAuthStateChangeListener(onChange);
+        return FirebaseService.registerAuthStateChangeListener(onChange);
     }
 
     static logout() {

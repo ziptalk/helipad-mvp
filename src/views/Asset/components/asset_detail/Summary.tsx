@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 import React, {useContext, useEffect, useState} from 'react';
 import Asset from '../../../../model/Asset';
-import SaveImage from '../../../../images/ic_save.svg';
+import UnsavedFlag from '../../../../images/ic_unsaved_flag.svg';
+import SavedFlag from '../../../../images/ic_saved_flag.svg';
 import ContactImage from '../../../../images/ic_contact.svg';
 import SaveAsset from "../../../../domain/SaveAsset";
 import {AuthContext} from "../../../../AuthProvider";
@@ -14,16 +15,16 @@ const Summary: React.FC<SummaryProps> = ({ data }) => {
   const {user} = useContext(AuthContext);
   const [isSavedAsset, setSavedAsset] = useState<boolean>(false);
 
-  useEffect(() => {
-    if (user != null) {
-      SaveAsset.isSaved(data.id, user.uid).then((result) => setSavedAsset(result));
-    }
-  }, []);
+  if (user != null && data.id !== "test_id") {
+    SaveAsset.isSaved(data.id, user.uid).then((result) => {
+      setSavedAsset(result)
+    });
+  }
 
   const onClickSave = async (e: any) => {
-
     if (user != null) {
       await SaveAsset.saveOrUnSaveAsset(data.id, user.uid);
+      setSavedAsset(!isSavedAsset);
     }
   }
 
@@ -64,19 +65,21 @@ const Summary: React.FC<SummaryProps> = ({ data }) => {
           </RoomInfoContent>
           <RoomInfoTitle>Pyung</RoomInfoTitle>
         </RoomInfo>
-        <RoomInfo onClick={onClickSave}>
+        <ClickableRoomInfo onClick={onClickSave}>
           <RoomInfoContent>
-            <Save />
+            {
+              isSavedAsset ? <SavedFlagImage /> : <UnSavedFlagImage />
+            }
           </RoomInfoContent>
           <RoomInfoTitle>Save</RoomInfoTitle>
-        </RoomInfo>
-        <RoomInfo>
+        </ClickableRoomInfo>
+        <ClickableRoomInfo>
           <RoomInfoContent>
             <Contact />
           </RoomInfoContent>
           <RoomInfoTitle>Contact</RoomInfoTitle>
           <RoomInfoTitle>Helipad</RoomInfoTitle>
-        </RoomInfo>
+        </ClickableRoomInfo>
       </Rooms>
     </Container>
   );
@@ -146,6 +149,13 @@ const RoomInfo = styled.div`
   align-items: center;
 `;
 
+const ClickableRoomInfo = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+`;
+
 const RoomInfoTitle = styled.div`
   font-size: 14px;
 `;
@@ -154,11 +164,17 @@ const RoomInfoContent = styled.div`
   font-size: 28px;
 `;
 
-const Save = styled.div`
+const UnSavedFlagImage = styled.div`
   width: 30px;
   height: 33px;
-  background-image: url(${SaveImage});
+  background-image: url(${UnsavedFlag});
 `;
+
+const SavedFlagImage = styled.div`
+  width: 30px;
+  height: 33px;
+  background-image: url(${SavedFlag});
+`
 
 const Contact = styled.div`
   width: 32px;
