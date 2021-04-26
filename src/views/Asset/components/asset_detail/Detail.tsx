@@ -107,7 +107,7 @@ const Detail: React.FC<DetailProps> = ({ data }) => {
               </StatusItem>
             </Status>
           </StatusContainer>
-          <Contact />
+          <Contact agent={data.agent} />
         </RightBody>
       </Body>
     </Container>

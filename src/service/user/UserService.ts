@@ -1,5 +1,6 @@
 import firebase from "firebase";
 import {userStore} from "../../shared/Firebase";
+import User from "../../model/User";
 
 export default class UserService {
     static logInWithEmailAndPassword(email: string, password: string) {
@@ -26,13 +27,18 @@ export default class UserService {
         return this.initializeAccount(credential.user.uid, email, firstName, lastName, isAgent);
     }
 
+    static async getUser(userId: string): Promise<User> {
+        let user = await userStore.doc(userId).get();
+        return User.fromObject(user.data());
+    }
+
     private static async initializeAccount(uid: string, email: string, firstName: string, lastName: string, isAgent: boolean) {
         return userStore.doc(uid).set({
             "firstName": firstName,
             "lastName": lastName,
             "email": email,
             "likes": [],
-            "isAgent": isAgent
+            "isAgent": isAgent,
         });
     }
 }

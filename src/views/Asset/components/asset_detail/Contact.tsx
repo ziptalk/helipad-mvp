@@ -1,18 +1,51 @@
 import styled from 'styled-components';
-import React from 'react';
+import React, {useContext, useState} from 'react';
+import ContactUseCase from "../../../../domain/ContactUseCase";
+import {AuthContext} from "../../../../AuthProvider";
 
-type ContactFieldProps = {};
+type ContactFieldProps = {
+    agent: string
+};
 
-const Contact: React.FC<ContactFieldProps> = () => {
-  return (
-    <Container>
-      <Content>
-        <Title>Contact HELIPAD</Title>
-      </Content>
-      <TextArea rows={20} />
-      <Send>Send Message</Send>
-    </Container>
-  );
+const Contact: React.FC<ContactFieldProps> = ({ agent }) => {
+    const { user } = useContext(AuthContext);
+    const [content, setContent] = useState<string>();
+
+    const onTextChange = (e: any) => {
+        setContent(e.target.value);
+    }
+
+    const onSend = () => {
+        console.log("onSend : " + content);
+        if (content === null) {
+            alert("You should enter content..");
+            return;
+        }
+        if (user === null) {
+            alert("Authentication error..");
+            return;
+        }
+
+        if (user != null && content != null) {
+            ContactUseCase.send(user.uid, agent, content)
+                .then((result) => {
+                    alert("Send message successfully!");
+                    setContent("");
+                }).catch((error) => {
+                    alert("Some errors was occurred...");
+                });
+        }
+    }
+
+    return (
+        <Container>
+            <Content>
+                <Title>Contact HELIPAD</Title>
+            </Content>
+            <TextArea rows={20} onChange={onTextChange}/>
+            <Send onClick={onSend}>Send Message</Send>
+        </Container>
+    );
 };
 
 const Container = styled.div`
@@ -56,6 +89,7 @@ const Send = styled.button`
   width: 100%;
   position: absolute;
   bottom: 0px;
+  cursor: pointer;
 `;
 
 export default Contact;

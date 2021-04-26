@@ -27,5 +27,6 @@ firebase.initializeApp(
 
 const assetStore = firebase.app().firestore().collection("assets");
 const userStore = firebase.app().firestore().collection("users");
+const contactStore = firebase.app().firestore().collection("contact");
 
-export {firebase, assetStore, userStore};
+export {firebase, assetStore, userStore, contactStore};

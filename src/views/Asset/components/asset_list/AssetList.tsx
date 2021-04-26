@@ -12,6 +12,7 @@ type AssetListProperties = {};
 enum Definition {
   FOR_INVESTMENT = 0,
   FOR_LIVING = 1,
+
 }
 
 const AssetList: React.FC<AssetListProperties> = () => {
