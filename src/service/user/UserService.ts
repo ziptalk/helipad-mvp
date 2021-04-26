@@ -31,7 +31,8 @@ export default class UserService {
             "firstName": firstName,
             "lastName": lastName,
             "email": email,
-            "likes": []
+            "likes": [],
+            "isAgent": isAgent
         });
     }
 }
