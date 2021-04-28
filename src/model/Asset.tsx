@@ -39,24 +39,26 @@ export default class Asset {
     readonly buildingInformation: BuildingInformation
   ) {}
 
-  static fromMap(map: Map<string, any>): Asset {
+  static fromObject(obj: any): Asset {
+    console.log("id : " + obj[COLUMNS.ID]);
+    console.log("building info : " + obj[COLUMNS.BUILDING_INFORMATION]);
     return new Asset(
-      map.get(COLUMNS.ID) as string,
-      map.get(COLUMNS.AGENT) as string,
-      map.get(COLUMNS.FOR_INVESTMENT) as boolean,
-      map.get(COLUMNS.PRICE) as number,
-      map.get(COLUMNS.STATUS) as string,
-      map.get(COLUMNS.DAYS_ON_MARKET) as number,
-      map.get(COLUMNS.TAX_PER_MONTH) as number,
-      map.get(COLUMNS.COMMON_CHARGE_PER_MONTH) as number,
-      map.get(COLUMNS.MIN_DOWN_PYMT) as number,
-      map.get(COLUMNS.COMPASS_TYPE) as string,
-      map.get(COLUMNS.MLS_TYPE) as string,
-      map.get(COLUMNS.EXPECTED_MONTHLY_PAYMENT) as number,
-      map.get(COLUMNS.EXPECTED_MONTHLY_RENT) as number,
-      map.get(COLUMNS.INFORMATION) as string,
-      map.get(COLUMNS.AMENITIES) as string[],
-      BuildingInformation.fromMap(map.get(COLUMNS.BUILDING_INFORMATION))
+      obj[COLUMNS.ID] as string,
+      obj[COLUMNS.AGENT] as string,
+      obj[COLUMNS.FOR_INVESTMENT] as boolean,
+      obj[COLUMNS.PRICE] as number,
+      obj[COLUMNS.STATUS] as string,
+      obj[COLUMNS.DAYS_ON_MARKET] as number,
+      obj[COLUMNS.TAX_PER_MONTH] as number,
+      obj[COLUMNS.COMMON_CHARGE_PER_MONTH] as number,
+      obj[COLUMNS.MIN_DOWN_PYMT] as number,
+      obj[COLUMNS.COMPASS_TYPE] as string,
+      obj[COLUMNS.MLS_TYPE] as string,
+      obj[COLUMNS.EXPECTED_MONTHLY_PAYMENT] as number,
+      obj[COLUMNS.EXPECTED_MONTHLY_RENT] as number,
+      obj[COLUMNS.INFORMATION] as string,
+      obj[COLUMNS.AMENITIES] as string[],
+      BuildingInformation.fromObject(obj[COLUMNS.BUILDING_INFORMATION])
     );
   }
 

@@ -38,24 +38,24 @@ export default class BuildingInformation {
     ) {
     }
 
-    static fromMap(map: Map<string, any>): BuildingInformation {
+    static fromObject(obj: any): BuildingInformation {
         return new BuildingInformation(
-            map.get(COLUMNS.THUMBNAIL) as string,
-            map.get(COLUMNS.ADDRESS) as string,
-            map.get(COLUMNS.STREET) as string,
-            map.get(COLUMNS.N_BED_ROOMS) as number,
-            map.get(COLUMNS.N_BATH_ROOMS) as number,
-            map.get(COLUMNS.N_ROOMS) as number,
-            map.get(COLUMNS.SQUARE) as number,
-            map.get(COLUMNS.COUNTRY) as string,
-            map.get(COLUMNS.BUILDING_NAME) as string,
-            map.get(COLUMNS.FLOOR) as number,
-            map.get(COLUMNS.STORIES) as number,
-            map.get(COLUMNS.RESIDENCES) as number,
-            map.get(COLUMNS.PET_POLICY) as string,
-            map.get(COLUMNS.YEAR_BUILT) as number,
-            map.get(COLUMNS.BUILDING_AGE) as string,
-            map.get(COLUMNS.BUILDING_TYPE) as string
+            obj[COLUMNS.THUMBNAIL] as string,
+            obj[COLUMNS.ADDRESS] as string,
+            obj[COLUMNS.STREET] as string,
+            obj[COLUMNS.N_BED_ROOMS] as number,
+            obj[COLUMNS.N_BATH_ROOMS] as number,
+            obj[COLUMNS.N_ROOMS] as number,
+            obj[COLUMNS.SQUARE] as number,
+            obj[COLUMNS.COUNTRY] as string,
+            obj[COLUMNS.BUILDING_NAME] as string,
+            obj[COLUMNS.FLOOR] as number,
+            obj[COLUMNS.STORIES] as number,
+            obj[COLUMNS.RESIDENCES] as number,
+            obj[COLUMNS.PET_POLICY] as string,
+            obj[COLUMNS.YEAR_BUILT] as number,
+            obj[COLUMNS.BUILDING_AGE] as string,
+            obj[COLUMNS.BUILDING_TYPE] as string
         );
     }
 

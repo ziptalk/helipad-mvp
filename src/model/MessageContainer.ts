@@ -1,22 +1,22 @@
+import Asset from "./Asset";
+
 export class MessageContainer {
     constructor(
         readonly user: string,
         readonly agent: string,
-        readonly messages: Array<Message>
+        readonly messages: Array<Message>,
+        readonly asset: Asset
     ) {}
 
-    static fromObject(object: any) {
-        let convertedMessage: Array<Message> = object["messages"]
-            .map((msg: any) => Message.fromObject(msg));
-
+    static async fromObject(object: any) {
         return new MessageContainer(
             object["user"] as string,
             object["agent"] as string,
-            convertedMessage
+            object["messages"].map((msg: any) => Message.fromObject(msg)),
+            Asset.fromObject((await object["asset"].get()).data())
         );
     }
 }
-
 
 class Message {
     constructor(

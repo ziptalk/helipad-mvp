@@ -19,9 +19,11 @@ export default class ContactService {
 
     static async getMyContactHistory(userId: string): Promise<MessageContainer[]> {
         let contacts = await contactStore.where("user", "==", userId).get();
-        return contacts.docs.map((doc) => {
-            return MessageContainer.fromObject(doc.data());
-        });
+        return Promise.all(
+            contacts.docs.map((doc) => {
+                return MessageContainer.fromObject(doc.data());
+            })
+        );
     }
 
     static async sendMessage(userId: string, agentId: string, message: string) {
