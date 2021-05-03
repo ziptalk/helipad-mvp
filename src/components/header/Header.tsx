@@ -1,49 +1,68 @@
-import React, {useContext} from 'react';
+import React, { useState, useContext } from 'react';
 import './Header.css';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import {AuthContext} from "../../AuthProvider";
-
+import { AuthContext } from '../../AuthProvider';
+import { useTranslation } from 'react-i18next';
 export const Header = () => {
-    const {authenticated} = useContext(AuthContext);
-    return (
-        <Container>
-            <LeftSide>
-                <Link to="/asset" className="headerMenu">
-                    <Title>HELIPAD</Title>
-                </Link>
-            </LeftSide>
-            <RightSide>
-                <Category>
-                    <Link to="/asset" className="headerMenu">
-                        Home
-                    </Link>
-                </Category>
-                <Category>
-                    {authenticated ? (
-                        <Link to="/logout" className="headerMenu">
-                            Logout
-                        </Link>
-                    ) : (
-                        <Link to="/sign-up" className="headerMenu">
-                            Sign up
-                        </Link>
-                    )}
-                </Category>
-                <Category>
-                    {authenticated ? (
-                        <Link to="/mypage" className="headerMenu">
-                            MyPage
-                        </Link>
-                    ) : (
-                        <Link to="/login" className="headerMenu">
-                            Login
-                        </Link>
-                    )}
-                </Category>
-            </RightSide>
-        </Container>
-    );
+  const { authenticated } = useContext(AuthContext);
+  const [language, setLanguage] = useState('english');
+  const { t, i18n } = useTranslation();
+
+  const selectEnglish = () => {
+    console.log('select EN');
+  };
+  const selectKorean = () => {
+    console.log('select KOR');
+  };
+  return (
+    <Container>
+      <LeftSide>
+        <Link to="/asset" className="headerMenu">
+          <Title>HELIPAD</Title>
+        </Link>
+      </LeftSide>
+      <RightSide>
+        <Category>
+          <Link to="/asset" className="headerMenu">
+            Home
+          </Link>
+        </Category>
+        <Category>
+          {authenticated ? (
+            <Link to="/logout" className="headerMenu">
+              Logout
+            </Link>
+          ) : (
+            <Link to="/sign-up" className="headerMenu">
+              Sign up
+            </Link>
+          )}
+        </Category>
+        <Category>
+          {authenticated ? (
+            <Link to="/mypage" className="headerMenu">
+              MyPage
+            </Link>
+          ) : (
+            <Link to="/login" className="headerMenu">
+              Login
+            </Link>
+          )}
+        </Category>
+        <Category>
+          <SelectLanguageBtn className="headerMenu" onClick={selectEnglish}>
+            English
+          </SelectLanguageBtn>
+        </Category>
+        <Category>
+          <SelectLanguageBtn className="headerMenu" onClick={selectKorean}>
+            한국어
+          </SelectLanguageBtn>
+        </Category>
+      </RightSide>
+    </Container>
+  );
 };
 
 const Container = styled.div`
@@ -74,6 +93,8 @@ const Category = styled.div`
     text-decoration: none;
     color: black;
     font-size: 1.1rem;
+    background: none;
+    border: none;
   }
 `;
 
@@ -112,3 +133,4 @@ const HeaderMenus = styled.div`
 `;
 
 const Divider = styled.div``;
+const SelectLanguageBtn = styled.button``;
