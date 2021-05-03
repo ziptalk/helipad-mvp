@@ -30,7 +30,7 @@ export const InviteCodeForm = () => {
         {inviteCodeValidation ? (
           <></>
         ) : (
-          <ErrorMessage>초대 코드가 틀렸습니다.</ErrorMessage>
+          <ErrorMessage>Invalid invite code</ErrorMessage>
         )}
         <Input value={inviteCode} onChange={handleOnchange}></Input>
 
@@ -71,12 +71,13 @@ const ErrorMessage = styled.div`
   display: inline-block;
   background-color: #fff2f4;
   border-color: rgba(227, 0, 0, 0.4);
-  font-size: 17px;
-  font-weight: 400;
+  font-size: 20px;
+  font-weight: 500;
   width: auto;
   height: auto;
   padding: 10px 0px;
   margin-bottom: 10px;
   text-align: center;
   border-radius: 8px;
+  color: #202020;
 `;
