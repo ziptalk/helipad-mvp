@@ -19,15 +19,15 @@ const ApplicationRoutes = () => {
                     <HeaderContainer />
                     <div className="routingContainer">
                         <PrivateRoutes path="/asset" component={AssetRoutes} />
-                        <Route path="/login" component={Login} />
-                        <Route path="/logout" component={Logout} />
-                        <Route path="/signup" component={SignUp} />
-                        <Route path="/mypage" component={MyPage} />
-                        <Route path="/process" component={Process} />
-                        <Route path="/contact" component={ContactHistory} />
-                        <Route path="/neighborhood" component={Neighborhood} />
-                        <Route path="/neighborhoodInfo/:id" component={NeighborhoodDetail} />
                         <Route path="/inviteCodeForm" component={InviteCodeForm} />
+                        <Route path="/login" component={Login} />
+                        <PrivateRoutes path="/logout" component={Logout} />
+                        <Route path="/signup" component={SignUp} />
+                        <PrivateRoutes path="/mypage" component={MyPage} />
+                        <PrivateRoutes path="/process" component={Process} />
+                        <PrivateRoutes path="/contact" component={ContactHistory} />
+                        <PrivateRoutes path="/neighborhood" component={Neighborhood} />
+                        <PrivateRoutes path="/neighborhoodInfo/:id" component={NeighborhoodDetail} />
                         {/*<Redirect to="/asset" from="/" />*/}
                         <Redirect to="/neighborhood" from="/" />
                     </div>

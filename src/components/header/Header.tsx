@@ -18,13 +18,13 @@ export const Header = () => {
   return (
     <Container>
       <LeftSide>
-        <Link to="/asset" className="headerMenu">
+        <Link to="/neighborhood" className="headerMenu">
           <Title>HELIPAD</Title>
         </Link>
       </LeftSide>
       <RightSide>
         <Category>
-          <Link to="/asset" className="headerMenu">
+          <Link to="/neighborhood" className="headerMenu">
             Home
           </Link>
         </Category>

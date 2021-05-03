@@ -4,23 +4,12 @@ import { AuthContext } from "./AuthProvider";
 
 const PrivateRoutes = ({ component: Component, ...parentProps}) => {
     const {authenticated, loadingAuthState} = useContext(AuthContext);
-    console.log("PrivateRoutes: authenticated? ", authenticated);
-    console.log("PrivateRoutes: loadingAuthState: ", loadingAuthState);
-    console.log("PrivateRoutes: rest: ", parentProps);
     if (loadingAuthState) {
         console.log("Render loading page...");
         return (
-            <div>
-                <h1>Loading...</h1>
-            </div>
+            <></>
         );
     }
-
-    // return (
-    //     <Route
-    //         {...parentProps}
-    //         render = {routeProps => <Component {...routeProps} />} />
-    // );
 
     return (
         <Route
@@ -29,7 +18,7 @@ const PrivateRoutes = ({ component: Component, ...parentProps}) => {
                 authenticated ?
                     (<Component {...routeProps} />)
                         :
-                    (<Redirect to={{pathname: "/login", state: {prevPath: routeProps.location}}} />)
+                    (<Redirect to={{pathname: "/inviteCodeForm", state: {prevPath: routeProps.location}}} />)
             }
         />
     )
