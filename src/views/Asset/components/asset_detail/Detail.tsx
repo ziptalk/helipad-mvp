@@ -16,6 +16,7 @@ type DetailProps = {
 };
 
 const Detail: React.FC<DetailProps> = ({ data }) => {
+  console.log('data :', data);
   return (
     <Container>
       <Category>
@@ -27,7 +28,7 @@ const Detail: React.FC<DetailProps> = ({ data }) => {
       </Category>
       <Body>
         <LeftBody>
-          <Thumbnail src={data.buildingInformation.thumbnail}/>
+          <Thumbnail src={data.buildingInformation.thumbnail} />
           <Information>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
             ligula sapien, rutrum sed vestibulum eget, rhoncus ac erat. Aliquam
@@ -107,7 +108,7 @@ const Detail: React.FC<DetailProps> = ({ data }) => {
               </StatusItem>
             </Status>
           </StatusContainer>
-          <Contact agent={data.agent} />
+          <Contact agent={data.agent} assetId={data.id} />
         </RightBody>
       </Body>
     </Container>
@@ -149,7 +150,7 @@ const LeftBody = styled.div`
 `;
 
 const Thumbnail = styled.img.attrs((props) => ({
-  src: props.src
+  src: props.src,
 }))`
   width: 100%;
   height: 624px;

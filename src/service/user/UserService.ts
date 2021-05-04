@@ -3,6 +3,7 @@ import { userStore } from '../../shared/Firebase';
 import { inviteCodeStore } from '../../shared/Firebase';
 import User from '../../model/User';
 import { setTokenSourceMapRange } from 'typescript';
+import { dividerChecker } from '../../views/MyPage/components/process/processService';
 
 export default class UserService {
   static logInWithEmailAndPassword(email: string, password: string) {
@@ -58,6 +59,19 @@ export default class UserService {
       likes: [],
       isAgent: isAgent,
     });
+  }
+
+  static async contactToAgent(userEmail: string, assetId: string) {
+    try {
+      let firebaseResult = await userStore
+        .where('email', '==', userEmail)
+        .get();
+      return firebaseResult.docs[0].ref.update({
+        contact: firebase.firestore.FieldValue.arrayUnion(assetId),
+      });
+    } catch (error) {
+      throw new Error(error);
+    }
   }
 
   //? Invite Code Store

@@ -46,6 +46,9 @@ export default class FirebaseService {
     return UserService.getUser(userId);
   }
 
+  static async contactToAgent(userEmail: string, assetId: string) {
+    return await UserService.contactToAgent(userEmail, assetId);
+  }
   static async saveOrUnSaveAsset(userId: string, assetId: string) {
     return AssetService.saveOrUnSaveAsset(userId, assetId);
   }
@@ -69,6 +72,7 @@ export default class FirebaseService {
   static getMyContactHistory(userId: string): Promise<MessageContainer[]> {
     return ContactService.getMyContactHistory(userId);
   }
+
   static checkInviteCode(inviteCode: string): Promise<any> {
     return UserService.checkInviteCode(inviteCode);
   }
