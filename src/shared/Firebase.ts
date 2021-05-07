@@ -14,6 +14,7 @@ const assetStore = firebase.app().firestore().collection('assets');
 const userStore = firebase.app().firestore().collection('users');
 const contactStore = firebase.app().firestore().collection('contact');
 const inviteCodeStore = firebase.app().firestore().collection('inviteCode');
+const processStore = firebase.app().firestore().collection('process');
 const storageRef = firebase.storage().ref();
 
 export {
@@ -22,5 +23,6 @@ export {
   userStore,
   contactStore,
   inviteCodeStore,
+  processStore,
   storageRef,
 };

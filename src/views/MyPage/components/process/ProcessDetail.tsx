@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import styled, { css } from 'styled-components';
 import CompletedImage from '../../../../images/ic_completed.svg';
 import ProgressImage from '../../../../images/ic_progress.svg';
 import { lengthChecker, dividerChecker, stepChecker } from './processService';
-import CheckProcessData from "../../../../domain/CheckProcessData";
-
+import CheckProcessData from '../../../../domain/CheckProcessData';
+import ContactUseCase from '../../../../domain/ContactUseCase';
+import { SendMessage } from './SendMessage';
+import GetProcessInfo from '../../../../domain/GetProcessInfo';
 /**
  * 변경 가능한 mock data
  * => ('변경 가능' 이란 각각의 data content가 변경될 수도 있고,
@@ -44,9 +46,20 @@ type assetsProps = {
     content: string;
   };
 };
-const ProcessDetail = () => {
-  let assetInformation: assetsProps = new CheckProcessData().getProcessedInfo();
-  let { assetId, processInfo, dueDateInfo } = assetInformation;
+const ProcessDetail = ({ contactInfo }: any) => {
+  let { userEmail, assetId } = contactInfo;
+  let [dueDateInfo, setDueDateInfo] = useState({ title: '', content: '' });
+  let [processList, setProcessList] = useState<any[]>();
+
+  useEffect(() => {
+    GetProcessInfo.getProcessInfo(userEmail, assetId).then((resolve) => {
+      let step = resolve.step;
+      let { title, content } = resolve.dueDate;
+      let processList = GetProcessInfo.makeProcessCategory(step);
+      setDueDateInfo({ title, content });
+      setProcessList(processList);
+    });
+  });
 
   return (
     <Container>
@@ -55,16 +68,18 @@ const ProcessDetail = () => {
         <DateContent>{dueDateInfo.content}</DateContent>
       </DateBlock>
       <ProcessBlock>
-        {processInfo.map((info: ProcessInfo) => (
-          <>
-            <Processes>
-              <Content status={info.statusInfo.status}>{info.title}</Content>
-              <Check status={info.statusInfo.status}></Check>
-            </Processes>
-            <Div status={info.statusInfo.status}>{info.divider}</Div>
-          </>
-        ))}
+        {processList &&
+          processList.map((process: any) => (
+            <>
+              <Processes>
+                <Content status={process.status}>{process.title}</Content>
+                <Check status={process.status}></Check>
+              </Processes>
+              <Div status={process.divider}></Div>
+            </>
+          ))}
       </ProcessBlock>
+      <SendMessage></SendMessage>
     </Container>
   );
 };
@@ -107,7 +122,7 @@ const ProcessBlock: any = styled.div`
 const Processes = styled.div`
   display: flex;
   text-align: center;
-
+  justify-content: center;
   position: relative;
 `;
 
@@ -175,16 +190,16 @@ const Check: any = styled.div`
 `;
 
 const Div: any = styled.div`
-  width: 45px;
+  width: 60px;
   font-size: 45px;
 
   ${(props: any) =>
-    props.status === 'completed'
+    props.status === true
       ? css`
-          color: #000000;
-        `
-      : props.status === 'progress'
-      ? css`
+          margin: 10px 0px;
+          margin-right: 60px;
+          height: 35px;
+          border-right: 2px solid black;
           color: #000000;
         `
       : css`

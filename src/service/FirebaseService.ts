@@ -2,6 +2,7 @@ import Asset from '../model/Asset';
 import AssetService from './asset/AssetService';
 import UserService from './user/UserService';
 import ContactService from './contact/ContactService';
+import ProcessService from './process/ProcessService';
 import { MessageContainer } from '../model/MessageContainer';
 import User from '../model/User';
 
@@ -75,5 +76,13 @@ export default class FirebaseService {
 
   static checkInviteCode(inviteCode: string): Promise<any> {
     return UserService.checkInviteCode(inviteCode);
+  }
+
+  static async updateProcess(userId: string, assetId: string, step: string) {
+    return ProcessService.updateProcess(userId, assetId, step);
+  }
+
+  static async getProcessInfo(userId: string, assetId: string) {
+    return ProcessService.getProcessInfo(userId, assetId);
   }
 }

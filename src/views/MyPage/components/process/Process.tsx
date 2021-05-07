@@ -6,10 +6,11 @@ import BuildingInformation from '../../../../model/BuildingInformation';
 import ProcessDetail from './ProcessDetail';
 type ProcessProps = {};
 
-const Process: React.FC<ProcessProps> = () => {
+const Process: React.FC<any> = ({ location }) => {
+  const contactInfo = location.state;
   const testAsset = new Asset(
-      "test_id",
-    "test_agent",
+    'test_id',
+    'test_agent',
     true,
     12345000,
     'Active',
@@ -56,7 +57,7 @@ const Process: React.FC<ProcessProps> = () => {
     <Container>
       <ProcessSummary data={testAsset}></ProcessSummary>
       <Divider />
-      <ProcessDetail />
+      <ProcessDetail contactInfo={contactInfo} />
     </Container>
   );
 };

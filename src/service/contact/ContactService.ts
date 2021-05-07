@@ -13,11 +13,11 @@ export default class ContactService {
       .get();
     console.log('doc: ' + doc);
 
-    if (doc.size === 1) {
-      return MessageContainer.fromObject(doc.docs[0].data());
-    } else {
-      throw Error();
-    }
+    // if (doc.size === 1) {
+    //   return MessageContainer.fromObject(doc.docs[0].data());
+    // } else {
+    //   throw Error();
+    // }
   }
 
   static async getMyContactHistory(

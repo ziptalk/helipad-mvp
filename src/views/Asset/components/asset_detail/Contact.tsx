@@ -1,8 +1,10 @@
 import styled from 'styled-components';
 import React, { useContext, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import ContactUseCase from '../../../../domain/ContactUseCase';
 import { AuthContext } from '../../../../AuthProvider';
 import ContactToAgent from '../../../../domain/ContactToAgent';
+import UpdateProcess from '../../../../domain/UpdateProcess';
 type ContactFieldProps = {
   agent: string;
   assetId: string;
@@ -11,42 +13,25 @@ type ContactFieldProps = {
 const Contact: React.FC<ContactFieldProps> = ({ agent, assetId }) => {
   const { user } = useContext(AuthContext);
   const [content, setContent] = useState<string>();
-
+  const history = useHistory();
   const onTextChange = (e: any) => {
     setContent(e.target.value);
   };
 
-  const onSend = () => {
-    console.log('onSend : ' + content);
-    if (content === null) {
-      alert('You should enter content..');
-      return;
-    }
-    if (user === null) {
-      alert('Authentication error..');
-      return;
-    }
-
-    if (user != null && content != null) {
-      ContactUseCase.send(user.uid, agent, content)
-        .then((result) => {
-          alert('Send message successfully!');
-          setContent('');
-        })
-        .catch((error) => {
-          alert('Some errors was occurred...');
-        });
-    }
+  const updateProcess = async (
+    userId: string,
+    assetId: string,
+    step: string
+  ) => {
+    await UpdateProcess.updateProcess(userId, assetId, step);
   };
-  const contactToAgent = () => {
-    if (user) {
-      const userEmail = user.email as string;
-      ContactToAgent.contactToAgent(userEmail, assetId)
-        .then((resolve) => console.log('문의 완료'))
-        .catch((error) => console.log(error));
-    } else {
-      throw new Error();
-    }
+
+  const contactToAgent = async () => {
+    if (!user) throw new Error();
+    const userEmail = user.email as string;
+    await ContactToAgent.contactToAgent(userEmail, assetId);
+    await updateProcess(userEmail, assetId, '0');
+    history.push({ pathname: '/process', state: { assetId, userEmail } });
   };
 
   return (
@@ -55,7 +40,6 @@ const Contact: React.FC<ContactFieldProps> = ({ agent, assetId }) => {
         <Title>Contact HELIPAD</Title>
       </Content>
       <TextArea rows={20} onChange={onTextChange} />
-      <Send onClick={onSend}>Send Message</Send>
       <Send onClick={contactToAgent}>Contact helipad for more information</Send>
     </Container>
   );

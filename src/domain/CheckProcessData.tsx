@@ -1,3 +1,5 @@
+import firebase from '../service/FirebaseService';
+
 /**
  * Process Component에서 step, length, divider check 메소드 제공하는 클래스
  *
@@ -42,7 +44,33 @@ let mock_data: assetsProps = {
     content: 'April, 1st, 2021',
   },
 };
-
+let mock_newData: any = {
+  assetId: 1,
+  processInfo: [
+    '문의완료',
+    'Setup local bank account',
+    'Find laywer',
+    'Find mortgage lender',
+    'Find escrow company',
+    'Inspection contingency, loan contingency, engineer survey schedulings',
+    'Inspection contingency',
+  ],
+  dueDateInfo: {
+    title: 'Due Date',
+    content: 'April, 1st, 2021',
+  },
+};
+type newProcessInfo = {
+  processInfo: string[];
+};
+type newAssetsProps = {
+  assetId: string;
+  processInfo: newProcessInfo;
+  dueDateInfo: {
+    title: string;
+    content: string;
+  };
+};
 type ProcessInfo = {
   id: number;
   title: string;
@@ -60,8 +88,10 @@ type assetsProps = {
 
 export default class CheckProcessData {
   private information: assetsProps;
+  private newInformation: newAssetsProps;
   constructor() {
     this.information = mock_data;
+    this.newInformation = mock_newData;
   }
 
   public checkProcessStep(processInfo: ProcessInfo[]): boolean {
@@ -74,6 +104,10 @@ export default class CheckProcessData {
       max = num;
     }
     return true;
+  }
+  public newGetProcessInfo(props: any) {
+    let step = props.processInfo.step;
+    let status = props.processInfo.status;
   }
 
   public getProcessedInfo(props: assetsProps = this.information): assetsProps {
@@ -95,40 +129,3 @@ export default class CheckProcessData {
     return returnedInfo;
   }
 }
-
-// public checkProcessStep(processInfo: ProcessInfo[]): boolean {
-//   let steps = processInfo.map((process) => process.statusInfo.step);
-//   let max: number = steps[0];
-//   for (let num of steps) {
-//     if (max < num) {
-//       return false;
-//     }
-//     max = num;
-//   }
-//   return true;
-// }
-
-// public getProcessedInfo(props: assetsProps = this.information): any {
-//   let information = props.processInfo;
-
-//   if (!this.checkProcessStep(information)) {
-//     console.log('process 상 오류 발생');
-//   }
-
-//   let processedInfo = information.map((info: any) => {
-//     let head = 0;
-//     let tail = 0;
-//     let result = [];
-//     let title = info.title;
-
-//     while (title.indexOf(',') > -1) {
-//       tail = title.indexOf(',');
-//       result.push(title.slice(head, tail + 1));
-//       title = title.slice(tail + 2);
-//     }
-//     result.push(title);
-//     return result;
-//   });
-
-//   return processedInfo;
-// }
