@@ -8,7 +8,7 @@ import {
 import PrivateRoutes from './PrivateRoutes';
 import { AssetDetailRoutes, AssetRoutes } from './views/Asset';
 import { HeaderContainer } from './components/header/HeaderContainer';
-import { Login, Logout, SignUp } from './views/Auth/components';
+import { Login, Logout, SignUp, RegisterForm } from './views/Auth/components';
 import MyPage from './views/MyPage/components/mypage/MyPage';
 import Process from './views/MyPage/components/process/Process';
 import ContactHistory from './views/MyPage/components/mypage/ContactHistory';
@@ -28,6 +28,7 @@ const ApplicationRoutes = () => {
             <Route path="/login" component={Login} />
             <PrivateRoutes path="/logout" component={Logout} />
             <Route path="/signup" component={SignUp} />
+            <Route path="/registerForm" component={RegisterForm} />
             <PrivateRoutes path="/mypage" component={MyPage} />
             <PrivateRoutes path="/process" component={Process} />
             <PrivateRoutes path="/contact" component={ContactHistory} />
@@ -36,7 +37,7 @@ const ApplicationRoutes = () => {
               path="/neighborhoodInfo/:id"
               component={NeighborhoodDetail}
             />
-            {/*<Redirect to="/asset" from="/" />*/}
+            <Redirect to="/asset" from="/" />
             <Redirect to="/neighborhood" from="/" />
           </div>
         </section>

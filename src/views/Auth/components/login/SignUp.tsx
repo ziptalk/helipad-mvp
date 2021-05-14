@@ -1,75 +1,101 @@
-import React, {useState} from "react";
+import React, { useState } from 'react';
 import styled from 'styled-components';
-import SignUpUseCase, {ErrorCode} from "../../../../domain/SignUpUseCase";
-import {InputField, InputType} from "./InputField";
-import {useHistory} from "react-router";
+import SignUpUseCase, { ErrorCode } from '../../../../domain/SignUpUseCase';
+import { InputField, InputType } from './InputField';
+import { useHistory } from 'react-router';
 
 const SignUp = () => {
-    const [lastName, setLastName] = useState<string>("");
-    const [firstName, setFirstName] = useState<string>("");
-    const [email, setEmail] = useState<string>("");
-    const [password, setPassword] = useState<string>("");
-    const [passwordConfirm, setPasswordConfirm] = useState<string>("");
-    const [isAgent, setIsAgent] = useState<boolean>(false);
+  const [lastName, setLastName] = useState<string>('');
+  const [firstName, setFirstName] = useState<string>('');
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const [passwordConfirm, setPasswordConfirm] = useState<string>('');
+  const [isAgent, setIsAgent] = useState<boolean>(false);
 
-    const history = useHistory();
+  const history = useHistory();
 
-    const onSuccess = () => {
-        alert("Sign-up success. Please login again.");
-        history.push("/login");
+  const onSuccess = () => {
+    alert('Sign-up success. Please login again.');
+    history.push('/login');
+  };
+
+  const onError = (error: any) => {
+    switch (error.code) {
+      case ErrorCode.EMAIL_ALREADY_IN_USE:
+        alert('This email is already in-use. Please use other account.');
+        break;
+      case ErrorCode.WEAK_PASSWORD:
+        alert('You should use stronger password');
+        break;
+      default:
+        break;
+    }
+  };
+
+  const onTrySignUp = (e: any) => {
+    e.preventDefault();
+
+    if (password !== passwordConfirm) {
+      alert('Password != PasswordConfirmation');
+      return;
     }
 
-    const onError = (error: any) => {
-        switch (error.code) {
-            case ErrorCode.EMAIL_ALREADY_IN_USE:
-                alert("This email is already in-use. Please use other account.");
-                break;
-            case ErrorCode.WEAK_PASSWORD:
-                alert("You should use stronger password");
-                break;
-            default:
-                break;
-        }
-    }
+    SignUpUseCase.withEmail(email, password, firstName, lastName, isAgent)
+      .then((value) => {
+        console.log(value);
+        onSuccess();
+      })
+      .catch((error) => onError(error));
+  };
 
-    const onTrySignUp = (e: any) => {
-        e.preventDefault();
-
-        if (password !== passwordConfirm) {
-            alert("Password != PasswordConfirmation");
-            return;
-        }
-
-        SignUpUseCase.withEmail(email, password, firstName, lastName, isAgent)
-            .then(value => {
-                console.log(value);
-                onSuccess();
-            }).catch((error) => onError(error));
-    }
-
-    return (
-        <Container>
-            <form>
-                <Title>Sign up</Title>
-                <Divider />
-                <Name>
-                    <InputField type={InputType.TEXT} title="last name" onChange={(name: string) => setLastName(name)} />
-                    <InputField type={InputType.TEXT} title="first name" onChange={(name: string) => setFirstName(name)} />
-                </Name>
-                <InputField type={InputType.EMAIL} title="email" onChange={(email: string) => setEmail(email)} />
-                <InputField type={InputType.PASSWORD} title="password" onChange={(password: string) => {
-                    setPassword(password);
-                }} />
-                <InputField type={InputType.PASSWORD} title="password confirmation" onChange={(password: string) => setPasswordConfirm(password)} />
-                <Agent>
-                    <AgentText>I'm a private banker of real estate agent</AgentText>
-                    <AgentCheckBox type="checkbox" onChange={(e) => {setIsAgent(e.target.checked)}} />
-                </Agent>
-                <Button onClick={onTrySignUp}>SIGN UP</Button>
-            </form>
-        </Container>
-    );
-}
+  return (
+    <Container>
+      <form>
+        <Title>Sign up</Title>
+        <Divider />
+        <Name>
+          <InputField
+            type={InputType.TEXT}
+            title="last name"
+            onChange={(name: string) => setLastName(name)}
+          />
+          <InputField
+            type={InputType.TEXT}
+            title="first name"
+            onChange={(name: string) => setFirstName(name)}
+          />
+        </Name>
+        <InputField
+          type={InputType.EMAIL}
+          title="email"
+          onChange={(email: string) => setEmail(email)}
+        />
+        <InputField
+          type={InputType.PASSWORD}
+          title="password"
+          onChange={(password: string) => {
+            setPassword(password);
+          }}
+        />
+        <InputField
+          type={InputType.PASSWORD}
+          title="password confirmation"
+          onChange={(password: string) => setPasswordConfirm(password)}
+        />
+        <Agent>
+          <AgentText>I'm a private banker of real estate agent</AgentText>
+          <AgentCheckBox
+            type="checkbox"
+            onChange={(e) => {
+              setIsAgent(e.target.checked);
+            }}
+          />
+        </Agent>
+        <Button onClick={onTrySignUp}>SIGN UP</Button>
+      </form>
+    </Container>
+  );
+};
 
 const Container = styled.div`
   width: 460px;
@@ -87,7 +113,7 @@ const Title = styled.div`
 const Divider = styled.div`
   width: 100%;
   border: 1px solid #000000;
-`
+`;
 
 const Name = styled.div`
   display: grid;

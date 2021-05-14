@@ -15,10 +15,11 @@ export const InviteCodeForm = () => {
 
   const checkInviteCode = async () => {
     let firebaseResult = await CheckInviteCode.checkInviteCode(inviteCode);
-
+    console.log('firebaseResult :', firebaseResult);
     if (firebaseResult) {
       setInviteCodeValidation(true);
-      history.push('/login');
+      // history.push('/login');
+      history.push('/registerForm');
     } else {
       setInviteCodeValidation(false);
     }
