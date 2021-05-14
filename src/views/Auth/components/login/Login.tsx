@@ -1,20 +1,23 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import LoginForm from "./LoginForm";
+import LoginForm from './LoginForm';
+import { useLocation } from 'react-router';
 
 const Login = () => {
-    return (
-        <Container>
-            <Row>
-                <LoginTitle>LOGIN</LoginTitle>
-            </Row>
-            <Divider />
-            <Row>
-                <LoginForm />
-            </Row>
-        </Container>
-    );
-}
+  const location = useLocation<any>();
+  const email = location.state.email;
+  return (
+    <Container>
+      <Row>
+        <LoginTitle>LOGIN</LoginTitle>
+      </Row>
+      <Divider />
+      <Row>
+        <LoginForm email={email} />
+      </Row>
+    </Container>
+  );
+};
 
 const Container = styled.div`
   width: 460px;

@@ -79,6 +79,7 @@ export default class UserService {
     let firebaseResult = await inviteCodeStore
       .where('password', '==', `${inviteCode}`)
       .get();
+    console.log('firebaseResult :', firebaseResult);
     console.log('firebaseResult.docs.length :', firebaseResult.docs.length);
     if (firebaseResult.docs.length > 0) {
       return true;
