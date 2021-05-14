@@ -1,10 +1,11 @@
-import * as React from "react";
-import styled from "styled-components";
-import LoginForm from "./LoginForm";
-import { useLocation } from "react-router";
+import * as React from 'react';
+import styled from 'styled-components';
+import LoginForm from './LoginForm';
+import { useLocation } from 'react-router';
 
 const Login = () => {
   const location = useLocation<any>();
+  const email = location.state.email;
   return (
     <Container>
       <Row>
@@ -12,7 +13,7 @@ const Login = () => {
       </Row>
       <Divider />
       <Row>
-        <LoginForm />
+        <LoginForm email={email} />
       </Row>
     </Container>
   );
