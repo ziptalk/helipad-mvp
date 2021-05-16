@@ -24,7 +24,7 @@ const ApplicationRoutes = () => {
           <HeaderContainer />
           <div className="routingContainer">
             <PrivateRoutes path="/asset" component={AssetRoutes} />
-            <Route path="/inviteCodeForm" component={InviteCodeForm} />
+            <Route exact path="/" component={InviteCodeForm} />
             <Route path="/login" component={Login} />
             <PrivateRoutes path="/logout" component={Logout} />
             <Route path="/signup" component={SignUp} />
