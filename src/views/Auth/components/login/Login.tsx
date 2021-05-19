@@ -5,7 +5,7 @@ import { useLocation } from 'react-router';
 
 const Login = () => {
   const location = useLocation<any>();
-  const email = location.state.email;
+
   return (
     <Container>
       <Row>
@@ -13,7 +13,7 @@ const Login = () => {
       </Row>
       <Divider />
       <Row>
-        <LoginForm email={email} />
+        <LoginForm />
       </Row>
     </Container>
   );
