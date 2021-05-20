@@ -1,47 +1,6 @@
-import React, {
-  useEffect,
-  useState,
-  Dispatch,
-  useReducer,
-  createContext,
-} from "react";
+import React, { useEffect, useState } from "react";
 import LoginUseCase from "../../../domain/LoginUseCase";
 import { firebase } from "../../../shared/Firebase";
-
-type State = {
-  invitationCode: {
-    validation: boolean;
-  };
-};
-
-type Action = { type: "success" } | { type: "fail" };
-const initialState = {
-  invitationCode: {
-    validation: true,
-  },
-};
-type DispatchType = Dispatch<Action>;
-
-const reducer = (state: State, action: Action): State => {
-  switch (action.type) {
-    case "success":
-      return {
-        ...state,
-        invitationCode: {
-          validation: true,
-        },
-      };
-    case "fail":
-      return {
-        ...state,
-        invitationCode: {
-          validation: false,
-        },
-      };
-    default:
-      return state;
-  }
-};
 
 type ContextProps = {
   user: firebase.User | null;
