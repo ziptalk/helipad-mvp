@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
-import styled from 'styled-components';
-import { CheckInviteCode } from '../../domain/CheckInviteCode';
-
+import React, { useState, useContext } from "react";
+import { useHistory } from "react-router-dom";
+import styled from "styled-components";
+import { CheckInviteCode } from "../../domain/CheckInviteCode";
+import { AuthContext } from "../../router/config/Provider/AuthProvider";
 export const InviteCodeForm = () => {
-  const [inviteCode, setInviteCode] = useState('');
-  const [inviteCodeValidation, setInviteCodeValidation] = useState(true);
+  const [inviteCode, setInviteCode] = useState("");
+  const { inviteCodeValidation, setInviteCodeValidation } =
+    useContext(AuthContext);
   const history = useHistory();
   const handleOnchange = (event: any) => {
     const inviteCode = event.target.value;
@@ -15,11 +16,11 @@ export const InviteCodeForm = () => {
 
   const checkInviteCode = async () => {
     let firebaseResult = await CheckInviteCode.checkInviteCode(inviteCode);
-    console.log('firebaseResult :', firebaseResult);
+    console.log("firebaseResult :", firebaseResult);
     if (firebaseResult) {
       setInviteCodeValidation(true);
       // history.push('/login');
-      history.push('/registerForm');
+      history.push("/auth/registerForm");
     } else {
       setInviteCodeValidation(false);
     }
@@ -51,9 +52,9 @@ const InputBlock = styled.div`
   justify-content: center;
 `;
 const Input = styled.input.attrs({
-  type: 'text',
-  id: 'inviteCode',
-  placeholder: 'Please enter your invite',
+  type: "text",
+  id: "inviteCode",
+  placeholder: "Please enter your invite",
 })`
   height: 45px;
   font-size: 20px;

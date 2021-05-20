@@ -1,23 +1,23 @@
-import styled from 'styled-components';
-import React, {useContext, useEffect, useState} from 'react';
-import Asset from '../../../../model/Asset';
-import UnsavedFlag from '../../../../images/ic_unsaved_flag.svg';
-import SavedFlag from '../../../../images/ic_saved_flag.svg';
-import ContactImage from '../../../../images/ic_contact.svg';
+import styled from "styled-components";
+import React, { useContext, useEffect, useState } from "react";
+import Asset from "../../../../model/Asset";
+import UnsavedFlag from "../../../../images/ic_unsaved_flag.svg";
+import SavedFlag from "../../../../images/ic_saved_flag.svg";
+import ContactImage from "../../../../images/ic_contact.svg";
 import SaveAsset from "../../../../domain/SaveAsset";
-import {AuthContext} from "../../../../AuthProvider";
+import { AuthContext } from "../../../../router/config/Provider/AuthProvider";
 
 type SummaryProps = {
   data: Asset;
 };
 
 const Summary: React.FC<SummaryProps> = ({ data }) => {
-  const {user} = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   const [isSavedAsset, setSavedAsset] = useState<boolean>(false);
 
   if (user != null && data.id !== "test_id") {
     SaveAsset.isSaved(data.id, user.uid).then((result) => {
-      setSavedAsset(result)
+      setSavedAsset(result);
     });
   }
 
@@ -26,7 +26,7 @@ const Summary: React.FC<SummaryProps> = ({ data }) => {
       await SaveAsset.saveOrUnSaveAsset(data.id, user.uid);
       setSavedAsset(!isSavedAsset);
     }
-  }
+  };
 
   return (
     <Container>
@@ -38,8 +38,8 @@ const Summary: React.FC<SummaryProps> = ({ data }) => {
         </Address>
       </AddressWrapper>
       <Price>
-        <Dollar>${data.price.toLocaleString('en-US')}</Dollar>
-        <Won>₩{data.price.toLocaleString('ko-KR')}</Won>
+        <Dollar>${data.price.toLocaleString("en-US")}</Dollar>
+        <Won>₩{data.price.toLocaleString("ko-KR")}</Won>
       </Price>
       <Divider />
       <Rooms>
@@ -67,9 +67,7 @@ const Summary: React.FC<SummaryProps> = ({ data }) => {
         </RoomInfo>
         <ClickableRoomInfo onClick={onClickSave}>
           <RoomInfoContent>
-            {
-              isSavedAsset ? <SavedFlagImage /> : <UnSavedFlagImage />
-            }
+            {isSavedAsset ? <SavedFlagImage /> : <UnSavedFlagImage />}
           </RoomInfoContent>
           <RoomInfoTitle>Save</RoomInfoTitle>
         </ClickableRoomInfo>
@@ -174,7 +172,7 @@ const SavedFlagImage = styled.div`
   width: 30px;
   height: 33px;
   background-image: url(${SavedFlag});
-`
+`;
 
 const Contact = styled.div`
   width: 32px;
