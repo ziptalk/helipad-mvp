@@ -1,21 +1,21 @@
-import * as React from 'react';
-import { Link, useHistory } from 'react-router-dom';
-import styled from 'styled-components';
-import LoginUseCase, { ErrorCode } from '../../../../domain/LoginUseCase';
-import { useContext, useState } from 'react';
-import { AuthContext } from '../../../../AuthProvider';
+import * as React from "react";
+import { Link, useHistory } from "react-router-dom";
+import styled from "styled-components";
+import LoginUseCase, { ErrorCode } from "../../../../domain/LoginUseCase";
+import { useContext, useState } from "react";
+import { AuthContext } from "../../../../router/config/Provider/AuthProvider";
 
-const LoginForm = ({ ...props }) => {
+const LoginForm = () => {
   const authContext = useContext(AuthContext);
   const history = useHistory();
-  const [email, setEmail] = useState<string>(props.email);
-  const [password, setPassword] = useState<string>('');
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
 
   const onClickedLogin = (event: React.MouseEvent<HTMLDivElement>) => {
     event.preventDefault();
     LoginUseCase.execute(email, password)
       .then((result) => {
-        console.log('result: ', result);
+        console.log("result: ", result);
         onLoginSuccess(result);
       })
       .catch((error) => onLoginFailed(error.code));
@@ -23,21 +23,21 @@ const LoginForm = ({ ...props }) => {
 
   const onLoginSuccess = (userInfo: any) => {
     authContext.setUser(userInfo.user);
-    console.log('onLoginSuccess: ', userInfo);
-    history.push('/neighborhood');
+    console.log("onLoginSuccess: ", userInfo);
+    history.push({ pathname: "/asset/neighborhood" });
   };
 
   const onLoginFailed = (response: any) => {
-    console.log('onLoginFailed: ', response);
+    console.log("onLoginFailed: ", response);
     switch (response) {
       case ErrorCode.WRONG_PASSWORD:
-        alert('You should enter right password.');
+        alert("You should enter right password.");
         break;
       case ErrorCode.USER_NOT_FOUND:
-        alert('Email address not found.');
+        alert("Email address not found.");
         break;
       default:
-        alert('Some error was occurred!');
+        alert("Some error was occurred!");
         break;
     }
   };
@@ -65,7 +65,7 @@ const LoginForm = ({ ...props }) => {
       </Row>
       <Row>
         Forgot your password?
-        <Link to={{ pathname: '/signup' }}>Sign-up</Link>
+        <Link to="/auth/signup"> Sign-up </Link>
       </Row>
       <FacebookLoginContainer>
         {/*<ReactFacebookLogin*/}

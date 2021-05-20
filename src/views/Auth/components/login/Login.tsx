@@ -2,8 +2,10 @@ import * as React from 'react';
 import styled from 'styled-components';
 import LoginForm from './LoginForm';
 import { useLocation } from 'react-router';
+import { RouteComponentProps } from 'react-router-dom';
 
-const Login = () => {
+const Login = ({ match }: any) => {
+  console.log('login match url :', match.url);
   const location = useLocation<any>();
   const email = location.state.email;
   return (

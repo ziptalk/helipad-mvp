@@ -120,7 +120,7 @@ const RegisterForm = () => {
     };
     console.log('result data :', result);
     history.push({
-      pathname: '/login',
+      pathname: '/auth/login',
       state: { email: email },
     });
   };

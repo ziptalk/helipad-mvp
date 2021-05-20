@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import './Header.css';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { AuthContext } from '../../AuthProvider';
+import { AuthContext } from '../../router/config/Provider/AuthProvider';
 import { useTranslation } from 'react-i18next';
 export const Header = () => {
   const { authenticated } = useContext(AuthContext);
@@ -18,34 +18,34 @@ export const Header = () => {
   return (
     <Container>
       <LeftSide>
-        <Link to="/neighborhood" className="headerMenu">
+        <Link to="/asset/neighborhood" className="headerMenu">
           <Title>HELIPAD</Title>
         </Link>
       </LeftSide>
       <RightSide>
         <Category>
-          <Link to="/neighborhood" className="headerMenu">
+          <Link to="/asset/neighborhood" className="headerMenu">
             Home
           </Link>
         </Category>
         <Category>
           {authenticated ? (
-            <Link to="/logout" className="headerMenu">
+            <Link to="/auth/logout" className="headerMenu">
               Logout
             </Link>
           ) : (
-            <Link to="/sign-up" className="headerMenu">
+            <Link to="/auth/signup" className="headerMenu">
               Sign up
             </Link>
           )}
         </Category>
         <Category>
           {authenticated ? (
-            <Link to="/mypage" className="headerMenu">
+            <Link to="/auth/mypage" className="headerMenu">
               MyPage
             </Link>
           ) : (
-            <Link to="/login" className="headerMenu">
+            <Link to="/auth/login" className="headerMenu">
               Login
             </Link>
           )}

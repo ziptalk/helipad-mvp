@@ -1,11 +1,11 @@
-import React, { useContext } from 'react';
-import { Route, Redirect } from 'react-router-dom';
-import { AuthContext } from './AuthProvider';
+import React, { useContext } from "react";
+import { Route, Redirect } from "react-router-dom";
+import { AuthContext } from "../Provider/AuthProvider";
 
 const PrivateRoutes = ({ component: Component, ...parentProps }) => {
   const { authenticated, loadingAuthState } = useContext(AuthContext);
   if (loadingAuthState) {
-    console.log('Render loading page...');
+    console.log("Render loading page...");
     return <></>;
   }
 
@@ -16,9 +16,12 @@ const PrivateRoutes = ({ component: Component, ...parentProps }) => {
         authenticated ? (
           <Component {...routeProps} />
         ) : (
-          <Redirect
-            to={{ pathname: '/', state: { prevPath: routeProps.location } }}
-          />
+          <>
+            {alert("로그인 후 이용 가능합니다")}
+            <Redirect
+              to={{ pathname: "/", state: { prevPath: routeProps.location } }}
+            />
+          </>
         )
       }
     />
