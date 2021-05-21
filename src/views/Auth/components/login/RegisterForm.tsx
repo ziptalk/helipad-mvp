@@ -209,6 +209,7 @@ type PropertyProps = {
   residential: string[];
   commercial: string[];
 };
+
 const RegisterForm = () => {
   const history = useHistory();
   const [baseInfo, setBaseInfo] = useState<BaseInfoProps>({
