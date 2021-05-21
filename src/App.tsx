@@ -11,19 +11,15 @@ import {
   Switch,
   Redirect,
 } from "react-router-dom";
-<<<<<<< HEAD
+
 import GlobalStyle from "./GlobalStyle";
-=======
->>>>>>> [wip] Divide asset, auth routing
+
 function App() {
   return (
     <Router>
       <Switch>
         <>
-<<<<<<< HEAD
           <GlobalStyle />
-=======
->>>>>>> [wip] Divide asset, auth routing
           <section className="container">
             <HeaderContainer />
             <div className="routingContainer">
