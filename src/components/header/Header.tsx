@@ -1,18 +1,10 @@
-<<<<<<< HEAD
 import React, { useState, useContext } from "react";
 import "./Header.css";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { AuthContext } from "../../router/config/Provider/AuthProvider";
 import { useTranslation } from "react-i18next";
-=======
-import React, { useState, useContext } from 'react';
-import './Header.css';
-import { Link } from 'react-router-dom';
-import styled from 'styled-components';
-import { AuthContext } from '../../router/config/Provider/AuthProvider';
-import { useTranslation } from 'react-i18next';
->>>>>>> [wip] Divide asset, auth routing
+
 export const Header = () => {
   const { authenticated, inviteCodeValidation } = useContext(AuthContext);
   const [language, setLanguage] = useState("english");
@@ -32,7 +24,6 @@ export const Header = () => {
         </Link>
       </LeftSide>
       <RightSide>
-<<<<<<< HEAD
         {authenticated ? (
           <>
             <Category>
@@ -98,45 +89,6 @@ export const Header = () => {
             </Category>
           </>
         )}
-=======
-        <Category>
-          <Link to="/asset/neighborhood" className="headerMenu">
-            Home
-          </Link>
-        </Category>
-        <Category>
-          {authenticated ? (
-            <Link to="/auth/logout" className="headerMenu">
-              Logout
-            </Link>
-          ) : (
-            <Link to="/auth/signup" className="headerMenu">
-              Sign up
-            </Link>
-          )}
-        </Category>
-        <Category>
-          {authenticated ? (
-            <Link to="/auth/mypage" className="headerMenu">
-              MyPage
-            </Link>
-          ) : (
-            <Link to="/auth/login" className="headerMenu">
-              Login
-            </Link>
-          )}
-        </Category>
-        <Category>
-          <SelectLanguageBtn className="headerMenu" onClick={selectEnglish}>
-            English
-          </SelectLanguageBtn>
-        </Category>
-        <Category>
-          <SelectLanguageBtn className="headerMenu" onClick={selectKorean}>
-            한국어
-          </SelectLanguageBtn>
-        </Category>
->>>>>>> [wip] Divide asset, auth routing
       </RightSide>
     </Container>
   );
