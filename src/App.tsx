@@ -11,11 +11,13 @@ import {
   Switch,
   Redirect,
 } from "react-router-dom";
+import GlobalStyle from "./GlobalStyle";
 function App() {
   return (
     <Router>
       <Switch>
         <>
+          <GlobalStyle />
           <section className="container">
             <HeaderContainer />
             <div className="routingContainer">
