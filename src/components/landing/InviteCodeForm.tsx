@@ -16,10 +16,8 @@ export const InviteCodeForm = () => {
 
   const checkInviteCode = async () => {
     let firebaseResult = await CheckInviteCode.checkInviteCode(inviteCode);
-    console.log("firebaseResult :", firebaseResult);
     if (firebaseResult) {
       setInviteCodeValidation(true);
-      // history.push('/login');
       history.push("/auth/registerForm");
     } else {
       setInviteCodeValidation(false);
@@ -28,12 +26,17 @@ export const InviteCodeForm = () => {
 
   return (
     <Container>
+      <Title>
+        Welcome to Helipad. At this time, membership to Helipad is by invitation
+        only. If you have an invitation code, please enter it below.
+      </Title>
       <InputBlock>
         {inviteCodeValidation ? (
           <></>
         ) : (
           <ErrorMessage>Invalid invite code</ErrorMessage>
         )}
+
         <Input value={inviteCode} onChange={handleOnchange}></Input>
 
         <Button onClick={checkInviteCode}>Submit</Button>
@@ -45,17 +48,24 @@ export const InviteCodeForm = () => {
 const Container = styled.div`
   box-sizing: border-box;
 `;
+
+const Title = styled.div`
+  font-size: 28px;
+  width: 600px;
+`;
 const InputBlock = styled.div`
   display: flex;
   flex-direction: column;
-  margin-top: 100px;
   justify-content: center;
+  align-items: center;
+  margin-top: 100px;
 `;
 const Input = styled.input.attrs({
   type: "text",
   id: "inviteCode",
-  placeholder: "Please enter your invite",
+  placeholder: "Please enter your invitation code",
 })`
+  width: 465px;
   height: 45px;
   font-size: 20px;
   margin-bottom: 20px;
@@ -75,11 +85,11 @@ const ErrorMessage = styled.div`
   border-color: rgba(227, 0, 0, 0.4);
   font-size: 20px;
   font-weight: 500;
-  width: auto;
-  height: auto;
-  padding: 10px 0px;
+  width: 465px;
+  height: 35px;
+  padding: 5px 0px;
   margin-bottom: 10px;
   text-align: center;
-  border-radius: 8px;
-  color: #202020;
+  border-radius: 10px;
+  color: #e96e6e;
 `;
