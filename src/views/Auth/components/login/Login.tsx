@@ -15,7 +15,7 @@ const Login = ({ match }: any) => {
       </Row>
       <Divider />
       <Row>
-        <LoginForm email={email} />
+        <LoginForm />
       </Row>
     </Container>
   );
