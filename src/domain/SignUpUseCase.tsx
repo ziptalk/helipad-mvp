@@ -1,12 +1,12 @@
 import FirebaseService from "../service/FirebaseService";
 
 export default class SignUpUseCase {
-    static async withEmail(email: string, password: string, firstName: string, lastName: string, isAgent: boolean) {
-        await FirebaseService.signUpWithEmailAndPassword(email, password, firstName, lastName, isAgent);
-    }
+  static async withEmail({ ...props }) {
+    await FirebaseService.signUpWithEmailAndPassword({ ...props });
+  }
 }
 
 export enum ErrorCode {
-    EMAIL_ALREADY_IN_USE = "auth/email-already-in-use",
-    WEAK_PASSWORD = "auth/weak-password"
+  EMAIL_ALREADY_IN_USE = "auth/email-already-in-use",
+  WEAK_PASSWORD = "auth/weak-password",
 }

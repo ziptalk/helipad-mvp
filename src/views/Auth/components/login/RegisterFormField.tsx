@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-enum CheckBoxType {
+enum RegisterFieldType {
   TEXT = "text",
   EMAIL = "email",
   PASSWORD = "password",
@@ -12,7 +12,7 @@ type CheckboxFieldProps = {
   value: string[];
   onChange: (name: string, value: string) => void;
 };
-const CheckboxField = ({ type, title, name, value, onChange }: any) => {
+const RegisterFormField = ({ type, title, name, value, onChange }: any) => {
   const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     let { checked, value } = event.target;
     if (event.target.type === "checkbox") {
@@ -51,8 +51,8 @@ const CheckboxField = ({ type, title, name, value, onChange }: any) => {
 
 const Label = styled.label`
   display: flex;
-
   align-items: center;
+  justify-content: space-between;
 `;
 const Title = styled.div`
   margin-right: 10px;
@@ -66,19 +66,30 @@ const Container = styled.div`
     display: flex;
   }
 
-  .text {
-    ${Title} {
-      margin-right: 10px;
-    }
+  ${Title} {
+    font-size: 16px;
   }
 
   .checkbox {
     ${CheckBox} {
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  .text {
+    ${CheckBox} {
+      width: 60%;
+      height: 25px;
+    }
+  }
+
+  /* .checkbox {
+    ${CheckBox} {
       margin: 0;
       width: 15px;
       height: 15px;
-      border: 2px solid red;
     }
-  }
+  } */
 `;
-export { CheckboxField, CheckBoxType };
+export { RegisterFormField, RegisterFieldType };

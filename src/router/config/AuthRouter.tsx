@@ -14,6 +14,7 @@ import {
   Logout,
   SignUp,
   RegisterForm,
+  RegisterForm2,
 } from "../../views/Auth/components";
 import MyPage from "../../views/MyPage/components/mypage/MyPage";
 import Process from "../../views/MyPage/components/process/Process";
@@ -35,6 +36,11 @@ const AuthRouter = ({ match }: RouteComponentProps) => {
               path={`${match.url}/registerForm`}
               component={RegisterForm}
             />
+            <Route
+              path={`${match.url}/registerForm2`}
+              component={RegisterForm2}
+            />
+
             <PrivateRoutes path={`${match.url}/logout`} component={Logout} />
             <PrivateRoutes path={`${match.url}/mypage`} component={MyPage} />
 

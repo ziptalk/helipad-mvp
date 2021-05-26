@@ -2,64 +2,81 @@ import React, { useState } from "react";
 import { useHistory } from "react-router";
 import styled from "styled-components";
 import { InputField, InputType } from "./InputField";
-import { CheckboxField, CheckBoxType } from "./RegisterFormField";
-
+import { RegisterFormField, RegisterFieldType } from "./RegisterFormField";
+import Signup from "./SignUp";
 let mockData = {
   baseInfo: [
     {
       id: "1",
-      type: CheckBoxType.TEXT,
-      title: "1. First Name",
-      name: "firstName",
-    },
-    {
-      id: "1",
-      type: CheckBoxType.TEXT,
-      title: "2. Last name",
+      type: RegisterFieldType.TEXT,
+      title: "last name",
       name: "lastName",
     },
     {
       id: "1",
-      type: CheckBoxType.TEXT,
-      title: "3. Email",
+      type: RegisterFieldType.TEXT,
+      title: "first name",
+      name: "firstName",
+    },
+    {
+      id: "1",
+      type: RegisterFieldType.TEXT,
+      title: "email",
       name: "email",
     },
     {
       id: "1",
-      type: CheckBoxType.TEXT,
-      title: "4. KaKao ID",
+      type: RegisterFieldType.TEXT,
+      title: "kakao ID",
       name: "kakaoId",
+    },
+    {
+      id: "1",
+      type: RegisterFieldType.TEXT,
+      title: "password",
+      name: "password",
+    },
+    {
+      id: "1",
+      type: RegisterFieldType.TEXT,
+      title: "password confirmation",
+      name: "passwordConfirmation",
+    },
+    {
+      id: "1",
+      type: RegisterFieldType.CHECKBOX,
+      title: "I'm a private banker or real estate agent",
+      name: "jop",
     },
   ],
   discover: [
     {
       id: "2",
-      type: CheckBoxType.CHECKBOX,
+      type: RegisterFieldType.CHECKBOX,
       title: "Search engine (Google, Naver, etc.)",
       name: "discover",
-      onChange: "handleDiscoverPath",
     },
     {
       id: "2",
-      type: CheckBoxType.CHECKBOX,
+      type: RegisterFieldType.CHECKBOX,
       title: "Recommended by friend or colleague",
       name: "discover",
     },
     {
       id: "2",
-      type: CheckBoxType.CHECKBOX,
+      type: RegisterFieldType.CHECKBOX,
       title: "Social media",
       name: "discover",
     },
     {
       id: "2",
-      type: CheckBoxType.CHECKBOX,
+      type: RegisterFieldType.CHECKBOX,
       title: "Blog or publication",
       name: "discover",
     },
     {
       id: "2",
-      type: CheckBoxType.TEXT,
+      type: RegisterFieldType.TEXT,
       title: "Other",
       name: "discover",
     },
@@ -67,31 +84,31 @@ let mockData = {
   interested: [
     {
       id: "3",
-      type: CheckBoxType.CHECKBOX,
+      type: RegisterFieldType.CHECKBOX,
       title: "Investment",
       name: "interested",
     },
     {
       id: "3",
-      type: CheckBoxType.CHECKBOX,
+      type: RegisterFieldType.CHECKBOX,
       title: "Rental Income Opportunity",
       name: "interested",
     },
     {
       id: "3",
-      type: CheckBoxType.CHECKBOX,
+      type: RegisterFieldType.CHECKBOX,
       title: "Second Home",
       name: "interested",
     },
     {
       id: "3",
-      type: CheckBoxType.CHECKBOX,
+      type: RegisterFieldType.CHECKBOX,
       title: "Relocating to U.S.",
       name: "interested",
     },
     {
       id: "3",
-      type: CheckBoxType.CHECKBOX,
+      type: RegisterFieldType.CHECKBOX,
       title: "Child’s U.S. Education",
       name: "interested",
     },
@@ -99,31 +116,31 @@ let mockData = {
   idealPrice: [
     {
       id: "4",
-      type: CheckBoxType.CHECKBOX,
+      type: RegisterFieldType.CHECKBOX,
       title: "Under $500K",
       name: "idealPrice",
     },
     {
       id: "4",
-      type: CheckBoxType.CHECKBOX,
+      type: RegisterFieldType.CHECKBOX,
       title: "US $500K - $1mm",
       name: "idealPrice",
     },
     {
       id: "4",
-      type: CheckBoxType.CHECKBOX,
+      type: RegisterFieldType.CHECKBOX,
       title: "US $1mm-$2.5m",
       name: "idealPrice",
     },
     {
       id: "4",
-      type: CheckBoxType.CHECKBOX,
+      type: RegisterFieldType.CHECKBOX,
       title: "$2.5m-$5.0m",
       name: "idealPrice",
     },
     {
       id: "4",
-      type: CheckBoxType.CHECKBOX,
+      type: RegisterFieldType.CHECKBOX,
       title: "$5.0m-10m",
       name: "idealPrice",
     },
@@ -131,49 +148,49 @@ let mockData = {
   preferredArea: [
     {
       id: "5",
-      type: CheckBoxType.CHECKBOX,
+      type: RegisterFieldType.CHECKBOX,
       title: "CA – Los Angeles",
       name: "preferredArea",
     },
     {
       id: "5",
-      type: CheckBoxType.CHECKBOX,
+      type: RegisterFieldType.CHECKBOX,
       title: "CA – Orange County",
       name: "preferredArea",
     },
     {
       id: "5",
-      type: CheckBoxType.CHECKBOX,
+      type: RegisterFieldType.CHECKBOX,
       title: "CA – San Diego",
       name: "preferredArea",
     },
     {
       id: "5",
-      type: CheckBoxType.CHECKBOX,
+      type: RegisterFieldType.CHECKBOX,
       title: "CA – San Francisco",
       name: "preferredArea",
     },
     {
       id: "5",
-      type: CheckBoxType.CHECKBOX,
+      type: RegisterFieldType.CHECKBOX,
       title: "NV – Las Vegas",
       name: "preferredArea",
     },
     {
       id: "5",
-      type: CheckBoxType.CHECKBOX,
+      type: RegisterFieldType.CHECKBOX,
       title: "New York",
       name: "preferredArea",
     },
     {
       id: "5",
-      type: CheckBoxType.CHECKBOX,
+      type: RegisterFieldType.CHECKBOX,
       title: "New Jersey",
       name: "preferredArea",
     },
     {
       id: "5",
-      type: CheckBoxType.TEXT,
+      type: RegisterFieldType.TEXT,
       title: "Others (Fill in)",
       name: "preferredArea",
     },
@@ -185,25 +202,69 @@ type BaseInfoProps = {
   lastName: string;
   email: string;
   kakaoId: string;
+  password: string;
 };
 
+type PropertyProps = {
+  residential: string[];
+  commercial: string[];
+};
 const RegisterForm = () => {
   const history = useHistory();
   const [baseInfo, setBaseInfo] = useState<BaseInfoProps>({
-    firstName: "",
     lastName: "",
+    firstName: "",
     email: "",
     kakaoId: "",
+    password: "",
+  });
+  const [property, setProperty] = useState<PropertyProps>({
+    residential: [],
+    commercial: [],
   });
   const [discoverPath, setDiscoverPath] = useState<string[]>([]);
   const [interested, setInterested] = useState<string[]>([]);
   const [idealPrice, setIdealPrice] = useState<string[]>([]);
   const [preferredArea, setPreferredArea] = useState<string[]>([]);
+  const [isAgent, setIsAgent] = useState<boolean>(false);
   const [discoverPathOther, setDiscoverPathOther] = useState<string>("");
   const [preferredAreaOther, setPreferredAreaOther] = useState<string>("");
 
   const handleBaseInfo = (name: string, value: string) => {
     setBaseInfo({ ...baseInfo, [name]: value });
+  };
+  const handleProperty = (event: React.ChangeEvent<HTMLInputElement>) => {
+    let { checked, value, name } = event.target;
+
+    switch (name) {
+      case "residential": {
+        if (checked) {
+          setProperty({
+            ...property,
+            residential: [...property.residential, value],
+          });
+        } else {
+          let newProperty = property.residential.filter((ele) => ele !== value);
+          setProperty({ ...property, residential: newProperty });
+        }
+        break;
+      }
+      case "commercial": {
+        if (checked) {
+          setProperty({
+            ...property,
+            commercial: [...property.commercial, value],
+          });
+        } else {
+          let newProperty = property.commercial.filter((ele) => ele !== value);
+          setProperty({ ...property, commercial: newProperty });
+        }
+        break;
+      }
+      default: {
+        return;
+      }
+    }
   };
   const handleDiscoverPath = (checked: boolean, value: string) => {
     if (checked) {
@@ -233,15 +294,25 @@ const RegisterForm = () => {
       setPreferredArea(preferredArea.filter((ele) => ele !== value));
     }
   };
+  const handleIsAgent = (checked: boolean, value: string) => {
+    if (checked) {
+      setIsAgent(true);
+    } else {
+      setIsAgent(false);
+    }
+  };
   const handleDiscoverPathOther = (name: string, value: string) => {
     setDiscoverPathOther(value);
   };
   const handlePreferredAreaOther = (name: string, value: string) => {
     setPreferredAreaOther(value);
   };
+  console.log("property :", property);
   const onTryRegister = () => {
     let result = {
       ...baseInfo,
+      isAgent,
+      property,
       discoverPath: [...discoverPath, discoverPathOther],
       interested,
       idealPrice,
@@ -255,31 +326,106 @@ const RegisterForm = () => {
 
   return (
     <Container>
-      <Title>Register</Title>
       <Form>
+        <Title>Sign up</Title>
         <Divider />
-        {mockData.baseInfo.map((data) => (
-          <CheckboxField
-            type={data.type}
-            title={data.title}
-            name={data.name}
-            onChange={handleBaseInfo}
-          />
-        ))}
+        <Signup handleBaseInfo={handleBaseInfo} handleIsAgent={handleIsAgent} />
+        <SubTitle>
+          4. What types of properties are you interested in? (check all that
+          apply)
+        </SubTitle>
+        <Ol>
+          <li>
+            <SubTitle_Title>Residential</SubTitle_Title>
+            <Ol type="a">
+              <li>
+                <Label style={{ display: "flex" }}>
+                  <Item>Single Family Home</Item>
+                  <Input
+                    type="checkbox"
+                    name="residential"
+                    value="Single Family Home"
+                    onChange={handleProperty}
+                  />
+                </Label>
+              </li>
+              <li>
+                <Label style={{ display: "flex" }}>
+                  <Item>Townhouse / Condo</Item>
+                  <Input
+                    type="checkbox"
+                    name="residential"
+                    value="Townhouse / Condo"
+                    onChange={handleProperty}
+                  />
+                </Label>
+              </li>
+            </Ol>
+          </li>
 
+          <li>
+            <SubTitle_Title>Commercial</SubTitle_Title>
+            <Ol type="a">
+              <li>
+                <Label style={{ display: "flex" }}>
+                  <Item>Multifamily units</Item>
+                  <Input
+                    type="checkbox"
+                    name="commercial"
+                    value="Multifamily units"
+                    onChange={handleProperty}
+                  />
+                </Label>
+              </li>
+              <li>
+                <Label style={{ display: "flex" }}>
+                  <Item>Retail</Item>
+                  <Input
+                    type="checkbox"
+                    name="commercial"
+                    value="Retail"
+                    onChange={handleProperty}
+                  />
+                </Label>
+              </li>
+              <li>
+                <Label style={{ display: "flex" }}>
+                  <Item>Industrial</Item>
+                  <Input
+                    type="checkbox"
+                    name="commercial"
+                    value="Industrial"
+                    onChange={handleProperty}
+                  />
+                </Label>
+              </li>
+              <li>
+                <Label style={{ display: "flex" }}>
+                  <Item>Land</Item>
+                  <Input
+                    type="checkbox"
+                    name="commercial"
+                    value="Land"
+                    onChange={handleProperty}
+                  />
+                </Label>
+              </li>
+            </Ol>
+          </li>
+        </Ol>
         <SubTitle>5. How did you discover Helipad?</SubTitle>
         <Ol type="a">
-          {mockData.discover.map((data) => (
-            <li>
-              {data.type === CheckBoxType.CHECKBOX ? (
-                <CheckboxField
+          {mockData.discover.map((data, idx) => (
+            <li key={idx}>
+              {data.type === RegisterFieldType.CHECKBOX ? (
+                <RegisterFormField
                   type={data.type}
                   title={data.title}
                   name={data.name}
                   onChange={handleDiscoverPath}
                 />
               ) : (
-                <CheckboxField
+                <RegisterFormField
                   type={data.type}
                   title={data.title}
                   name={data.name}
@@ -289,51 +435,52 @@ const RegisterForm = () => {
             </li>
           ))}
         </Ol>
-
         <SubTitle>
           6. Why are you interested in a home in the U.S.? (check all that
           apply)
         </SubTitle>
         <Ol type="a">
-          {mockData.interested.map((data) => (
-            <CheckboxField
-              type={data.type}
-              title={data.title}
-              name={data.name}
-              onChange={handleInterested}
-            />
+          {mockData.interested.map((data, idx) => (
+            <li key={idx}>
+              <RegisterFormField
+                type={data.type}
+                title={data.title}
+                name={data.name}
+                onChange={handleInterested}
+              />
+            </li>
           ))}
         </Ol>
-
         <SubTitle>
           7. What is your ideal price point? (check all that apply)
         </SubTitle>
         <Ol type="a">
-          {mockData.idealPrice.map((data) => (
-            <CheckboxField
-              type={data.type}
-              title={data.title}
-              name={data.name}
-              onChange={handleIdealPrice}
-            />
+          {mockData.idealPrice.map((data, idx) => (
+            <li key={idx}>
+              <RegisterFormField
+                type={data.type}
+                title={data.title}
+                name={data.name}
+                onChange={handleIdealPrice}
+              />
+            </li>
           ))}
         </Ol>
-
         <SubTitle>
           8. What is your preferred area? (check all that apply)
         </SubTitle>
         <Ol type="a">
-          {mockData.preferredArea.map((data) => (
-            <li>
-              {data.type === CheckBoxType.CHECKBOX ? (
-                <CheckboxField
+          {mockData.preferredArea.map((data, idx) => (
+            <li key={idx}>
+              {data.type === RegisterFieldType.CHECKBOX ? (
+                <RegisterFormField
                   type={data.type}
                   title={data.title}
                   name={data.name}
                   onChange={handlePreferredArea}
                 />
               ) : (
-                <CheckboxField
+                <RegisterFormField
                   type={data.type}
                   title={data.title}
                   name={data.name}
@@ -344,27 +491,53 @@ const RegisterForm = () => {
           ))}
         </Ol>
       </Form>
-      <Button onClick={onTryRegister}>Register</Button>
+      <Button onClick={onTryRegister}>Create account</Button>
     </Container>
   );
 };
 
 const Container = styled.div`
   font-weight: 400;
+  width: 460px;
 `;
 const Title = styled.div`
   font-size: 30px;
-  width: 100%;
-  height: 40px;
+  font-weight: bold;
   text-align: center;
-  border-bottom: 2px solid lightgray;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 `;
-const SubTitle = styled.div``;
+const Label = styled.label`
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+`;
+const Divider = styled.div`
+  width: 100%;
+  border: 1px solid #000000;
+`;
+const SubTitle = styled.div`
+  font-size: 20px;
+  margin: 10px 0px;
+`;
+const SubTitle_Title = styled.div`
+  font-size: 16px;
+  margin: 5px 0px;
+`;
+const Item = styled.div`
+  margin: 5px 0px;
+`;
 const Form = styled.form`
   margin-bottom: 20px;
 `;
-const Divider = styled.div``;
+
+const Name = styled.div`
+  display: grid;
+  grid-template-columns: 220px 220px;
+  grid-gap: 24px;
+`;
+
 const Button = styled.button`
   width: 465px;
   height: 46px;
@@ -372,6 +545,11 @@ const Button = styled.button`
   font-size: 20px;
   font-weight: 500;
   color: #ffffff;
+`;
+
+const Input = styled.input`
+  width: 20px;
+  height: 20px;
 `;
 const Ol = styled.ol`
   margin: 0;
