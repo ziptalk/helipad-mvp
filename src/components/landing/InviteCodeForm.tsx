@@ -18,7 +18,7 @@ export const InviteCodeForm = () => {
     let firebaseResult = await CheckInviteCode.checkInviteCode(inviteCode);
     if (firebaseResult) {
       setInviteCodeValidation(true);
-      history.push("/auth/registerForm");
+      history.push("/auth/registerForm2");
     } else {
       setInviteCodeValidation(false);
     }
