@@ -1,11 +1,10 @@
-import * as React from 'react';
-import styled from 'styled-components';
-import LoginForm from './LoginForm';
-import { useLocation } from 'react-router';
+import * as React from "react";
+import styled from "styled-components";
+import LoginForm from "./LoginForm";
+import { useLocation } from "react-router";
 
 const Login = () => {
   const location = useLocation<any>();
-
   return (
     <Container>
       <Row>
