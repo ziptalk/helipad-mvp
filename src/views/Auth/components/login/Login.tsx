@@ -6,8 +6,7 @@ import { RouteComponentProps } from "react-router-dom";
 
 const Login = ({ match }: any) => {
   console.log("login match url :", match.url);
-  const location = useLocation<any>();
-  const email = location.state.email;
+
   return (
     <Container>
       <Row>
