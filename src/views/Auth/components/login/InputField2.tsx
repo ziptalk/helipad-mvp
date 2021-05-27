@@ -20,20 +20,14 @@ const Input = styled.input`
 type InputFieldProps = {
   title: string;
   type: InputType;
-  name: string;
-  onChange: (name: string, value: string) => void;
+  onChange: (param: string) => void;
 };
 
-const InputField: React.FC<InputFieldProps> = ({
-  title,
-  name,
-  type,
-  onChange,
-}) => {
+const InputField: React.FC<InputFieldProps> = ({ title, type, onChange }) => {
   const [value, setValue] = useState("");
   const temp = "";
-  const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    onChange(name, event.currentTarget.value);
+  const handleOnChange = (e: React.FormEvent<HTMLInputElement>) => {
+    onChange(e.currentTarget.value);
   };
   return (
     <Container>

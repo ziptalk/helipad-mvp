@@ -1,10 +1,10 @@
-import styled from 'styled-components';
-import React, { useContext, useState } from 'react';
-import { useHistory } from 'react-router-dom';
-import ContactUseCase from '../../../../domain/ContactUseCase';
-import { AuthContext } from '../../../../AuthProvider';
-import ContactToAgent from '../../../../domain/ContactToAgent';
-import UpdateProcess from '../../../../domain/UpdateProcess';
+import styled from "styled-components";
+import React, { useContext, useState } from "react";
+import { useHistory } from "react-router-dom";
+import ContactUseCase from "../../../../domain/ContactUseCase";
+import { AuthContext } from "../../../../router/config/Provider/AuthProvider";
+import ContactToAgent from "../../../../domain/ContactToAgent";
+import UpdateProcess from "../../../../domain/UpdateProcess";
 type ContactFieldProps = {
   agent: string;
   assetId: string;
@@ -30,8 +30,9 @@ const Contact: React.FC<ContactFieldProps> = ({ agent, assetId }) => {
     if (!user) throw new Error();
     const userEmail = user.email as string;
     await ContactToAgent.contactToAgent(userEmail, assetId);
-    await updateProcess(userEmail, assetId, '0');
-    history.push({ pathname: '/process', state: { assetId, userEmail } });
+    const updateResult = await updateProcess(userEmail, assetId, "0");
+    console.log("updateResult :", updateResult);
+    history.push({ pathname: "/asset/process", state: { assetId, userEmail } });
   };
 
   return (

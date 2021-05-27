@@ -1,10 +1,10 @@
-import Asset from '../model/Asset';
-import AssetService from './asset/AssetService';
-import UserService from './user/UserService';
-import ContactService from './contact/ContactService';
-import ProcessService from './process/ProcessService';
-import { MessageContainer } from '../model/MessageContainer';
-import User from '../model/User';
+import Asset from "../model/Asset";
+import AssetService from "./asset/AssetService";
+import UserService from "./user/UserService";
+import ContactService from "./contact/ContactService";
+import ProcessService from "./process/ProcessService";
+import { MessageContainer } from "../model/MessageContainer";
+import User from "../model/User";
 
 export default class FirebaseService {
   static async getAssetList(): Promise<Asset[]> {
@@ -15,20 +15,8 @@ export default class FirebaseService {
     return AssetService.getAsset(id);
   }
 
-  static async signUpWithEmailAndPassword(
-    email: string,
-    password: string,
-    firstName: string,
-    lastName: string,
-    isAgent: boolean
-  ) {
-    return UserService.signUpWithEmailAndPassword(
-      email,
-      password,
-      firstName,
-      lastName,
-      isAgent
-    );
+  static async signUpWithEmailAndPassword({ ...props }) {
+    return UserService.signUpWithEmailAndPassword(props);
   }
 
   static async logInWithEmailAndPassword(email: string, password: string) {
