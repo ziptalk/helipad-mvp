@@ -13,6 +13,8 @@ import {
 } from "react-router-dom";
 
 import GlobalStyle from "./GlobalStyle";
+import HomePage from "./views/Home/components/HomePage";
+import FAQ from "./views/Home/components/FAQ";
 
 function App() {
   return (
@@ -26,6 +28,8 @@ function App() {
               <Route exact path="/" component={InviteCodeForm} />
               <Route path="/auth" component={AuthRouter} />
               <Route path="/asset" component={AssetRouter} />
+              <Route path="/home" component={HomePage} />
+              <Route path="/faq" component={FAQ} />
             </div>
           </section>
         </>
