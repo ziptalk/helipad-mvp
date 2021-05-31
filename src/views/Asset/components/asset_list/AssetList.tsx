@@ -1,18 +1,18 @@
 import React, {useEffect, useState} from 'react';
-import './AssetList.css';
 import AssetCard from './AssetCard';
 import styled from 'styled-components';
 import { ReactComponent as ArrowUp } from '../../../../images/ic_down.svg';
 import { ReactComponent as ArrowDown } from '../../../../images/ic_up.svg';
 import GetAsset from '../../../../domain/GetAsset';
 import Asset from '../../../../model/Asset';
+import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
+import GoogleMap from "../../../../shared/GoogleMap";
 
 type AssetListProperties = {};
 
 enum Definition {
   FOR_INVESTMENT = 0,
   FOR_LIVING = 1,
-
 }
 
 const AssetList: React.FC<AssetListProperties> = () => {
@@ -45,77 +45,41 @@ const AssetList: React.FC<AssetListProperties> = () => {
 
   return (
     <Container>
-      <Category>
-        <InvestmentBlock onClick={() => getInvestmentList()}>
-          {
-            definition === Definition.FOR_INVESTMENT ?
-                (
-                    <Selected>
-                      Investment Recommendations
-                    </Selected>
-                ) : (
-                    <Unselected>
-                      Investment Recommendations
-                    </Unselected>
-                )
-          }
-        </InvestmentBlock>
-        <Divider>|</Divider>
-        <LivingBlock onClick={() => getLivingList()}>
-          {
-            definition === Definition.FOR_LIVING ?
-                (
-                    <Selected>
-                      Living Recommendations
-                    </Selected>
-                ) : (
-                    <Unselected>
-                      Living Recommendations
-                    </Unselected>
-                )
-          }
-        </LivingBlock>
-      </Category>
-      <SortBlock>
-        <ArrowTitle>Sort by Price</ArrowTitle>
-        <ArrowBlock>
-          <ArrowUp
-            style={{ cursor: "pointer" }}
-            onClick={() => {
-              setAscending();
-            }}
-          />
-        </ArrowBlock>
-        <ArrowDown
-          style={{ cursor: "pointer" }}
-          onClick={() => {
-            setDescending();
-          }}
+      <MapContainer>
+        <GoogleMap
+            bootstrapURLKeys = {{ key: 'AIzaSyAHHYSWgQGMPHXYRqCMMUSlxTvqrDepyeA' }}
+            defaultZoom={15}
+            defaultCenter={{ lat: 37.5, lng: 127 }}
         />
-      </SortBlock>
-
-      <AssetListGrid>
-        {assets
-          .filter((asset) => {
-            switch (definition) {
-              case Definition.FOR_INVESTMENT:
-                return asset.forInvestment;
-              case Definition.FOR_LIVING:
-                return !asset.forInvestment;
-              default:
-                return asset.forInvestment;
-            }
-          }).sort((a, b) => (
-              ascend ? a.price - b.price : b.price - a.price)
-          ).map((asset, idx) => (
-            <AssetCard key={idx} data={asset} />
-          ))}
-      </AssetListGrid>
+      </MapContainer>
+      <AssetContainer>
+        {
+          assets.map((asset) => <AssetCard data={asset} />)
+        }
+      </AssetContainer>
     </Container>
   );
 };
 
-const Container = styled.div``;
+const Container = styled.div`
+  width: 100vw;
+  height: calc(100vh - 100px);
+  display: flex;
+  flex-direction: row;
+`;
+
+const MapContainer = styled.div`
+  width: calc(100vw - 512px);
+  height: 100vh;
+`;
+
+const AssetContainer = styled.div`
+  width: 512px;
+  height: 100vh;
+  background-color: #61dafb;
+  overflow-y: scroll;
+  z-index: 0;
+`;
 
 const Category = styled.div`
   display: flex;

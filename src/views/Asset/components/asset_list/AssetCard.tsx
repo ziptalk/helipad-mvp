@@ -19,7 +19,6 @@ const AssetCard = ({ data }: AssetCardProps) => {
                 <PriceDollar>
                   ($){(data.price * 1000).toLocaleString('en-US')}
                 </PriceDollar>
-                <PriceWon>(₩){data.price.toLocaleString('ko-KR')}</PriceWon>
               </PriceBlock>
               <PlaceInfoBlock>
                 <StreetInfo>{data.buildingInformation.street}</StreetInfo>
@@ -49,7 +48,7 @@ const AssetCard = ({ data }: AssetCardProps) => {
 };
 
 const Container: any = styled.div`
-  width: 470px;
+  width: 512px;
   height: 353px;
 
   background: url(${(props: any) => props.background});
