@@ -61,6 +61,10 @@ const Neighborhood: React.FC<any> = ({ Neighborhood }) => {
 
 const Container = styled.div`
   margin: 83px 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 `;
 const Title = styled.div`
   font-size: 18px;
