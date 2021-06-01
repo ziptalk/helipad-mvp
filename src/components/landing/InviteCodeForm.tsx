@@ -1,13 +1,20 @@
-import React, { useState, useContext } from "react";
-import { useHistory } from "react-router-dom";
+import React, { useState, useEffect, useContext } from "react";
+import { useHistory, Redirect } from "react-router-dom";
 import styled from "styled-components";
 import { CheckInviteCode } from "../../domain/CheckInviteCode";
 import { AuthContext } from "../../router/config/Provider/AuthProvider";
 export const InviteCodeForm = () => {
   const [inviteCode, setInviteCode] = useState("");
-  const { inviteCodeValidation, setInviteCodeValidation } =
-    useContext(AuthContext);
+  const {
+    authenticated,
+    loadingAuthState,
+    inviteCodeValidation,
+    setInviteCodeValidation,
+  } = useContext(AuthContext);
   const history = useHistory();
+  if (loadingAuthState) {
+    return <></>;
+  }
   const handleOnchange = (event: any) => {
     const inviteCode = event.target.value;
     setInviteCode(inviteCode);
@@ -23,24 +30,31 @@ export const InviteCodeForm = () => {
       setInviteCodeValidation(false);
     }
   };
-
+  console.log("authenticated", authenticated);
   return (
     <Container>
-      <Title>
-        Welcome to Helipad. At this time, membership to Helipad is by invitation
-        only. If you have an invitation code, please enter it below.
-      </Title>
-      <InputBlock>
-        {inviteCodeValidation ? (
-          <></>
-        ) : (
-          <ErrorMessage>Invalid invite code</ErrorMessage>
-        )}
+      {authenticated ? (
+        <Redirect to="/asset/neighborhood">ㅁㄴㅇ</Redirect>
+      ) : (
+        <>
+          <Title>
+            Welcome to Helipad. At this time, membership to Helipad is by
+            invitation only. If you have an invitation code, please enter it
+            below.
+          </Title>
+          <InputBlock>
+            {inviteCodeValidation ? (
+              <></>
+            ) : (
+              <ErrorMessage>Invalid invite code</ErrorMessage>
+            )}
 
-        <Input value={inviteCode} onChange={handleOnchange}></Input>
+            <Input value={inviteCode} onChange={handleOnchange}></Input>
 
-        <Button onClick={checkInviteCode}>Submit</Button>
-      </InputBlock>
+            <Button onClick={checkInviteCode}>Submit</Button>
+          </InputBlock>
+        </>
+      )}
     </Container>
   );
 };
