@@ -58,25 +58,12 @@ export class MapContainer extends React.Component {
             return Geocode.fromAddress(currentAddr)
               .then( response => {
                 const { lat, lng } = response.results[0].geometry.location;
-                // console.log(lat)
-                // console.log(lng)
+               
                 this.setState({
                     latState: lat,
                     lngState: lng,
                     fetchingServices: false,
                 });
-
-                // this.state.assetState.map(data =>
-                //     data.assetId === index ?
-                //     ({ ...data, assetLat: lat, assetLng: lng})
-                //     : data
-                // )
-
-                // assetStateList.map(data =>
-                //     data.assetId === index ?
-                //     ({ ...data, assetLat: lat, assetLng: lng})
-                //     : data
-                // )
 
                 assetStateList[index].assetLat = lat;
                 assetStateList[index].assetLng= lng;
@@ -89,21 +76,10 @@ export class MapContainer extends React.Component {
         GoogleMapLocate(this.state.address, 0)
 
         const { data } = this.props
-        // const { assetState } = this.state.assetState
 
         let id = 1
 
-        // console.log(data)
-
         await  data.map(function(asset){
-            // console.log(asset.buildingInformation.address)
-
-            // this.setState({
-            //     assetState : this.state.assetState.concat({ 
-            //         assetId: id,
-            //         assetAddress: asset.buildingInformation.address,
-            //     })
-            // });
             assetStateList = assetStateList.concat({
                 assetId: id,
                 assetAddress: asset.buildingInformation.address,
@@ -111,18 +87,13 @@ export class MapContainer extends React.Component {
                 .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")
             })
             id++;
-            // console.log(id)
         })
 
         await  data.map((asset, index) => GoogleMapLocate(asset.buildingInformation.address, index + 1))
         
-        // console.log(assetStateList)
-
         await this.setState({
             assetState : assetStateList
         })
-        // console.log("hererer")
-        // console.log(this.state.assetState)
     }
 
     render() {
@@ -131,21 +102,9 @@ export class MapContainer extends React.Component {
             height: '100vh'
         };
 
-        // console.log(this.state.assetState)
 
         return (
             <Container>
-                {/* <div>{this.state.latState}</div>
-                <div>{this.state.lngState}</div>
-                <div>
-                    {
-                    this.state.assetState.map((asset) => asset.assetAddress)
-                    }
-                </div> */}
-
-                {/* <div>{
-                data.map((asset) => asset)
-                }</div> */}
                 <Map
                     google={this.props.google}
                     zoom={14}
@@ -153,15 +112,7 @@ export class MapContainer extends React.Component {
                     initialCenter={{
                         lat: 40.7164377,
                         lng: -73.9644072
-                        // lat: this.state.latState,
-                        // lng: this.state.lngState
                     }}>
-                    {/* <Marker
-                        lat={0}
-                        lng={0}
-                        name="My Marker"
-                        color="blue"
-                    /> */}
                     {this.state.assetState.map(asset => 
                         <Marker key="marker_1"
                         icon={{
