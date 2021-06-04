@@ -9,13 +9,7 @@ import {
 import PrivateRoutes from "./PrivateRouter/PrivateRoutes";
 import { AssetDetailRoutes, AssetRoutes } from "../../views/Asset";
 
-import {
-  Login,
-  Logout,
-  SignUp,
-  RegisterForm,
-  RegisterForm2,
-} from "../../views/Auth/components";
+import { Login, Logout, RegisterForm } from "../../views/Auth/components";
 import MyPage from "../../views/MyPage/components/mypage/MyPage";
 import Process from "../../views/MyPage/components/process/Process";
 import ContactHistory from "../../views/MyPage/components/mypage/ContactHistory";
@@ -31,16 +25,10 @@ const AuthRouter = ({ match }: RouteComponentProps) => {
         <section className="container">
           <div className="routingContainer">
             <Route path={`${match.url}/login`} component={Login} />
-            <Route path={`${match.url}/signup`} component={SignUp} />
             <Route
               path={`${match.url}/registerForm`}
               component={RegisterForm}
             />
-            <Route
-              path={`${match.url}/registerForm2`}
-              component={RegisterForm2}
-            />
-
             <PrivateRoutes path={`${match.url}/logout`} component={Logout} />
             <PrivateRoutes path={`${match.url}/mypage`} component={MyPage} />
 

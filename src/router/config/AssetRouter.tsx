@@ -8,18 +8,10 @@ import {
 } from "react-router-dom";
 import { AssetDetailRoutes, AssetRoutes } from "../../views/Asset";
 import PrivateRoutes from "./PrivateRouter/PrivateRoutes";
-import {
-  Login,
-  Logout,
-  SignUp,
-  RegisterForm,
-} from "../../views/Auth/components";
-import { InviteCodeForm } from "../../components/landing/InviteCodeForm";
 import Process from "../../views/MyPage/components/process/Process";
 import ContactHistory from "../../views/MyPage/components/mypage/ContactHistory";
 import Neighborhood from "../../views/Neighborhood/components/Neighborhood";
 import NeighborhoodDetail from "../../views/Neighborhood/components/NeighborhoodDetail";
-import { composeInitialProps } from "react-i18next";
 
 const AssetRouter = ({ match }: RouteComponentProps) => {
   console.log("match url :", match.url);

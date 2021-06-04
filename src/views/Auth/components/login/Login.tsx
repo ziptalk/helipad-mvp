@@ -1,8 +1,6 @@
 import * as React from "react";
 import styled from "styled-components";
 import LoginForm from "./LoginForm";
-import { useLocation } from "react-router";
-import { RouteComponentProps } from "react-router-dom";
 
 const Login = ({ match }: any) => {
   console.log("login match url :", match.url);
