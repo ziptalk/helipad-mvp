@@ -7,8 +7,11 @@ import GetAsset from "../../../../domain/GetAsset";
 import Asset from "../../../../model/Asset";
 import { Map, GoogleApiWrapper, Marker } from "google-maps-react";
 import GoogleMap from "../../../../shared/GoogleMap";
+// import Marker from './Marker';
 
 type AssetListProperties = {};
+
+const AnyReactComponent = ({text}: any) => <div>{text}</div>;
 
 enum Definition {
   FOR_INVESTMENT = 0,
@@ -57,10 +60,12 @@ const AssetList: React.FC<AssetListProperties> = ({ history }: any) => {
     <Container>
       <MapContainer>
         <GoogleMap
-          bootstrapURLKeys={{ key: "AIzaSyAHHYSWgQGMPHXYRqCMMUSlxTvqrDepyeA" }}
-          defaultZoom={15}
-          defaultCenter={{ lat: 37.5, lng: 127 }}
-        />
+            bootstrapURLKeys = {{ key: 'AIzaSyAHHYSWgQGMPHXYRqCMMUSlxTvqrDepyeA' }}
+            defaultZoom={15}
+            defaultCenter={{ lat: 0, lng: 0 }}
+            data={assets}
+        >
+        </GoogleMap>
       </MapContainer>
       <AssetContainer>
         {assets.map((asset) => (
