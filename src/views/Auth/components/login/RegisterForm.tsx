@@ -1,264 +1,106 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router";
 import styled from "styled-components";
+import SignUpUseCase, { ErrorCode } from "../../../../domain/SignUpUseCase";
 import { InputField, InputType } from "./InputField";
-import { RegisterFormField, RegisterFieldType } from "./RegisterFormField";
-import Signup from "./SignUp";
-let mockData = {
-  baseInfo: [
-    {
-      id: "1",
-      type: RegisterFieldType.TEXT,
-      title: "last name",
-      name: "lastName",
-    },
-    {
-      id: "1",
-      type: RegisterFieldType.TEXT,
-      title: "first name",
-      name: "firstName",
-    },
-    {
-      id: "1",
-      type: RegisterFieldType.TEXT,
-      title: "email",
-      name: "email",
-    },
-    {
-      id: "1",
-      type: RegisterFieldType.TEXT,
-      title: "kakao ID",
-      name: "kakaoId",
-    },
-    {
-      id: "1",
-      type: RegisterFieldType.TEXT,
-      title: "password",
-      name: "password",
-    },
-    {
-      id: "1",
-      type: RegisterFieldType.TEXT,
-      title: "password confirmation",
-      name: "passwordConfirmation",
-    },
-    {
-      id: "1",
-      type: RegisterFieldType.CHECKBOX,
-      title: "I'm a private banker or real estate agent",
-      name: "jop",
-    },
-  ],
-  discover: [
-    {
-      id: "2",
-      type: RegisterFieldType.CHECKBOX,
-      title: "Search engine (Google, Naver, etc.)",
-      name: "discover",
-    },
-    {
-      id: "2",
-      type: RegisterFieldType.CHECKBOX,
-      title: "Recommended by friend or colleague",
-      name: "discover",
-    },
-    {
-      id: "2",
-      type: RegisterFieldType.CHECKBOX,
-      title: "Social media",
-      name: "discover",
-    },
-    {
-      id: "2",
-      type: RegisterFieldType.CHECKBOX,
-      title: "Blog or publication",
-      name: "discover",
-    },
-    {
-      id: "2",
-      type: RegisterFieldType.TEXT,
-      title: "Other",
-      name: "discover",
-    },
-  ],
-  interested: [
-    {
-      id: "3",
-      type: RegisterFieldType.CHECKBOX,
-      title: "Investment",
-      name: "interested",
-    },
-    {
-      id: "3",
-      type: RegisterFieldType.CHECKBOX,
-      title: "Rental Income Opportunity",
-      name: "interested",
-    },
-    {
-      id: "3",
-      type: RegisterFieldType.CHECKBOX,
-      title: "Second Home",
-      name: "interested",
-    },
-    {
-      id: "3",
-      type: RegisterFieldType.CHECKBOX,
-      title: "Relocating to U.S.",
-      name: "interested",
-    },
-    {
-      id: "3",
-      type: RegisterFieldType.CHECKBOX,
-      title: "Child’s U.S. Education",
-      name: "interested",
-    },
-  ],
-  idealPrice: [
-    {
-      id: "4",
-      type: RegisterFieldType.CHECKBOX,
-      title: "Under $500K",
-      name: "idealPrice",
-    },
-    {
-      id: "4",
-      type: RegisterFieldType.CHECKBOX,
-      title: "US $500K - $1mm",
-      name: "idealPrice",
-    },
-    {
-      id: "4",
-      type: RegisterFieldType.CHECKBOX,
-      title: "US $1mm-$2.5m",
-      name: "idealPrice",
-    },
-    {
-      id: "4",
-      type: RegisterFieldType.CHECKBOX,
-      title: "$2.5m-$5.0m",
-      name: "idealPrice",
-    },
-    {
-      id: "4",
-      type: RegisterFieldType.CHECKBOX,
-      title: "$5.0m-10m",
-      name: "idealPrice",
-    },
-  ],
-  preferredArea: [
-    {
-      id: "5",
-      type: RegisterFieldType.CHECKBOX,
-      title: "CA – Los Angeles",
-      name: "preferredArea",
-    },
-    {
-      id: "5",
-      type: RegisterFieldType.CHECKBOX,
-      title: "CA – Orange County",
-      name: "preferredArea",
-    },
-    {
-      id: "5",
-      type: RegisterFieldType.CHECKBOX,
-      title: "CA – San Diego",
-      name: "preferredArea",
-    },
-    {
-      id: "5",
-      type: RegisterFieldType.CHECKBOX,
-      title: "CA – San Francisco",
-      name: "preferredArea",
-    },
-    {
-      id: "5",
-      type: RegisterFieldType.CHECKBOX,
-      title: "NV – Las Vegas",
-      name: "preferredArea",
-    },
-    {
-      id: "5",
-      type: RegisterFieldType.CHECKBOX,
-      title: "New York",
-      name: "preferredArea",
-    },
-    {
-      id: "5",
-      type: RegisterFieldType.CHECKBOX,
-      title: "New Jersey",
-      name: "preferredArea",
-    },
-    {
-      id: "5",
-      type: RegisterFieldType.TEXT,
-      title: "Others (Fill in)",
-      name: "preferredArea",
-    },
-  ],
-};
-
-type BaseInfoProps = {
-  firstName: string;
-  lastName: string;
-  email: string;
-  kakaoId: string;
-  password: string;
-};
-
-type PropertyProps = {
+import { useHistory } from "react-router";
+import CheckboxField from "./CheckboxField";
+type InterestPropertyProps = {
   residential: string[];
   commercial: string[];
 };
-
 const RegisterForm = () => {
-  const history = useHistory();
-  const [baseInfo, setBaseInfo] = useState<BaseInfoProps>({
-    lastName: "",
-    firstName: "",
-    email: "",
-    kakaoId: "",
-    password: "",
-  });
-  const [property, setProperty] = useState<PropertyProps>({
-    residential: [],
-    commercial: [],
-  });
+  const [lastName, setLastName] = useState<string>("");
+  const [firstName, setFirstName] = useState<string>("");
+  const [kakaoId, setKakaoId] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [passwordConfirm, setPasswordConfirm] = useState<string>("");
+  const [isAgent, setIsAgent] = useState<boolean>(false);
+  const [interestProperty, setInterestProperty] =
+    useState<InterestPropertyProps>({
+      residential: [],
+      commercial: [],
+    });
   const [discoverPath, setDiscoverPath] = useState<string[]>([]);
-  const [interested, setInterested] = useState<string[]>([]);
+  const [discoverPathOther, setDiscoverPathOther] = useState<string>("");
+  const [interestHome, setInterestHome] = useState<string[]>([]);
   const [idealPrice, setIdealPrice] = useState<string[]>([]);
   const [preferredArea, setPreferredArea] = useState<string[]>([]);
-  const [isAgent, setIsAgent] = useState<boolean>(false);
-  const [discoverPathOther, setDiscoverPathOther] = useState<string>("");
   const [preferredAreaOther, setPreferredAreaOther] = useState<string>("");
+  const history = useHistory();
+  const onTryRegister = () => {
+    let userInfo = {
+      lastName,
+      firstName,
+      email,
+      password,
+      passwordConfirm,
+      isAgent,
+      interestProperty,
+      discoverPath,
+      discoverPathOther,
+      interestHome,
+      idealPrice,
+      preferredArea,
+      preferredAreaOther,
+    };
 
-  const handleBaseInfo = (name: string, value: string) => {
-    setBaseInfo({ ...baseInfo, [name]: value });
+    history.push({
+      pathname: "/login",
+    });
   };
-  const handleProperty = (event: React.ChangeEvent<HTMLInputElement>) => {
-    let { checked, value, name } = event.target;
 
+  const onSuccess = () => {
+    alert("Sign-up success. Please login again.");
+    history.push("/auth/login");
+  };
+
+  const onError = (error: any) => {
+    switch (error.code) {
+      case ErrorCode.EMAIL_ALREADY_IN_USE:
+        alert("This email is already in-use. Please use other account.");
+        break;
+      case ErrorCode.WEAK_PASSWORD:
+        alert("You should use stronger password");
+        break;
+      default:
+        break;
+    }
+  };
+  const handleInterestProperty = (
+    checked: boolean,
+    value: string,
+    name: string
+  ) => {
     switch (name) {
-      case "residential": {
+      case "property_residential": {
         if (checked) {
-          setProperty({
-            ...property,
-            residential: [...property.residential, value],
+          setInterestProperty({
+            ...interestProperty,
+            residential: [...interestProperty.residential, value],
           });
         } else {
-          let newProperty = property.residential.filter((ele) => ele !== value);
-          setProperty({ ...property, residential: newProperty });
+          let newProperty = interestProperty.residential.filter(
+            (ele) => ele !== value
+          );
+          setInterestProperty({
+            ...interestProperty,
+            residential: newProperty,
+          });
         }
         break;
       }
-      case "commercial": {
+      case "property_commercial": {
         if (checked) {
-          setProperty({
-            ...property,
-            commercial: [...property.commercial, value],
+          setInterestProperty({
+            ...interestProperty,
+            commercial: [...interestProperty.commercial, value],
           });
         } else {
-          let newProperty = property.commercial.filter((ele) => ele !== value);
-          setProperty({ ...property, commercial: newProperty });
+          let newProperty = interestProperty.commercial.filter(
+            (ele) => ele !== value
+          );
+          setInterestProperty({ ...interestProperty, commercial: newProperty });
         }
         break;
       }
@@ -267,270 +109,340 @@ const RegisterForm = () => {
       }
     }
   };
-  const handleDiscoverPath = (checked: boolean, value: string) => {
+  const handleDiscoverPath = (
+    checked: boolean,
+    value: string,
+    name?: string
+  ) => {
     if (checked) {
       setDiscoverPath([...discoverPath, value]);
     } else {
       setDiscoverPath(discoverPath.filter((ele) => ele !== value));
     }
   };
-  const handleInterested = (checked: boolean, value: string) => {
+  const handleDiscoverPathOther = (value: string) => {
+    setDiscoverPathOther(value);
+  };
+
+  const handleInterestHome = (
+    checked: boolean,
+    value: string,
+    name?: string
+  ) => {
     if (checked) {
-      setInterested([...interested, value]);
+      setInterestHome([...interestHome, value]);
     } else {
-      setInterested(interested.filter((ele) => ele !== value));
+      setInterestHome(interestHome.filter((ele) => ele !== value));
     }
   };
-  const handleIdealPrice = (checked: boolean, value: string) => {
+
+  const handleIdealPrice = (checked: boolean, value: string, name?: string) => {
     if (checked) {
       setIdealPrice([...idealPrice, value]);
     } else {
       setIdealPrice(idealPrice.filter((ele) => ele !== value));
     }
   };
-  const handlePreferredArea = (checked: boolean, value: string) => {
+
+  const handlePreferredArea = (
+    checked: boolean,
+    value: string,
+    name?: string
+  ) => {
     if (checked) {
       setPreferredArea([...preferredArea, value]);
     } else {
       setPreferredArea(preferredArea.filter((ele) => ele !== value));
     }
   };
-  const handleIsAgent = (checked: boolean, value: string) => {
-    if (checked) {
-      setIsAgent(true);
-    } else {
-      setIsAgent(false);
-    }
-  };
-  const handleDiscoverPathOther = (name: string, value: string) => {
-    setDiscoverPathOther(value);
-  };
-  const handlePreferredAreaOther = (name: string, value: string) => {
+
+  const handlePreferredAreaOther = (value: string) => {
     setPreferredAreaOther(value);
   };
-  console.log("property :", property);
-  const onTryRegister = () => {
-    let result = {
-      ...baseInfo,
+  const onTrySignUp = (e: any) => {
+    e.preventDefault();
+
+    if (password !== passwordConfirm) {
+      alert("Password != PasswordConfirmation");
+      return;
+    }
+    let userInfo = {
+      lastName,
+      firstName,
+      kakaoId,
+      email,
+      password,
+      passwordConfirm,
       isAgent,
-      property,
-      discoverPath: [...discoverPath, discoverPathOther],
-      interested,
+      interestProperty,
+      discoverPath,
+      discoverPathOther,
+      interestHome,
       idealPrice,
-      preferredArea: [...preferredArea, preferredAreaOther],
+      preferredArea,
+      preferredAreaOther,
     };
-    console.log("result data :", result);
-    history.push({
-      pathname: "/auth/login",
-    });
+
+    SignUpUseCase.withEmail(userInfo)
+      .then((value) => {
+        console.log(value);
+        onSuccess();
+      })
+      .catch((error) => onError(error));
   };
 
   return (
     <Container>
-      <Form>
+      <form>
         <Title>Sign up</Title>
         <Divider />
-        <Signup handleBaseInfo={handleBaseInfo} handleIsAgent={handleIsAgent} />
+        <Name>
+          <InputField
+            type={InputType.TEXT}
+            title="last name"
+            onChange={(name: string) => setLastName(name)}
+          />
+          <InputField
+            type={InputType.TEXT}
+            title="first name"
+            onChange={(name: string) => setFirstName(name)}
+          />
+        </Name>
+        <InputField
+          type={InputType.TEXT}
+          title="kakao ID"
+          onChange={(kakaoId: string) => setKakaoId(kakaoId)}
+        />
+        <InputField
+          type={InputType.EMAIL}
+          title="email"
+          onChange={(email: string) => setEmail(email)}
+        />
+        <InputField
+          type={InputType.PASSWORD}
+          title="password"
+          onChange={(password: string) => {
+            setPassword(password);
+          }}
+        />
+        <InputField
+          type={InputType.PASSWORD}
+          title="password confirmation"
+          onChange={(password: string) => setPasswordConfirm(password)}
+        />
+        <Agent>
+          <AgentText>I'm a private banker of real estate agent</AgentText>
+          <AgentCheckBox
+            onChange={(e) => {
+              setIsAgent(e.target.checked);
+            }}
+          />
+        </Agent>
+
         <SubTitle>
           4. What types of properties are you interested in? (check all that
           apply)
         </SubTitle>
-        <Ol>
-          <li>
-            <SubTitle_Title>Residential</SubTitle_Title>
-            <Ol type="a">
-              <li>
-                <Label style={{ display: "flex" }}>
-                  <Item>Single Family Home</Item>
-                  <Input
-                    type="checkbox"
-                    name="residential"
-                    value="Single Family Home"
-                    onChange={handleProperty}
-                  />
-                </Label>
-              </li>
-              <li>
-                <Label style={{ display: "flex" }}>
-                  <Item>Townhouse / Condo</Item>
-                  <Input
-                    type="checkbox"
-                    name="residential"
-                    value="Townhouse / Condo"
-                    onChange={handleProperty}
-                  />
-                </Label>
-              </li>
-            </Ol>
-          </li>
+        <Category>1. Residential</Category>
+        <CheckboxField
+          name="property_residential"
+          value="Single Family Home"
+          onChange={handleInterestProperty}
+        />
+        <CheckboxField
+          name="property_residential"
+          value="Townhouse / Condo"
+          onChange={handleInterestProperty}
+        />
+        <Category>2. Commercial</Category>
+        <CheckboxField
+          name="property_commercial"
+          value="Multifamily units"
+          onChange={handleInterestProperty}
+        />
+        <CheckboxField
+          name="property_commercial"
+          value="Retail
+          "
+          onChange={handleInterestProperty}
+        />
+        <CheckboxField
+          name="property_commercial"
+          value="Industrial"
+          onChange={handleInterestProperty}
+        />
+        <CheckboxField
+          name="property_commercial"
+          value="Land"
+          onChange={handleInterestProperty}
+        />
 
-          <li>
-            <SubTitle_Title>Commercial</SubTitle_Title>
-            <Ol type="a">
-              <li>
-                <Label style={{ display: "flex" }}>
-                  <Item>Multifamily units</Item>
-                  <Input
-                    type="checkbox"
-                    name="commercial"
-                    value="Multifamily units"
-                    onChange={handleProperty}
-                  />
-                </Label>
-              </li>
-              <li>
-                <Label style={{ display: "flex" }}>
-                  <Item>Retail</Item>
-                  <Input
-                    type="checkbox"
-                    name="commercial"
-                    value="Retail"
-                    onChange={handleProperty}
-                  />
-                </Label>
-              </li>
-              <li>
-                <Label style={{ display: "flex" }}>
-                  <Item>Industrial</Item>
-                  <Input
-                    type="checkbox"
-                    name="commercial"
-                    value="Industrial"
-                    onChange={handleProperty}
-                  />
-                </Label>
-              </li>
-              <li>
-                <Label style={{ display: "flex" }}>
-                  <Item>Land</Item>
-                  <Input
-                    type="checkbox"
-                    name="commercial"
-                    value="Land"
-                    onChange={handleProperty}
-                  />
-                </Label>
-              </li>
-            </Ol>
-          </li>
-        </Ol>
         <SubTitle>5. How did you discover Helipad?</SubTitle>
-        <Ol type="a">
-          {mockData.discover.map((data, idx) => (
-            <li key={idx}>
-              {data.type === RegisterFieldType.CHECKBOX ? (
-                <RegisterFormField
-                  type={data.type}
-                  title={data.title}
-                  name={data.name}
-                  onChange={handleDiscoverPath}
-                />
-              ) : (
-                <RegisterFormField
-                  type={data.type}
-                  title={data.title}
-                  name={data.name}
-                  onChange={handleDiscoverPathOther}
-                />
-              )}
-            </li>
-          ))}
-        </Ol>
+        <CheckboxField
+          name="discoverPath"
+          value="Search engine (Google, Naver, etc.)"
+          onChange={handleDiscoverPath}
+        />
+        <CheckboxField
+          name="discoverPath"
+          value="Recommended by friend or colleague"
+          onChange={handleDiscoverPath}
+        />
+        <CheckboxField
+          name="discoverPath"
+          value="Social media"
+          onChange={handleDiscoverPath}
+        />
+        <CheckboxField
+          name="discoverPath"
+          value="Blog or publication"
+          onChange={handleDiscoverPath}
+        />
+        <OtherBlock>
+          <OtherTitle>Other</OtherTitle>
+          <input
+            type="text"
+            value={discoverPathOther}
+            onChange={(e) => setDiscoverPathOther(e.target.value)}
+          ></input>
+        </OtherBlock>
+
         <SubTitle>
           6. Why are you interested in a home in the U.S.? (check all that
           apply)
         </SubTitle>
-        <Ol type="a">
-          {mockData.interested.map((data, idx) => (
-            <li key={idx}>
-              <RegisterFormField
-                type={data.type}
-                title={data.title}
-                name={data.name}
-                onChange={handleInterested}
-              />
-            </li>
-          ))}
-        </Ol>
+        <CheckboxField
+          name="interestHome"
+          value="Investment"
+          onChange={handleInterestHome}
+        />
+        <CheckboxField
+          name="interestHome"
+          value="Rental Income Opportunity"
+          onChange={handleInterestHome}
+        />
+        <CheckboxField
+          name="interestHome"
+          value="Second Home"
+          onChange={handleInterestHome}
+        />
+        <CheckboxField
+          name="interestHome"
+          value="Relocating to U.S."
+          onChange={handleInterestHome}
+        />
+        <CheckboxField
+          name="interestHome"
+          value="Child’s U.S. Education"
+          onChange={handleInterestHome}
+        />
+
         <SubTitle>
-          7. What is your ideal price point? (check all that apply)
+          7. What is your ideal price point? <br />
+          (check all that apply)
         </SubTitle>
-        <Ol type="a">
-          {mockData.idealPrice.map((data, idx) => (
-            <li key={idx}>
-              <RegisterFormField
-                type={data.type}
-                title={data.title}
-                name={data.name}
-                onChange={handleIdealPrice}
-              />
-            </li>
-          ))}
-        </Ol>
+        <CheckboxField
+          name="idealPrice"
+          value="Under $500K"
+          onChange={handleIdealPrice}
+        />
+        <CheckboxField
+          name="idealPrice"
+          value="US $500K - $1mm"
+          onChange={handleIdealPrice}
+        />
+        <CheckboxField
+          name="idealPrice"
+          value="US $1mm-$2.5m"
+          onChange={handleIdealPrice}
+        />
+        <CheckboxField
+          name="idealPrice"
+          value="$2.5m-$5.0m"
+          onChange={handleIdealPrice}
+        />
+        <CheckboxField
+          name="idealPrice"
+          value="$5.0m-10m"
+          onChange={handleIdealPrice}
+        />
+
         <SubTitle>
-          8. What is your preferred area? (check all that apply)
+          8. What is your preferred area? <br />
+          (check all that apply)
         </SubTitle>
-        <Ol type="a">
-          {mockData.preferredArea.map((data, idx) => (
-            <li key={idx}>
-              {data.type === RegisterFieldType.CHECKBOX ? (
-                <RegisterFormField
-                  type={data.type}
-                  title={data.title}
-                  name={data.name}
-                  onChange={handlePreferredArea}
-                />
-              ) : (
-                <RegisterFormField
-                  type={data.type}
-                  title={data.title}
-                  name={data.name}
-                  onChange={handlePreferredAreaOther}
-                />
-              )}
-            </li>
-          ))}
-        </Ol>
-      </Form>
-      <Button onClick={onTryRegister}>Create account</Button>
+        <CheckboxField
+          name="preferredArea"
+          value="CA – Los Angeles
+          "
+          onChange={handlePreferredArea}
+        />
+        <CheckboxField
+          name="preferredArea"
+          value="CA – Orange County
+          "
+          onChange={handlePreferredArea}
+        />
+        <CheckboxField
+          name="preferredArea"
+          value="CA – San Diego
+          "
+          onChange={handlePreferredArea}
+        />
+        <CheckboxField
+          name="preferredArea"
+          value="CA – San Francisco
+          "
+          onChange={handlePreferredArea}
+        />
+        <CheckboxField
+          name="preferredArea"
+          value="NV – Las Vegas
+          "
+          onChange={handlePreferredArea}
+        />
+        <CheckboxField
+          name="preferredArea"
+          value="New York
+          "
+          onChange={handlePreferredArea}
+        />
+        <CheckboxField
+          name="preferredArea"
+          value="New Jersey
+          "
+          onChange={handlePreferredArea}
+        />
+        <OtherBlock>
+          <OtherTitle>Others (fill in)</OtherTitle>
+          <input
+            type="text"
+            value={preferredAreaOther}
+            onChange={(e) => setPreferredAreaOther(e.target.value)}
+          ></input>
+        </OtherBlock>
+        <Button onClick={onTrySignUp}>Create account</Button>
+      </form>
     </Container>
   );
 };
 
 const Container = styled.div`
-  font-weight: 400;
   width: 460px;
+  display: flex;
+  flex-direction: column;
 `;
+
 const Title = styled.div`
   font-size: 30px;
   font-weight: bold;
   text-align: center;
   margin-bottom: 15px;
 `;
-const Label = styled.label`
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-`;
+
 const Divider = styled.div`
   width: 100%;
   border: 1px solid #000000;
-`;
-const SubTitle = styled.div`
-  font-size: 20px;
-  margin: 10px 0px;
-`;
-const SubTitle_Title = styled.div`
-  font-size: 16px;
-  margin: 5px 0px;
-`;
-const Item = styled.div`
-  margin: 5px 0px;
-`;
-const Form = styled.form`
-  margin-bottom: 20px;
 `;
 
 const Name = styled.div`
@@ -539,20 +451,58 @@ const Name = styled.div`
   grid-gap: 24px;
 `;
 
-const Button = styled.button`
-  width: 465px;
-  height: 46px;
-  background: #7000ff;
-  font-size: 20px;
-  font-weight: 500;
-  color: #ffffff;
+const Agent = styled.div`
+  margin-top: 15px;
+  padding-left: 10px;
+  padding-right: 10px;
+  display: flex;
+  flex-direction: row;
+  background: #ebebeb;
+  border: 1px solid #d7d7d7;
+  height: 45px;
+  align-items: center;
+  justify-content: space-between;
 `;
 
-const Input = styled.input`
+const AgentText = styled.div`
+  font-size: 20px;
+  color: #4542e2;
+`;
+
+const AgentCheckBox = styled.input`
   width: 20px;
   height: 20px;
 `;
-const Ol = styled.ol`
-  margin: 0;
+
+const SubTitle = styled.div`
+  font-size: 20px;
+  margin: 20px 0px 10px;
 `;
+const SubTitle_Title = styled.div`
+  font-size: 16px;
+  margin: 5px 0px;
+`;
+const Category = styled.div`
+  font-size: 19px;
+`;
+
+const OtherBlock = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 455px;
+  padding-left: 50px;
+`;
+const OtherTitle = styled.div`
+  font-size: 17px;
+`;
+const Button = styled.button`
+  margin-top: 10px;
+  width: 100%;
+  height: 45px;
+  background-color: #4542e2;
+  color: #ffffff;
+  font-size: 20px;
+`;
+
 export default RegisterForm;
