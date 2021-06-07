@@ -48,8 +48,15 @@ const AssetCard = ({ data }: AssetCardProps) => {
 };
 
 const Container: any = styled.div`
-  width: 512px;
-  height: 353px;
+  display: inline-block;
+  justify-content: space-between;
+  // width: 512px;
+  // height: 353px;
+  margin: 12px;
+  width: 250px;
+  height: 175px;
+  // width: 100%;
+  // max-width: 300px;
 
   background: url(${(props: any) => props.background});
   background-size: cover;
@@ -73,7 +80,8 @@ const ContainerGradient = styled.div`
 const ContainerContent = styled.div`
   color: #ffffff;
   font-weight: 600;
-  font-size: 25px;
+  // font-size: 25px;
+  font-size; 8px;
   display: flex;
   padding: 20px 20px;
 `;
@@ -81,15 +89,17 @@ const LeftSide = styled.div`
   width: 60%;
 `;
 const PriceBlock = styled.div`
-  font-size: 22px;
+  // font-size: 22px;
+  font-size: 11px;
   font-weight: 600;
   padding-bottom: 10px;
 `;
 const PriceDollar = styled.div``;
 const PriceWon = styled.div``;
 const PlaceInfoBlock = styled.div`
-  font-family: "Helvetica Neue";
-  font-size: 15px;
+  font-family: 'Helvetica Neue';
+  // font-size: 15px;
+  font-size :8px;
   font-weight: 500;
   padding: 8px 0;
 `;
@@ -105,8 +115,9 @@ const RightSide = styled.div`
   width: 35%;
 `;
 const RoomInfoBlock = styled.div`
-  font-family: "Helvetica Neue";
-  font-size: 18px;
+  font-family: 'Helvetica Neue';
+  // font-size: 18px;
+  font-size: 9px;
   font-weight: 400;
 `;
 const RoomInfo = styled.div`

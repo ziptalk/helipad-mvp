@@ -10,6 +10,11 @@ import GoogleMap from "../../../../shared/GoogleMap";
 import Geocode from "react-geocode";
 // import Marker from './Marker';
 
+Geocode.setApiKey('AIzaSyAHHYSWgQGMPHXYRqCMMUSlxTvqrDepyeA')
+Geocode.setLanguage('en')
+Geocode.setRegion('es')
+Geocode.enableDebug()
+
 type AssetListProperties = {};
 
 const AnyReactComponent = ({text}: any) => <div>{text}</div>;
@@ -26,14 +31,14 @@ const AssetList: React.FC<AssetListProperties> = ({ history }: any) => {
   const [ascend, setAscend] = useState(true);
   const [assets, setAssets] = useState<Asset[]>([]);
   const [locations, setLocations] = useState([
-    {
-        assetId: 0,
-        assetAddress : "",
-        assetLat : 40.7164377,
-        assetLng : -73.9644072,
-        assetLabel: "1,234,567,890,001"
-    },
-]);
+      {
+          assetId: 0,
+          assetAddress : "",
+          assetLat : 40.7164377,
+          assetLng : -73.9644072,
+          assetLabel: "1,234,567,890,001"
+      },
+  ]);
 
   // useEffect(() => {
   //   GetAsset.getAssetList().then((value) => {
@@ -46,7 +51,9 @@ const AssetList: React.FC<AssetListProperties> = ({ history }: any) => {
       setAssets(value);
       console.log('data', value);
     });
+  }, []);
 
+  useEffect(() => {
     let assetStateList = [
         {
             assetId: 0,
@@ -57,39 +64,42 @@ const AssetList: React.FC<AssetListProperties> = ({ history }: any) => {
         },
     ]
 
-    let id = 1;
+    async function forSettingLocation(){
+      let id = 1;
 
-    const GoogleMapLocate2 = async (currentAddr: string, index: number) => {
-      await Geocode.fromAddress(currentAddr)
-        .then( response => {
-          const { lat, lng } = response.results[0].geometry.location;               
-          
-          assetStateList[index].assetLat = lat;
-          assetStateList[index].assetLng= lng;
-          
-          return {lat, lng}
-        })
-        .catch(err => console.log(err))
+      const GoogleMapLocate = async (currentAddr: string, index: number) => {
+        await Geocode.fromAddress(currentAddr)
+          .then( response => {
+            const { lat, lng } = response.results[0].geometry.location;               
+            
+            assetStateList[index].assetLat = lat;
+            assetStateList[index].assetLng= lng;
+            
+            return {lat, lng}
+          })
+          .catch(err => console.log(err))
+      }
+
+      await assets.map(function(asset){
+          assetStateList = assetStateList.concat({
+              assetId: id,
+              assetAddress: asset.buildingInformation.address,
+              assetLat: 0,
+              assetLng: 0,
+              assetLabel: (asset.price*1000).toString()
+              .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")
+          })
+          id++;
+      })
+      await assets.map((asset, index) => GoogleMapLocate(asset.buildingInformation.address, index + 1))
+
+      await setLocations(assetStateList);
+    // console.log(assetStateList)
     }
+    forSettingLocation();
+  }, [])
 
-    assets.map(function(asset){
-        assetStateList = assetStateList.concat({
-            assetId: id,
-            assetAddress: asset.buildingInformation.address,
-            assetLat: 0,
-            assetLng: 0,
-            assetLabel: (asset.price*1000).toString()
-            .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")
-        })
-        id++;
-    })
-    
-    assets.map((asset, index) => GoogleMapLocate2(asset.buildingInformation.address, index + 1))
-
-    setLocations(assetStateList);
-    console.log(locations);
-
-  }, []);
+  console.log(locations);
 
   const getInvestmentList = () => {
     setDefinition(Definition.FOR_INVESTMENT);
@@ -106,16 +116,18 @@ const AssetList: React.FC<AssetListProperties> = ({ history }: any) => {
   const setDescending = () => {
     setAscend(false);
   };
-
   return (
     <Container>
       <MapContainer>
+        {/* {locations.map((location => 
+          <div>{location.assetId}</div>))} */}
         <GoogleMap
             bootstrapURLKeys = {{ key: 'AIzaSyAHHYSWgQGMPHXYRqCMMUSlxTvqrDepyeA' }}
             defaultZoom={15}
             defaultCenter={{ lat: 0, lng: 0 }}
             // data={assets}
             data = {locations}
+            // data = {assets}
         >
         </GoogleMap>
       </MapContainer>
@@ -130,20 +142,24 @@ const AssetList: React.FC<AssetListProperties> = ({ history }: any) => {
 
 const Container = styled.div`
   width: 100vw;
+  // width: 100%;
   height: calc(100vh - 100px);
   display: flex;
   flex-direction: row;
 `;
 
 const MapContainer = styled.div`
-  width: calc(100vw - 512px);
+  width: calc(100vw - 550px);
+  // width: 60%;
   height: 100vh;
 `;
 
 const AssetContainer = styled.div`
-  width: 512px;
+  width: 550px;
+  // width: 40%;
   height: 100vh;
-  background-color: #61dafb;
+  // background-color: #61dafb;
+  background-color: #F4F4F4;
   overflow-y: scroll;
   z-index: 0;
 `;
