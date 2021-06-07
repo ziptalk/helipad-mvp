@@ -7,6 +7,7 @@ import GetAsset from "../../../../domain/GetAsset";
 import Asset from "../../../../model/Asset";
 import { Map, GoogleApiWrapper, Marker } from "google-maps-react";
 import GoogleMap from "../../../../shared/GoogleMap";
+import Geocode from "react-geocode";
 // import Marker from './Marker';
 
 type AssetListProperties = {};
@@ -24,6 +25,15 @@ const AssetList: React.FC<AssetListProperties> = ({ history }: any) => {
   );
   const [ascend, setAscend] = useState(true);
   const [assets, setAssets] = useState<Asset[]>([]);
+  const [locations, setLocations] = useState([
+    {
+        assetId: 0,
+        assetAddress : "",
+        assetLat : 40.7164377,
+        assetLng : -73.9644072,
+        assetLabel: "1,234,567,890,001"
+    },
+]);
 
   // useEffect(() => {
   //   GetAsset.getAssetList().then((value) => {
@@ -32,12 +42,53 @@ const AssetList: React.FC<AssetListProperties> = ({ history }: any) => {
   //   });
   // }, []);
   useEffect(() => {
-    GetAsset.getAssetListByNeighborhood(history.location.state).then(
-      (value) => {
-        setAssets(value);
-        console.log("data", value);
-      }
-    );
+    GetAsset.getAssetList().then((value) => {
+      setAssets(value);
+      console.log('data', value);
+    });
+
+    let assetStateList = [
+        {
+            assetId: 0,
+            assetAddress : "",
+            assetLat : 40.7164377,
+            assetLng : -73.9644072,
+            assetLabel: "1,234,567,890,001"
+        },
+    ]
+
+    let id = 1;
+
+    const GoogleMapLocate2 = async (currentAddr: string, index: number) => {
+      await Geocode.fromAddress(currentAddr)
+        .then( response => {
+          const { lat, lng } = response.results[0].geometry.location;               
+          
+          assetStateList[index].assetLat = lat;
+          assetStateList[index].assetLng= lng;
+          
+          return {lat, lng}
+        })
+        .catch(err => console.log(err))
+    }
+
+    assets.map(function(asset){
+        assetStateList = assetStateList.concat({
+            assetId: id,
+            assetAddress: asset.buildingInformation.address,
+            assetLat: 0,
+            assetLng: 0,
+            assetLabel: (asset.price*1000).toString()
+            .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")
+        })
+        id++;
+    })
+    
+    assets.map((asset, index) => GoogleMapLocate2(asset.buildingInformation.address, index + 1))
+
+    setLocations(assetStateList);
+    console.log(locations);
+
   }, []);
 
   const getInvestmentList = () => {
@@ -63,7 +114,8 @@ const AssetList: React.FC<AssetListProperties> = ({ history }: any) => {
             bootstrapURLKeys = {{ key: 'AIzaSyAHHYSWgQGMPHXYRqCMMUSlxTvqrDepyeA' }}
             defaultZoom={15}
             defaultCenter={{ lat: 0, lng: 0 }}
-            data={assets}
+            // data={assets}
+            data = {locations}
         >
         </GoogleMap>
       </MapContainer>
