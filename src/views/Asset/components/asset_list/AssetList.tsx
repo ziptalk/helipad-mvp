@@ -90,15 +90,11 @@ const AssetList: React.FC<AssetListProperties> = ({ history }: any) => {
                   assetLng: 0,
                   assetLabel: priceLabel
               })
-              console.log("1111111")
               id++;
               return id;
           })
     
         await Promise.all(listSetting).then(res => console.log(`${res}`))
-        console.log("Done!");
-    
-        console.log(listSetting)
     
         const GoogleMapLocate = async (currentAddr: string, index: number) => {
           await Geocode.fromAddress(currentAddr)
@@ -106,26 +102,20 @@ const AssetList: React.FC<AssetListProperties> = ({ history }: any) => {
               const { lat, lng } = response.results[0].geometry.location;    
               assetStateList[index].assetLat = lat;
               assetStateList[index].assetLng= lng;
-              console.log("4444444")
               return {lat, lng}
             })
             .catch(err => console.log(err))
         }
     
-        console.log("222222")
-    
         const geoSetting =
         value.map(async function(asset, index){
-          console.log("333333")
           await GoogleMapLocate(asset.buildingInformation.address, index + 1)
           return index
         })
     
         await Promise.all(geoSetting).then(res => console.log(`${res}`))
         
-        console.log(assetStateList)
         await setLocations(assetStateList);
-        console.log("done!!!!!!")
       }
     
     forSettingLocation();
@@ -133,10 +123,6 @@ const AssetList: React.FC<AssetListProperties> = ({ history }: any) => {
     }
     wholeFunction();
   }, []);
-
-  console.log(locations);
-
-  
 
   const getInvestmentList = () => {
     setDefinition(Definition.FOR_INVESTMENT);
@@ -156,9 +142,6 @@ const AssetList: React.FC<AssetListProperties> = ({ history }: any) => {
   return (
     <Container>
       <MapContainer>
-        {/* <button onClick={()=>forSettingLocation()}>If you want to see markers, please click me.</button> */}
-        {/* {locations.map((location => 
-          <div>{location.assetId}</div>))} */}
         <GoogleMap
             bootstrapURLKeys = {{ key: 'AIzaSyAHHYSWgQGMPHXYRqCMMUSlxTvqrDepyeA' }}
             defaultZoom={15}

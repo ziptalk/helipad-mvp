@@ -1,6 +1,7 @@
 import {GoogleApiWrapper, Map, Marker} from "google-maps-react";
 import React from "react";
 import styled from "styled-components";
+import { withRouter } from 'react-router-dom';
 import Geocode from "react-geocode";
 import Asset from '../model/Asset';
 import { decorate, observable, action, makeObservable } from 'mobx';
@@ -17,10 +18,10 @@ export class MapContainer extends React.Component {
         }
         console.log(this.state.data)
     }
-
-    // onclickToLink = () => {
-    //     history.push("/")
-    // }
+    onclickToLink = (id) => {
+        let newURL = window.location.href + "/test_id_" + id.toString()
+        document.location.href = newURL
+    }
 
     render(){
         const mapStyles = {
@@ -32,9 +33,6 @@ export class MapContainer extends React.Component {
 
         return (
             <Container>
-                    {this.props.data.map(asset=>{
-                        <div>{asset.assetLabel}</div>
-                    })}
                 <Map
                     google={this.props.google}
                     zoom={14}
@@ -55,7 +53,7 @@ export class MapContainer extends React.Component {
                        lng: asset.assetLng
                    }}
                    label={asset.assetLabel}
-                   onClick={()=>null}
+                   onClick={()=>this.onclickToLink(asset.assetId)}
                    >
                    </Marker>
                 )}
