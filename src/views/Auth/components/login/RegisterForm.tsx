@@ -231,7 +231,7 @@ const RegisterForm = () => {
           onChange={(password: string) => setPasswordConfirm(password)}
         />
         <Agent>
-          <AgentText>I'm a private banker of real estate agent</AgentText>
+          <AgentText>I'm a private banker or real estate agent</AgentText>
           <AgentCheckBox
             onChange={(e) => {
               setIsAgent(e.target.checked);

@@ -1,8 +1,8 @@
-import React from 'react';
-import { Link, RouteComponentProps, useHistory } from 'react-router-dom';
-import './AssetCard.css';
-import Asset from '../../../../model/Asset';
-import styled from 'styled-components';
+import React from "react";
+import { Link, RouteComponentProps, useHistory } from "react-router-dom";
+import "./AssetCard.css";
+import Asset from "../../../../model/Asset";
+import styled from "styled-components";
 
 type AssetCardProps = {
   data: Asset;
@@ -10,14 +10,14 @@ type AssetCardProps = {
 
 const AssetCard = ({ data }: AssetCardProps) => {
   return (
-    <Link to={`/asset/assetList/${data.id}`} style={{ textDecoration: 'none' }}>
+    <Link to={`/asset/assetList/${data.id}`} style={{ textDecoration: "none" }}>
       <Container background={data.buildingInformation.thumbnail}>
         <ContainerGradient>
           <ContainerContent>
             <LeftSide>
               <PriceBlock>
                 <PriceDollar>
-                  ($){(data.price * 1000).toLocaleString('en-US')}
+                  ($){data.price.toLocaleString("en-US")}
                 </PriceDollar>
               </PriceBlock>
               <PlaceInfoBlock>
@@ -88,7 +88,7 @@ const PriceBlock = styled.div`
 const PriceDollar = styled.div``;
 const PriceWon = styled.div``;
 const PlaceInfoBlock = styled.div`
-  font-family: 'Helvetica Neue';
+  font-family: "Helvetica Neue";
   font-size: 15px;
   font-weight: 500;
   padding: 8px 0;
@@ -105,7 +105,7 @@ const RightSide = styled.div`
   width: 35%;
 `;
 const RoomInfoBlock = styled.div`
-  font-family: 'Helvetica Neue';
+  font-family: "Helvetica Neue";
   font-size: 18px;
   font-weight: 400;
 `;

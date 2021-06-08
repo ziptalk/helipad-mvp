@@ -34,6 +34,9 @@ const Process: React.FC<any> = ({ location }) => {
       "Washer / Dryer in Unit",
       "Central AC",
     ],
+    "",
+    0,
+    0,
     new BuildingInformation(
       "https://d3mi7e2vp4lzjl.cloudfront.net/LISTING_EDITOR/putImages/a556ec7f-d697-459a-85ee-943a77acc8be/33410b94-f019-49a3-a74e-375586a4fa51/1500x1000.jpg",
       "Williamsburg, Brooklyn, NY 11249",
@@ -50,7 +53,8 @@ const Process: React.FC<any> = ({ location }) => {
       "-",
       1910,
       "Pre-war",
-      "Lowrise"
+      "Lowrise",
+      ""
     )
   );
 

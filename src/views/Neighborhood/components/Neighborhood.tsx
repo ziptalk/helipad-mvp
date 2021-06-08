@@ -5,10 +5,7 @@ import GetNeighborhoodList from "../../../domain/GetNeighborhoodList";
 import NeighborhoodCard from "./NeighborhoodCard";
 
 const Neighborhood = ({ match }: RouteComponentProps) => {
-  console.log("neighborhood url: ", match.url);
-  console.log("Neighborhood");
   const neighborhoodList = GetNeighborhoodList.get();
-  console.log("neighborhood : " + neighborhoodList);
 
   return (
     <Container>

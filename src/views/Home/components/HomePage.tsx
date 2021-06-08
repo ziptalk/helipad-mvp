@@ -3,36 +3,34 @@ import React from "react";
 import { useHistory } from "react-router";
 
 const HomePage = () => {
-    const history = useHistory();
-    const onClickBuy = () => {
-        history.push({ pathname: "/asset/neighborhood" });
-    }
+  const history = useHistory();
+  const onClickBuy = () => {
+    history.push({ pathname: "/asset/neighborhood" });
+  };
 
-    const onClickPropertyManagement = () => {
+  const onClickPropertyManagement = () => {};
 
-    }
+  const onClickFAQ = () => {
+    history.push({ pathname: "/asset/faq" });
+  };
 
-    const onClickFAQ = () => {
-
-    }
-
-    return (
-        <Container>
-            <Title>Congratulations on joining Helipad!</Title>
-            <ButtonHolder>
-                <Button onClick={onClickBuy}>Buy a Home</Button>
-                <Button onClick={onClickPropertyManagement}>Property Management</Button>
-                <Button onClick={onClickFAQ}>Frequently Asked Question</Button>
-            </ButtonHolder>
-        </Container>
-    )
-}
+  return (
+    <Container>
+      <Title>Congratulations on joining Helipad!</Title>
+      <ButtonHolder>
+        <Button onClick={onClickBuy}>Buy a Home</Button>
+        <Button onClick={onClickPropertyManagement}>Property Management</Button>
+        <Button onClick={onClickFAQ}>Frequently Asked Question</Button>
+      </ButtonHolder>
+    </Container>
+  );
+};
 
 const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-`
+`;
 
 const Title = styled.div`
   font-size: 36px;
@@ -41,7 +39,7 @@ const Title = styled.div`
 const ButtonHolder = styled.div`
   display: flex;
   flex-direction: row;
-  
+
   margin-top: 100px;
 `;
 

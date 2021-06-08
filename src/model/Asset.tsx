@@ -1,4 +1,4 @@
-import BuildingInformation from './BuildingInformation';
+import BuildingInformation from "./BuildingInformation";
 
 export const COLUMNS = {
   ID: "id",
@@ -16,7 +16,10 @@ export const COLUMNS = {
   EXPECTED_MONTHLY_RENT: "expectedMonthlyRent",
   INFORMATION: "information",
   AMENITIES: "amenities",
-  BUILDING_INFORMATION: "buildingInformation"
+  NEIGHBORHOOD: "neighborhood",
+  LOTSIZE: "lotSize",
+  HOAFEE: "hoaFee",
+  BUILDING_INFORMATION: "buildingInformation",
 };
 
 export default class Asset {
@@ -36,6 +39,9 @@ export default class Asset {
     readonly expectedMonthlyRent: number,
     readonly information: string,
     readonly amenities: string[],
+    readonly neighborhood: string,
+    readonly lotSize: number,
+    readonly hoaFee: number,
     readonly buildingInformation: BuildingInformation
   ) {}
 
@@ -58,17 +64,37 @@ export default class Asset {
       obj[COLUMNS.EXPECTED_MONTHLY_RENT] as number,
       obj[COLUMNS.INFORMATION] as string,
       obj[COLUMNS.AMENITIES] as string[],
+      obj[COLUMNS.NEIGHBORHOOD] as string,
+      obj[COLUMNS.LOTSIZE] as number,
+      obj[COLUMNS.HOAFEE] as number,
       BuildingInformation.fromObject(obj[COLUMNS.BUILDING_INFORMATION])
     );
   }
 
   static emptyAsset(): Asset {
     return new Asset(
-        "test_id",
-        "test_agent",
-        false,
-        0,
-        "No",
+      "test_id",
+      "test_agent",
+      false,
+      0,
+      "No",
+      0,
+      0,
+      0,
+      0,
+      "",
+      "",
+      0,
+      0,
+      "",
+      [],
+      "",
+      0,
+      0,
+      new BuildingInformation(
+        "",
+        "",
+        "",
         0,
         0,
         0,
@@ -77,26 +103,13 @@ export default class Asset {
         "",
         0,
         0,
+        0,
         "",
-        [],
-        new BuildingInformation(
-            "",
-            "",
-            "",
-            0,
-            0,
-            0,
-            0,
-            "",
-            "",
-            0,
-            0,
-            0,
-            "",
-            0,
-            "",
-            ""
-        )
+        0,
+        "",
+        "",
+        ""
+      )
     );
   }
 
@@ -115,6 +128,9 @@ export default class Asset {
     map.set(COLUMNS.EXPECTED_MONTHLY_RENT, this.expectedMonthlyRent);
     map.set(COLUMNS.INFORMATION, this.information);
     map.set(COLUMNS.AMENITIES, this.amenities);
+    map.set(COLUMNS.NEIGHBORHOOD, this.neighborhood);
+    map.set(COLUMNS.HOAFEE, this.hoaFee);
+    map.set(COLUMNS.LOTSIZE, this.lotSize);
     map.set(COLUMNS.BUILDING_INFORMATION, this.buildingInformation.toMap());
     return map;
   }

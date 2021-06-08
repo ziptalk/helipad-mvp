@@ -1,24 +1,26 @@
-import React, { useEffect, useState } from 'react';
-import styled from 'styled-components';
-import NeighborhoodItem from '../../../model/NeighborhoodItem';
-import GetNeighborhoodList from '../../../domain/GetNeighborhoodList';
-import { RouteComponentProps, useHistory } from 'react-router';
+import React, { useEffect, useState } from "react";
+import styled from "styled-components";
+import NeighborhoodItem from "../../../model/NeighborhoodItem";
+import GetNeighborhoodList from "../../../domain/GetNeighborhoodList";
+import { RouteComponentProps, useHistory } from "react-router";
 
 interface MatchParams {
-  id: string;
+  regionName: string;
 }
 
 const NeighborhoodDetail = ({ match }: RouteComponentProps<MatchParams>) => {
   const [neighborhoodItem, setNeighborhoodItem] = useState<NeighborhoodItem>();
   const history = useHistory();
+  console.log("match.params:", match.params.regionName);
   const onClickGoToSaleButton = (e: any) => {
     if (e) e.preventDefault();
 
-    history.push('/asset/assetList');
+    // history.push('/asset/assetList');
+    history.push("/asset/assetList", match.params.regionName);
   };
   useEffect(() => {
-    let id = match.params.id;
-    let item = GetNeighborhoodList.getById(id)[0];
+    let regionName = match.params.regionName;
+    let item = GetNeighborhoodList.getById(regionName)[0];
     setNeighborhoodItem(item);
   }, []);
 

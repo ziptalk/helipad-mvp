@@ -1,16 +1,16 @@
-import React from 'react';
-import styled from 'styled-components';
-import NeighborhoodItem from '../../../model/NeighborhoodItem';
-import { Link } from 'react-router-dom';
+import React from "react";
+import styled from "styled-components";
+import NeighborhoodItem from "../../../model/NeighborhoodItem";
+import { Link } from "react-router-dom";
 
 type NeighborhoodCardProps = {
   data: NeighborhoodItem;
 };
 
 const NeighborhoodCard = ({ data }: NeighborhoodCardProps) => {
-  console.log('data :', data);
+  console.log("data :", data);
   return (
-    <Link to={'/asset/neighborhoodInfo/' + data.id}>
+    <Link to={"/asset/neighborhoodInfo/" + data.regionName}>
       <Wrapper>
         <Container background={data.thumbnailUrl} />
         <RegionName>{data.regionName}</RegionName>
