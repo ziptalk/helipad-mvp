@@ -1,22 +1,24 @@
-import styled from 'styled-components';
-import React from 'react';
-import Asset from '../../../../model/Asset';
-import Contact from './Contact';
-import Amenities from './Amenties';
-import Location from './Location';
-import BuildingInfo from './BuiildingInfo';
-import InvestmentProfile from './InvestmentProfile';
-import SchoolNearby from './SchoolNearby';
-import IDontKnow from './IDontKnow';
-import Neighborhood from './Neighborhood';
-import Footer from '../../../../components/Footer';
-
+import styled from "styled-components";
+import React from "react";
+import Asset from "../../../../model/Asset";
+import Contact from "./Contact";
+import Amenities from "./Amenties";
+import Location from "./Location";
+import BuildingInfo from "./BuiildingInfo";
+import InvestmentProfile from "./InvestmentProfile";
+import SchoolNearby from "./SchoolNearby";
+import SchoolNearBy2 from "./SchoolNearBy/SchoolNearBy2";
+import IDontKnow from "./IDontKnow";
+import Neighborhood from "./Neighborhood";
+import Footer from "../../../../components/Footer";
+import { AiOutlinePlayCircle } from "react-icons/ai";
 type DetailProps = {
   data: Asset;
 };
 
 const Detail: React.FC<DetailProps> = ({ data }) => {
-  console.log('data :', data);
+  console.log("data :", data);
+  const virtualTourLink = data.buildingInformation.virtualTour;
   return (
     <Container>
       <Category>
@@ -29,25 +31,22 @@ const Detail: React.FC<DetailProps> = ({ data }) => {
       <Body>
         <LeftBody>
           <Thumbnail src={data.buildingInformation.thumbnail} />
-          <Information>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
-            ligula sapien, rutrum sed vestibulum eget, rhoncus ac erat. Aliquam
-            erat volutpat. Sed convallis scelerisque enim at fermentum. Aliquam
-            consectetur, est ac auctor iaculis, odio mi bibendum leo, in congue
-            neque velit vel enim. Nullam vitae justo at mauris sodales feugiat.
-            Praesent pellentesque ipsum eget tellus imperdiet ultrices. Sed
-            ultricies nisi nec diam sodales fringilla. Quisque adipiscing cursus
-            porta. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            Aliquam bibendum scelerisque elit, eu pharetra dui pulvinar eget.
-            Nam mollis mauris id tellus ultricies at porttitor neque vulputate.
-            Class aptent taciti sociosqu ad litora torquent per conubia nostra,
-            per inceptos himenaeos.
-          </Information>
+          {virtualTourLink && (
+            <VirtualTourButton href={virtualTourLink}>
+              <AiOutlinePlayCircle
+                style={{ paddingRight: "10", fontSize: "32" }}
+              />
+              Virtual Tour
+            </VirtualTourButton>
+          )}
+
+          <Information>{data.information}</Information>
           <Amenities data={data.amenities} />
           <Location address={data.buildingInformation.street} />
           <BuildingInfo buildingInformation={data.buildingInformation} />
-          <InvestmentProfile />
+          <InvestmentProfile data={data} />
           <SchoolNearby />
+
           <IDontKnow />
           <Neighborhood />
         </LeftBody>
@@ -76,11 +75,11 @@ const Detail: React.FC<DetailProps> = ({ data }) => {
               </StatusItem>
               <StatusItem>
                 <StatusCategory>HOA Fees</StatusCategory>
-                <StatusContent></StatusContent>
+                <StatusContent>{data.hoaFee} / month</StatusContent>
               </StatusItem>
               <StatusItem>
                 <StatusCategory>Lot Size</StatusCategory>
-                <StatusContent></StatusContent>
+                <StatusContent>{data.lotSize} SF</StatusContent>
               </StatusItem>
               <StatusItem>
                 <StatusCategory>MLS Type</StatusCategory>
@@ -148,7 +147,17 @@ const LeftBody = styled.div`
   display: flex;
   flex-direction: column;
 `;
-
+const VirtualTourButton = styled.a`
+  margin-top: 20px;
+  width: 150px;
+  height: 50px;
+  color: black;
+  border: 1px solid lightgray;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 const Thumbnail = styled.img.attrs((props) => ({
   src: props.src,
 }))`

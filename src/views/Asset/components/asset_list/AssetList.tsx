@@ -1,11 +1,11 @@
-import React, {useEffect, useState} from 'react';
-import AssetCard from './AssetCard';
-import styled from 'styled-components';
-import { ReactComponent as ArrowUp } from '../../../../images/ic_down.svg';
-import { ReactComponent as ArrowDown } from '../../../../images/ic_up.svg';
-import GetAsset from '../../../../domain/GetAsset';
-import Asset from '../../../../model/Asset';
-import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
+import React, { useEffect, useState } from "react";
+import AssetCard from "./AssetCard";
+import styled from "styled-components";
+import { ReactComponent as ArrowUp } from "../../../../images/ic_down.svg";
+import { ReactComponent as ArrowDown } from "../../../../images/ic_up.svg";
+import GetAsset from "../../../../domain/GetAsset";
+import Asset from "../../../../model/Asset";
+import { Map, GoogleApiWrapper, Marker } from "google-maps-react";
 import GoogleMap from "../../../../shared/GoogleMap";
 
 type AssetListProperties = {};
@@ -15,16 +15,26 @@ enum Definition {
   FOR_LIVING = 1,
 }
 
-const AssetList: React.FC<AssetListProperties> = () => {
-  const [definition, setDefinition] = useState<Definition>(Definition.FOR_INVESTMENT);
+const AssetList: React.FC<AssetListProperties> = ({ history }: any) => {
+  const [definition, setDefinition] = useState<Definition>(
+    Definition.FOR_INVESTMENT
+  );
   const [ascend, setAscend] = useState(true);
   const [assets, setAssets] = useState<Asset[]>([]);
 
+  // useEffect(() => {
+  //   GetAsset.getAssetList().then((value) => {
+  //     setAssets(value);
+  //     console.log("data", value);
+  //   });
+  // }, []);
   useEffect(() => {
-    GetAsset.getAssetList().then((value) => {
-      setAssets(value);
-      console.log('data', value);
-    });
+    GetAsset.getAssetListByNeighborhood(history.location.state).then(
+      (value) => {
+        setAssets(value);
+        console.log("data", value);
+      }
+    );
   }, []);
 
   const getInvestmentList = () => {
@@ -47,15 +57,15 @@ const AssetList: React.FC<AssetListProperties> = () => {
     <Container>
       <MapContainer>
         <GoogleMap
-            bootstrapURLKeys = {{ key: 'AIzaSyAHHYSWgQGMPHXYRqCMMUSlxTvqrDepyeA' }}
-            defaultZoom={15}
-            defaultCenter={{ lat: 37.5, lng: 127 }}
+          bootstrapURLKeys={{ key: "AIzaSyAHHYSWgQGMPHXYRqCMMUSlxTvqrDepyeA" }}
+          defaultZoom={15}
+          defaultCenter={{ lat: 37.5, lng: 127 }}
         />
       </MapContainer>
       <AssetContainer>
-        {
-          assets.map((asset) => <AssetCard data={asset} />)
-        }
+        {assets.map((asset) => (
+          <AssetCard data={asset} />
+        ))}
       </AssetContainer>
     </Container>
   );
@@ -100,7 +110,7 @@ const InvestmentBlock = styled.button`
 
 const Selected = styled.div`
   font-weight: bold;
-`
+`;
 const Unselected = styled.div`
   font-weight: 300;
 `;

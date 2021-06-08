@@ -34,7 +34,7 @@ export const InviteCodeForm = () => {
   return (
     <Container>
       {authenticated ? (
-        <Redirect to="/asset/neighborhood">ㅁㄴㅇ</Redirect>
+        <Redirect to="/home">ㅁㄴㅇ</Redirect>
       ) : (
         <>
           <Title>

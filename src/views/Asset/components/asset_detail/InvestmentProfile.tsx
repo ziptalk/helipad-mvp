@@ -1,5 +1,5 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
 /**
  *
@@ -7,7 +7,7 @@ import styled from 'styled-components';
  */
 
 type InvestmentProfileProps = {};
-const InvestmentProfile: React.FC<any> = ({ InvestmentProfileProps }) => {
+const InvestmentProfile: React.FC<any> = ({ data }) => {
   return (
     <Container>
       <Title>Investment Profile</Title>
@@ -16,25 +16,27 @@ const InvestmentProfile: React.FC<any> = ({ InvestmentProfileProps }) => {
         <Block>
           <PaymentItem>
             <PaymentCategory>Home Price</PaymentCategory>
-            <PaymentContent placeholder={'$1,499,000'}></PaymentContent>
+            <PaymentContent placeholder={`$ ${data.price}`}></PaymentContent>
           </PaymentItem>
           <PaymentItem>
             <PaymentCategory>Expected monthly rent</PaymentCategory>
-            <PaymentContent placeholder={'$1,499,000'}></PaymentContent>
+            <PaymentContent
+              placeholder={`$ ${data.expectedMonthlyRent}`}
+            ></PaymentContent>
           </PaymentItem>
           <PaymentItem>
             <PaymentCategory>Yield</PaymentCategory>
-            <PaymentContent placeholder={'10%'}></PaymentContent>
+            <PaymentContent placeholder={"10%"}></PaymentContent>
           </PaymentItem>
         </Block>
         <Block>
           <TaxItem>
             <TaxCategory id="first">Property Taxes</TaxCategory>
-            <TaxContent>$ 63</TaxContent>
+            <TaxContent>{data.texPerMonth}</TaxContent>
           </TaxItem>
           <TaxItem>
             <TaxCategory id="second">Maintenance / Common Charges</TaxCategory>
-            <TaxContent id="third">$ 904</TaxContent>
+            <TaxContent id="third">{data.commonChargePerMonth}</TaxContent>
           </TaxItem>
         </Block>
       </PaymentContainer>
@@ -50,7 +52,7 @@ const PaymentItem = styled.div`
 `;
 const PaymentCategory = styled.div``;
 const PaymentContent = styled.input.attrs((props) => ({
-  type: 'text',
+  type: "text",
   placeholder: props.placeholder,
 }))`
   &:focus {
@@ -65,7 +67,7 @@ const PaymentContent = styled.input.attrs((props) => ({
   box-sizing: border-box;
 
   #price {
-    placeholder: '123';
+    placeholder: "123";
   }
 `;
 const TaxItem = styled.div`

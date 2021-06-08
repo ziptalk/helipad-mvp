@@ -14,7 +14,11 @@ export default class FirebaseService {
   static async getAsset(id: string): Promise<Asset> {
     return AssetService.getAsset(id);
   }
-
+  static async getAssetListByNeighborhood(
+    neighborhood: string
+  ): Promise<Asset[]> {
+    return AssetService.getAssetListByNeighborhood(neighborhood);
+  }
   static async signUpWithEmailAndPassword({ ...props }) {
     return UserService.signUpWithEmailAndPassword(props);
   }

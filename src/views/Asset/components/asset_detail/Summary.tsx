@@ -39,7 +39,6 @@ const Summary: React.FC<SummaryProps> = ({ data }) => {
       </AddressWrapper>
       <Price>
         <Dollar>${data.price.toLocaleString("en-US")}</Dollar>
-        <Won>₩{data.price.toLocaleString("ko-KR")}</Won>
       </Price>
       <Divider />
       <Rooms>

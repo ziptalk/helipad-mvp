@@ -12,7 +12,7 @@ import Process from "../../views/MyPage/components/process/Process";
 import ContactHistory from "../../views/MyPage/components/mypage/ContactHistory";
 import Neighborhood from "../../views/Neighborhood/components/Neighborhood";
 import NeighborhoodDetail from "../../views/Neighborhood/components/NeighborhoodDetail";
-
+import FAQ from "../../views/Home/components/FAQ";
 const AssetRouter = ({ match }: RouteComponentProps) => {
   console.log("match url :", match.url);
   console.log("match path:", match.path);
@@ -31,13 +31,14 @@ const AssetRouter = ({ match }: RouteComponentProps) => {
               component={Neighborhood}
             />
             <PrivateRoutes
-              path={`${match.url}/neighborhoodInfo/:id`}
+              path={`${match.url}/neighborhoodInfo/:regionName`}
               component={NeighborhoodDetail}
             />
             <PrivateRoutes
               path={`${match.url}/assetList`}
               component={AssetRoutes}
             />
+            <PrivateRoutes path={`${match.url}/faq`} component={FAQ} />
           </div>
         </section>
       </>

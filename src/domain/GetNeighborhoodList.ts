@@ -5,8 +5,8 @@ export default class GetNeighborhoodList {
     return item;
   }
 
-  static getById(id: string) {
-    return item.filter((data) => data.id === id);
+  static getById(regionName: string) {
+    return item.filter((data) => data.regionName === regionName);
   }
 }
 
@@ -14,7 +14,7 @@ let item = [
   new NeighborhoodItem(
     "neighborhood_item_1",
     "Los Angeles",
-    "Beverly Hiils",
+    "Beverly Hills",
     "https://images.ctfassets.net/ypfe9l9zihcg/Gv2oTtkIMwIOWQGEqqosC/f430248ba7ca893da5403e873ebbfb8b/beverly-hills-unexpected-appeal-1.jpg",
     "Welcome to Beverly Hills\n" +
       "After a failed attempt to find oil on the land in the early 1900’s, present day Beverly Hills was subdivided into lots. It wasn’t long before the city would contain one of the most famous zip codes in the world, attracting the town’s most elite actors, actresses and businessmen. Despite its name, Beverly Hills is most built on flat land and unofficially divided into North and South by Santa Monica Boulevard.",
