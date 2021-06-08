@@ -8,6 +8,7 @@ import Asset from "../../../../model/Asset";
 import { Map, GoogleApiWrapper, Marker } from "google-maps-react";
 import GoogleMap from "../../../../shared/GoogleMap";
 import Geocode from "react-geocode";
+import { setUncaughtExceptionCaptureCallback } from 'node:process';
 // import Marker from './Marker';
 
 Geocode.setApiKey('AIzaSyAHHYSWgQGMPHXYRqCMMUSlxTvqrDepyeA')
@@ -34,72 +35,108 @@ const AssetList: React.FC<AssetListProperties> = ({ history }: any) => {
       {
           assetId: 0,
           assetAddress : "",
-          assetLat : 40.7164377,
-          assetLng : -73.9644072,
+          assetLat : 1000,
+          assetLng : 1000,
           assetLabel: "1,234,567,890,001"
       },
   ]);
+  const [locationsDone, setLocationsDone] = useState(false)
 
-  // useEffect(() => {
-  //   GetAsset.getAssetList().then((value) => {
-  //     setAssets(value);
-  //     console.log("data", value);
-  //   });
-  // }, []);
+  console.log(assets)
+
   useEffect(() => {
-    GetAsset.getAssetList().then((value) => {
-      setAssets(value);
-      console.log('data', value);
-    });
+    async function wholeFunction(){
+      GetAsset.getAssetList().then((value) => {
+        setAssets(value);
+        console.log('data', value);
+
+        let assetStateList = [
+          {
+              assetId: 0,
+              assetAddress : "",
+              assetLat : 1000,
+              assetLng : 1000,
+              // assetLabel: "1,234,567,890,001"
+              assetLabel: "996K"
+          },
+          {
+            assetId: 1,
+            assetAddress : "",
+            assetLat : 40.716,
+            assetLng : -73.964,
+            // assetLabel: "1,234,567,890,001"
+            assetLabel: "1.5M"
+        },
+      ]
+    
+      async function forSettingLocation(){
+        // setLocationsDone(true);
+        let id = 1;
+        const listSetting = 
+            value.map(async function(asset){
+              let price = asset.price/1000 //won -> dollar
+              let priceLabel = ""
+              if(1000000 > price && price >= 1000){
+                priceLabel = (price/1000).toFixed(0).toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",") + "K"
+              } else if(price >= 1000000){
+                priceLabel = (price/1000000).toFixed(1).toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",") + "M"
+              } else {
+                priceLabel = price.toString()
+              }
+              assetStateList = assetStateList.concat({
+                  assetId: id,
+                  assetAddress: asset.buildingInformation.address,
+                  assetLat: 0,
+                  assetLng: 0,
+                  assetLabel: priceLabel
+              })
+              console.log("1111111")
+              id++;
+              return id;
+          })
+    
+        await Promise.all(listSetting).then(res => console.log(`${res}`))
+        console.log("Done!");
+    
+        console.log(listSetting)
+    
+        const GoogleMapLocate = async (currentAddr: string, index: number) => {
+          await Geocode.fromAddress(currentAddr)
+            .then( response => {
+              const { lat, lng } = response.results[0].geometry.location;    
+              assetStateList[index].assetLat = lat;
+              assetStateList[index].assetLng= lng;
+              console.log("4444444")
+              return {lat, lng}
+            })
+            .catch(err => console.log(err))
+        }
+    
+        console.log("222222")
+    
+        const geoSetting =
+        value.map(async function(asset, index){
+          console.log("333333")
+          await GoogleMapLocate(asset.buildingInformation.address, index + 1)
+          return index
+        })
+    
+        await Promise.all(geoSetting).then(res => console.log(`${res}`))
+        
+        console.log(assetStateList)
+        await setLocations(assetStateList);
+        console.log("done!!!!!!")
+      }
+    
+    forSettingLocation();
+      });
+    }
+    wholeFunction();
   }, []);
 
-  useEffect(() => {
-    let assetStateList = [
-        {
-            assetId: 0,
-            assetAddress : "",
-            assetLat : 40.7164377,
-            assetLng : -73.9644072,
-            assetLabel: "1,234,567,890,001"
-        },
-    ]
-
-    async function forSettingLocation(){
-      let id = 1;
-
-      const GoogleMapLocate = async (currentAddr: string, index: number) => {
-        await Geocode.fromAddress(currentAddr)
-          .then( response => {
-            const { lat, lng } = response.results[0].geometry.location;               
-            
-            assetStateList[index].assetLat = lat;
-            assetStateList[index].assetLng= lng;
-            
-            return {lat, lng}
-          })
-          .catch(err => console.log(err))
-      }
-
-      await assets.map(function(asset){
-          assetStateList = assetStateList.concat({
-              assetId: id,
-              assetAddress: asset.buildingInformation.address,
-              assetLat: 0,
-              assetLng: 0,
-              assetLabel: (asset.price*1000).toString()
-              .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")
-          })
-          id++;
-      })
-      await assets.map((asset, index) => GoogleMapLocate(asset.buildingInformation.address, index + 1))
-
-      await setLocations(assetStateList);
-    // console.log(assetStateList)
-    }
-    forSettingLocation();
-  }, [])
-
   console.log(locations);
+
+  
 
   const getInvestmentList = () => {
     setDefinition(Definition.FOR_INVESTMENT);
@@ -119,6 +156,7 @@ const AssetList: React.FC<AssetListProperties> = ({ history }: any) => {
   return (
     <Container>
       <MapContainer>
+        {/* <button onClick={()=>forSettingLocation()}>If you want to see markers, please click me.</button> */}
         {/* {locations.map((location => 
           <div>{location.assetId}</div>))} */}
         <GoogleMap
