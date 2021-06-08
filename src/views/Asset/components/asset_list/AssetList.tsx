@@ -33,7 +33,7 @@ const AssetList: React.FC<AssetListProperties> = ({ history }: any) => {
   const [assets, setAssets] = useState<Asset[]>([]);
   const [locations, setLocations] = useState([
       {
-          assetId: 0,
+          assetId: "",
           assetAddress : "",
           assetLat : 1000,
           assetLng : 1000,
@@ -52,21 +52,13 @@ const AssetList: React.FC<AssetListProperties> = ({ history }: any) => {
 
         let assetStateList = [
           {
-              assetId: 0,
+              assetId: "",
               assetAddress : "",
               assetLat : 1000,
               assetLng : 1000,
               // assetLabel: "1,234,567,890,001"
               assetLabel: "996K"
           },
-          {
-            assetId: 1,
-            assetAddress : "",
-            assetLat : 40.716,
-            assetLng : -73.964,
-            // assetLabel: "1,234,567,890,001"
-            assetLabel: "1.5M"
-        },
       ]
     
       async function forSettingLocation(){
@@ -84,7 +76,7 @@ const AssetList: React.FC<AssetListProperties> = ({ history }: any) => {
                 priceLabel = price.toString()
               }
               assetStateList = assetStateList.concat({
-                  assetId: id,
+                  assetId: asset.id,
                   assetAddress: asset.buildingInformation.address,
                   assetLat: 0,
                   assetLng: 0,

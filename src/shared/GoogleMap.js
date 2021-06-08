@@ -19,7 +19,7 @@ export class MapContainer extends React.Component {
         console.log(this.state.data)
     }
     onclickToLink = (id) => {
-        let newURL = window.location.href + "/test_id_" + id.toString()
+        let newURL = window.location.href + "/" + id
         document.location.href = newURL
     }
 
