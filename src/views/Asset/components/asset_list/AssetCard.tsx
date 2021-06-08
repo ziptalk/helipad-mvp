@@ -99,7 +99,8 @@ const PriceWon = styled.div``;
 const PlaceInfoBlock = styled.div`
   font-family: 'Helvetica Neue';
   // font-size: 15px;
-  font-size :8px;
+  font-size :10px;
+  // -webkit-transform:scale(0.9);
   font-weight: 500;
   padding: 8px 0;
 `;
