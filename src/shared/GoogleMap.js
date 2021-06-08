@@ -17,7 +17,11 @@ export class MapContainer extends React.Component {
         }
         console.log(this.state.data)
     }
-    
+
+    // onclickToLink = () => {
+    //     history.push("/")
+    // }
+
     render(){
         const mapStyles = {
             width: 'calc(100vw - 512px)',
@@ -28,6 +32,9 @@ export class MapContainer extends React.Component {
 
         return (
             <Container>
+                    {this.props.data.map(asset=>{
+                        <div>{asset.assetLabel}</div>
+                    })}
                 <Map
                     google={this.props.google}
                     zoom={14}
@@ -41,13 +48,14 @@ export class MapContainer extends React.Component {
                     icon={{
                        url: 'https://www.asianpaints.com/content/dam/asian_paints/colours/swatches/7661.png.transform/cc-width-720-height-540/image.png',
                        anchor: new window.google.maps.Point(17, 46),
-                       scaledSize: new window.google.maps.Size(150, 37)
+                       scaledSize: new window.google.maps.Size(50, 37)
                    }}
                    position={{
                        lat: asset.assetLat,
                        lng: asset.assetLng
                    }}
                    label={asset.assetLabel}
+                   onClick={()=>null}
                    >
                    </Marker>
                 )}
