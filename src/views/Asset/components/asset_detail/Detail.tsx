@@ -61,17 +61,10 @@ const Detail: React.FC<DetailProps> = ({ data }) => {
                 <StatusCategory>Days on Market</StatusCategory>
                 <StatusContent>{data.daysOnMarket}</StatusContent>
               </StatusItem>
-              <StatusItem>
-                <StatusCategory>Common Charges</StatusCategory>
-                <StatusContent>
-                  ${data.commonChargePerMonth} / month
-                </StatusContent>
-              </StatusItem>
+
               <StatusItem>
                 <StatusCategory>Estimated Property Tax</StatusCategory>
-                <StatusContent>
-                  {data.commonChargePerMonth} / month
-                </StatusContent>
+                <StatusContent>{data.taxPerMonth}</StatusContent>
               </StatusItem>
               <StatusItem>
                 <StatusCategory>HOA Fees</StatusCategory>
@@ -101,10 +94,6 @@ const Detail: React.FC<DetailProps> = ({ data }) => {
                 <StatusCategory>Expected monthly payment</StatusCategory>
                 <StatusContent>${data.expectedMonthlyPayment}</StatusContent>
               </StatusItem> */}
-              <StatusItem>
-                <StatusCategory>Expected monthly rent</StatusCategory>
-                <StatusContent>${data.expectedMonthlyRent}</StatusContent>
-              </StatusItem>
             </Status>
           </StatusContainer>
           <Contact agent={data.agent} assetId={data.id} />

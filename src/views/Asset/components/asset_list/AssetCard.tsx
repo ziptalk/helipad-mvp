@@ -81,7 +81,7 @@ const ContainerContent = styled.div`
   color: #ffffff;
   font-weight: 600;
   // font-size: 25px;
-  font-size; 8px;
+  font-size: 8px;
   display: flex;
   padding: 20px 20px;
 `;
@@ -97,9 +97,9 @@ const PriceBlock = styled.div`
 const PriceDollar = styled.div``;
 const PriceWon = styled.div``;
 const PlaceInfoBlock = styled.div`
-  font-family: 'Helvetica Neue';
+  font-family: "Helvetica Neue";
   // font-size: 15px;
-  font-size :10px;
+  font-size: 10px;
   // -webkit-transform:scale(0.9);
   font-weight: 500;
   padding: 8px 0;
@@ -116,7 +116,7 @@ const RightSide = styled.div`
   width: 35%;
 `;
 const RoomInfoBlock = styled.div`
-  font-family: 'Helvetica Neue';
+  font-family: "Helvetica Neue";
   // font-size: 18px;
   font-size: 9px;
   font-weight: 400;
