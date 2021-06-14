@@ -18,26 +18,23 @@ const InvestmentProfile: React.FC<any> = ({ data }) => {
             <PaymentCategory>Home Price</PaymentCategory>
             <PaymentContent placeholder={`$ ${data.price}`}></PaymentContent>
           </PaymentItem>
-          <PaymentItem>
-            <PaymentCategory>Expected monthly rent</PaymentCategory>
-            <PaymentContent
-              placeholder={`$ ${data.expectedMonthlyRent}`}
-            ></PaymentContent>
-          </PaymentItem>
+
           <PaymentItem>
             <PaymentCategory>Yield</PaymentCategory>
             <PaymentContent placeholder={"10%"}></PaymentContent>
           </PaymentItem>
         </Block>
         <Block>
-          <TaxItem>
-            <TaxCategory id="first">Property Taxes</TaxCategory>
-            <TaxContent>{data.texPerMonth}</TaxContent>
-          </TaxItem>
-          <TaxItem>
-            <TaxCategory id="second">Maintenance / Common Charges</TaxCategory>
-            <TaxContent id="third">{data.commonChargePerMonth}</TaxContent>
-          </TaxItem>
+          <PaymentItem>
+            <PaymentCategory>Property Taxes</PaymentCategory>
+            <PaymentContent placeholder={data.taxPerMonth}></PaymentContent>
+          </PaymentItem>
+        </Block>
+        <Block>
+          <PaymentItem>
+            <PaymentCategory>HOA Fee</PaymentCategory>
+            <PaymentContent placeholder={`$ ${data.hoaFee}`}></PaymentContent>
+          </PaymentItem>
         </Block>
       </PaymentContainer>
     </Container>
