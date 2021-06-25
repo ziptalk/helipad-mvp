@@ -15,7 +15,6 @@ import Process from "../../views/MyPage/components/process/Process";
 import ContactHistory from "../../views/MyPage/components/mypage/ContactHistory";
 import Neighborhood from "../../views/Neighborhood/components/Neighborhood";
 import NeighborhoodDetail from "../../views/Neighborhood/components/NeighborhoodDetail";
-import { InviteCodeForm } from "../../components/landing/InviteCodeForm";
 
 const AuthRouter = ({ match }: RouteComponentProps) => {
   console.log("application match url : ", match.url);
