@@ -10,6 +10,8 @@ import { AssetDetailRoutes, AssetRoutes } from "../../views/Asset";
 import PrivateRoutes from "./PrivateRouter/PrivateRoutes";
 import Process from "../../views/MyPage/components/process/Process";
 import ContactHistory from "../../views/MyPage/components/mypage/ContactHistory";
+
+import NeighborhoodContainer from "../../views/Neighborhood/list/NeighborhoodContainer";
 import Neighborhood from "../../views/Neighborhood/components/Neighborhood";
 import NeighborhoodDetail from "../../views/Neighborhood/components/NeighborhoodDetail";
 import FAQ from "../../views/Home/components/FAQ";
@@ -28,7 +30,7 @@ const AssetRouter = ({ match }: RouteComponentProps) => {
             />
             <PrivateRoutes
               path={`${match.url}/neighborhood`}
-              component={Neighborhood}
+              component={NeighborhoodContainer}
             />
             <PrivateRoutes
               path={`${match.url}/neighborhoodInfo/:regionName`}
