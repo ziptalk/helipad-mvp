@@ -46,7 +46,7 @@ export class MapContainer extends React.Component {
                 {this.props.data.map(asset=>
                     <Marker key="marker_1"
                     icon={{
-                       url: 'https://www.asianpaints.com/content/dam/asian_paints/colours/swatches/7661.png.transform/cc-width-720-height-540/image.png',
+                       url: 'https://ifh.cc/g/IlY3eY.png',
                        anchor: new window.google.maps.Point(17, 46),
                        scaledSize: new window.google.maps.Size(50, 37)
                    }}

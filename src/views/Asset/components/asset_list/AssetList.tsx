@@ -10,6 +10,11 @@ import GoogleMap from "../../../../shared/GoogleMap";
 import Geocode from "react-geocode";
 import { setUncaughtExceptionCaptureCallback } from "node:process";
 // import Marker from './Marker';
+// import RangeSliders from "./RangeSlider";
+import RangeSliders from "./PriceRangeSlider";
+import DoubleRangeSlider from "./DoubleRangeSlider";
+
+
 
 Geocode.setApiKey("AIzaSyAHHYSWgQGMPHXYRqCMMUSlxTvqrDepyeA");
 Geocode.setLanguage("en");
@@ -158,9 +163,15 @@ const AssetList: React.FC<AssetListProperties> = ({ history }: any) => {
         ></GoogleMap>
       </MapContainer>
       <AssetContainer>
-        {assets.map((asset) => (
+        <AssetTitle>Beverly Hills, CA Homes for Sale & Real Estate</AssetTitle>
+        <PriceControl>
+          <div style={{paddingTop:"20px", paddingLeft:"30px"}}>Purchase price</div>
+          {/* <RangeSliders /> */}
+          <DoubleRangeSlider />
+        </PriceControl>
+        {/* {assets.map((asset) => (
           <AssetCard data={asset} />
-        ))}
+        ))} */}
       </AssetContainer>
     </Container>
   );
@@ -257,5 +268,25 @@ const AssetListGrid = styled.div`
   grid-template-columns: 470px 470px 470px;
   grid-gap: 15px;
 `;
+
+const AssetTitle = styled.div`
+  width: 100%;
+  height: 50px;
+  font-size: 25px;
+  background-color: black;
+  color: white;
+  text-align: center;
+  padding-top: 10px;
+`
+
+const PriceControl = styled.div`
+  width: 100%;
+  height: 200px;
+  background-color: white;
+  color: black;
+  font-size: 22px;
+  // padding: 20px;
+  // padding-left: 30px;
+`
 
 export default AssetList;
