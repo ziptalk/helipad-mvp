@@ -12,6 +12,9 @@ import IDontKnow from "./IDontKnow";
 import Neighborhood from "./Neighborhood";
 import Footer from "../../../../components/Footer";
 import { AiOutlinePlayCircle } from "react-icons/ai";
+import { BsGrid, BsMap } from "react-icons/bs";
+import { BiStreetView } from "react-icons/bi";
+
 type DetailProps = {
   data: Asset;
 };
@@ -39,7 +42,33 @@ const Detail: React.FC<DetailProps> = ({ data }) => {
               Virtual Tour
             </VirtualTourButton>
           )}
-
+          <UnderBarContainer>
+            <ImageContainer>
+              <button style={{border: "0", width:"5%", fontSize:"20px", fontWeight:700, backgroundColor:"transparent"}}>〈</button>
+              <button style={{backgroundImage:`url("${data.buildingInformation.thumbnail}")`, width:"15%", backgroundSize:"100% 100%", border:"0"}}>
+                {/* <div style={{width:"100%", height:"100%",backdropFilter:"brightness(1.3)"}}/> */}
+              </button>
+              <button style={{backgroundImage:`url("${data.buildingInformation.thumbnail}")`, width:"15%", backgroundSize:"100% 100%", border:"0", filter:"brightness(0.7)"}}></button>
+              <button style={{backgroundImage:`url("${data.buildingInformation.thumbnail}")`, width:"15%", backgroundSize:"100% 100%", border:"0", filter:"brightness(0.7)"}}></button>
+              <button style={{backgroundImage:`url("${data.buildingInformation.thumbnail}")`, width:"15%", backgroundSize:"100% 100%", border:"0", filter:"brightness(0.7)"}}></button>
+              <button style={{backgroundImage:`url("${data.buildingInformation.thumbnail}")`, width:"15%", backgroundSize:"100% 100%", border:"0", filter:"brightness(0.7)"}}></button>
+              <button style={{border: "0", width:"5%", fontSize:"20px", fontWeight:700, backgroundColor:"transparent"}}>〉</button>
+            </ImageContainer>
+            <ButtonContainer style={{border:"1px solid #EAEAEA"}}>
+              <button style={{width:"30%", border:"0", backgroundColor:"transparent"}}>
+                <BsGrid style={{width:"20px", height:"20px"}}/>
+                <div>View All</div>
+              </button>
+              <button style={{width:"30%", border:"0", backgroundColor:"transparent"}}>
+                <BsMap style={{width:"20px", height:"20px"}}/>
+                <div>Map</div>
+              </button>
+              <button style={{width:"30%", border:"0", backgroundColor:"transparent"}}>
+                <BiStreetView style={{width:"20px", height:"20px"}}/>
+                <div>Street View</div>
+              </button>
+            </ButtonContainer>
+          </UnderBarContainer>
           <Information>{data.information}</Information>
           <Amenities data={data.amenities} />
           <Location address={data.buildingInformation.street} />
@@ -185,4 +214,25 @@ const StatusCategory = styled.div`
 
 const StatusContent = styled.div``;
 
+const UnderBarContainer = styled.div`
+  width:100%;
+  height: 70px;
+  display: flex;
+  justify-content: space-between;
+`
+
+const ImageContainer = styled.div`
+  width: 70%;
+  height: 60px;
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+`
+const ButtonContainer = styled.div`
+  width: 30%;
+  height: 60px;
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+`
 export default Detail;

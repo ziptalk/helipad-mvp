@@ -29,7 +29,7 @@ const Summary: React.FC<SummaryProps> = ({ data }) => {
   };
 
   return (
-    <Container style={{backgroundColor:"black", color:"white"}}>
+    <Container style={{backgroundColor:"black", color:"white", width:"100vw", padding:"20px 100px 20px 100px"}}>
       <AddressWrapper>
         <Street>{data.buildingInformation.street}</Street>
         <Address>
@@ -37,9 +37,12 @@ const Summary: React.FC<SummaryProps> = ({ data }) => {
           <City>{data.buildingInformation.address}</City>
         </Address>
       </AddressWrapper>
-      <Price>
-        <Dollar>${data.price.toLocaleString("en-US")}</Dollar>
-      </Price>
+      <RoomInfo>
+        <RoomInfoContent>
+          <Dollar>${data.price.toLocaleString("en-US")}</Dollar>
+        </RoomInfoContent>
+        <RoomInfoTitle>Price</RoomInfoTitle>
+      </RoomInfo>
       <Divider />
       <Rooms>
         <RoomInfo>
@@ -181,5 +184,7 @@ const Contact = styled.div`
   height: 33px;
   background-image: url(${ContactImage});
 `;
+
+
 
 export default Summary;
