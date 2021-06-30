@@ -13,8 +13,6 @@ import { Login, Logout, RegisterForm } from "../../views/Auth/components";
 import MyPage from "../../views/MyPage/components/mypage/MyPage";
 import Process from "../../views/MyPage/components/process/Process";
 import ContactHistory from "../../views/MyPage/components/mypage/ContactHistory";
-import Neighborhood from "../../views/Neighborhood/components/Neighborhood";
-import NeighborhoodDetail from "../../views/Neighborhood/components/NeighborhoodDetail";
 
 const AuthRouter = ({ match }: RouteComponentProps) => {
   console.log("application match url : ", match.url);
