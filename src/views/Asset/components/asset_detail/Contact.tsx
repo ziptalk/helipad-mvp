@@ -71,6 +71,7 @@ const Title = styled.div`
   font-size: 18px;
   line-height: 26.55px;
   border-bottom: 1px solid #e9e9e9;
+  
 `;
 
 const ContactContainer = styled.div`
@@ -79,8 +80,11 @@ const ContactContainer = styled.div`
 
 const Send = styled.button`
   text-align: center;
-  background: #4542e2;
-  color: #ffffff;
+  // background: #4542e2;
+  background: #B69142;
+  // color: #ffffff;
+  color: black;
+  font-weight: 800;
   font-size: 20px;
   padding-top: 10px;
   padding-bottom: 10px;
