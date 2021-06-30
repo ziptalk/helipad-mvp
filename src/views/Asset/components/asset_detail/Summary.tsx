@@ -29,7 +29,7 @@ const Summary: React.FC<SummaryProps> = ({ data }) => {
   };
 
   return (
-    <Container>
+    <Container style={{backgroundColor:"black", color:"white"}}>
       <AddressWrapper>
         <Street>{data.buildingInformation.street}</Street>
         <Address>
@@ -96,12 +96,14 @@ const AddressWrapper = styled.div`
 `;
 
 const Street = styled.div`
-  color: #4542e2;
+  // color: #4542e2;
+  color: white;
   font-size: 30px;
 `;
 const Address = styled.div`
   display: flex;
   flex-direction: row;
+  font-weight: 200;
 `;
 
 const Company = styled.div`
@@ -155,6 +157,7 @@ const ClickableRoomInfo = styled.div`
 
 const RoomInfoTitle = styled.div`
   font-size: 14px;
+  font-weight: 200;
 `;
 
 const RoomInfoContent = styled.div`
