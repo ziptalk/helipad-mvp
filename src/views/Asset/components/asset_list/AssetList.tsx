@@ -172,6 +172,7 @@ const Container = styled.div`
   height: calc(100vh - 100px);
   display: flex;
   flex-direction: row;
+  margin-top: 112px;
 `;
 
 const MapContainer = styled.div`

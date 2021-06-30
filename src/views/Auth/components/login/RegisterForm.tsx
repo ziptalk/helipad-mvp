@@ -428,6 +428,7 @@ const RegisterForm = () => {
 };
 
 const Container = styled.div`
+  margin-top: 170px;
   width: 460px;
   display: flex;
   flex-direction: column;

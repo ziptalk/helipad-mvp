@@ -3,7 +3,7 @@ import NeighborhoodBg from "../../../../images/Neighborhood/neighborhoodBg.jpg";
 
 import { ReactComponent as HomeSvg } from "../../../../images/Neighborhood/ic_houseIcon.svg";
 import { ReactComponent as ScrollSvg } from "../../../../images/Neighborhood/ic_headerScrollIcon.svg";
-import BlackChatBot from "../../../../components/BlackChatBot";
+
 const HeaderPresenter = () => {
   return (
     <Container>
@@ -14,7 +14,6 @@ const HeaderPresenter = () => {
           <SubTitle>
             Look around for a good place to start a special life
           </SubTitle>
-          <BlackChatBot />
         </TitleBlock>
       </LandingBlock>
 
@@ -33,6 +32,7 @@ const Container: any = styled.div`
   position: relative;
   width: 100%;
   height: 1200px;
+  z-index: 1;
 `;
 const LandingBlock: any = styled.div`
   position: relative;
