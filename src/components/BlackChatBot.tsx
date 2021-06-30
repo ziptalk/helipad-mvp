@@ -15,6 +15,7 @@ const Container = styled.div`
   right: 29px;
   bottom: 90px;
   transition: transform 200ms ease-in;
+  z-index: 2;
   &:hover {
     transform: scale(1.1);
   }

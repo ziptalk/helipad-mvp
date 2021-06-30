@@ -41,10 +41,10 @@ const InviteCodeFormContainer = () => {
     let firebaseResult = await CheckInviteCode.checkInviteCode(inviteCode);
 
     if (firebaseResult) {
-      setInviteCodeValidation(true);
+      setInviteCodeValidation(false);
       history.push("/auth/registerForm");
     } else {
-      setInviteCodeValidation(false);
+      setInviteCodeValidation(true);
     }
   };
   return (

@@ -24,6 +24,7 @@ function App() {
           <GlobalStyle />
           <section className="container">
             <HeaderContainer />
+
             <div className="routingContainer">
               <Route exact path="/" component={InviteCodeFormContainer} />
               <Route path="/auth" component={AuthRouter} />
