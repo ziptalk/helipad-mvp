@@ -13,7 +13,7 @@ const Container = styled.div`
   width: 54px;
   height: 54px;
   right: 29px;
-  bottom: 54px;
+  bottom: 90px;
   transition: transform 200ms ease-in;
   &:hover {
     transform: scale(1.1);
