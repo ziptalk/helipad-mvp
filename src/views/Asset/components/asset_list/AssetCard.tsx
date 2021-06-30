@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, RouteComponentProps, useHistory } from "react-router-dom";
 import "./AssetCard.css";
 import Asset from "../../../../model/Asset";
@@ -9,10 +9,38 @@ type AssetCardProps = {
 };
 
 const AssetCard = ({ data }: AssetCardProps) => {
+  const [mouseOver, setMouseOver] = useState(false);
+
+  const handlerMouseOver = (event:Event) => {
+    setMouseOver(true)
+  }
+
+  const handlerMouseOut = (event:Event) => {
+    setMouseOver(false)
+  }
+
   return (
     <Link to={`/asset/assetList/${data.id}`} style={{ textDecoration: "none" }}>
-      <Container background={data.buildingInformation.thumbnail}>
+      <Container 
+        background={data.buildingInformation.thumbnail} 
+        onMouseOver={handlerMouseOver}
+        onMouseOut={handlerMouseOut}>
         <ContainerGradient>
+          {mouseOver ? 
+          <>
+          <ContainerContent2 style={{position:"relative"}}>
+            <div style={{display:"flex", justifyContent:"space-between", width:"100%"}}>
+              <button style={{backgroundColor:"transparent", color:"white", fontSize:"20px", fontWeight:800, border:"0"}}>〈</button>
+              <button style={{backgroundColor:"transparent", color:"white", fontSize:"20px", fontWeight:800, border:"0"}}>〉</button>
+            </div>
+            <div style={{width:"100%", position:"absolute", alignItems:"center", textAlign:"center"}}>
+              <div style={{backgroundColor:"black",marginLeft:"55px", marginTop:"30px",color:"white", fontSize:"12px", width:"100px", height:"20px",alignItems:"center", textAlign:"center"}}>
+                01 of 01
+              </div>
+            </div>
+          </ContainerContent2>
+          </>
+          :
           <ContainerContent>
             <LeftSide>
               <PriceBlock>
@@ -29,10 +57,10 @@ const AssetCard = ({ data }: AssetCardProps) => {
             <RightSide>
               <RoomInfoBlock>
                 <RoomInfo>
-                  {data.buildingInformation.nBedrooms} Bedrooms
+                  {data.buildingInformation.nBedrooms} Beds
                 </RoomInfo>
                 <RoomInfo>
-                  {data.buildingInformation.nBathrooms} Bathrooms
+                  {data.buildingInformation.nBathrooms} Bath
                 </RoomInfo>
                 <RoomInfo>{data.buildingInformation.square} Sq m</RoomInfo>
                 <RoomInfo>
@@ -41,6 +69,7 @@ const AssetCard = ({ data }: AssetCardProps) => {
               </RoomInfoBlock>
             </RightSide>
           </ContainerContent>
+        }
         </ContainerGradient>
       </Container>
     </Link>
@@ -72,7 +101,7 @@ const ContainerGradient = styled.div`
     rgba(0, 0, 0, 0.5) 64.52%,
     #000000 100%
   );
-  display: flex;
+  // display: flex;
   justify-content: flex-end;
   flex-direction: column;
 `;
@@ -84,14 +113,23 @@ const ContainerContent = styled.div`
   font-size: 8px;
   display: flex;
   padding: 20px 20px;
+  padding-top:70px;
+`;
+const ContainerContent2 = styled.div`
+  color: #ffffff;
+  font-weight: 600;
+  // font-size: 25px;
+  font-size; 8px;
+  padding: 20px 20px;
+  padding-top:70px;
 `;
 const LeftSide = styled.div`
   width: 60%;
 `;
 const PriceBlock = styled.div`
   // font-size: 22px;
-  font-size: 11px;
-  font-weight: 600;
+  font-size: 15px;
+  font-weight: 800;
   padding-bottom: 10px;
 `;
 const PriceDollar = styled.div``;
