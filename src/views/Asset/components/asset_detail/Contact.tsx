@@ -5,6 +5,9 @@ import ContactUseCase from "../../../../domain/ContactUseCase";
 import { AuthContext } from "../../../../router/config/Provider/AuthProvider";
 import ContactToAgent from "../../../../domain/ContactToAgent";
 import UpdateProcess from "../../../../domain/UpdateProcess";
+import { BsChevronDown, BsArrowRight } from "react-icons/bs";
+// import Expand from 'react-expand-animated';
+
 type ContactFieldProps = {
   agent: string;
   assetId: string;
@@ -35,14 +38,32 @@ const Contact: React.FC<ContactFieldProps> = ({ agent, assetId }) => {
     history.push({ pathname: "/asset/process", state: { assetId, userEmail } });
   };
 
+  const escrowProcessOnClick = () => {
+
+  }
+
   return (
-    <Container>
-      <Content>
-        <Title>Contact HELIPAD</Title>
-      </Content>
-      <TextArea rows={20} onChange={onTextChange} />
-      <Send onClick={contactToAgent}>Contact helipad for more information</Send>
-    </Container>
+    <>
+      <Send style={{display:"flex", alignItems:"center", paddingLeft:"100px"}} onClick={escrowProcessOnClick}>
+        <div>
+          Proceed to Escrow Process 
+        </div>
+        <BsArrowRight style={{marginLeft:"10px", width:"33px", height:"33px"}}/>
+      </Send>
+      <Send style={{border:"1px solid black", textAlign:"left", backgroundColor:'white', paddingLeft:"20px", paddingRight:"20px", display: "flex", justifyContent: "space-between", alignItems: "center"}}>
+        <div>
+          Contact Helipad for Next Steps
+        </div>
+        <BsChevronDown style={{width:"24px", height:"24px"}}/>
+      </Send>
+    </>
+    // <Container>
+    //   <Content>
+    //     <Title>Contact HELIPAD</Title>
+    //   </Content>
+    //   <TextArea rows={20} onChange={onTextChange} />
+    //   <Send onClick={contactToAgent}>Contact helipad for more information</Send>
+    // </Container>
   );
 };
 
@@ -84,12 +105,15 @@ const Send = styled.button`
   background: #B69142;
   // color: #ffffff;
   color: black;
-  font-weight: 800;
-  font-size: 20px;
+  font-weight: 600;
+  font-size: 18px;
   padding-top: 10px;
   padding-bottom: 10px;
+  margin-bottom: 15px;
   width: 100%;
+  height: 60px;
   cursor: pointer;
+  border: 0;
 `;
 
 export default Contact;

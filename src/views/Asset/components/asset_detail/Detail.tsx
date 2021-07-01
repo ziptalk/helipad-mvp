@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Asset from "../../../../model/Asset";
 import Contact from "./Contact";
 import Amenities from "./Amenties";
@@ -20,19 +20,28 @@ type DetailProps = {
 };
 
 const Detail: React.FC<DetailProps> = ({ data }) => {
+  const [categoryClick, setCategoryClick] = useState(0)
+
   console.log("data :", data);
   const virtualTourLink = data.buildingInformation.virtualTour;
+
+  const categoryOnClick = (state: number) => {
+    setCategoryClick(state);
+  }
   return (
     <Container>
-      <Category>
-        <CategoryItem>Location</CategoryItem>
-        <CategoryDivider />
-        <CategoryItem>Schools</CategoryItem>
-        <CategoryDivider />
-        <CategoryItem>Neighborhood</CategoryItem>
-      </Category>
       <Body>
         <LeftBody>
+          <Category>
+          <CategoryTitle>
+            {categoryClick == 0 ? <CategoryItem  style={{boxShadow:"inset 0px -3px 0px #B69142", color:"black"}} onClick={()=>categoryOnClick(0)} >Location</CategoryItem>:<CategoryItem onClick={()=>categoryOnClick(0)} >Location</CategoryItem>}
+            {categoryClick == 1 ? <CategoryItem  style={{boxShadow:"inset 0px -3px 0px #B69142", color:"black"}} onClick={()=>categoryOnClick(1)} >Schools</CategoryItem>:<CategoryItem onClick={()=>categoryOnClick(1)} >Schools</CategoryItem>}
+            {categoryClick == 2 ? <CategoryItem  style={{boxShadow:"inset 0px -3px 0px #B69142", color:"black"}} onClick={()=>categoryOnClick(2)} >Similar Homes</CategoryItem>:<CategoryItem onClick={()=>categoryOnClick(2)} >Similar Homes</CategoryItem>}
+          </CategoryTitle>
+          {/* <InformationTitle>
+            Information
+          </InformationTitle> */}
+        </Category>
           <Thumbnail src={data.buildingInformation.thumbnail} />
           {virtualTourLink && (
             <VirtualTourButton href={virtualTourLink}>
@@ -80,6 +89,11 @@ const Detail: React.FC<DetailProps> = ({ data }) => {
           <Neighborhood />
         </LeftBody>
         <RightBody>
+          <Category>
+            <div style={{fontSize:"20px", fontWeight:700, paddingTop:"10px"}}>
+              Information
+            </div>
+          </Category>
           <StatusContainer>
             <Status>
               <StatusItem>
@@ -140,19 +154,39 @@ const Container = styled.div`
 `;
 
 const Category = styled.div`
-  width: 1092px;
+  // width: 1092px;
+  width: 100%;
+  // margin-left: 15%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  margin-bottom: 30px;
 `;
 
-const CategoryItem = styled.div`
+const CategoryTitle = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+`
+
+const CategoryItem = styled.button`
   font-size: 18px;
+  width: 100%;
+  height: 50px;
+  border: 0;
+  background-color: transparent;
+  box-shadow: inset 0px -3px 0px #CFD4DA;
+  color: #CFD4DA;
 `;
 
 const CategoryDivider = styled.div`
   border: 1px solid #000000;
 `;
+
+const InformationTitle = styled.div`
+  width: 45%;
+`
 
 const Body = styled.div`
   display: grid;
@@ -203,16 +237,18 @@ const StatusItem = styled.div`
   flex-direction: row;
   font-size: 18px;
   border-bottom: 1px solid #e9e9e9;
-  padding-top: 15px;
-  padding-bottom: 15px;
+  padding-top: 7px;
+  padding-bottom: 7px;
 `;
 
 const StatusCategory = styled.div`
-  font-weight: bold;
+  // font-weight: bold;
   width: 260px;
 `;
 
-const StatusContent = styled.div``;
+const StatusContent = styled.div`
+  font-weight: 500;
+`;
 
 const UnderBarContainer = styled.div`
   width:100%;

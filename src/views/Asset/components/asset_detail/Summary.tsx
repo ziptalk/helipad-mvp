@@ -88,8 +88,10 @@ const Summary: React.FC<SummaryProps> = ({ data }) => {
 const Container = styled.div`
   display: flex;
   flex-direction: row;
-  width: 1452px;
+  // width: 1452px;
+  width: 100%;
   justify-content: space-between;
+  margin-top: 112px;
 `;
 
 const AddressWrapper = styled.div`
