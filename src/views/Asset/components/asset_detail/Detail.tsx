@@ -14,6 +14,7 @@ import Footer from "../../../../components/Footer";
 import { AiOutlinePlayCircle } from "react-icons/ai";
 import { BsGrid, BsMap } from "react-icons/bs";
 import { BiStreetView } from "react-icons/bi";
+import Modal from "./modal";
 
 type DetailProps = {
   data: Asset;
@@ -21,12 +22,27 @@ type DetailProps = {
 
 const Detail: React.FC<DetailProps> = ({ data }) => {
   const [categoryClick, setCategoryClick] = useState(0)
+  const [viewallOpen, setViewallOpen] = useState(false)
+  const [popupClick, setPopupClick] = useState(0)
 
   console.log("data :", data);
   const virtualTourLink = data.buildingInformation.virtualTour;
 
   const categoryOnClick = (state: number) => {
     setCategoryClick(state);
+  }
+
+  const popupOnClick = (state: number) => {
+    setPopupClick(state)
+    setViewallOpen(true);
+  }
+
+  const closeViewall = () => {
+    setViewallOpen(false);
+  }
+
+  const openViewall = () => {
+    setViewallOpen(true);
   }
   return (
     <Container>
@@ -64,20 +80,36 @@ const Detail: React.FC<DetailProps> = ({ data }) => {
               <button style={{border: "0", width:"5%", fontSize:"20px", fontWeight:700, backgroundColor:"transparent"}}>〉</button>
             </ImageContainer>
             <ButtonContainer style={{border:"1px solid #EAEAEA"}}>
-              <button style={{width:"30%", border:"0", backgroundColor:"transparent"}}>
+              <button onClick={()=>popupOnClick(0)} style={{width:"30%", border:"0", backgroundColor:"transparent"}}>
                 <BsGrid style={{width:"20px", height:"20px"}}/>
                 <div>View All</div>
               </button>
-              <button style={{width:"30%", border:"0", backgroundColor:"transparent"}}>
+              <button onClick={()=>popupOnClick(1)} style={{width:"30%", border:"0", backgroundColor:"transparent"}}>
                 <BsMap style={{width:"20px", height:"20px"}}/>
                 <div>Map</div>
               </button>
-              <button style={{width:"30%", border:"0", backgroundColor:"transparent"}}>
+              <button onClick={()=>popupOnClick(2)} style={{width:"30%", border:"0", backgroundColor:"transparent"}}>
                 <BiStreetView style={{width:"20px", height:"20px"}}/>
                 <div>Street View</div>
               </button>
             </ButtonContainer>
           </UnderBarContainer>
+          <Modal 
+            open={viewallOpen} 
+            close={closeViewall}
+            header={
+              <div style={{width:"100%", display:"flex", justifyContent:"center"}}>
+              <PopupCategoryContainer>
+                {popupClick == 0 ? <PopupCategoryButton style={{backgroundColor:"white", color:"#212121"}}>View all</PopupCategoryButton> : <PopupCategoryButton>View all</PopupCategoryButton>}
+                {popupClick == 1 ? <PopupCategoryButton style={{backgroundColor:"white", color:"#212121"}}>Map</PopupCategoryButton> : <PopupCategoryButton>Map</PopupCategoryButton>}
+                {popupClick == 2 ? <PopupCategoryButton style={{backgroundColor:"white", color:"#212121"}}>Street View</PopupCategoryButton> : <PopupCategoryButton>Street View</PopupCategoryButton>}
+              </PopupCategoryContainer>
+              </div>
+            }>
+            <div style={{width:"100%"}}>
+              zzz
+            </div>
+          </Modal>
           <Information>{data.information}</Information>
           <Amenities data={data.amenities} />
           <Location address={data.buildingInformation.street} />
@@ -271,4 +303,24 @@ const ButtonContainer = styled.div`
   display: flex;
   justify-content: space-between;
 `
+
+const PopupCategoryContainer = styled.div`
+  width: 50%;
+  height: 35px;
+  margin-top: 15px;
+  display: flex;
+  // font-size: 15px;
+  text-align: center;
+  align-items: center;
+`
+
+const PopupCategoryButton = styled.div`
+  width: 30%;
+  color: #A3A3A3;
+  height: 100%;
+  text-align: center;
+  align-items: center;
+  padding-top: 10px;
+`
+
 export default Detail;

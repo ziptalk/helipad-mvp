@@ -5,7 +5,12 @@ import ContactUseCase from "../../../../domain/ContactUseCase";
 import { AuthContext } from "../../../../router/config/Provider/AuthProvider";
 import ContactToAgent from "../../../../domain/ContactToAgent";
 import UpdateProcess from "../../../../domain/UpdateProcess";
-import { BsChevronDown, BsArrowRight } from "react-icons/bs";
+import { BsChevronDown, BsArrowRight, BsChevronUp } from "react-icons/bs";
+import useCollapse from 'react-collapsed';
+import { ImPhone } from 'react-icons/im';
+import { GrMail } from 'react-icons/gr';
+import { RiKakaoTalkFill } from 'react-icons/ri';
+
 // import Expand from 'react-expand-animated';
 
 type ContactFieldProps = {
@@ -17,6 +22,8 @@ const Contact: React.FC<ContactFieldProps> = ({ agent, assetId }) => {
   const { user } = useContext(AuthContext);
   const [content, setContent] = useState<string>();
   const history = useHistory();
+  const { getCollapseProps, getToggleProps, isExpanded } = useCollapse();
+
   const onTextChange = (e: any) => {
     setContent(e.target.value);
   };
@@ -50,12 +57,49 @@ const Contact: React.FC<ContactFieldProps> = ({ agent, assetId }) => {
         </div>
         <BsArrowRight style={{marginLeft:"10px", width:"33px", height:"33px"}}/>
       </Send>
-      <Send style={{border:"1px solid black", textAlign:"left", backgroundColor:'white', paddingLeft:"20px", paddingRight:"20px", display: "flex", justifyContent: "space-between", alignItems: "center"}}>
-        <div>
-          Contact Helipad for Next Steps
-        </div>
-        <BsChevronDown style={{width:"24px", height:"24px"}}/>
-      </Send>
+      <div style={{width:"100%", border:"1px solid black"}}>
+        <Send {...getToggleProps()} style={{textAlign:"left", backgroundColor:'white', paddingLeft:"20px", paddingRight:"20px", display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom:"0px"}}>
+          <div>
+            Contact Helipad for Next Steps
+          </div>
+          {isExpanded ? 
+            <BsChevronUp style={{width:"24px", height:"24px"}}/>
+          :
+            <BsChevronDown style={{width:"24px", height:"24px"}}/>
+          }
+        </Send>
+        <section {...getCollapseProps()}>
+          <ContactBox>
+            <div style={{marginBottom:"25px"}}>How would you like a Helipad agent to reach out?</div>
+            <ContactWayBox>
+              <ContactTitle>
+                <ImPhone style={{width:"20px", height:"20px", marginRight:"7px"}}/>
+                <div>Phone</div>
+              </ContactTitle>
+              <ContactForm placeholder="You do not need to enter (-)"/>
+              <SendButton>SEND</SendButton>
+            </ContactWayBox>
+            <ContactWayBox>
+              <ContactTitle>
+                <GrMail style={{width:"20px", height:"20px", marginRight:"7px"}}/>
+                <div>Email</div>
+              </ContactTitle>
+              <ContactForm placeholder="Please enter your email"/>
+              <SendButton>SEND</SendButton>
+            </ContactWayBox>
+            <ContactWayBox>
+              <ContactTitle>
+                <RiKakaoTalkFill style={{width:"20px", height:"20px", marginRight:"7px"}}/>
+                <div>Kakao Talk ID</div>
+              </ContactTitle>
+              <ContactForm placeholder="Enter your Kakao Talk ID"/>
+              <SendButton>SEND</SendButton>
+            </ContactWayBox>
+          </ContactBox>
+        </section>
+      </div>
+      
+
     </>
     // <Container>
     //   <Content>
@@ -115,5 +159,40 @@ const Send = styled.button`
   cursor: pointer;
   border: 0;
 `;
+
+const ContactBox = styled.div`
+  padding: 20px;
+  padding-top: 0px;
+`
+
+const ContactWayBox = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  height: 34px;
+  margin: 5px 0 5px 0;
+`
+
+const ContactTitle = styled.div`
+  width: 30%;
+  display: flex;
+  align-items: center;
+  color: #666666;
+`
+
+const ContactForm = styled.input`
+  width: 50%;
+  border: 1px solid #A3A3A3;
+  font-size: 15px;
+  padding-left: 10px;
+`
+
+const SendButton = styled.button`
+  width: 15%;
+  border: 2px solid black;
+  background-color: white;
+  font-size: 14px;
+  font-weight: 900;
+`
 
 export default Contact;
