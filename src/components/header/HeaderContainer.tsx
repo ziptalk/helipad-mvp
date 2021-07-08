@@ -1,19 +1,41 @@
-import { useEffect, useState, useContext } from "react";
-import { Link } from "react-router-dom";
-import { RouteComponentProps, StaticContext } from "react-router";
+import { useState, useEffect, useContext } from "react";
 import { AuthContext } from "../../router/config/Provider/AuthProvider";
 import HeaderPresenter from "./HeaderPresenter";
-
+import { useHistory } from "react-router-dom";
 const HeaderContainer = () => {
-  const { authenticated, inviteCodeValidation } = useContext(AuthContext);
+  const { headerMode, authenticated } = useContext(AuthContext);
+  const history = useHistory();
+  const [userIconCategory, setUserIconCategory] = useState({
+    param1: "",
+    param2: "",
+  });
+  const [globalIconCategory, setGlobalIconCategory] = useState({
+    param1: "KOR",
+    param2: "ENG",
+  });
 
-  // user, global은 dropdown으로 구현 예정
-  // authenticated에 따라서 black header와 white header로 나누기
-  // 로그인이 된 경우 authenticated 는 true, 아니면 false
+  useEffect(() => {
+    if (authenticated) {
+      setUserIconCategory({
+        ...userIconCategory,
+        param1: "My Page",
+        param2: "Sign out",
+      });
+    } else {
+      setUserIconCategory({
+        ...userIconCategory,
+        param1: "Register",
+        param2: "Sign in",
+      });
+    }
+  }, [authenticated]);
+  const onClickUserIcon = () => {};
   return (
     <HeaderPresenter
-      authenticated={authenticated}
-      inviteCodeValidation={inviteCodeValidation}
+      headerMode={headerMode}
+      userIconCategory={userIconCategory}
+      globalIconCategory={globalIconCategory}
+      onClickUserIcon={onClickUserIcon}
     />
   );
 };

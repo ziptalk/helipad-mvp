@@ -1,9 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState, useContext, useEffect } from "react";
 import NeighborhoodItem from "../../../../model/NeighborhoodItem";
 import { RouteComponentProps } from "react-router";
 import { useHistory } from "react-router-dom";
 import GetNeighborhoodList from "../../../../domain/GetNeighborhoodList";
 import NeighborhoodDetailPresenter from "./NeighborhoodDetailPresenter";
+import { AuthContext } from "../../../../router/config/Provider/AuthProvider";
 type MatchParams = {
   regionName: string;
 };
@@ -13,8 +14,9 @@ const NeighborhoodDetailContainer = ({
   let regionName = match.params.regionName;
   const history = useHistory();
   const [regionInfo, setRegionInfo] = useState<NeighborhoodItem>();
-
+  const { setHeaderMode } = useContext(AuthContext);
   useEffect(() => {
+    setHeaderMode("black");
     let getResult = GetNeighborhoodList.getById(regionName)[0];
     setRegionInfo(getResult);
   }, []);

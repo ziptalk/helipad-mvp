@@ -2,15 +2,17 @@ import * as React from "react";
 import { Link, useHistory } from "react-router-dom";
 import styled from "styled-components";
 import LoginUseCase, { ErrorCode } from "../../../../domain/LoginUseCase";
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { AuthContext } from "../../../../router/config/Provider/AuthProvider";
 
 const LoginForm = () => {
-  const authContext = useContext(AuthContext);
+  const { setUser, setHeaderMode } = useContext(AuthContext);
   const history = useHistory();
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-
+  useEffect(() => {
+    setHeaderMode("black");
+  });
   const onClickedLogin = (event: React.MouseEvent<HTMLDivElement>) => {
     event.preventDefault();
     LoginUseCase.execute(email, password)
@@ -22,7 +24,7 @@ const LoginForm = () => {
   };
 
   const onLoginSuccess = (userInfo: any) => {
-    authContext.setUser(userInfo.user);
+    setUser(userInfo.user);
     console.log("onLoginSuccess: ", userInfo);
     // history.push({ pathname: "/asset/neighborhood" });
     history.push("/home");
@@ -66,7 +68,7 @@ const LoginForm = () => {
       </Row>
       <Row>
         Forgot your password?
-        <Link to="/auth/signup"> Sign-up </Link>
+        <Link to="/auth/registerForm"> Sign-up </Link>
       </Row>
       <FacebookLoginContainer>
         {/*<ReactFacebookLogin*/}

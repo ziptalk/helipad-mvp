@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { AuthContext } from "../../../../router/config/Provider/AuthProvider";
 import styled from "styled-components";
 import SignUpUseCase, { ErrorCode } from "../../../../domain/SignUpUseCase";
 import { InputField, InputType } from "./InputField";
@@ -28,6 +29,10 @@ const RegisterForm = () => {
   const [preferredArea, setPreferredArea] = useState<string[]>([]);
   const [preferredAreaOther, setPreferredAreaOther] = useState<string>("");
   const history = useHistory();
+  const { setHeaderMode } = useContext(AuthContext);
+  useEffect(() => {
+    setHeaderMode("black");
+  });
   const onTryRegister = () => {
     let userInfo = {
       lastName,
@@ -428,7 +433,8 @@ const RegisterForm = () => {
 };
 
 const Container = styled.div`
-  margin-top: 170px;
+  margin-top: 50px;
+  margin-bottom: 100px;
   width: 460px;
   display: flex;
   flex-direction: column;

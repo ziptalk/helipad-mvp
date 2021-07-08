@@ -3,7 +3,7 @@ import HeaderPresenter from "./HeaderPresenter";
 import MainPresenter from "./MainPresenter";
 import ComingSoonPresenter from "./ComingSoonPresenter";
 import ContactPresenter from "./ContactPresenter";
-import FooterPresenter from "../common/FooterPresenter";
+import FooterPresenter from "../../../../components/FooterPresenter";
 import NeighborhoodItem from "../../../../model/NeighborhoodItem";
 
 type NeighborhoodProps = {
@@ -25,5 +25,6 @@ const NeighborhoodPresenter = ({ neighborhoodList }: NeighborhoodProps) => {
 const Container = styled.div`
   display: flex;
   flex-direction: column;
+  width: 100%;
 `;
 export default NeighborhoodPresenter;

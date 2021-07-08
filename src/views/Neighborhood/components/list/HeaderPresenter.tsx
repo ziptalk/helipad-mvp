@@ -1,13 +1,13 @@
 import styled from "styled-components";
-import NeighborhoodBg from "../../../../images/Neighborhood/neighborhoodBg.jpg";
 
+import HeaderBackground from "../../../../images/Neighborhood/headerBackgroundImg.jpg";
 import { ReactComponent as HomeSvg } from "../../../../images/Neighborhood/ic_houseIcon.svg";
 import { ReactComponent as ScrollSvg } from "../../../../images/Neighborhood/ic_headerScrollIcon.svg";
 
 const HeaderPresenter = () => {
   return (
     <Container>
-      <LandingBlock imgPath={NeighborhoodBg}>
+      <LandingBlock imgPath={HeaderBackground}>
         <TitleBlock>
           <HomeIcon />
           <Title>Exploring the Neighborhood</Title>

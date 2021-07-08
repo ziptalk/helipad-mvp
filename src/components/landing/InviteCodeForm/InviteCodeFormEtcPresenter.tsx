@@ -7,9 +7,6 @@ import styled from "styled-components";
 const InviteCodeFormEtcPresenter = () => {
   return (
     <>
-      <ChatBotButton>
-        <Smile />
-      </ChatBotButton>
       <Contact>
         <Call />
         <Email />

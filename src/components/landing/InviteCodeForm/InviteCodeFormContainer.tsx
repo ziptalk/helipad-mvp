@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useHistory, Redirect } from "react-router-dom";
 import Styled from "styled-components";
 import { CheckInviteCode } from "../../../domain/CheckInviteCode";
@@ -15,8 +15,12 @@ const InviteCodeFormContainer = () => {
     loadingAuthState,
     inviteCodeValidation,
     setInviteCodeValidation,
+    setHeaderMode,
   } = useContext(AuthContext);
 
+  useEffect(() => {
+    setHeaderMode("black");
+  });
   if (loadingAuthState) {
     return <></>;
   }

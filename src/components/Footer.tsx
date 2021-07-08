@@ -1,18 +1,14 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 import React from "react";
 
 const Footer: React.FC = () => {
-    return (
-        <Container>
-
-        </Container>
-    );
-}
+  return <Container></Container>;
+};
 
 const Container = styled.div`
-  width: 100%;
+  width: 1912px;
   height: 350px;
-  background-color: #C4C4C4;
+  background-color: #c4c4c4;
   margin-top: 150px;
 `;
 

@@ -9,6 +9,7 @@ type NeighborhoodProps = {
 };
 
 const MainPresenter = ({ order, neighborhood }: NeighborhoodProps) => {
+  console.log("MainPresenter");
   const { thumbnailUrl, state, regionName, intro } = neighborhood;
   return (
     <>
@@ -57,7 +58,7 @@ const Container = styled.div`
   color: black;
 `;
 const Thumbnail: any = styled.div`
-  width: 960px;
+  width: 952px;
   height: 880px;
   background: url(${(props: any) => props.thumbnail});
   background-size: cover;
