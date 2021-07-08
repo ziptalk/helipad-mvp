@@ -10,6 +10,8 @@ import useCollapse from 'react-collapsed';
 import { ImPhone } from 'react-icons/im';
 import { GrMail } from 'react-icons/gr';
 import { RiKakaoTalkFill } from 'react-icons/ri';
+import { Link } from "react-router-dom";
+import { processStore } from '../../../../shared/Firebase';
 
 // import Expand from 'react-expand-animated';
 
@@ -46,17 +48,42 @@ const Contact: React.FC<ContactFieldProps> = ({ agent, assetId }) => {
   };
 
   const escrowProcessOnClick = () => {
+    
+  }
 
+  async function copyFirebaseOnClick(){
+    let result = await (await processStore.doc('test_id_2').get()).data();
+    let thisRef = await (await processStore.doc(assetId).get()).data();
+    console.log(result);
+    console.log(thisRef)
+    if(result){
+      let idName = 'test_id_1'
+      await processStore.doc(idName).set(result)
+      await processStore.doc(idName).update({
+        'assetId': idName
+      })
+      // for(var i=3; i<=26; i++){
+      //   let idName = 'test_id_' + i.toString()
+      //   // result.assetId = idName
+      // await processStore.doc(idName).set(result)
+      //   await processStore.doc(idName).update({
+      //     'assetId': idName
+      //   })
+      // }
+    }
   }
 
   return (
     <>
-      <Send style={{display:"flex", alignItems:"center", paddingLeft:"100px"}} onClick={escrowProcessOnClick}>
-        <div>
-          Proceed to Escrow Process 
-        </div>
-        <BsArrowRight style={{marginLeft:"10px", width:"33px", height:"33px"}}/>
-      </Send>
+    {/* <button onClick={copyFirebaseOnClick}>파베 복사</button> */}
+      <Link to={`/process/userprocess/${assetId}`} >
+        <Send style={{display:"flex", alignItems:"center", paddingLeft:"100px"}} onClick={escrowProcessOnClick}>
+          <div>
+            Proceed to Escrow Process 
+          </div>
+          <BsArrowRight style={{marginLeft:"10px", width:"33px", height:"33px"}}/>
+        </Send>
+      </Link>
       <div style={{width:"100%", border:"1px solid black"}}>
         <Send {...getToggleProps()} style={{textAlign:"left", backgroundColor:'white', paddingLeft:"20px", paddingRight:"20px", display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom:"0px"}}>
           <div>

@@ -23,6 +23,7 @@ const NormalUserProcess = ({ match }: RouteComponentProps<MatchParams>) => {
   const [asset, setAsset] = useState<Asset>(Asset.emptyAsset());
   const [processes, setProcesses] = useState<Process>(Process.emptyProcess());
   const [processLoad, setProcessLoad] = useState(false);
+  const [processError, setProcessError] = useState(false);
     // const [process, setProcess] = useState(
     //     {
     //         userId: "dlguswn3659@naver.com",
@@ -44,32 +45,41 @@ const NormalUserProcess = ({ match }: RouteComponentProps<MatchParams>) => {
     // )
 
   useEffect(() => {
-    GetAsset.getAsset(id).then((value) => {
-      setAsset(value);
-      if (user != null) {
-        ContactUseCase.getContactHistory(user.uid, value.agent).then(
-          (value) => {
-            console.log("get contact history");
+    //   if(id == 'test_id_2'){
+        try{
+            GetAsset.getAsset(id).then((value) => {
+                setAsset(value);
+                if (user != null) {
+                  ContactUseCase.getContactHistory(user.uid, value.agent).then(
+                    (value) => {
+                      console.log("get contact history");
+                    }
+                  );
+                }
+                window.scroll({ top: 0 });
+              });
+          
+              if(user != null){
+                  ProcessUseCase.getProcess(user.uid, id).then((value) => {
+                      setProcesses(value);
+                      setProcessLoad(true);
+                      console.log("user hi!");
+                      window.scroll({top:0});
+                      console.log(value);
+                      {value.process.map((group) => {
+                          group.task.map((group2) => {
+                              console.log(group2.description)
+                          })
+                      })}
+                  })
+              }
           }
-        );
-      }
-      window.scroll({ top: 0 });
-    });
-
-    if(user != null){
-        ProcessUseCase.getProcess(user.uid, id).then((value) => {
-            setProcesses(value);
-            setProcessLoad(true);
-            console.log("user hi!");
-            window.scroll({top:0});
-            console.log(value);
-            {value.process.map((group) => {
-                group.task.map((group2) => {
-                    console.log(group2.description)
-                })
-            })}
-        })
-    }
+          catch (e) {
+              console.log(e);
+              setProcessError(true)
+          }
+    //   }
+    
   }, []);
 
   return (
@@ -86,6 +96,7 @@ const NormalUserProcess = ({ match }: RouteComponentProps<MatchParams>) => {
                     <AnnounceSentence><ImNotification style={{marginRight:"7px", marginBottom:"-2px"}}/>Kaylee this doesn’t include the requirements of the Korean government/private banker</AnnounceSentence>
                 </AnnounceBox>
             </DescriptionBox>
+            {processError ? <></> :
             <ProcessBox>
                 {processLoad ? 
                     <>
@@ -115,6 +126,7 @@ const NormalUserProcess = ({ match }: RouteComponentProps<MatchParams>) => {
                     </>
                 }
             </ProcessBox>
+            }
         </Container>
       </>
   );

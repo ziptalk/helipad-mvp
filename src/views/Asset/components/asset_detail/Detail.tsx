@@ -35,6 +35,7 @@ const Detail: React.FC<DetailProps> = ({ data }) => {
   const popupOnClick = (state: number) => {
     setPopupClick(state)
     setViewallOpen(true);
+    console.log(data);
   }
 
   const closeViewall = () => {
@@ -107,7 +108,26 @@ const Detail: React.FC<DetailProps> = ({ data }) => {
               </div>
             }>
             <div style={{width:"100%"}}>
-              zzz
+              {popupClick == 0 ? 
+              <div style={{marginLeft:"30px"}}>
+                <div style={{display:"flex"}}>
+                  <div>{data.buildingInformation.address}</div>
+                  <div style={{marginLeft:"20px"}}>${data.price}</div>
+                  <div style={{marginLeft:"20px"}}>{data.buildingInformation.nBedrooms} Beds</div>
+                  <div style={{marginLeft:"20px"}}>{data.buildingInformation.nBathrooms} Baths</div>
+                  <div style={{marginLeft:"20px"}}>{data.buildingInformation.square} Square</div>
+                </div>
+
+                <div >
+                  <img src={data.buildingInformation.thumbnail} style={{width:"500px", margin:"30px 30px 0 0"}}/>
+                  <img src={data.buildingInformation.thumbnail} style={{width:"500px", margin:"30px 30px 0 0"}}/>
+                  <img src={data.buildingInformation.thumbnail} style={{width:"500px", margin:"30px 30px 0 0"}}/>
+                  <img src={data.buildingInformation.thumbnail} style={{width:"500px", margin:"30px 30px 0 0"}}/>
+                  <img src={data.buildingInformation.thumbnail} style={{width:"500px", margin:"30px 30px 0 0"}}/>
+                  <img src={data.buildingInformation.thumbnail} style={{width:"500px", margin:"30px 30px 0 0"}}/>
+                </div>
+              </div>
+              :<><div>서비스 준비중입니다.</div></>}
             </div>
           </Modal>
           <Information>{data.information}</Information>
