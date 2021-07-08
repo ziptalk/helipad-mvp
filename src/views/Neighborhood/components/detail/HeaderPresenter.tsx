@@ -25,9 +25,7 @@ const HeaderPresenter = ({
   );
 };
 
-const Container = styled.div`
-  margin-top: 216px;
-`;
+const Container = styled.div``;
 const Content = styled.div`
   display: flex;
   flex-direction: column;
@@ -43,7 +41,7 @@ const RegionName = styled.div`
   font-weight: 500;
   line-height: 96px;
   letter-spacing: -2px;
-  width: 358px;
+
   height: 96px;
   margin: auto;
   margin-bottom: 30px;
