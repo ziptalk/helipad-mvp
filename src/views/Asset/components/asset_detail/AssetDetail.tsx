@@ -15,10 +15,12 @@ interface MatchParams {
 
 const AssetDetail = ({ match }: RouteComponentProps<MatchParams>) => {
   let id = match.params.assetId;
-  const { user } = useContext(AuthContext);
+  const { user, setHeaderMode } = useContext(AuthContext);
   const [asset, setAsset] = useState<Asset>(Asset.emptyAsset());
 
   useEffect(() => {
+    setHeaderMode("black");
+
     GetAsset.getAsset(id).then((value) => {
       setAsset(value);
       if (user != null) {
@@ -44,6 +46,7 @@ const AssetDetail = ({ match }: RouteComponentProps<MatchParams>) => {
 const Container = styled.div`
   display: flex;
   flex-direction: column;
+  width: 1904px;
 `;
 
 const Divider = styled.div`

@@ -177,22 +177,26 @@ const AssetList: React.FC<AssetListProperties> = ({ history }: any) => {
 };
 
 const Container = styled.div`
-  width: 100vw;
+  // width: 100vw;
+  width: 1904px;
   // width: 100%;
   height: calc(100vh - 100px);
   display: flex;
   flex-direction: row;
-  margin-top: 112px;
+  // margin-top: 112px;
 `;
 
 const MapContainer = styled.div`
-  width: calc(100vw - 550px);
+  width: calc(1904px - 691px);
+  align-items:right;
+  margin-left:0px;
   // width: 60%;
   height: 100vh;
 `;
 
 const AssetContainer = styled.div`
-  width: 550px;
+  width: 691px;
+  // width: 900px;
   // width: 40%;
   height: 100vh;
   // background-color: #61dafb;

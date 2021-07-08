@@ -135,6 +135,7 @@ const NormalUserProcess = ({ match }: RouteComponentProps<MatchParams>) => {
 const Container = styled.div`
   display: flex;
   flex-direction: column;
+  width: 1904px;
 `;
 
 const DescriptionBox = styled.div`
