@@ -14,11 +14,7 @@ const HeaderPresenter = ({
   headerMode,
   userIconCategory,
   globalIconCategory,
-  onClickUserIcon,
-  clicked,
-  setClicked,
 }: any) => {
-  console.log("header headerMode:", headerMode);
   return (
     <>
       <Container>
@@ -27,20 +23,19 @@ const HeaderPresenter = ({
         </Link>
         <About color={headerMode}>About us</About>
         <BlackChatBot></BlackChatBot>
-
         <IconBlock>
           <DropDownContainer>
             <DropdownMenu
               Component={() => <BlackUser color={headerMode} />}
-              param1={userIconCategory.param1}
-              param2={userIconCategory.param2}
+              mypageOrRegister={userIconCategory.mypageOrRegister}
+              signOutOrSignIn={userIconCategory.signOutOrSignIn}
             />
           </DropDownContainer>
           <DropDownContainer>
             <DropdownMenu
               Component={() => <BlackGlobal color={headerMode} />}
-              param1={globalIconCategory.param1}
-              param2={globalIconCategory.param2}
+              mypageOrRegister={globalIconCategory.korean}
+              signOutOrSignIn={globalIconCategory.english}
             />
           </DropDownContainer>
           <SearchButton>

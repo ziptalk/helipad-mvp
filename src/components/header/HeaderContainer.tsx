@@ -1,31 +1,38 @@
 import { useState, useEffect, useContext } from "react";
 import { AuthContext } from "../../router/config/Provider/AuthProvider";
 import HeaderPresenter from "./HeaderPresenter";
-import { useHistory } from "react-router-dom";
+
+enum DropDownMenu {
+  mypage = "MY Page",
+  signout = "Sign Out",
+  register = "Register",
+  signin = "Sign In",
+  korean = "KOR",
+  english = "ENG",
+}
 const HeaderContainer = () => {
   const { headerMode, authenticated } = useContext(AuthContext);
-  const history = useHistory();
   const [userIconCategory, setUserIconCategory] = useState({
-    param1: "",
-    param2: "",
+    mypageOrRegister: "",
+    signOutOrSignIn: "",
   });
   const [globalIconCategory, setGlobalIconCategory] = useState({
-    param1: "KOR",
-    param2: "ENG",
+    korean: DropDownMenu.korean,
+    english: DropDownMenu.english,
   });
 
   useEffect(() => {
     if (authenticated) {
       setUserIconCategory({
         ...userIconCategory,
-        param1: "My Page",
-        param2: "Sign out",
+        mypageOrRegister: DropDownMenu.mypage,
+        signOutOrSignIn: DropDownMenu.signout,
       });
     } else {
       setUserIconCategory({
         ...userIconCategory,
-        param1: "Register",
-        param2: "Sign in",
+        mypageOrRegister: DropDownMenu.register,
+        signOutOrSignIn: DropDownMenu.signin,
       });
     }
   }, [authenticated]);
