@@ -6,6 +6,9 @@ import SavedFlag from "../../../../images/ic_saved_flag.svg";
 import ContactImage from "../../../../images/ic_contact.svg";
 import SaveAsset from "../../../../domain/SaveAsset";
 import { AuthContext } from "../../../../router/config/Provider/AuthProvider";
+import { FaHelicopter } from "react-icons/fa";
+import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
+import { FaShareAlt } from "react-icons/fa";
 
 type SummaryProps = {
   data: Asset;
@@ -69,16 +72,22 @@ const Summary: React.FC<SummaryProps> = ({ data }) => {
         </RoomInfo>
         <ClickableRoomInfo onClick={onClickSave}>
           <RoomInfoContent>
-            {isSavedAsset ? <SavedFlagImage /> : <UnSavedFlagImage />}
+            {/* {isSavedAsset ? <SavedFlagImage /> : <UnSavedFlagImage />} */}
+            {isSavedAsset ? <AiFillHeart /> : <AiOutlineHeart />}
           </RoomInfoContent>
-          <RoomInfoTitle>Save</RoomInfoTitle>
+          <RoomInfoTitle>Favorite</RoomInfoTitle>
         </ClickableRoomInfo>
         <ClickableRoomInfo>
           <RoomInfoContent>
-            <Contact />
+            <FaHelicopter />
           </RoomInfoContent>
-          <RoomInfoTitle>Contact</RoomInfoTitle>
-          <RoomInfoTitle>Helipad</RoomInfoTitle>
+          <RoomInfoTitle>Ongoing</RoomInfoTitle>
+        </ClickableRoomInfo>
+        <ClickableRoomInfo>
+          <RoomInfoContent>
+            <FaShareAlt />
+          </RoomInfoContent>
+          <RoomInfoTitle>Share</RoomInfoTitle>
         </ClickableRoomInfo>
       </Rooms>
     </Container>
@@ -88,8 +97,10 @@ const Summary: React.FC<SummaryProps> = ({ data }) => {
 const Container = styled.div`
   display: flex;
   flex-direction: row;
-  width: 1452px;
+  // width: 1452px;
+  width: 100%;
   justify-content: space-between;
+  margin-top: 112px;
 `;
 
 const AddressWrapper = styled.div`

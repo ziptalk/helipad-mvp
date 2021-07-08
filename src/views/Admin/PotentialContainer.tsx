@@ -14,7 +14,7 @@ const PotentialContainer = () => {
       event.target.parentNode.classList.add("check");
     }
   };
-  return <PotentialPresenter onClick={onClick} />;
+  return <PotentialPresenter onClick={onClick}></PotentialPresenter>;
 };
 
 export default PotentialContainer;

@@ -35,7 +35,7 @@ const AssetDetail = ({ match }: RouteComponentProps<MatchParams>) => {
   return (
     <Container>
       <Summary data={asset} />
-      <Divider />
+      {/* <Divider /> */}
       <Detail data={asset} />
     </Container>
   );
@@ -48,7 +48,7 @@ const Container = styled.div`
 
 const Divider = styled.div`
   border: 1px solid #000000;
-  margin-top: 40px;
+  // margin-top: 40px;
   margin-bottom: 40px;
 `;
 

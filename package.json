@@ -31,9 +31,15 @@
     "i18next": "^20.2.2",
     "mobx": "^6.3.2",
     "mobx-react": "^7.2.0",
+    "prop-types": "^15.7.2",
     "react": "^17.0.2",
+    "react-collapsed": "^3.0.2",
     "react-dom": "^17.0.2",
+<<<<<<< HEAD
     "react-dropdown": "^1.9.2",
+=======
+    "react-expand-animated": "^1.0.2",
+>>>>>>> 1060e6f13038d1f9d8f71d747febd0deed9c741e
     "react-facebook-login": "^4.1.1",
     "react-geocode": "^0.2.3",
     "react-i18next": "^11.8.15",

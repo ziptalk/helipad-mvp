@@ -8,7 +8,6 @@ import Asset from "../../../../model/Asset";
 import { Map, GoogleApiWrapper, Marker } from "google-maps-react";
 import GoogleMap from "../../../../shared/GoogleMap";
 import Geocode from "react-geocode";
-import { setUncaughtExceptionCaptureCallback } from "node:process";
 // import Marker from './Marker';
 // import RangeSliders from "./RangeSlider";
 import RangeSliders from "./PriceRangeSlider";

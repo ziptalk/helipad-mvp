@@ -130,6 +130,7 @@ const BlackGlobal: any = styled(BlackGlobalSvg)`
     transform: scale(1.1);
   }
 `;
+
 const Search = styled(SearchSvg)``;
 const SearchButton = styled.button`
   width: 112px;
