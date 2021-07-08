@@ -46,7 +46,8 @@ const AssetDetail = ({ match }: RouteComponentProps<MatchParams>) => {
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  width: 1904px;
+  /* width: 1904px; */
+  width: 100%;
 `;
 
 const Divider = styled.div`
