@@ -37,7 +37,7 @@ const ContactPresenter = () => {
 
 const Container = styled.div`
   margin-top: 139px;
-  width: 1920px;
+  width: 100%;
   height: 740px;
 
   background-image: url(${BackgroundSvg});

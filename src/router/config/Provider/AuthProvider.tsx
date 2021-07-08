@@ -50,6 +50,8 @@ type ContextProps = {
   loadingAuthState: boolean;
   inviteCodeValidation: boolean;
   setInviteCodeValidation: any;
+  headerMode: string;
+  setHeaderMode: any;
 };
 
 export const AuthContext = React.createContext<Partial<ContextProps>>({});
@@ -59,6 +61,7 @@ export const AuthProvider = ({ children }: any) => {
   const [user, setUser] = useState(null);
   const [loadingAuthState, setLoadingAuthState] = useState(true);
   const [inviteCodeValidation, setInviteCodeValidation] = useState(true);
+  const [headerMode, setHeaderMode] = useState("white");
   useEffect(() => {
     firebase.auth().onAuthStateChanged((user: any) => {
       setUser(user);
@@ -79,6 +82,8 @@ export const AuthProvider = ({ children }: any) => {
         loadingAuthState,
         inviteCodeValidation,
         setInviteCodeValidation,
+        headerMode,
+        setHeaderMode,
       }}
     >
       {children}

@@ -1,18 +1,10 @@
-import React from "react";
 import "./App.css";
 import AuthRouter from "./router/config/AuthRouter";
 import AssetRouter from "./router/config/AssetRouter";
 import ProcessRouter from "./router/config/ProcessRouter";
 import InviteCodeFormContainer from "./components/landing/InviteCodeForm//InviteCodeFormContainer";
 import HeaderContainer from "./components/header/HeaderContainer";
-
-import {
-  BrowserRouter as Router,
-  Route,
-  Switch,
-  Redirect,
-} from "react-router-dom";
-
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import GlobalStyle from "./GlobalStyle";
 import HomePage from "./views/Home/components/HomePage";
 import FAQ from "./views/Home/components/FAQ";

@@ -1,5 +1,9 @@
 import NeighborhoodItem from "../model/NeighborhoodItem";
-
+import beverlyHills from "../images/Neighborhood/List/beverly_hills_thumbnail.jpg";
+import malibu from "../images/Neighborhood/List/malibu_thumbnail.jpg";
+import santaMonica from "../images/Neighborhood/List/santa_monica_thumbnail.jpg";
+import westHollywood from "../images/Neighborhood/List/west_hollywood_thumbnail.jpg";
+import studioCity from "../images/Neighborhood/List/studioCity_thumbnail.jpg";
 export default class GetNeighborhoodList {
   static get() {
     return item;
@@ -15,7 +19,8 @@ let item = [
     "neighborhood_item_1",
     "Los Angeles",
     "Beverly Hills",
-    "https://images.ctfassets.net/ypfe9l9zihcg/Gv2oTtkIMwIOWQGEqqosC/f430248ba7ca893da5403e873ebbfb8b/beverly-hills-unexpected-appeal-1.jpg",
+    beverlyHills,
+    // "https://images.ctfassets.net/ypfe9l9zihcg/Gv2oTtkIMwIOWQGEqqosC/f430248ba7ca893da5403e873ebbfb8b/beverly-hills-unexpected-appeal-1.jpg",
     "Welcome to Beverly Hills\n" +
       "After a failed attempt to find oil on the land in the early 1900’s, present day Beverly Hills was subdivided into lots. It wasn’t long before the city would contain one of the most famous zip codes in the world, attracting the town’s most elite actors, actresses and businessmen. Despite its name, Beverly Hills is most built on flat land and unofficially divided into North and South by Santa Monica Boulevard.",
     null,
@@ -62,7 +67,8 @@ let item = [
     "neighborhood_item_2",
     "Los Angeles",
     "Malibu",
-    "https://images.ctfassets.net/ypfe9l9zihcg/6aT8UVURsAwKCuooiEUAS4/32c648723fe56a46610d0a1d2bcd5e01/malibu-around-the-block-1.jpg",
+    // "https://images.ctfassets.net/ypfe9l9zihcg/6aT8UVURsAwKCuooiEUAS4/32c648723fe56a46610d0a1d2bcd5e01/malibu-around-the-block-1.jpg",
+    malibu,
     "Welcome to Malibu\n" +
       'Malibu owes its name to the Chumash, Native Americans who originally settled there and named it Humaliwo, which means "the surf sounds loudly.” The area was highly secluded until 1929 when the Pacific Coast Highway was built. Now Malibu is a thoroughfare for many vacationers driving up and down the California coast, and a highly revered destination for Los Angeles locals.',
     null,
@@ -107,7 +113,8 @@ let item = [
     "neighborhood_item_3",
     "Los Angeles",
     "Santa Monica",
-    "https://images.ctfassets.net/ypfe9l9zihcg/1leYwEelEYwUI2Yk6246ug/2cd9da9fb916b170894e1e7b4e554a87/santa-monica-hero.jpg",
+    // "https://images.ctfassets.net/ypfe9l9zihcg/1leYwEelEYwUI2Yk6246ug/2cd9da9fb916b170894e1e7b4e554a87/santa-monica-hero.jpg",
+    santaMonica,
     "Welcome to Santa Monica\n" +
       "This seaside city is named after Saint Monica, the mother of Saint Augustine, but the reason why remains undetermined. One telling says it was named by explorer Gaspar de Portolà, who camped there in 1769 and named it in honor of the feast day of Saint Monica. Another credits Father Juan Crespi, who claimed a pair of creeks known as the Kuruvunga Springs (technically located outside of Santa Monica’s border), were like the tears of Saint Monica, who, prior to her son’s conversion, wept nightly over his impiety.",
     null,
@@ -154,7 +161,8 @@ let item = [
     "neighborhood_item_4",
     "Los Angeles",
     "West Hollywood",
-    "https://images.ctfassets.net/ypfe9l9zihcg/3m9ANvlRdYUUYMYQuE0eye/8be178a8b0c11ebfd99e207860201560/west-hollywood-hero.jpg",
+    westHollywood,
+    // "https://images.ctfassets.net/ypfe9l9zihcg/3m9ANvlRdYUUYMYQuE0eye/8be178a8b0c11ebfd99e207860201560/west-hollywood-hero.jpg",
     "Welcome to West Hollywood\n" +
       "In the 1920’s, gambling was illegal in the city of Los Angeles but still legal in Los Angeles County. Since West Hollywood was still unincorporated at the time, casinos and nightclubs started popping up around what is now the Sunset Strip. There might not be much gambling these days, but West Hollywood still holds onto the bright lights and ubiquitous energy.",
     null,
@@ -198,7 +206,8 @@ let item = [
     "neighborhood_item_5",
     "Los Angeles",
     "Studio City",
-    "https://images.ctfassets.net/ypfe9l9zihcg/3Ka5LrJHYA02AwiWC0WAs4/3751cc7e828e79ab83ec08fbeac8f691/studio-city-hero.jpg",
+    studioCity,
+    // "https://images.ctfassets.net/ypfe9l9zihcg/3Ka5LrJHYA02AwiWC0WAs4/3751cc7e828e79ab83ec08fbeac8f691/studio-city-hero.jpg",
     "Welcome to Studio City\n" +
       "A compelling blur of quaint and trendy, little has changed in this San Fernando Valley neighborhood since Mack Sennett began building what is now CBS Studios in 1927. Offering a small selection of hip boutiques, eateries, and nightlife spots, Studio City’s true appeal is revealed in its tree-lined streets and beautiful Santa Monica foothill scenery.",
     null,
@@ -236,57 +245,59 @@ let item = [
       "https://images.ctfassets.net/ypfe9l9zihcg/3c8s3Unmnmmg06wMuoIkgy/7dd0e51d72f0fcf2f0579d74aa2f605d/studio-city-youll-fall-in-love-with-1.jpg",
     ]
   ),
-  new NeighborhoodItem(
-    "neighborhood_item_6",
-    "Los Angeles",
-    "San Diego, La Jolla",
-    "https://images.ctfassets.net/ypfe9l9zihcg/6eST91eFBSwSwmMKkGyI2q/cd8420b35baf935d830dd38fb5dda79c/Hero1.jpg",
-    "Welcome to La Jolla\n" +
-      "A manicured oceanside resort community 12 miles north of downtown, La Jolla (“the jewel” in Spanish) is considered the Monte Carlo of Southern California—with good reason. This paradisiacal enclave is a natural and a cultural jewel indeed. Its arcing coastline’s natural coves give way to steep canyons and hillsides peppered with homes worth millions, and then there’s the ideal Mediterranean climate, elite shopping and dining, art galleries, and prestigious institutions—the Scripps Institution of Oceanography and the Salk Institute among them—that La Jollans enjoy. It should come as no surprise that this is one of San Diego’s most highly coveted areas to settle.",
-    null,
-    "Hotels, Luxury Shopping, Restaurants, Art Galleries, Public Art, Museums, Culture, Golf, Beaches, Cove, Tourist Friendly",
-    "This seaside sanctum’s luxurious offerings have multiplied since its initial heyday as a resort area.",
-    "People have been drawn to La Jolla’s scenic beaches and cliffside tableaus since the 1890s, when the area was popularized as a beach vacation spot reachable by train. Originally, La Jolla was a village of small cottages scattered along cliffs and canyons. Today those cottages have given way to a multi-million dollar mansions and luxury hotels. “Jewel City” is now divvied into multiple neighborhoods including the Village of La Jolla, La Jolla Shores, La Jolla Farms, Bird Rock, and more, though its resort-like appeal remains. What makes this moneyed enclave so attractive—even some of the global ultrarich own second homes here—is that it strikes the ideal balance between stunning scenery and a elite array of activities and amenities. Upscale shops, fine dining, private clubs, boating, arts, culture, and more satisfy the culturati, while the celebrated topography is, well, simply poetic.",
-    [
-      "https://images.ctfassets.net/ypfe9l9zihcg/5cxH7f2suWuW6eiWkSUUim/3ae428e6a2aca9d568da1c3b276834b6/Large1.jpg",
-      "https://images.ctfassets.net/ypfe9l9zihcg/3KSaVq4NTG2sAMIS8YAwcK/d1a57221c97a01db1eaf8b1fcc3fb270/Small1.jpg",
-      "https://images.ctfassets.net/ypfe9l9zihcg/14XKLkafjeCOW8k0moQs0q/2a84c6698c809531f85633e79f00b8e1/Small2.jpg",
-    ],
-    "This upscale community balances its cosmopolitan vibe against a laid-back pace.",
-    "This is San Diego’s most prestigious community, but it’s still a beach town at heart. Even world-famous area restaurant George’s at the Cove has a relatively casual dress code. Still, La Jolla checks all the boxes for those who live the high life. There’s couture shopping on Prospect Street (sometimes called the 'Rodeo Drive of San Diego'), car dealerships selling Lamborghinis and Bentleys, luxury hotels like the historic Grande Colonial, plus plenty of fine dining, golf, spas, and top-rated scuba and surfing spots. Add in the area’s secluded trails, scenic overlooks, and perfect Mediterranean temperature and it’s all too easy to see why living in La Jolla is so desirable.",
-    [
-      "https://images.ctfassets.net/ypfe9l9zihcg/6COOjGZOkoEgcyuqQKiCcC/088191522d40ff0a139198bdc5529ddd/Large2.jpg",
-      "https://images.ctfassets.net/ypfe9l9zihcg/1mpV66wykQGmM8iIGckywS/6cd1981a772913c8ed4adb7a8bdb00c4/Small3.jpg",
-      "https://images.ctfassets.net/ypfe9l9zihcg/7vaRo7NldeGSewgOCyaYS0/9248955498d0c0a377aac1259c0006eb/Small4.jpg",
-    ],
-    "Activities revolve around the stunning shoreline and plethora of water activities.",
-    "From scuba diving in La Jolla Cove to stand-up paddle boarding at La Jolla Shores, surfing at Windansea Beach, or sunning at Black’s Beach (in the buff, if you like—nudity is legal there), the beautiful coastline draws residents and people from all over the city daily. It’s not even unheard of for locals to pop on a swim cap and paddle right next to the seals and sea lions in the Cove. And later? Cocktails on elegant restaurant decks overlooking the ocean beckon.",
-    [
-      "https://images.ctfassets.net/ypfe9l9zihcg/6bzA7JlXagiw2IWOoUsiSE/d11ba57e64d2e5b1918a7f33bae9ae2a/Large4.jpg",
-      "https://images.ctfassets.net/ypfe9l9zihcg/10g1agQc3IGEE8YkagY8g/0e7bbb7cb15fc9df53c028df70e6eb25/Small5.jpg",
-      "https://images.ctfassets.net/ypfe9l9zihcg/67MHj7xgDCUoqwAwgAeSmY/a0faa11fce4c614228df3bf2a7f69e0e/Small6.jpg",
-    ],
-    "A booming arts scene, with incredible murals displayed in the open for the enjoyment of all.",
-    "La Jolla is known for contemporary art, but the ‘hood’s most Instagrammable work isn’t in a gallery. Instead, it’s exhibited publicly, usually on the side of private buildings. Look around any corner as you walk through downtown La Jolla Village and you’ll see them—the vibrant, large-scale murals of The La Jolla Mural Project. This artist-commissioned eye candy is on display for a minimum of two years, and turning a corner to discover one of these gems is a total delight. For a deeper dive into La Jolla’s cultural offerings, don’t miss the Museum of Contemporary Art San Diego on Prospect Street, the Tony Award-winning La Jolla Playhouse, classical music performances from the La Jolla Music Society, and the Birch Aquarium at Scripps.",
-    [
-      "https://images.ctfassets.net/ypfe9l9zihcg/3w4xZICBraQoKoKeOUGC0U/842417019178866230864d590c337d1c/la-jolla.png",
-      "https://images.ctfassets.net/ypfe9l9zihcg/3v3zmVeeFqYAEgY4ksSEMo/7ef06bf7ddadfb51538c72f650834ef3/Small7.jpg",
-      "https://images.ctfassets.net/ypfe9l9zihcg/2y6nZzn45y0CcUKQKM6gq0/c00ab08a3febd024e877968fb002185d/Small8.jpg",
-    ],
-    "Filled with some of the city’s most exceptional homes, listings regularly reach the multi-millions.",
-    "This is some of San Diego’s prized real estate, with median prices hovering around $2 million. The closer the home to the neighborhood’s seven miles of breathtaking coastline—or the better the ocean view—the pricier the property. And while many are hidden behind gates or visible only from the ocean, there’s some truly incredible oceanfront estates and quiet beach getaways scattered along the shore. Everything from turn-of-the-century Spanish architectural masterpieces to modern gated manors is on offer, some even with direct access to the area’s beautiful beaches.",
-    [
-      "https://images.ctfassets.net/ypfe9l9zihcg/3o0v0UeExWasyGei0CyaaW/bb4bb9406b93b818ff33a1cc2286a490/Large3__1_.jpg",
-      "https://images.ctfassets.net/ypfe9l9zihcg/38A55uNrFe6AScUKykQoom/91310c5961ba8c11b9ed2447ab745139/Small9.jpg",
-      "https://images.ctfassets.net/ypfe9l9zihcg/6om8pjlk4gcggQESGgwosO/50c53ce2b3d1f6632df5f17474e4e26e/Small10.jpg",
-      "https://images.ctfassets.net/ypfe9l9zihcg/13WpqLXVLaeg6WEsAwkCeg/6af994632fed79412a796e91bac66579/Large5.jpg",
-    ],
-    "Stunning La Jolla Cove, with its winding pathways, coastal views, and chatty resident sea lions and seals.",
-    "Certain La Jolla denizens are lucky enough to claim one of the most covetable of the area’s protected coastal stretches as their home—the native sea lions and harbor seals, that is. The best place to visit these beloved marine mammals is to walk along Coast Boulevard to La Jolla Cove, a small rocky cove beach where they love to sunbathe. It’s possible to walk through a small gate out onto the rocks close to the lounging sea creatures to snap photos.",
-    [
-      "https://images.ctfassets.net/ypfe9l9zihcg/8QxcVtvuV2Sm8AE6e40My/4acc626cbd66aedfbb13618acceabd7d/Large6.jpg",
-    ]
-  ),
+
+  //! La Jolla
+  // new NeighborhoodItem(
+  //   "neighborhood_item_6",
+  //   "Los Angeles",
+  //   "San Diego, La Jolla",
+  //   "https://images.ctfassets.net/ypfe9l9zihcg/6eST91eFBSwSwmMKkGyI2q/cd8420b35baf935d830dd38fb5dda79c/Hero1.jpg",
+  //   "Welcome to La Jolla\n" +
+  //     "A manicured oceanside resort community 12 miles north of downtown, La Jolla (“the jewel” in Spanish) is considered the Monte Carlo of Southern California—with good reason. This paradisiacal enclave is a natural and a cultural jewel indeed. Its arcing coastline’s natural coves give way to steep canyons and hillsides peppered with homes worth millions, and then there’s the ideal Mediterranean climate, elite shopping and dining, art galleries, and prestigious institutions—the Scripps Institution of Oceanography and the Salk Institute among them—that La Jollans enjoy. It should come as no surprise that this is one of San Diego’s most highly coveted areas to settle.",
+  //   null,
+  //   "Hotels, Luxury Shopping, Restaurants, Art Galleries, Public Art, Museums, Culture, Golf, Beaches, Cove, Tourist Friendly",
+  //   "This seaside sanctum’s luxurious offerings have multiplied since its initial heyday as a resort area.",
+  //   "People have been drawn to La Jolla’s scenic beaches and cliffside tableaus since the 1890s, when the area was popularized as a beach vacation spot reachable by train. Originally, La Jolla was a village of small cottages scattered along cliffs and canyons. Today those cottages have given way to a multi-million dollar mansions and luxury hotels. “Jewel City” is now divvied into multiple neighborhoods including the Village of La Jolla, La Jolla Shores, La Jolla Farms, Bird Rock, and more, though its resort-like appeal remains. What makes this moneyed enclave so attractive—even some of the global ultrarich own second homes here—is that it strikes the ideal balance between stunning scenery and a elite array of activities and amenities. Upscale shops, fine dining, private clubs, boating, arts, culture, and more satisfy the culturati, while the celebrated topography is, well, simply poetic.",
+  //   [
+  //     "https://images.ctfassets.net/ypfe9l9zihcg/5cxH7f2suWuW6eiWkSUUim/3ae428e6a2aca9d568da1c3b276834b6/Large1.jpg",
+  //     "https://images.ctfassets.net/ypfe9l9zihcg/3KSaVq4NTG2sAMIS8YAwcK/d1a57221c97a01db1eaf8b1fcc3fb270/Small1.jpg",
+  //     "https://images.ctfassets.net/ypfe9l9zihcg/14XKLkafjeCOW8k0moQs0q/2a84c6698c809531f85633e79f00b8e1/Small2.jpg",
+  //   ],
+  //   "This upscale community balances its cosmopolitan vibe against a laid-back pace.",
+  //   "This is San Diego’s most prestigious community, but it’s still a beach town at heart. Even world-famous area restaurant George’s at the Cove has a relatively casual dress code. Still, La Jolla checks all the boxes for those who live the high life. There’s couture shopping on Prospect Street (sometimes called the 'Rodeo Drive of San Diego'), car dealerships selling Lamborghinis and Bentleys, luxury hotels like the historic Grande Colonial, plus plenty of fine dining, golf, spas, and top-rated scuba and surfing spots. Add in the area’s secluded trails, scenic overlooks, and perfect Mediterranean temperature and it’s all too easy to see why living in La Jolla is so desirable.",
+  //   [
+  //     "https://images.ctfassets.net/ypfe9l9zihcg/6COOjGZOkoEgcyuqQKiCcC/088191522d40ff0a139198bdc5529ddd/Large2.jpg",
+  //     "https://images.ctfassets.net/ypfe9l9zihcg/1mpV66wykQGmM8iIGckywS/6cd1981a772913c8ed4adb7a8bdb00c4/Small3.jpg",
+  //     "https://images.ctfassets.net/ypfe9l9zihcg/7vaRo7NldeGSewgOCyaYS0/9248955498d0c0a377aac1259c0006eb/Small4.jpg",
+  //   ],
+  //   "Activities revolve around the stunning shoreline and plethora of water activities.",
+  //   "From scuba diving in La Jolla Cove to stand-up paddle boarding at La Jolla Shores, surfing at Windansea Beach, or sunning at Black’s Beach (in the buff, if you like—nudity is legal there), the beautiful coastline draws residents and people from all over the city daily. It’s not even unheard of for locals to pop on a swim cap and paddle right next to the seals and sea lions in the Cove. And later? Cocktails on elegant restaurant decks overlooking the ocean beckon.",
+  //   [
+  //     "https://images.ctfassets.net/ypfe9l9zihcg/6bzA7JlXagiw2IWOoUsiSE/d11ba57e64d2e5b1918a7f33bae9ae2a/Large4.jpg",
+  //     "https://images.ctfassets.net/ypfe9l9zihcg/10g1agQc3IGEE8YkagY8g/0e7bbb7cb15fc9df53c028df70e6eb25/Small5.jpg",
+  //     "https://images.ctfassets.net/ypfe9l9zihcg/67MHj7xgDCUoqwAwgAeSmY/a0faa11fce4c614228df3bf2a7f69e0e/Small6.jpg",
+  //   ],
+  //   "A booming arts scene, with incredible murals displayed in the open for the enjoyment of all.",
+  //   "La Jolla is known for contemporary art, but the ‘hood’s most Instagrammable work isn’t in a gallery. Instead, it’s exhibited publicly, usually on the side of private buildings. Look around any corner as you walk through downtown La Jolla Village and you’ll see them—the vibrant, large-scale murals of The La Jolla Mural Project. This artist-commissioned eye candy is on display for a minimum of two years, and turning a corner to discover one of these gems is a total delight. For a deeper dive into La Jolla’s cultural offerings, don’t miss the Museum of Contemporary Art San Diego on Prospect Street, the Tony Award-winning La Jolla Playhouse, classical music performances from the La Jolla Music Society, and the Birch Aquarium at Scripps.",
+  //   [
+  //     "https://images.ctfassets.net/ypfe9l9zihcg/3w4xZICBraQoKoKeOUGC0U/842417019178866230864d590c337d1c/la-jolla.png",
+  //     "https://images.ctfassets.net/ypfe9l9zihcg/3v3zmVeeFqYAEgY4ksSEMo/7ef06bf7ddadfb51538c72f650834ef3/Small7.jpg",
+  //     "https://images.ctfassets.net/ypfe9l9zihcg/2y6nZzn45y0CcUKQKM6gq0/c00ab08a3febd024e877968fb002185d/Small8.jpg",
+  //   ],
+  //   "Filled with some of the city’s most exceptional homes, listings regularly reach the multi-millions.",
+  //   "This is some of San Diego’s prized real estate, with median prices hovering around $2 million. The closer the home to the neighborhood’s seven miles of breathtaking coastline—or the better the ocean view—the pricier the property. And while many are hidden behind gates or visible only from the ocean, there’s some truly incredible oceanfront estates and quiet beach getaways scattered along the shore. Everything from turn-of-the-century Spanish architectural masterpieces to modern gated manors is on offer, some even with direct access to the area’s beautiful beaches.",
+  //   [
+  //     "https://images.ctfassets.net/ypfe9l9zihcg/3o0v0UeExWasyGei0CyaaW/bb4bb9406b93b818ff33a1cc2286a490/Large3__1_.jpg",
+  //     "https://images.ctfassets.net/ypfe9l9zihcg/38A55uNrFe6AScUKykQoom/91310c5961ba8c11b9ed2447ab745139/Small9.jpg",
+  //     "https://images.ctfassets.net/ypfe9l9zihcg/6om8pjlk4gcggQESGgwosO/50c53ce2b3d1f6632df5f17474e4e26e/Small10.jpg",
+  //     "https://images.ctfassets.net/ypfe9l9zihcg/13WpqLXVLaeg6WEsAwkCeg/6af994632fed79412a796e91bac66579/Large5.jpg",
+  //   ],
+  //   "Stunning La Jolla Cove, with its winding pathways, coastal views, and chatty resident sea lions and seals.",
+  //   "Certain La Jolla denizens are lucky enough to claim one of the most covetable of the area’s protected coastal stretches as their home—the native sea lions and harbor seals, that is. The best place to visit these beloved marine mammals is to walk along Coast Boulevard to La Jolla Cove, a small rocky cove beach where they love to sunbathe. It’s possible to walk through a small gate out onto the rocks close to the lounging sea creatures to snap photos.",
+  //   [
+  //     "https://images.ctfassets.net/ypfe9l9zihcg/8QxcVtvuV2Sm8AE6e40My/4acc626cbd66aedfbb13618acceabd7d/Large6.jpg",
+  //   ]
+  // ),
 ];
 
 // let item = [

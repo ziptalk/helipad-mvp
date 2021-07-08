@@ -180,6 +180,7 @@ const Image: any = styled.img.attrs((props: any) => ({
 }))`
   max-width: 100%;
   height: auto;
+
   &:nth-child(odd) {
     margin-right: 20px;
   }

@@ -6,45 +6,48 @@ import { ReactComponent as BlackUserSvg } from "../../images/Header/ic_blackUser
 import { ReactComponent as WhiteUserSvg } from "../../images/Header/ic_whiteUser.svg";
 import { ReactComponent as BlackGlobalSvg } from "../../images/Header/ic_blackGlobal.svg";
 import { ReactComponent as WhiteGlobalSvg } from "../../images/Header/ic_whiteGlobal.svg";
-import Logout from "../LogoutButton";
+
 import BlackChatBot from "../BlackChatBot";
 import { ReactComponent as SearchSvg } from "../../images/Header/ic_search.svg";
-const HeaderPresenter = ({ authenticated, inviteCodeValidation }: any) => {
-  console.log("inviteCodeValidation", inviteCodeValidation);
+import DropdownMenu from "../DropdownMenu";
+const HeaderPresenter = ({
+  headerMode,
+  userIconCategory,
+  globalIconCategory,
+  onClickUserIcon,
+  clicked,
+  setClicked,
+}: any) => {
+  console.log("header headerMode:", headerMode);
   return (
     <>
-      {authenticated ? (
-        <Container>
-          <Link to="/asset/neighborhood">
-            <BlackLogo />
-          </Link>
-          <About primary>About us</About>
-          <BlackChatBot></BlackChatBot>
-          <LogoutButton></LogoutButton>
-          <IconBlock>
-            <WhiteUser />
-            <WhiteGlobal />
-            <SearchButton>
-              <Search />
-            </SearchButton>
-          </IconBlock>
-        </Container>
-      ) : (
-        <Container primary>
-          <Link to="/asset/neighborhood">
-            <WhiteLogo />
-          </Link>
-          <About>About us</About>
+      <Container>
+        <Link to="/asset/neighborhood">
+          <BlackLogo color={headerMode} />
+        </Link>
+        <About color={headerMode}>About us</About>
+        <BlackChatBot></BlackChatBot>
 
-          <IconBlock>
-            <BlackUser />
-            <BlackGlobal />
-            <SearchButton>
-              <Search />
-            </SearchButton>
-          </IconBlock>
-        </Container>
-      )}
+        <IconBlock>
+          <DropDownContainer>
+            <DropdownMenu
+              Component={() => <BlackUser color={headerMode} />}
+              param1={userIconCategory.param1}
+              param2={userIconCategory.param2}
+            />
+          </DropDownContainer>
+          <DropDownContainer>
+            <DropdownMenu
+              Component={() => <BlackGlobal color={headerMode} />}
+              param1={globalIconCategory.param1}
+              param2={globalIconCategory.param2}
+            />
+          </DropDownContainer>
+          <SearchButton>
+            <Search />
+          </SearchButton>
+        </IconBlock>
+      </Container>
     </>
   );
 };
@@ -53,36 +56,22 @@ const Container: any = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 1904px;
 
-  /* background-color: black; */
-  width: 100%;
-  position: absolute;
-  top: 0px;
-
-  background-color: ${(props: any) => (props.primary ? "black" : "white")};
+  /* background-color: ${(props: any) =>
+    props.primary ? "black" : "white"}; */
 `;
 
-const Container2 = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  /* background-color: black; */
-  width: 100%;
-  position: absolute;
-  top: 0px;
-  z-index: 1;
-  margin-bottom: 112px;
-`;
-const WhiteLogo = styled(WhiteLogoSvg)`
+const BlackLogo: any = styled(BlackLogoSvg)`
   margin-left: 60px;
   position: relative;
   z-index: 2;
-`;
-const BlackLogo = styled(BlackLogoSvg)`
-  margin-left: 60px;
-  position: relative;
-  z-index: 2;
+  fill: ${(props: any) =>
+    props.color === "white"
+      ? "white"
+      : props.color === "black"
+      ? "black"
+      : "black"};
 `;
 const About: any = styled.div`
   font-family: Poppins;
@@ -92,32 +81,56 @@ const About: any = styled.div`
   line-height: 27px;
   letter-spacing: 0px;
   padding-right: 20px;
-  color: black;
-  color: ${(props: any) => (props.primary ? "black" : "white")};
+
+  color: ${(props: any) =>
+    props.color === "white"
+      ? "white"
+      : props.color === "black"
+      ? "black"
+      : "white"};
   position: relative;
   z-index: 2;
 `;
-const IconBlock = styled.div``;
-const WhiteUser: any = styled(WhiteUserSvg)`
-  margin-right: 17px;
-  padding-bottom: 3px;
+const IconBlock = styled.div`
+  display: flex;
+  align-items: center;
 `;
-const WhiteGlobal: any = styled(WhiteGlobalSvg)`
-  margin-right: 39px;
-  padding-bottom: 3px;
-`;
+const DropDownContainer = styled.div``;
 const BlackUser: any = styled(BlackUserSvg)`
-  margin-right: 17px;
-  padding-bottom: 3px;
+  margin-right: 9px;
   position: relative;
   z-index: 2;
+  stroke: ${(props: any) =>
+    props.color === "white"
+      ? "white"
+      : props.color === "black"
+      ? "black"
+      : "black"};
+
+  transform: scale 1s ease-in;
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+  }
 `;
 const BlackGlobal: any = styled(BlackGlobalSvg)`
-  margin-right: 39px;
-  padding-bottom: 3px;
+  margin-left: 9px;
+  margin-right: 34px;
   position: relative;
   z-index: 2;
+  stroke: ${(props: any) =>
+    props.color === "white"
+      ? "white"
+      : props.color === "black"
+      ? "black"
+      : "black"};
+  transform: scale 1s ease-in;
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+  }
 `;
+
 const Search = styled(SearchSvg)``;
 const SearchButton = styled.button`
   width: 112px;
@@ -127,6 +140,4 @@ const SearchButton = styled.button`
   z-index: 2;
 `;
 
-const LogoutBlock = styled.div``;
-const LogoutButton = styled(Logout)``;
 export default HeaderPresenter;
