@@ -32,7 +32,14 @@ const Summary: React.FC<SummaryProps> = ({ data }) => {
   };
 
   return (
-    <Container style={{backgroundColor:"black", color:"white", width:"1904px", padding:"20px 100px 20px 100px"}}>
+    <Container
+      style={{
+        backgroundColor: "black",
+        color: "white",
+        width: "100%",
+        padding: "20px 100px 20px 100px",
+      }}
+    >
       <AddressWrapper>
         <Street>{data.buildingInformation.street}</Street>
         <Address>
@@ -196,7 +203,5 @@ const Contact = styled.div`
   height: 33px;
   background-image: url(${ContactImage});
 `;
-
-
 
 export default Summary;

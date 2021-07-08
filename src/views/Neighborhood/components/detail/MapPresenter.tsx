@@ -19,6 +19,7 @@ const MapPresenter = ({ regionInfo }: MapPresenterProps) => {
 
 const Container = styled.div`
   margin-bottom: 60px;
+  width: 100%;
 `;
 const MapBlock = styled.div`
   width: 100%;
@@ -28,7 +29,7 @@ const MapBlock = styled.div`
 const AttributeBlock = styled.div`
   display: flex;
   align-items: center;
-  width: 1496px;
+  width: 80%;
   height: 27px;
   margin-top: 20px;
   margin-left: 212px;

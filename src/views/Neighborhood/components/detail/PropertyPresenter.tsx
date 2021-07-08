@@ -124,12 +124,15 @@ const PropertyPresenter = ({ regionInfo }: PropertyPresenterProps) => {
   );
 };
 
-const Container = styled.div``;
+const Container = styled.div`
+  width: 100%;
+`;
 const Category = styled.div`
   margin-bottom: 60px;
+  width: 100%;
 `;
 const TextBlock = styled.div`
-  width: 1496px;
+  width: 77%;
   height: 149px;
   margin-bottom: 60px;
   text-align: center;
@@ -168,7 +171,7 @@ const Content = styled.div`
 `;
 const ImageBlock: any = styled.div`
   margin: 0 212px;
-  width: 1492px;
+  width: 85%;
   min-height: 70vh;
   display: flex;
 
