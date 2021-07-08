@@ -32,7 +32,7 @@ const Summary: React.FC<SummaryProps> = ({ data }) => {
   };
 
   return (
-    <Container style={{backgroundColor:"black", color:"white", width:"100vw", padding:"20px 100px 20px 100px"}}>
+    <Container style={{backgroundColor:"black", color:"white", width:"1904px", padding:"20px 100px 20px 100px"}}>
       <AddressWrapper>
         <Street>{data.buildingInformation.street}</Street>
         <Address>
@@ -100,7 +100,7 @@ const Container = styled.div`
   // width: 1452px;
   width: 100%;
   justify-content: space-between;
-  margin-top: 112px;
+  // margin-top: 112px;
 `;
 
 const AddressWrapper = styled.div`
@@ -130,6 +130,7 @@ const City = styled.div`
 `;
 
 const Dollar = styled.div``;
+
 const Won = styled.div``;
 
 const Price = styled.div`

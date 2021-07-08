@@ -81,9 +81,9 @@ const Container: any = styled.div`
   justify-content: space-between;
   // width: 512px;
   // height: 353px;
-  margin: 12px;
-  width: 250px;
-  height: 175px;
+  margin: 19px;
+  width: 306px;
+  height: 214px;
   // width: 100%;
   // max-width: 300px;
 
