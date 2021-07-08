@@ -16,35 +16,39 @@ const MainPresenter = ({ order, neighborhood }: NeighborhoodProps) => {
       {order % 2 === 0 ? (
         <Container>
           <Thumbnail thumbnail={thumbnailUrl}></Thumbnail>
-          <Content>
-            <StateBlock>
-              <StateIcon />
-              <State>{state}</State>
-            </StateBlock>
-            <RegionName>{regionName}</RegionName>
-            <Intro>{intro}</Intro>
-            <ReadMoreButton
-              to={"/asset/neighborhoodInfo/" + neighborhood.regionName}
-            >
-              <ReadMore />
-            </ReadMoreButton>
-          </Content>
+          <ContentContainer>
+            <Content>
+              <StateBlock>
+                <StateIcon />
+                <State>{state}</State>
+              </StateBlock>
+              <RegionName>{regionName}</RegionName>
+              <Intro>{intro}</Intro>
+              <ReadMoreButton
+                to={"/asset/neighborhoodInfo/" + neighborhood.regionName}
+              >
+                <ReadMore />
+              </ReadMoreButton>
+            </Content>
+          </ContentContainer>
         </Container>
       ) : (
         <Container>
-          <Content>
-            <StateBlock>
-              <StateIcon />
-              <State>{state}</State>
-            </StateBlock>
-            <RegionName>{regionName}</RegionName>
-            <Intro>{intro}</Intro>
-            <ReadMoreButton
-              to={"/asset/neighborhoodInfo/" + neighborhood.regionName}
-            >
-              <ReadMore />
-            </ReadMoreButton>
-          </Content>
+          <ContentContainer>
+            <Content>
+              <StateBlock>
+                <StateIcon />
+                <State>{state}</State>
+              </StateBlock>
+              <RegionName>{regionName}</RegionName>
+              <Intro>{intro}</Intro>
+              <ReadMoreButton
+                to={"/asset/neighborhoodInfo/" + neighborhood.regionName}
+              >
+                <ReadMore />
+              </ReadMoreButton>
+            </Content>
+          </ContentContainer>
           <Thumbnail thumbnail={thumbnailUrl}></Thumbnail>
         </Container>
       )}
@@ -56,17 +60,25 @@ const Container = styled.div`
   width: 100%;
   display: flex;
   color: black;
+  display: flex;
 `;
 const Thumbnail: any = styled.div`
-  width: 952px;
+  flex: 1;
+  /* width: 952px; */
   height: 880px;
+  width: 50%;
   background: url(${(props: any) => props.thumbnail});
   background-size: cover;
   text-decoration: none;
 `;
+const ContentContainer = styled.div`
+  flex: 1;
+  width: 50%;
+`;
 const Content = styled.div`
-  width: 854px;
+  /* width: 854px; */
   margin-top: 95px;
+
   margin-left: 106px;
 `;
 const StateBlock = styled.div`

@@ -56,7 +56,7 @@ const Container: any = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 1904px;
+  width: 100%;
 
   /* background-color: ${(props: any) =>
     props.primary ? "black" : "white"}; */
