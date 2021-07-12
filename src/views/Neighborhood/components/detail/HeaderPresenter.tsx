@@ -26,15 +26,14 @@ const HeaderPresenter = ({
 };
 
 const Container = styled.div`
-  margin-top: 216px;
+  width: 100%;
 `;
 const Content = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 1496px;
+  /* width: 1496px; */
   height: 1260px;
-  margin: 0 212px;
 `;
 const RegionName = styled.div`
   font-family: Poppins;
@@ -43,19 +42,19 @@ const RegionName = styled.div`
   font-weight: 500;
   line-height: 96px;
   letter-spacing: -2px;
-  width: 358px;
   height: 96px;
   margin: auto;
   margin-bottom: 30px;
 `;
 const Thumbnail: any = styled.div`
-  width: 1496px;
+  width: 80%;
   height: 880px;
   margin-bottom: 58px;
   background: url(${(props: any) => props.thumbnail});
   background-size: cover;
 `;
 const Intro = styled.div`
+  width: 80%;
   font-family: Poppins;
   font-size: 18px;
   font-style: normal;
