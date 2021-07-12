@@ -162,6 +162,7 @@ const ProcessBox = styled.div`
     margin: 0px;
     margin-left:180px;
     border-left: 1px solid black;
+    margin-bottom: 100px;
 `
 
 const DayCircle = styled.div`
