@@ -25,14 +25,15 @@ export class MapContainer extends React.Component {
 
     render(){
         const mapStyles = {
-            width: 'calc(100vw - 512px)',
+            // width: 'calc(100vw - 512px)',
+            width: "100%",
             height: '100vh'
         };
 
         console.log(this.props.data)
 
         return (
-            <Container>
+            <Container id="google-map-container">
                 <Map
                     google={this.props.google}
                     zoom={12}
@@ -67,6 +68,7 @@ export class MapContainer extends React.Component {
 }
 
 const Container = styled.div`
+    width: 100%;
   height: 100vh;
   overflow: hidden;
 `;

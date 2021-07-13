@@ -101,9 +101,9 @@ const Detail: React.FC<DetailProps> = ({ data }) => {
             header={
               <div style={{width:"100%", display:"flex", justifyContent:"center"}}>
               <PopupCategoryContainer>
-                {popupClick == 0 ? <PopupCategoryButton style={{backgroundColor:"white", color:"#212121"}}>View all</PopupCategoryButton> : <PopupCategoryButton>View all</PopupCategoryButton>}
-                {popupClick == 1 ? <PopupCategoryButton style={{backgroundColor:"white", color:"#212121"}}>Map</PopupCategoryButton> : <PopupCategoryButton>Map</PopupCategoryButton>}
-                {popupClick == 2 ? <PopupCategoryButton style={{backgroundColor:"white", color:"#212121"}}>Street View</PopupCategoryButton> : <PopupCategoryButton>Street View</PopupCategoryButton>}
+                {popupClick == 0 ? <PopupCategoryButton style={{backgroundColor:"white", color:"#212121"}}>View all</PopupCategoryButton> : <PopupCategoryButton onClick={()=>{setPopupClick(0)}}>View all</PopupCategoryButton>}
+                {popupClick == 1 ? <PopupCategoryButton style={{backgroundColor:"white", color:"#212121"}}>Map</PopupCategoryButton> : <PopupCategoryButton onClick={()=>{setPopupClick(1)}}>Map</PopupCategoryButton>}
+                {popupClick == 2 ? <PopupCategoryButton style={{backgroundColor:"white", color:"#212121"}}>Street View</PopupCategoryButton> : <PopupCategoryButton onClick={()=>{setPopupClick(2)}}>Street View</PopupCategoryButton>}
               </PopupCategoryContainer>
               </div>
             }>
@@ -191,7 +191,7 @@ const Detail: React.FC<DetailProps> = ({ data }) => {
               </StatusItem> */}
             </Status>
           </StatusContainer>
-          <Contact agent={data.agent} assetId={data.id} />
+          <Contact agent={data.agent} assetId={data.id} buildingInformation={data} />
         </RightBody>
       </Body>
     </Container>

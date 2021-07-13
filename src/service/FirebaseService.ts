@@ -60,8 +60,8 @@ export default class FirebaseService {
     return AssetService.getSavedAsset(userId);
   }
 
-  static sendMessage(from: string, to: string, message: string) {
-    return ContactService.sendMessage(from, to, message);
+  static sendMessage(from: string, to: string, message: string, asset: string, type: string) {
+    return ContactService.sendMessage(from, to, message, asset, type);
   }
 
   static getContactHistory(userId: string, agentId: string) {
