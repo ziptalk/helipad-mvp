@@ -38,7 +38,6 @@ const Contact: React.FC<ContactFieldProps> = ({ agent, assetId, buildingInformat
   const [kakaoId, setKakaoId] = useState('');
   const [email, setEmail] = useState('');
 
-
   async function getUserInfo(){
     if(user){
       let contacts = await userStore.doc(user.uid.toString()).get();
