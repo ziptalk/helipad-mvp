@@ -24,11 +24,14 @@ export default class ContactService {
     userId: string
   ): Promise<MessageContainer[]> {
     let contacts = await contactStore.where('user', '==', userId).get();
+    // let contacts = await contactStore.doc(userId).get();
     return Promise.all(
       contacts.docs.map((doc) => {
         return MessageContainer.fromObject(doc.data());
       })
+      // return MessageContainer.fromObject(contacts.data());
     );
+      
   }
 
   static async sendMessage(userId: string, agentId: string, message: string) {
