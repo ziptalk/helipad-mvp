@@ -12,7 +12,7 @@ import Process from "../../views/MyPage/components/process/Process";
 import ContactHistory from "../../views/MyPage/components/mypage/ContactHistory";
 import NeighborhoodContainer from "../../views/Neighborhood/components/list/NeighborhoodContainer";
 import NeighborhoodDetailContainer from "../../views/Neighborhood/components/detail/NeighborhoodDetailContainer";
-import { PotentialContainer } from "../../views/Admin/index";
+import { PotentialContainer } from "../../views/Potential/index";
 import FAQ from "../../views/Home/components/FAQ";
 const AssetRouter = ({ match }: RouteComponentProps) => {
   console.log("match url :", match.url);
