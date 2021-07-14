@@ -15,13 +15,27 @@ const HeaderPresenter = ({
   userIconCategory,
   globalIconCategory,
 }: any) => {
+  console.log("headerMode:", headerMode);
   return (
     <>
       <Container>
         <Link to="/asset/neighborhood">
           <BlackLogo color={headerMode} />
         </Link>
-        <About color={headerMode}>About us</About>
+        <CategoryContainer>
+          <Link to="/aboutUs">
+            <About color={headerMode}>About us</About>
+          </Link>
+          <Link to="/asset/neighborhood">
+            <Neighborhood color={headerMode}>Neighborhood</Neighborhood>
+          </Link>
+          <Link to="/faq">
+            <FAQ color={headerMode}>FAQ</FAQ>
+          </Link>
+          <Link to="/contactUs">
+            <ContactUs color={headerMode}>Contact us</ContactUs>
+          </Link>
+        </CategoryContainer>
         <BlackChatBot></BlackChatBot>
         <IconBlock>
           <DropDownContainer>
@@ -56,7 +70,11 @@ const Container: any = styled.div`
   /* background-color: ${(props: any) =>
     props.primary ? "black" : "white"}; */
 `;
-
+const CategoryContainer = styled.div`
+  width: 25%;
+  display: flex;
+  justify-content: space-between;
+`;
 const BlackLogo: any = styled(BlackLogoSvg)`
   margin-left: 60px;
   position: relative;
@@ -69,6 +87,8 @@ const BlackLogo: any = styled(BlackLogoSvg)`
       : "black"};
 `;
 const About: any = styled.div`
+  min-width: 145px;
+  text-align: center;
   font-family: Poppins;
   font-size: 18px;
   font-style: normal;
@@ -82,10 +102,13 @@ const About: any = styled.div`
       ? "white"
       : props.color === "black"
       ? "black"
-      : "white"};
+      : "black"};
   position: relative;
   z-index: 2;
 `;
+const Neighborhood: any = styled(About)``;
+const FAQ: any = styled(About)``;
+const ContactUs: any = styled(About)``;
 const IconBlock = styled.div`
   display: flex;
   align-items: center;
