@@ -23,7 +23,59 @@ const PotentialPresenter = ({
   onGoingList,
   chatHistoryList,
 }: PotentialPresenterProps) => {
-  const renderSwitch = (selectedCategory: string) => {
+  const renderSelectedCategory = (selectedCategory: string) => {
+    switch (selectedCategory) {
+      case SelectedCategory.favorite:
+        return (
+          <CategoryContainer>
+            <Selected>Favorite</Selected>
+            <Category
+              onClick={() => onClickedCategory(SelectedCategory.onGoing)}
+            >
+              OnGoing
+            </Category>
+            <Category
+              onClick={() => onClickedCategory(SelectedCategory.chatHistory)}
+            >
+              Chat History
+            </Category>
+          </CategoryContainer>
+        );
+      case SelectedCategory.onGoing:
+        return (
+          <CategoryContainer>
+            <Category
+              onClick={() => onClickedCategory(SelectedCategory.favorite)}
+            >
+              Favorite
+            </Category>
+            <Selected>OnGoing</Selected>
+            <Category
+              onClick={() => onClickedCategory(SelectedCategory.chatHistory)}
+            >
+              Chat History
+            </Category>
+          </CategoryContainer>
+        );
+      case SelectedCategory.chatHistory:
+        return (
+          <CategoryContainer>
+            <Category
+              onClick={() => onClickedCategory(SelectedCategory.favorite)}
+            >
+              Favorite
+            </Category>
+            <Category
+              onClick={() => onClickedCategory(SelectedCategory.onGoing)}
+            >
+              OnGoing
+            </Category>
+            <Selected>Chat History</Selected>
+          </CategoryContainer>
+        );
+    }
+  };
+  const renderSelectedList = (selectedCategory: string) => {
     switch (selectedCategory) {
       case SelectedCategory.favorite:
         return (
@@ -48,38 +100,11 @@ const PotentialPresenter = ({
         );
     }
   };
-
   return (
     <Container>
       <Title>Admin</Title>
-      <CategoryContainer>
-        {selectedCategory === SelectedCategory.favorite ? (
-          <Selected>Favorite</Selected>
-        ) : (
-          <Category
-            onClick={() => onClickedCategory(SelectedCategory.favorite)}
-          >
-            Favorite
-          </Category>
-        )}
-        {selectedCategory === SelectedCategory.onGoing ? (
-          <Selected>OnGoing</Selected>
-        ) : (
-          <Category onClick={() => onClickedCategory(SelectedCategory.onGoing)}>
-            OnGoing
-          </Category>
-        )}
-        {selectedCategory === SelectedCategory.chatHistory ? (
-          <Selected>Chat History</Selected>
-        ) : (
-          <Category
-            onClick={() => onClickedCategory(SelectedCategory.chatHistory)}
-          >
-            Chat History
-          </Category>
-        )}
-      </CategoryContainer>
-      {renderSwitch(selectedCategory)}
+      {renderSelectedCategory(selectedCategory)}
+      {renderSelectedList(selectedCategory)}
     </Container>
   );
 };

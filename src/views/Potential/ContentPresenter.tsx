@@ -31,7 +31,7 @@ const ContentPresenter = ({
             <No>{item.no}</No>
             <Name>{item.name}</Name>
             <Listing imgPath={item.listing}></Listing>
-            <RequestedDate></RequestedDate>
+            <RequestedDate>{item.requestedContactDate}</RequestedDate>
             <InitialDate readOnly={true}></InitialDate>
             <AcceptedDate readOnly={true}></AcceptedDate>
             <Escrow id={`${item.id}`}></Escrow>
@@ -141,6 +141,7 @@ const RequestedDate = styled.div`
   width: 220px;
   height: 20px;
   margin-left: 84px;
+  text-align: center;
 `;
 const InitialDate = styled.input.attrs({
   type: "date",

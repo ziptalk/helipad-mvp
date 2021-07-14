@@ -16,7 +16,7 @@ const PotentialContainer = () => {
   const [favoriteList, setFavoriteList] = useState<List[]>([]);
   const [onGoingList, setOnGoingList] = useState<List[]>([]);
   const [chatHistoryList, setChatHistoryList] = useState<List[]>([]);
-
+  console.log(favoriteList);
   useEffect(() => {
     setHeaderMode("black");
     const getResult = GetPotentialAndEscrowList.getFavoriteList();
