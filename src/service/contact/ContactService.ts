@@ -1,4 +1,4 @@
-import { contactStore } from '../../shared/Firebase';
+import { assetStore, contactStore } from '../../shared/Firebase';
 import { MessageContainer } from '../../model/MessageContainer';
 import firebase from 'firebase';
 
@@ -34,20 +34,37 @@ export default class ContactService {
       
   }
 
-  static async sendMessage(userId: string, agentId: string, message: string) {
+  static async sendMessage(userId: string, agentId: string, message: string, asset: string, type: string) {
     let doc = await contactStore
       .where('user', '==', userId)
       .where('agent', '==', agentId)
       .get();
+    console.log(doc);
+    console.log(doc.size);
     if (doc.size === 1) {
       let docId = doc.docs[0].id;
       return contactStore.doc(docId).update({
         messages: firebase.firestore.FieldValue.arrayUnion({
           timestamp: new Date(),
-          message: message,
-          type: 'question',
+          contact: message,
+          type: type,
         }),
       });
+    } else if (doc.size === 0) {
+      let assetDoc2 = await (await assetStore.where('id', '==', asset).get()).docs[0].ref;
+      let assetDoc =  await (await assetStore.where('id', '==', asset).get());
+      if (assetDoc.size === 1){
+        return contactStore.add({
+          user: userId,
+          agent: agentId,
+          messages: firebase.firestore.FieldValue.arrayUnion({
+            timestamp: new Date(),
+            contact: message,
+            type: type,
+          }),          
+          asset: assetDoc2
+        })
+      }
     }
     return undefined;
   }

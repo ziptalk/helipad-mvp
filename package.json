@@ -30,6 +30,7 @@
     "google-map-react": "^2.1.9",
     "google-maps-react": "^2.0.6",
     "i18next": "^20.2.2",
+    "infobip": "^0.1.0",
     "mobx": "^6.3.2",
     "mobx-react": "^7.2.0",
     "prop-types": "^15.7.2",

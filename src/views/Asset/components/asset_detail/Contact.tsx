@@ -13,20 +13,30 @@ import { RiKakaoTalkFill } from 'react-icons/ri';
 import { Link } from "react-router-dom";
 import { processStore } from '../../../../shared/Firebase';
 import { userStore } from '../../../../shared/Firebase';
+import { Infobip } from 'infobip';
+import Asset from "../../../../model/Asset";
+
+// type BuildingInformationProps = {
+//     buildingInformation: BuildingInformation;
+// }
 
 // import Expand from 'react-expand-animated';
 
 type ContactFieldProps = {
   agent: string;
   assetId: string;
+  buildingInformation: Asset;
 };
 
-const Contact: React.FC<ContactFieldProps> = ({ agent, assetId }) => {
+const Contact: React.FC<ContactFieldProps> = ({ agent, assetId, buildingInformation}) => {
   const { user } = useContext(AuthContext);
   const [content, setContent] = useState<string>();
   const history = useHistory();
   const { getCollapseProps, getToggleProps, isExpanded } = useCollapse();
   const [isAgent, setIsAgent] = useState(false);
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [kakaoId, setKakaoId] = useState('');
+  const [email, setEmail] = useState('');
 
   async function getUserInfo(){
     if(user){
@@ -86,6 +96,33 @@ const Contact: React.FC<ContactFieldProps> = ({ agent, assetId }) => {
 
   const escrowProcessOnClick = () => {
     
+  }
+
+  const sendOnClick = (type: string) => {
+    var sendInfo = ""
+    // var client = new Infobip('propwave', '*******')
+    // var message = {from: "InfoSMS", to : "01077683659", text : "Is test SMS"};
+
+    // client.SMS.send(message).then(res => console.log(res)).catch( err=> console.log(err));
+    if(type == "PhoneNumber"){
+      sendInfo = phoneNumber
+    }else if(type == "Email"){
+      sendInfo = email
+    }else if(type == "KakaoID"){
+      sendInfo = kakaoId
+    }
+
+    if(user){
+      ContactUseCase.send(user.uid, buildingInformation.agent, sendInfo, buildingInformation.id, type).then(
+          (value) => {
+              console.log("success")
+              console.log(phoneNumber)
+              console.log(value)
+          }
+      );
+      console.log(buildingInformation)
+      alert("Successfully sent. We'll get back to you right away.")
+    }
   }
 
   async function copyFirebaseOnClick(){
@@ -152,24 +189,24 @@ const Contact: React.FC<ContactFieldProps> = ({ agent, assetId }) => {
                 <ImPhone style={{width:"20px", height:"20px", marginRight:"7px"}}/>
                 <div>Phone</div>
               </ContactTitle>
-              <ContactForm placeholder="You do not need to enter (-)"/>
-              <SendButton>SEND</SendButton>
+              <ContactForm value={phoneNumber} onChange={(e)=>{setPhoneNumber(e.target.value)}} placeholder="You do not need to enter (-)"/>
+              <SendButton onClick={()=>sendOnClick("PhoneNumber")}>SEND</SendButton>
             </ContactWayBox>
             <ContactWayBox>
               <ContactTitle>
                 <GrMail style={{width:"20px", height:"20px", marginRight:"7px"}}/>
                 <div>Email</div>
               </ContactTitle>
-              <ContactForm placeholder="Please enter your email"/>
-              <SendButton>SEND</SendButton>
+              <ContactForm value={email} onChange={(e)=>{setEmail(e.target.value)}} placeholder="Please enter your email"/>
+              <SendButton onClick={()=>sendOnClick("Email")}>SEND</SendButton>
             </ContactWayBox>
             <ContactWayBox>
               <ContactTitle>
-                <RiKakaoTalkFill style={{width:"20px", height:"20px", marginRight:"7px"}}/>
+                <RiKakaoTalkFill  style={{width:"20px", height:"20px", marginRight:"7px"}}/>
                 <div>Kakao Talk ID</div>
               </ContactTitle>
-              <ContactForm placeholder="Enter your Kakao Talk ID"/>
-              <SendButton>SEND</SendButton>
+              <ContactForm value={kakaoId} onChange={(e)=>{setKakaoId(e.target.value)}} placeholder="Enter your Kakao Talk ID"/>
+              <SendButton onClick={()=>sendOnClick("KakaoID")}>SEND</SendButton>
             </ContactWayBox>
           </ContactBox>
         </section>
