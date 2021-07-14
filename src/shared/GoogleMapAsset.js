@@ -25,13 +25,12 @@ export class MapContainer extends React.Component {
 
     render(){
         const mapStyles = {
-            // width: 'calc(100% - 512px)',
-            // width: "100%",
-            width: "calc(1904px - 691px)",
-            height: '100vh'
+            // width: 'calc(100vw - 470px)',
+            width: "950px",
+            height: '247px'
         };
 
-        console.log(this.props.data)
+        console.log(this.props.data.assetLabel)
 
         return (
             <Container id="google-map-container">
@@ -39,29 +38,26 @@ export class MapContainer extends React.Component {
                     google={this.props.google}
                     zoom={12}
                     style={mapStyles}
-                    initialCenter={{
+                    center={{
                         // lat: 40.711,
                         // lng: -73.955
-                        lat: 34.0864142,
-                        lng: -118.4139961
+                        lat: this.props.data.assetLat,
+                        lng: this.props.data.assetLng
                     }}>
-                {this.props.data.map(asset=>
                     <Marker key="marker_1"
-                    icon={{
-                       url: 'https://ifh.cc/g/IlY3eY.png',
-                       anchor: new window.google.maps.Point(17, 46),
-                       scaledSize: new window.google.maps.Size(50, 37)
-                   }}
-                   position={{
-                       lat: asset.assetLat,
-                       lng: asset.assetLng
-                   }}
-                   label={asset.assetLabel}
-                   onClick={()=>this.onclickToLink(asset.assetId)}
-                   >
+                        icon={{
+                        url: 'https://ifh.cc/g/IlY3eY.png',
+                        anchor: new window.google.maps.Point(17, 46),
+                        scaledSize: new window.google.maps.Size(50, 37)
+                    }}
+                    position={{
+                        lat: this.props.data.assetLat,
+                        lng: this.props.data.assetLng
+                    }}
+                    label={this.props.data.assetLabel}
+                    onClick={()=>this.onclickToLink(this.props.data.assetId)}
+                    >
                    </Marker>
-                )}
-
                 </Map>
             </Container>
         );
