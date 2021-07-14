@@ -13,8 +13,6 @@ import Geocode from "react-geocode";
 import RangeSliders from "./PriceRangeSlider";
 import DoubleRangeSlider from "./DoubleRangeSlider";
 
-
-
 Geocode.setApiKey("AIzaSyAHHYSWgQGMPHXYRqCMMUSlxTvqrDepyeA");
 Geocode.setLanguage("en");
 Geocode.setRegion("es");
@@ -164,7 +162,9 @@ const AssetList: React.FC<AssetListProperties> = ({ history }: any) => {
       <AssetContainer>
         <AssetTitle>Beverly Hills, CA Homes for Sale & Real Estate</AssetTitle>
         <PriceControl>
-          <div style={{paddingTop:"20px", paddingLeft:"30px"}}>Purchase price</div>
+          <div style={{ paddingTop: "20px", paddingLeft: "30px" }}>
+            Purchase price
+          </div>
           {/* <RangeSliders /> */}
           <DoubleRangeSlider />
         </PriceControl>
@@ -178,7 +178,7 @@ const AssetList: React.FC<AssetListProperties> = ({ history }: any) => {
 
 const Container = styled.div`
   // width: 100vw;
-  width: 1904px;
+  width: 100%;
   // width: 100%;
   height: calc(100vh - 100px);
   display: flex;
@@ -187,9 +187,9 @@ const Container = styled.div`
 `;
 
 const MapContainer = styled.div`
-  width: calc(1904px - 691px);
-  align-items:right;
-  margin-left:0px;
+  width: calc(100vw - 691px);
+  align-items: right;
+  margin-left: 0px;
   // width: 60%;
   height: 100vh;
 `;
@@ -281,7 +281,7 @@ const AssetTitle = styled.div`
   color: white;
   text-align: center;
   padding-top: 10px;
-`
+`;
 
 const PriceControl = styled.div`
   width: 100%;
@@ -291,6 +291,6 @@ const PriceControl = styled.div`
   font-size: 22px;
   // padding: 20px;
   // padding-left: 30px;
-`
+`;
 
 export default AssetList;

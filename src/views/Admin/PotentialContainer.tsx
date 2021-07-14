@@ -14,6 +14,7 @@ const PotentialContainer = () => {
       event.target.parentNode.classList.add("check");
     }
   };
+  const selectTitle = () => {};
   return (
     <>
       {clickedPotential ? (
