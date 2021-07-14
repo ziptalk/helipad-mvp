@@ -3,6 +3,9 @@ import NeighborhoodItem from "../../../../model/NeighborhoodItem";
 import { Link } from "react-router-dom";
 import { ReactComponent as LineSvg } from "../../../../images/Neighborhood/ic_lineImg.svg";
 import { ReactComponent as readMoreSvg } from "../../../../images/Neighborhood/ic_readMore.svg";
+
+import LazyLoadingImg from "../../../../components/LazyLoadingImg";
+import "react-lazy-load-image-component/src/effects/opacity.css";
 type NeighborhoodProps = {
   order: number;
   neighborhood: NeighborhoodItem;
@@ -15,7 +18,8 @@ const MainPresenter = ({ order, neighborhood }: NeighborhoodProps) => {
     <>
       {order % 2 === 0 ? (
         <Container>
-          <Thumbnail thumbnail={thumbnailUrl}></Thumbnail>
+          {/* <Thumbnail thumbnail={thumbnailUrl}></Thumbnail> */}
+          <LazyLoadingImg thumbnailUrl={thumbnailUrl}></LazyLoadingImg>
           <ContentContainer>
             <Content>
               <StateBlock>
@@ -49,7 +53,8 @@ const MainPresenter = ({ order, neighborhood }: NeighborhoodProps) => {
               </ReadMoreButton>
             </Content>
           </ContentContainer>
-          <Thumbnail thumbnail={thumbnailUrl}></Thumbnail>
+          {/* <Thumbnail thumbnail={thumbnailUrl}></Thumbnail> */}
+          <LazyLoadingImg thumbnailUrl={thumbnailUrl}></LazyLoadingImg>
         </Container>
       )}
     </>
@@ -60,7 +65,6 @@ const Container = styled.div`
   width: 100%;
   display: flex;
   color: black;
-  display: flex;
 `;
 const Thumbnail: any = styled.div`
   flex: 1;

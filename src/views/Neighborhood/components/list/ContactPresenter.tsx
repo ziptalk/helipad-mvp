@@ -1,9 +1,10 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import BackgroundSvg from "../../../../images/Neighborhood/ic_contactBackground.svg";
+import BackgroundJpg from "../../../../images/Neighborhood/List/contactUs.jpg";
 import { ReactComponent as AdminEmailSvg } from "../../../../images/Neighborhood/ic_adminEmailIcon.svg";
 import { ReactComponent as AdminPhoneSvg } from "../../../../images/Neighborhood/ic_adminPhoneIcon.svg";
 import { ReactComponent as PointerSvg } from "../../../../images/Neighborhood/ic_contactPointer.svg";
+import LazyLoadingImg from "../../../../components/LazyLoadingImg";
 const ContactPresenter = () => {
   return (
     <Container>
@@ -40,11 +41,13 @@ const Container = styled.div`
   width: 100%;
   height: 740px;
 
-  background-image: url(${BackgroundSvg});
+  background-image: url(${BackgroundJpg});
   background-size: cover;
   color: white;
 `;
 const Content = styled.div`
+  position: absolute;
+  z-index: 2;
   margin-top: 133px;
   margin-left: 212px;
   width: 883px;

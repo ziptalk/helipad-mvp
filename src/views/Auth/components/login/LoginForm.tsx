@@ -27,7 +27,7 @@ const LoginForm = () => {
     setUser(userInfo.user);
     console.log("onLoginSuccess: ", userInfo);
     // history.push({ pathname: "/asset/neighborhood" });
-    history.push("/home");
+    history.push("/asset/neighborhood");
   };
 
   const onLoginFailed = (response: any) => {

@@ -4,25 +4,35 @@ import "react-dropdown/style.css";
 import styled from "styled-components";
 import UnopDropdown from "unop-react-dropdown";
 type DropdownMenuProps = {
-  param1: string;
-  param2: string;
+  mypageOrRegister: string;
+  signOutOrSignIn: string;
 };
 // 로그인 상태에 따라 userIcon의 메뉴를 다르게 보여줘야함
 // authenticate => true이면 [My Page, Sign out], false이면 [Register, Sign in]
-const DropdownMenu = ({ param1, param2, Component }: any) => {
+enum ClickedMenu {
+  mypage = "My Page",
+  register = "Register",
+  signout = "Sign Out",
+  signin = "Sign In",
+}
+const DropdownMenu = ({
+  mypageOrRegister,
+  signOutOrSignIn,
+  Component,
+}: any) => {
   const history = useHistory();
   const onClick = (event: any) => {
     const clickedButton = event.target.innerText;
     switch (clickedButton) {
-      case "My Page":
+      case ClickedMenu.mypage:
         break;
-      case "Register":
+      case ClickedMenu.register:
         history.push("/auth/registerForm");
         break;
-      case "Sign out":
+      case ClickedMenu.signout:
         history.push("/auth/logout");
         break;
-      case "Sign in":
+      case ClickedMenu.signin:
         history.push("/auth/login");
         break;
       default:
@@ -33,9 +43,9 @@ const DropdownMenu = ({ param1, param2, Component }: any) => {
     <Container>
       <UnopDropdown hover trigger={<Component />}>
         <ItemContainer>
-          <Item onClick={onClick}>{param1}</Item>
+          <Item onClick={onClick}>{mypageOrRegister}</Item>
           <Divider />
-          <Item onClick={onClick}>{param2}</Item>
+          <Item onClick={onClick}>{signOutOrSignIn}</Item>
         </ItemContainer>
       </UnopDropdown>
     </Container>

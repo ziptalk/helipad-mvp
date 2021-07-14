@@ -15,9 +15,9 @@ const HeaderPresenter = () => {
             Look around for a good place to start a special life
           </SubTitle>
         </TitleBlock>
+        <Scroll />
       </LandingBlock>
 
-      <Scroll />
       <MainHeaderBlock>
         <MainTitle>Neighborhood</MainTitle>
         <MainSubTitle>
@@ -40,15 +40,23 @@ const LandingBlock: any = styled.div`
   height: 900px;
   background: url(${(props: any) => props.imgPath});
   background-size: 100% 900px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `;
 
 const TitleBlock = styled.div`
-  position: absolute;
-  top: 349px;
-  left: 588px;
+  position: relative;
+  /* top: 349px; */
+  /* left: 588px; */
   z-index: 1;
   text-align: center;
   color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 `;
 const HomeIcon = styled(HomeSvg)`
   margin-bottom: 26px;
@@ -71,9 +79,10 @@ const SubTitle = styled.div`
   letter-spacing: 0em;
 `;
 const Scroll = styled(ScrollSvg)`
-  position: absolute;
-  left: 935px;
-  bottom: 350px;
+  position: relative;
+  top: 283px;
+  /* left: 935px; */
+  /* bottom: 100px; */
 `;
 const MainHeaderBlock = styled.div`
   display: flex;

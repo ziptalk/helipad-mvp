@@ -14,33 +14,42 @@ const HeaderPresenter = ({
   headerMode,
   userIconCategory,
   globalIconCategory,
-  onClickUserIcon,
-  clicked,
-  setClicked,
 }: any) => {
-  console.log("header headerMode:", headerMode);
+  console.log("headerMode:", headerMode);
   return (
     <>
       <Container>
         <Link to="/asset/neighborhood">
           <BlackLogo color={headerMode} />
         </Link>
-        <About color={headerMode}>About us</About>
+        <CategoryContainer>
+          <Link to="/aboutUs">
+            <About color={headerMode}>About us</About>
+          </Link>
+          <Link to="/asset/neighborhood">
+            <Neighborhood color={headerMode}>Neighborhood</Neighborhood>
+          </Link>
+          <Link to="/faq">
+            <FAQ color={headerMode}>FAQ</FAQ>
+          </Link>
+          <Link to="/contactUs">
+            <ContactUs color={headerMode}>Contact us</ContactUs>
+          </Link>
+        </CategoryContainer>
         <BlackChatBot></BlackChatBot>
-
         <IconBlock>
           <DropDownContainer>
             <DropdownMenu
               Component={() => <BlackUser color={headerMode} />}
-              param1={userIconCategory.param1}
-              param2={userIconCategory.param2}
+              mypageOrRegister={userIconCategory.mypageOrRegister}
+              signOutOrSignIn={userIconCategory.signOutOrSignIn}
             />
           </DropDownContainer>
           <DropDownContainer>
             <DropdownMenu
               Component={() => <BlackGlobal color={headerMode} />}
-              param1={globalIconCategory.param1}
-              param2={globalIconCategory.param2}
+              mypageOrRegister={globalIconCategory.korean}
+              signOutOrSignIn={globalIconCategory.english}
             />
           </DropDownContainer>
           <SearchButton>
@@ -61,7 +70,11 @@ const Container: any = styled.div`
   /* background-color: ${(props: any) =>
     props.primary ? "black" : "white"}; */
 `;
-
+const CategoryContainer = styled.div`
+  width: 25%;
+  display: flex;
+  justify-content: space-between;
+`;
 const BlackLogo: any = styled(BlackLogoSvg)`
   margin-left: 60px;
   position: relative;
@@ -74,6 +87,8 @@ const BlackLogo: any = styled(BlackLogoSvg)`
       : "black"};
 `;
 const About: any = styled.div`
+  min-width: 145px;
+  text-align: center;
   font-family: Poppins;
   font-size: 18px;
   font-style: normal;
@@ -87,10 +102,13 @@ const About: any = styled.div`
       ? "white"
       : props.color === "black"
       ? "black"
-      : "white"};
+      : "black"};
   position: relative;
   z-index: 2;
 `;
+const Neighborhood: any = styled(About)``;
+const FAQ: any = styled(About)``;
+const ContactUs: any = styled(About)``;
 const IconBlock = styled.div`
   display: flex;
   align-items: center;
