@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import ContactUseCase from "../../../../domain/ContactUseCase";
 import { AuthContext } from "../../../../router/config/Provider/AuthProvider";
@@ -12,6 +12,7 @@ import { GrMail } from 'react-icons/gr';
 import { RiKakaoTalkFill } from 'react-icons/ri';
 import { Link } from "react-router-dom";
 import { processStore } from '../../../../shared/Firebase';
+import { userStore } from '../../../../shared/Firebase';
 
 // import Expand from 'react-expand-animated';
 
@@ -25,6 +26,42 @@ const Contact: React.FC<ContactFieldProps> = ({ agent, assetId }) => {
   const [content, setContent] = useState<string>();
   const history = useHistory();
   const { getCollapseProps, getToggleProps, isExpanded } = useCollapse();
+  const [isAgent, setIsAgent] = useState(false);
+
+  async function getUserInfo(){
+    if(user){
+      let contacts = await userStore.doc(user.uid.toString()).get();
+      console.log(contacts)
+      if (!contacts) {
+        console.log('No such document!');
+      } else {
+        let dataResult = contacts.data();
+        if(dataResult){
+          if(dataResult.isAgent != undefined){
+            console.log(dataResult.isAgent);
+            setIsAgent(dataResult.isAgent)
+          }
+        }
+        // setIsAgent(dataResult.isAgent);
+        // let agentStatus = new Map(Object.entries(dataResult));
+        console.log('Document data:', contacts.data());
+      }
+    }
+  }
+  // console.log(user);
+  useEffect(() => {
+    if(user){
+      // ContactUseCase.getMyContactHistory(user.uid).then(
+      //     (value) => {
+      //         console.log(user.uid)
+      //         console.log(value)
+      //     }
+      // );
+      getUserInfo()
+      
+      
+    }
+  }, [])
 
   const onTextChange = (e: any) => {
     setContent(e.target.value);
@@ -76,6 +113,16 @@ const Contact: React.FC<ContactFieldProps> = ({ agent, assetId }) => {
   return (
     <>
     {/* <button onClick={copyFirebaseOnClick}>파베 복사</button> */}
+    {isAgent ? 
+      <Link to={`/process/adminprocess/${assetId}`} >
+        <Send style={{display:"flex", alignItems:"center", paddingLeft:"100px"}} onClick={escrowProcessOnClick}>
+          <div>
+            Proceed to Escrow Process 
+          </div>
+          <BsArrowRight style={{marginLeft:"10px", width:"33px", height:"33px"}}/>
+        </Send>
+      </Link>
+    : 
       <Link to={`/process/userprocess/${assetId}`} >
         <Send style={{display:"flex", alignItems:"center", paddingLeft:"100px"}} onClick={escrowProcessOnClick}>
           <div>
@@ -84,6 +131,8 @@ const Contact: React.FC<ContactFieldProps> = ({ agent, assetId }) => {
           <BsArrowRight style={{marginLeft:"10px", width:"33px", height:"33px"}}/>
         </Send>
       </Link>
+    }
+      
       <div style={{width:"100%", border:"1px solid black"}}>
         <Send {...getToggleProps()} style={{textAlign:"left", backgroundColor:'white', paddingLeft:"20px", paddingRight:"20px", display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom:"0px"}}>
           <div>

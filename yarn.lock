@@ -2182,6 +2182,11 @@
     schema-utils "^2.6.5"
     source-map "^0.7.3"
 
+"@popperjs/core@^2.9.2":
+  version "2.9.2"
+  resolved "https://registry.yarnpkg.com/@popperjs/core/-/core-2.9.2.tgz#adea7b6953cbb34651766b0548468e743c6a2353"
+  integrity sha512-VZMYa7+fXHdwIq1TDhSXoVmSPEGM/aa+6Aiq3nVVJ9bXr24zScr+NlKFKC3iPljA7ho/GAZr+d2jOf5GIRC30Q==
+
 "@protobufjs/aspromise@^1.1.1", "@protobufjs/aspromise@^1.1.2":
   version "1.1.2"
   resolved "https://registry.npmjs.org/@protobufjs/aspromise/-/aspromise-1.1.2.tgz"
@@ -2642,6 +2647,15 @@
   version "1.5.4"
   resolved "https://registry.npmjs.org/@types/q/-/q-1.5.4.tgz"
   integrity sha512-1HcDas8SEj4z1Wc696tH56G8OlRaH/sqZOynNNB+HF0WOeXPaxTtbYzJY2oEfiUxjSKjhCKr+MvR7dCHcEelug==
+
+"@types/react-datepicker@^4.1.2":
+  version "4.1.2"
+  resolved "https://registry.yarnpkg.com/@types/react-datepicker/-/react-datepicker-4.1.2.tgz#aad4764f0c25be72ca06cff2a80c07bcba24d02d"
+  integrity sha512-oG0TbkAmTdFy0G9QEcfv+7QyWMmffAyrXGf0bsEsTl+OECc2SRylYDc91RXekfZDpFXkPhPCQZfCYQehFanMlw==
+  dependencies:
+    "@types/react" "*"
+    date-fns "^2.0.1"
+    popper.js "^1.14.1"
 
 "@types/react-dom@^17.0.0":
   version "17.0.3"
@@ -4470,7 +4484,7 @@ class-utils@^0.3.5:
     isobject "^3.0.0"
     static-extend "^0.1.1"
 
-classnames@^2.2.3:
+classnames@^2.2.3, classnames@^2.2.6:
   version "2.3.1"
   resolved "https://registry.npmjs.org/classnames/-/classnames-2.3.1.tgz"
   integrity sha512-OlQdbZ7gLfGarSqxesMesDa5uz7KFbID8Kpq/SxIoNGDqY8lSYs0D+hhtBXhcdB3rcbXArFr7vlHheLk1voeNA==
@@ -5351,6 +5365,11 @@ date-and-time@^0.14.2:
   version "0.14.2"
   resolved "https://registry.npmjs.org/date-and-time/-/date-and-time-0.14.2.tgz"
   integrity sha512-EFTCh9zRSEpGPmJaexg7HTuzZHh6cnJj1ui7IGCFNXzd2QdpsNh05Db5TF3xzJm30YN+A8/6xHSuRcQqoc3kFA==
+
+date-fns@^2.0.1:
+  version "2.22.1"
+  resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-2.22.1.tgz#1e5af959831ebb1d82992bf67b765052d8f0efc4"
+  integrity sha512-yUFPQjrxEmIsMqlHhAhmxkuH769baF21Kk+nZwZGyrMoyLA+LugaQtC0+Tqf9CBUUULWwUJt6Q5ySI3LJDDCGg==
 
 debug@2.6.9, debug@^2.2.0, debug@^2.3.3, debug@^2.6.0, debug@^2.6.9:
   version "2.6.9"
@@ -10959,6 +10978,11 @@ popper.js@1.16.1-lts:
   resolved "https://registry.npmjs.org/popper.js/-/popper.js-1.16.1-lts.tgz"
   integrity sha512-Kjw8nKRl1m+VrSFCoVGPph93W/qrSO7ZkqPpTf7F4bk/sqcfWK019dWBUpE/fBOsOQY1dks/Bmcbfn1heM/IsA==
 
+popper.js@^1.14.1:
+  version "1.16.1"
+  resolved "https://registry.yarnpkg.com/popper.js/-/popper.js-1.16.1.tgz#2a223cb3dc7b6213d740e40372be40de43e65b1b"
+  integrity sha512-Wb4p1J4zyFTbM+u6WuO4XstYx4Ky9Cewe4DWrel7B0w6VVICvPwdOpotjzcf6eD8TsckVnIMNONQyPIUFOUbCQ==
+
 portfinder@^1.0.23, portfinder@^1.0.26:
   version "1.0.28"
   resolved "https://registry.npmjs.org/portfinder/-/portfinder-1.0.28.tgz"
@@ -11994,6 +12018,18 @@ react-collapsed@^3.0.2:
     raf "^3.4.1"
     tiny-warning "^1.0.3"
 
+react-datepicker@^4.1.1:
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/react-datepicker/-/react-datepicker-4.1.1.tgz#5ecef49c672b2250fca26327c988464e6ba52b62"
+  integrity sha512-vtZIA7MbUrffRw1CHiyOGtmTO/tTdZGr5BYaiRucHMTb6rCqA8TkaQhzX6tTwMwP8vV38Khv4UWohrJbiX1rMw==
+  dependencies:
+    "@popperjs/core" "^2.9.2"
+    classnames "^2.2.6"
+    date-fns "^2.0.1"
+    prop-types "^15.7.2"
+    react-onclickoutside "^6.10.0"
+    react-popper "^2.2.5"
+
 react-day-picker@^7.0.5:
   version "7.4.10"
   resolved "https://registry.npmjs.org/react-day-picker/-/react-day-picker-7.4.10.tgz"
@@ -12062,6 +12098,11 @@ react-facebook-login@^4.1.1:
   resolved "https://registry.npmjs.org/react-facebook-login/-/react-facebook-login-4.1.1.tgz"
   integrity sha512-COnHEHlYGTKipz4963safFAK9PaNTcCiXfPXMS/yxo8El+/AJL5ye8kMJf23lKSSGGPgqFQuInskIHVqGqTvSw==
 
+react-fast-compare@^3.0.1:
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/react-fast-compare/-/react-fast-compare-3.2.0.tgz#641a9da81b6a6320f270e89724fb45a0b39e43bb"
+  integrity sha512-rtGImPZ0YyLrscKI9xTpV8psd6I8VAtjKCzQDlzyDvqJA8XOW78TXYQwNRNd8g8JZnDu8q9Fu/1v4HPAVwVdHA==
+
 react-geocode@^0.2.3:
   version "0.2.3"
   resolved "https://registry.npmjs.org/react-geocode/-/react-geocode-0.2.3.tgz"
@@ -12091,6 +12132,19 @@ react-is@^16.6.0, react-is@^16.7.0, react-is@^16.8.1, react-is@^16.8.2:
   version "17.0.1"
   resolved "https://registry.npmjs.org/react-is/-/react-is-17.0.1.tgz"
   integrity sha512-NAnt2iGDXohE5LI7uBnLnqvLQMtzhkiAOLXTmv+qnF9Ky7xAPcX8Up/xWIhxvLVGJvuLiNc4xQLtuqDRzb4fSA==
+
+react-onclickoutside@^6.10.0:
+  version "6.11.2"
+  resolved "https://registry.yarnpkg.com/react-onclickoutside/-/react-onclickoutside-6.11.2.tgz#790e2100b9a3589eefca1404ecbf0476b81b7928"
+  integrity sha512-640486eSwU/t5iD6yeTlefma8dI3bxPXD93hM9JGKyYITAd0P1JFkkcDeyHZRqNpY/fv1YW0Fad9BXr44OY8wQ==
+
+react-popper@^2.2.5:
+  version "2.2.5"
+  resolved "https://registry.yarnpkg.com/react-popper/-/react-popper-2.2.5.tgz#1214ef3cec86330a171671a4fbcbeeb65ee58e96"
+  integrity sha512-kxGkS80eQGtLl18+uig1UIf9MKixFSyPxglsgLBxlYnyDf65BiY9B3nZSc6C9XUNDgStROB0fMQlTEz1KxGddw==
+  dependencies:
+    react-fast-compare "^3.0.1"
+    warning "^4.0.2"
 
 react-promise@^3.0.2:
   version "3.0.2"
@@ -14632,6 +14686,13 @@ walker@^1.0.7, walker@~1.0.5:
   integrity sha1-L3+bj9ENZ3JisYqITijRlhjgKPs=
   dependencies:
     makeerror "1.0.x"
+
+warning@^4.0.2:
+  version "4.0.3"
+  resolved "https://registry.yarnpkg.com/warning/-/warning-4.0.3.tgz#16e9e077eb8a86d6af7d64aa1e05fd85b4678ca3"
+  integrity sha512-rpJyN222KWIvHJ/F53XSZv0Zl/accqHR8et1kpaMTD/fLCRxtV8iX8czMzY7sVZupTI3zcUTg8eycS2kNF9l6w==
+  dependencies:
+    loose-envify "^1.0.0"
 
 watchpack-chokidar2@^2.0.1:
   version "2.0.1"

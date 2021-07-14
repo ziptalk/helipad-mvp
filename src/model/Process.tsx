@@ -1,4 +1,7 @@
 import { High } from "../views/Asset/components/asset_detail/SchoolNearBy/component";
+import firebase from 'firebase'
+
+type Timestamp = firebase.firestore.Timestamp;
 
 export default class Process {
     constructor(
@@ -48,7 +51,7 @@ class Day {
 class Task {
     constructor(
         readonly agent: string,
-        readonly deadline: Long,
+        readonly deadline: Timestamp,
         readonly description: string,
         readonly done: boolean,
         readonly day: number
@@ -57,7 +60,7 @@ class Task {
     static fromObject(object: any) {
         return new Task(
             object["agent"] as string,
-            object["deadline"] as Long,
+            object["deadline"] as Timestamp,
             object["description"] as string,
             object["done"] as boolean,
             object["day"] as number

@@ -6,7 +6,7 @@ import {
   Redirect,
   RouteComponentProps,
 } from "react-router-dom";
-import { ProcessRoutes } from "../../views/Process";
+import { ProcessRoutes, AdminProcessRoutes } from "../../views/Process";
 import PrivateRoutes from "./PrivateRouter/PrivateRoutes";
 // import Process from "../../views/MyPage/components/process/Process";
 
@@ -22,6 +22,10 @@ const ProcessRouter = ({ match }: RouteComponentProps) => {
             <PrivateRoutes
               path={`${match.url}/userprocess`}
               component={ProcessRoutes}
+            />
+            <PrivateRoutes
+              path={`${match.url}/adminprocess`}
+              component={AdminProcessRoutes}
             />
           </div>
         </section>
