@@ -41,10 +41,23 @@ const AdminProcess = ({ match }: RouteComponentProps<MatchParams>) => {
   const [done, setDone] = useState(false);
   const [deadline, setDeadline] = useState(new Date());
   const [day, setDay] = useState(-1);
+  const [today, setToday] = useState('');
 
 
   useEffect(() => {
     //   if(id == 'test_id_2'){
+        var d = new Date(),
+            month = '' + (d.getMonth() + 1),
+            day = '' + d.getDate(),
+            year = d.getFullYear();
+
+        if (month.length < 2) 
+            month = '0' + month;
+        if (day.length < 2) 
+            day = '0' + day;
+        var resultDate = [year, month, day].join('.');
+        setToday(resultDate)
+
         try{
             GetAsset.getAsset(id).then((value) => {
                 setAsset(value);
@@ -313,6 +326,11 @@ const AdminProcess = ({ match }: RouteComponentProps<MatchParams>) => {
                                 <>
                                 {(editState[0] == index && editState[1] == index2) ?
                                 <>
+                                <div style={{display:"flex", marginLeft:"-150px"}}>
+                                    <div style={{marginRight:"30px", marginTop:"-5px"}}>
+                                        <TodayTag>TODAY</TodayTag>
+                                        <div style={{fontSize:"18px", fontWeight:500, color:"#F15524", textAlign:"right", marginRight:"-10px", marginTop:"17px"}}>{today}</div>
+                                    </div>
                                 <EditContainer>
                                     <div style={{display:"flex", justifyContent:"space-between"}}>
                                         <div style={{width: "80%"}}>
@@ -327,11 +345,24 @@ const AdminProcess = ({ match }: RouteComponentProps<MatchParams>) => {
                                             <DescriptionInput value={description} onChange={handleDescriptionOnchange}></DescriptionInput>
                                             {/* <div>{tasks.description.toString()}</div> */}
                                             <DeadlineContainer>
-                                                <FiCalendar style={{fontSize:"25px", fontWeight:100}}/>
-                                                <div style={{marginLeft:"10px"}}>
-                                                    <div style={{fontSize:"7px"}}>Deadline</div>
-                                                    <DatePicker selected={deadline} onChange={(date: Date) => setDeadline(date)} />
-                                                </div>
+                                                {done ? 
+                                                <>
+                                                    <FiCalendar style={{fontSize:"25px", fontWeight:100, color:"#359545"}}/>
+                                                    <div style={{marginLeft:"16px", color:"#359545"}}>
+                                                        <div style={{fontSize:"10px"}}>Deadline</div>
+                                                        <DatePicker selected={deadline} onChange={(date: Date) => setDeadline(date)} />
+                                                    </div>
+                                                </>
+                                                :
+                                                <>
+                                                    <FiCalendar style={{fontSize:"25px", fontWeight:100, color:'#F15524'}}/>
+                                                    <div style={{marginLeft:"16px", color:"#F15524"}}>
+                                                        <div style={{fontSize:"10px"}}>Deadline</div>
+                                                        <DatePicker selected={deadline} onChange={(date: Date) => setDeadline(date)} />
+                                                    </div>
+                                                </>
+                                                }
+                                                
                                             </DeadlineContainer>
                                         </div>
                                         <ButtonBoxContainer style={{textAlign:"right"}}>
@@ -343,6 +374,7 @@ const AdminProcess = ({ match }: RouteComponentProps<MatchParams>) => {
                                         </ButtonBoxContainer>
                                     </div>
                                 </EditContainer>
+                                </div>
                                 </>
                                 :
                                     <TaskContainer onMouseEnter={()=>handleMouseHover(index, index2)}>
@@ -354,7 +386,7 @@ const AdminProcess = ({ match }: RouteComponentProps<MatchParams>) => {
                                         {tasks.agent == "HELIPAD" ? <AgentBox style={{backgroundColor:"#B69142"}}><CgProfile style={{marginRight:"3px"}}/><div>{tasks.agent}</div></AgentBox> : <AgentBox style={{backgroundColor:"#CE723E"}}><CgProfile style={{marginRight:"3px"}}/><div>{tasks.agent}</div></AgentBox>}
                                         </>}
                                         
-                                        <div>{tasks.description.toString()}</div>
+                                        <div style={{fontSize:"18px", fontWeight:400}}>{tasks.description.toString()}</div>
                                         {(hoverState[0] == index && hoverState[1] == index2) ?
                                         <EditButton onClick={editButtonOnClick}>✍️ edit</EditButton>
                                         :<></>}
@@ -382,18 +414,20 @@ const AdminProcess = ({ match }: RouteComponentProps<MatchParams>) => {
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  width: 1904px;
+  width: 100%;
+//   font-family: Poppins;
+//   font-weight: 900;
 `;
 
 const DescriptionBox = styled.div`
     margin: 50px;
     margin-left: 100px;
-    margin-bottom: 30px;
+    margin-bottom: 53px;
 `
 
 const DescriptionTitle = styled.div`
-    font-size: 40px;
-    font-weight: 700;
+    font-size: 60px;
+    font-weight: 600;
 `
 
 const AnnounceBox = styled.div`
@@ -401,13 +435,14 @@ const AnnounceBox = styled.div`
 `
 
 const AnnounceSentence = styled.div`
-    font-size: 12px;
+    font-size: 18px;
     margin-bottom: 7px;
+    font-weight: 400;
 `
 
 const ProcessBox = styled.div`
     margin: 0px;
-    margin-left:180px;
+    margin-left:230px;
     border-left: 1px solid black;
     margin-bottom: 100px;
 `
@@ -419,17 +454,17 @@ const DeadlineContainer = styled.div`
 `
 
 const DayCircle = styled.div`
-    width: 50px;
-    height: 50px;
-    border-radius: 25px;
-    background-color: black;
+    width: 80px;
+    height: 80px;
+    border-radius: 40px;
+    background-color: #212121;
     color: white;
-    font-size: 11px;
-    font-weight: 700;
+    font-size: 18px;
+    font-weight: 600;
     text-align: center;
     align-items: center;
-    padding-top: 18px;
-    margin-left: -26px;
+    padding-top: 28px;
+    margin-left: -41px;
 `
 
 const TaskContainer = styled.div`
@@ -478,11 +513,11 @@ const SemiLine = styled.div`
 const AgentBox = styled.div`
     display: flex;
     align-items: center;
-    height: 18px;
-    border-radius: 9px;
+    height: 28px;
+    border-radius: 14px;
     color: white;
-    font-size: 10px;
-    font-weight: 600;
+    font-size: 14px;
+    font-weight: 500;
     text-align: center;
     margin-right: 20px;
     padding-left: 10px;
@@ -497,6 +532,7 @@ const SaveButton = styled.button`
     font-size: 20px;
     background-color: #B69142;
     border-radius: 30px;
+    border: 0;
 `
 
 const AgentInput = styled.input`
@@ -518,7 +554,9 @@ const DescriptionInput = styled.input`
 
 const EditContainer = styled.div`
     width: 800px;
-    margin-left: -30px;
+    // margin-left: -30px;
+    margin-top: 30px;
+    margin-bottom: 30px;
     border: 2px solid black;
     background-color: white;
     padding: 20px;
@@ -527,6 +565,35 @@ const EditContainer = styled.div`
 const ButtonBoxContainer = styled.div`
     width: 20%;
     height: 100%;
+`
+
+const TodayTag = styled.div`
+    background: #F15524;
+    color: white;
+    text-align: center;
+    align-items: center;
+    display: inline-block;
+    height: 28px;
+    margin-left: 20px;
+    margin-top: 55px;
+    position: relative;
+    width: 72px;
+    border-radius: 4px;
+    font-size: 14px;
+    padding-top: 4px;
+    font-weight: 500;
+    &:before {
+        border-bottom: 14px solid transparent;
+        border-left: 10px solid #F15524;
+        border-top: 14px solid transparent;
+        content: "";
+        height: 0;
+        left: 70px;
+        position: absolute;
+        top: 0px;
+        width: 0;
+        border-radius: 4px;
+    }
 `
 
 export default AdminProcess;
