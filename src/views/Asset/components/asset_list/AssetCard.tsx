@@ -3,6 +3,8 @@ import { Link, RouteComponentProps, useHistory } from "react-router-dom";
 import "./AssetCard.css";
 import Asset from "../../../../model/Asset";
 import styled from "styled-components";
+import { FaHelicopter } from "react-icons/fa";
+import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 
 type AssetCardProps = {
   data: Asset;
@@ -10,6 +12,8 @@ type AssetCardProps = {
 
 const AssetCard = ({ data }: AssetCardProps) => {
   const [mouseOver, setMouseOver] = useState(false);
+  const [heart, setHeart] = useState(false);
+  const [onGoing, setOnGoing] = useState(false);
 
   const handlerMouseOver = (event: Event) => {
     setMouseOver(true);
@@ -19,22 +23,49 @@ const AssetCard = ({ data }: AssetCardProps) => {
     setMouseOver(false);
   };
 
+  const heartOnClick = () => {
+    setHeart(!heart);
+  }
+
+  const onGoingOnClick = () => {
+    setOnGoing(!onGoing);
+  }
+
   return (
-    <Link to={`/asset/assetList/${data.id}`} style={{ textDecoration: "none" }}>
       <Container
         background={data.buildingInformation.thumbnail}
         onMouseOver={handlerMouseOver}
         onMouseOut={handlerMouseOut}
       >
-        <ContainerGradient>
+        
           {mouseOver ? (
             <>
-              <ContainerContent2 style={{ position: "relative" }}>
+            <div style={{marginTop:"-31px", paddingTop:"0px"}}>
+              <ContainerContent2>
+                {/* <div style={{width:"100%", height:"30px"}}></div> */}
+                <div style={{display:"flex", alignItems:"right", width:"100%", marginTop:"0px", paddingTop:"30px", height:"30px"}}>
+                  {heart? 
+                  <button onClick={heartOnClick} style={{width:"32px", height:"32px", backgroundColor:"black", borderRadius:"16px", textAlign:"center", alignItems:"center", paddingTop:'6px', marginLeft:"200px", border:0}}><AiFillHeart style={{fontSize:"20px", color:"#EBB136"}}/></button>                  
+                  : 
+                  <button onClick={heartOnClick} style={{width:"32px", height:"32px", backgroundColor:"black", borderRadius:"16px", textAlign:"center", alignItems:"center", paddingTop:'6px', marginLeft:"200px", border:0}}><AiFillHeart style={{fontSize:"20px", color:"white"}}/></button>
+                  }
+                  {onGoing?
+                  <button onClick={onGoingOnClick} style={{width:"32px", height:"32px", backgroundColor:"black", borderRadius:"16px", textAlign:"center", alignItems:"center", paddingTop:'6px', marginLeft:"6px", border:0}}><FaHelicopter style={{fontSize:"20px", color:"#EBB136"}}/></button>
+                  :
+                  <button onClick={onGoingOnClick} style={{width:"32px", height:"32px", backgroundColor:"black", borderRadius:"16px", textAlign:"center", alignItems:"center", paddingTop:'6px', marginLeft:"6px", border:0}}><FaHelicopter style={{fontSize:"20px", color:"white"}}/></button>
+                }
+                </div>
+                <Link to={`/asset/assetList/${data.id}`} style={{ textDecoration: "none" }}>
                 <div
                   style={{
                     display: "flex",
+                    // position:"relative",
                     justifyContent: "space-between",
                     width: "100%",
+                    // marginTop:"-50px",
+                    marginTop:"50px",
+                    paddingTop:"30px",
+                    height:"30px"
                   }}
                 >
                   <button
@@ -63,35 +94,43 @@ const AssetCard = ({ data }: AssetCardProps) => {
                 <div
                   style={{
                     width: "100%",
-                    position: "absolute",
+                    // position: "absolute",
                     alignItems: "center",
                     textAlign: "center",
+                    paddingTop:"30px",
+                    // height:"20px"
                   }}
                 >
                   <div
                     style={{
                       backgroundColor: "black",
-                      marginLeft: "55px",
-                      marginTop: "30px",
+                      marginLeft: "100px",
+                      // marginTop: "30px",
                       color: "white",
                       fontSize: "12px",
-                      width: "100px",
+                      width: "72px",
                       height: "20px",
                       alignItems: "center",
                       textAlign: "center",
+                      marginBottom:"0px"
                     }}
                   >
                     01 of 01
                   </div>
                 </div>
+                </Link>
               </ContainerContent2>
+              </div>
             </>
           ) : (
+            <Link to={`/asset/assetList/${data.id}`} style={{ textDecoration: "none" }}>
+            <ContainerGradient>
+            <div>
             <ContainerContent>
               <LeftSide>
                 <PriceBlock>
                   <PriceDollar>
-                    ($){data.price.toLocaleString("en-US")}
+                    ${data.price.toLocaleString("en-US")}
                   </PriceDollar>
                 </PriceBlock>
                 <PlaceInfoBlock>
@@ -102,21 +141,30 @@ const AssetCard = ({ data }: AssetCardProps) => {
               <Divider />
               <RightSide>
                 <RoomInfoBlock>
-                  <RoomInfo>{data.buildingInformation.nBedrooms} Beds</RoomInfo>
                   <RoomInfo>
-                    {data.buildingInformation.nBathrooms} Bath
+                    <RoomInfoNum>{data.buildingInformation.nBedrooms}</RoomInfoNum>
+                    <div>Beds</div>
                   </RoomInfo>
-                  <RoomInfo>{data.buildingInformation.square} Sq m</RoomInfo>
                   <RoomInfo>
-                    {Math.round(data.buildingInformation.square / 3.3)} Pyung
+                    <RoomInfoNum>{data.buildingInformation.nBathrooms} </RoomInfoNum>
+                    <div>Bath</div>
+                  </RoomInfo>
+                  <RoomInfo>
+                    <RoomInfoNum>{data.buildingInformation.square}</RoomInfoNum>
+                    <div>Sq m</div>
+                    </RoomInfo>
+                  <RoomInfo>
+                  <RoomInfoNum>{Math.round(data.buildingInformation.square / 3.3)}</RoomInfoNum>
+                  Pyung
                   </RoomInfo>
                 </RoomInfoBlock>
               </RightSide>
             </ContainerContent>
+            </div>
+            </ContainerGradient>
+            </Link>
           )}
-        </ContainerGradient>
       </Container>
-    </Link>
   );
 };
 
@@ -157,7 +205,12 @@ const ContainerContent = styled.div`
   font-size: 8px;
   display: flex;
   padding: 20px 20px;
-  padding-top: 70px;
+  vertical-align: bottom;
+  // position: relative;
+  // top:100px;
+  // margin-top:60px;
+  padding-top: 120px;
+  // padding-bottom:20px;
 `;
 const ContainerContent2 = styled.div`
   color: #ffffff;
@@ -165,16 +218,16 @@ const ContainerContent2 = styled.div`
   // font-size: 25px;
   font-size: 8px;
   padding: 20px 20px;
-  padding-top: 70px;
+  // padding-top:17px;
 `;
 const LeftSide = styled.div`
   width: 60%;
 `;
 const PriceBlock = styled.div`
   // font-size: 22px;
-  font-size: 15px;
-  font-weight: 800;
-  padding-bottom: 10px;
+  font-size: 20px;
+  font-weight: 600;
+  padding-bottom: 2px;
 `;
 const PriceDollar = styled.div``;
 const PriceWon = styled.div``;
@@ -184,13 +237,19 @@ const PlaceInfoBlock = styled.div`
   font-size: 10px;
   // -webkit-transform:scale(0.9);
   font-weight: 500;
-  padding: 8px 0;
+  padding: 0px 0;
 `;
-const StreetInfo = styled.div``;
-const AddressInfo = styled.div``;
+const StreetInfo = styled.div`
+  font-size: 12px
+  font-weight: 400
+`;
+const AddressInfo = styled.div`
+  font-size: 12px
+  font-weight: 400
+`;
 
 const Divider = styled.div`
-  border-right: 1px solid #ffffff;
+  border-right: 0px solid #ffffff;
   margin: 0px 20px;
 `;
 
@@ -206,6 +265,15 @@ const RoomInfoBlock = styled.div`
 const RoomInfo = styled.div`
   margin: 5px 0;
   text-decoration: none;
+  display: flex;
+  font-weight: 300;
+  font-size: 10px;
 `;
+
+const RoomInfoNum = styled.div`
+  width : 30px;
+  font-size : 10px;
+  font-weight : 500;
+`
 
 export default AssetCard;

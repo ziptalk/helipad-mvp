@@ -108,9 +108,14 @@ const DoubleRangeSlider = () => {
                 xStep={100}
                 onChange={handleChange} />
             <div style={{display:"flex"}}>
-                <div style={{fontSize:"14px", padding:"20px", paddingLeft:"30px"}}>{assets.length} of {fullAssets.length} Homes</div>
-                <div style={{fontSize:"14px", padding:"20px", paddingLeft:"5px"}}>|</div>
-                <div style={{fontSize:"14px", padding:"20px", paddingLeft:"5px", color:"#B69142"}}>Sort by Recommended</div>
+                <div style={{fontSize:"14px", padding:"20px", paddingLeft:"30px", paddingRight:"0px", display:"flex"}}>
+                    <div style={{fontWeight:600, marginRight:"3px"}}>{assets.length}</div>
+                    <div style={{fontWeight:400, marginRight:"3px"}}>of</div>
+                    <div style={{fontWeight:600, marginRight:"3px"}}>{fullAssets.length}</div>
+                    <div style={{fontWeight:400}}>Homes</div>
+                </div>
+                {/* <div style={{fontSize:"14px", padding:"20px", paddingLeft:"5px"}}></div> */}
+                <div style={{fontSize:"14px", padding:"20px", paddingLeft:"5px",color:"#B69142"}}>Sort by Recommended</div>
             </div>
             {assets.map((asset) => (
             <AssetCard data={asset} />
