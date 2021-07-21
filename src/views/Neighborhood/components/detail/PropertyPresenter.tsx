@@ -183,6 +183,7 @@ const Image: any = styled.img.attrs((props: any) => ({
 }))`
   max-width: 100%;
   height: auto;
+  flex: 1;
 
   &:nth-child(odd) {
     margin-right: 20px;

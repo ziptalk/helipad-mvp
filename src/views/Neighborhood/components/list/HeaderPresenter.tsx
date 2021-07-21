@@ -32,7 +32,6 @@ const Container: any = styled.div`
   position: relative;
   width: 100%;
   height: 1200px;
-  z-index: 1;
 `;
 const LandingBlock: any = styled.div`
   position: relative;
@@ -44,6 +43,7 @@ const LandingBlock: any = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  z-index: 0;
 `;
 
 const TitleBlock = styled.div`

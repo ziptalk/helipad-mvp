@@ -14,13 +14,13 @@ const LoginForm = () => {
     setHeaderMode("black");
   });
   const onClickedLogin = (event: React.MouseEvent<HTMLDivElement>) => {
-    event.preventDefault();
-    LoginUseCase.execute(email, password)
-      .then((result) => {
-        console.log("result: ", result);
-        onLoginSuccess(result);
-      })
-      .catch((error) => onLoginFailed(error.code));
+    // event.preventDefault();
+    // LoginUseCase.execute(email, password)
+    //   .then((result) => {
+    //     console.log("result: ", result);
+    //     onLoginSuccess(result);
+    //   })
+    //   .catch((error) => onLoginFailed(error.code));
   };
 
   const onLoginSuccess = (userInfo: any) => {
@@ -89,7 +89,7 @@ const LoginForm = () => {
 
 const Form = styled.form`
   width: 100%;
-  margin-top: 40px;
+  margin-top: 100px;
   display: flex;
   flex-direction: column;
   font-size: 20px;

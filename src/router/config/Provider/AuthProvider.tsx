@@ -61,7 +61,7 @@ export const AuthProvider = ({ children }: any) => {
   const [user, setUser] = useState(null);
   const [loadingAuthState, setLoadingAuthState] = useState(true);
   const [inviteCodeValidation, setInviteCodeValidation] = useState(true);
-  const [headerMode, setHeaderMode] = useState("white");
+  const [headerMode, setHeaderMode] = useState("inviteCodeForm");
   useEffect(() => {
     firebase.auth().onAuthStateChanged((user: any) => {
       setUser(user);

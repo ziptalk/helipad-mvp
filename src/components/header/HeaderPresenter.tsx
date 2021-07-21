@@ -6,36 +6,44 @@ import { ReactComponent as BlackUserSvg } from "../../images/Header/ic_blackUser
 import { ReactComponent as WhiteUserSvg } from "../../images/Header/ic_whiteUser.svg";
 import { ReactComponent as BlackGlobalSvg } from "../../images/Header/ic_blackGlobal.svg";
 import { ReactComponent as WhiteGlobalSvg } from "../../images/Header/ic_whiteGlobal.svg";
-
 import BlackChatBot from "../BlackChatBot";
 import { ReactComponent as SearchSvg } from "../../images/Header/ic_search.svg";
 import DropdownMenu from "../DropdownMenu";
 const HeaderPresenter = ({
   headerMode,
+  isLandingPage,
   userIconCategory,
   globalIconCategory,
 }: any) => {
   console.log("headerMode:", headerMode);
+  console.log("isLandingPage:", isLandingPage);
+
+  const renderByHeaderMode = () => {
+    switch (headerMode) {
+      case "inviteCodeForm":
+        return <></>;
+      case "neighborhoodList":
+        return <></>;
+      default:
+        return (
+          <CategoryContainer>
+            <Link to="/aboutUs">
+              <About color={headerMode}>About us</About>
+            </Link>
+            <Link to="/asset/neighborhood">
+              <Neighborhood color={headerMode}>Neighborhood</Neighborhood>
+            </Link>
+          </CategoryContainer>
+        );
+    }
+  };
   return (
     <>
-      <Container>
+      <Container color={headerMode} isLandingPage={isLandingPage}>
         <Link to="/asset/neighborhood">
           <BlackLogo color={headerMode} />
         </Link>
-        <CategoryContainer>
-          <Link to="/aboutUs">
-            <About color={headerMode}>About us</About>
-          </Link>
-          <Link to="/asset/neighborhood">
-            <Neighborhood color={headerMode}>Neighborhood</Neighborhood>
-          </Link>
-          <Link to="/faq">
-            <FAQ color={headerMode}>FAQ</FAQ>
-          </Link>
-          <Link to="/contactUs">
-            <ContactUs color={headerMode}>Contact us</ContactUs>
-          </Link>
-        </CategoryContainer>
+        {renderByHeaderMode()}
         <BlackChatBot></BlackChatBot>
         <IconBlock>
           <DropDownContainer>
@@ -52,9 +60,6 @@ const HeaderPresenter = ({
               signOutOrSignIn={globalIconCategory.english}
             />
           </DropDownContainer>
-          <SearchButton>
-            <Search />
-          </SearchButton>
         </IconBlock>
       </Container>
     </>
@@ -67,24 +72,43 @@ const Container: any = styled.div`
   align-items: center;
   width: 100%;
 
-  /* background-color: ${(props: any) =>
-    props.primary ? "black" : "white"}; */
+  background-color: ${(props: any) =>
+    (props.color === "inviteCodeForm" || props.color === "neighborhoodList") &&
+    "transparent"};
+  position: ${(props: any) =>
+    (props.color === "inviteCodeForm" || props.color === "neighborhoodList") &&
+    "fixed"};
+  top: ${(props: any) =>
+    (props.color === "inviteCodeForm" || props.color === "neighborhoodList") &&
+    "0px"};
+  z-index: ${(props: any) =>
+    (props.color === "inviteCodeForm" || props.color === "neighborhoodList") &&
+    1};
 `;
+
 const CategoryContainer = styled.div`
-  width: 25%;
+  width: 12%;
   display: flex;
   justify-content: space-between;
+  margin-right: 120px;
+  @media ${({ theme }) => theme.mediaQueryOnDevice.notebookS} {
+    width: 18%;
+  }
 `;
 const BlackLogo: any = styled(BlackLogoSvg)`
   margin-left: 60px;
   position: relative;
-  z-index: 2;
+  z-index: 1;
   fill: ${(props: any) =>
-    props.color === "white"
+    props.color === "inviteCodeForm"
       ? "white"
-      : props.color === "black"
+      : props.color === "neighborhoodList"
       ? "black"
       : "black"};
+
+  @media ${({ theme }) => theme.mediaQueryOnDevice.notebookS} {
+    margin-left: 30px;
+  }
 `;
 const About: any = styled.div`
   min-width: 145px;
@@ -98,13 +122,13 @@ const About: any = styled.div`
   padding-right: 20px;
 
   color: ${(props: any) =>
-    props.color === "white"
+    props.color === "inviteCodeForm"
       ? "white"
-      : props.color === "black"
+      : props.color === "neighborhoodList"
       ? "black"
       : "black"};
   position: relative;
-  z-index: 2;
+  z-index: 1;
 `;
 const Neighborhood: any = styled(About)``;
 const FAQ: any = styled(About)``;
@@ -112,17 +136,18 @@ const ContactUs: any = styled(About)``;
 const IconBlock = styled.div`
   display: flex;
   align-items: center;
+  margin-right: 30px;
 `;
 const DropDownContainer = styled.div``;
 const BlackUser: any = styled(BlackUserSvg)`
   margin-right: 9px;
   position: relative;
-  z-index: 2;
+  z-index: 1;
   stroke: ${(props: any) =>
-    props.color === "white"
+    props.color === "inviteCodeForm"
       ? "white"
-      : props.color === "black"
-      ? "black"
+      : props.color === "neighborhoodList"
+      ? "white"
       : "black"};
 
   transform: scale 1s ease-in;
@@ -135,12 +160,12 @@ const BlackGlobal: any = styled(BlackGlobalSvg)`
   margin-left: 9px;
   margin-right: 34px;
   position: relative;
-  z-index: 2;
+  z-index: 1;
   stroke: ${(props: any) =>
-    props.color === "white"
+    props.color === "inviteCodeForm"
       ? "white"
-      : props.color === "black"
-      ? "black"
+      : props.color === "neighborhoodList"
+      ? "white"
       : "black"};
   transform: scale 1s ease-in;
   &:hover {
@@ -155,7 +180,7 @@ const SearchButton = styled.button`
   height: 112px;
   background-color: #b69142;
   position: relative;
-  z-index: 2;
+  z-index: 1;
 `;
 
 export default HeaderPresenter;

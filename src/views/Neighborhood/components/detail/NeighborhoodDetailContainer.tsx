@@ -16,13 +16,14 @@ const NeighborhoodDetailContainer = ({
   const [regionInfo, setRegionInfo] = useState<NeighborhoodItem>();
   const { setHeaderMode } = useContext(AuthContext);
   useEffect(() => {
-    setHeaderMode("black");
+    setHeaderMode("");
     let getResult = GetNeighborhoodList.getById(regionName)[0];
     setRegionInfo(getResult);
   }, []);
 
   const onClickHomesForSale = (event: any) => {
     event.preventDefault();
+    setHeaderMode("");
     history.push("/asset/assetList", regionName);
   };
   if (!regionInfo) {

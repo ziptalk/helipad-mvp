@@ -1,2 +1,2 @@
-import PotentialContainer from "./PotentialContainer";
+import PotentialContainer from "./components/PotentialContainer";
 export { PotentialContainer };

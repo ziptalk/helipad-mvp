@@ -7,13 +7,12 @@ type DropdownMenuProps = {
   mypageOrRegister: string;
   signOutOrSignIn: string;
 };
-// 로그인 상태에 따라 userIcon의 메뉴를 다르게 보여줘야함
-// authenticate => true이면 [My Page, Sign out], false이면 [Register, Sign in]
-enum ClickedMenu {
-  mypage = "My Page",
-  register = "Register",
-  signout = "Sign Out",
-  signin = "Sign In",
+
+enum MenuName {
+  MYPAGE = "My Page",
+  REGISTER = "Register",
+  SIGNOUT = "Sign Out",
+  SIGNIN = "Sign In",
 }
 const DropdownMenu = ({
   mypageOrRegister,
@@ -24,15 +23,15 @@ const DropdownMenu = ({
   const onClick = (event: any) => {
     const clickedButton = event.target.innerText;
     switch (clickedButton) {
-      case ClickedMenu.mypage:
+      case MenuName.MYPAGE:
         break;
-      case ClickedMenu.register:
+      case MenuName.REGISTER:
         history.push("/auth/registerForm");
         break;
-      case ClickedMenu.signout:
+      case MenuName.SIGNOUT:
         history.push("/auth/logout");
         break;
-      case ClickedMenu.signin:
+      case MenuName.SIGNIN:
         history.push("/auth/login");
         break;
       default:
@@ -54,6 +53,7 @@ const DropdownMenu = ({
 const Container = styled.div`
   position: relative;
   z-index: 2;
+  padding-top: 7px;
 `;
 
 const ItemContainer = styled.div`

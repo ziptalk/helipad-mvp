@@ -75,7 +75,7 @@ const SocialBlock = styled.div`
   color: white;
   position: fixed;
   left: 60px;
-  top: 397px;
+  top: 42vh;
   transform: rotate(90deg);
 `;
 const FollowUs = styled.div``;

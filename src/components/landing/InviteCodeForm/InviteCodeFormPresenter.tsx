@@ -1,4 +1,12 @@
 import styled from "styled-components";
+enum Content {
+  FIRSTTITLE = "Real Estate Investing,",
+  SECONDTITLE = "Reimagined.",
+  SUBTITLE = "You can only access it with a membership. Please enter an invitation code.",
+  ENTER = "ENTER",
+  ERRORMESSAGE = "Invalid invite code",
+  PLACEHOLDER = "Invite code",
+}
 const InviteCodeFormPresenter = ({
   inviteCodeValidation,
   handleOnChange,
@@ -9,20 +17,17 @@ const InviteCodeFormPresenter = ({
     <Container>
       <SubContainer>
         <Title>
-          Real Estate Investing,
+          {Content.FIRSTTITLE}
           <br />
-          Reimagined.
+          {Content.SECONDTITLE}
         </Title>
-        <SubTitle>
-          You can only access it with a membership. Please enter an invitation
-          code.
-        </SubTitle>
+        <SubTitle>{Content.SUBTITLE}</SubTitle>
         {!inviteCodeValidation && (
-          <ErrorMessage>Invalid invite code</ErrorMessage>
+          <ErrorMessage>{Content.ERRORMESSAGE}</ErrorMessage>
         )}
         <InputBlock onChange={handleOnChange}>
           <Input onKeyDown={checkInviteCodeWithEnterKey}></Input>
-          <SendButton onClick={checkInviteCode}>SEND CODE</SendButton>
+          <SendButton onClick={checkInviteCode}>{Content.ENTER}</SendButton>
         </InputBlock>
       </SubContainer>
     </Container>
@@ -32,14 +37,23 @@ export default InviteCodeFormPresenter;
 const Container = styled.div`
   width: 100%;
   height: 100vh;
-  background-color: black;
+  background-color: transparent;
 `;
 // 가운데 정렬을 위한 SubContainer => 이 페이지만 background가 black임
 const SubContainer = styled.div`
-  padding-top: 150px;
-  width: 55%;
+  width: 100%;
+  height: 100%;
   color: white;
   margin: auto;
+  background-color: rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 250px;
+  @media ${({ theme }) => theme.mediaQueryOnDevice.notebookS} {
+    padding-left: 150px;
+  }
 `;
 
 const Title = styled.div`
@@ -67,7 +81,7 @@ const SubTitle = styled.div`
 `;
 
 const InputBlock = styled.div`
-  border: 2px solid #4c4c4c;
+  border: 2px solid white;
   width: 422px;
   height: 62px;
   display: flex;
@@ -75,7 +89,7 @@ const InputBlock = styled.div`
 `;
 const Input = styled.input.attrs({
   type: "password",
-  placeholder: "Invite code",
+  placeholder: `${Content.PLACEHOLDER}`,
 })`
   width: 304px;
   height: 40px;
@@ -90,6 +104,9 @@ const Input = styled.input.attrs({
   border: none;
   outline: none;
   margin-left: 15px;
+  ::placeholder {
+    color: white;
+  }
 `;
 const SendButton = styled.button`
   width: 118px;
@@ -102,7 +119,7 @@ const SendButton = styled.button`
   font-weight: bold;
   font-size: 16px;
   line-height: 19px;
-
+  border: none;
   color: #000000;
 `;
 
