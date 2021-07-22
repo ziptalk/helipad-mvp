@@ -10,7 +10,7 @@ const NeighborhoodContainer = () => {
   const { setHeaderMode } = useContext(AuthContext);
 
   useEffect(() => {
-    setHeaderMode("mixed");
+    setHeaderMode("neighborhoodList");
     const newNeighborhoodList = GenNeighborhoodList.get();
     setNeighborhoodList([...neighborhoodList, ...newNeighborhoodList]);
   }, []);

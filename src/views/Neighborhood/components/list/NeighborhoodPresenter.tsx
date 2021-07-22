@@ -26,5 +26,6 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
+  background: transparent;
 `;
 export default NeighborhoodPresenter;

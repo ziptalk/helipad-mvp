@@ -6,8 +6,8 @@ import { AuthContext } from "../../../router/config/Provider/AuthProvider";
 import styled from "styled-components";
 import InviteCodeFormPresenter from "./InviteCodeFormPresenter";
 import InviteCodeFormEtcPresenter from "./InviteCodeFormEtcPresenter";
-
-const InviteCodeFormContainer = () => {
+import VideoPlayerPresenter from "./videoPlayerPresenter";
+const InviteCodeFormContainer = ({ isLandingPage, setIsLandingPage }: any) => {
   const [inviteCode, setInviteCode] = useState("");
   const history = useHistory();
   const {
@@ -19,13 +19,17 @@ const InviteCodeFormContainer = () => {
   } = useContext(AuthContext);
 
   useEffect(() => {
-    setHeaderMode("black");
+    setHeaderMode("inviteCodeForm");
+    setIsLandingPage(true);
+    return () => {
+      setIsLandingPage(false);
+    };
   });
   if (loadingAuthState) {
     return <></>;
   }
   if (authenticated) {
-    return <Redirect to="/home"></Redirect>;
+    return <Redirect to="/asset/neighborhood"></Redirect>;
   }
 
   const handleOnChange = (event: any) => {
@@ -52,7 +56,8 @@ const InviteCodeFormContainer = () => {
     }
   };
   return (
-    <>
+    <Container>
+      <VideoPlayerPresenter />
       <InviteCodeFormPresenter
         inviteCodeValidation={inviteCodeValidation}
         handleOnChange={handleOnChange}
@@ -60,8 +65,11 @@ const InviteCodeFormContainer = () => {
         checkInviteCodeWithEnterKey={checkInviteCodeWithEnterKey}
       />
       <InviteCodeFormEtcPresenter />
-    </>
+    </Container>
   );
 };
-
+const Container = styled.div`
+  width: 100%;
+  height: 100%;
+`;
 export default InviteCodeFormContainer;

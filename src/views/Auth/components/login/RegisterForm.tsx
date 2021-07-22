@@ -433,7 +433,7 @@ const RegisterForm = () => {
 };
 
 const Container = styled.div`
-  margin-top: 50px;
+  margin-top: 100px;
   margin-bottom: 100px;
   width: 460px;
   display: flex;
