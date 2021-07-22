@@ -14,10 +14,10 @@ function App() {
   const [isLandingPage, setIsLandingPage] = useState(false);
   return (
     <Router>
-      <GlobalStyle />
-      <ThemeProvider theme={theme}>
         <Switch>
           <>
+            <ThemeProvider theme={theme}>
+            <GlobalStyle />
             <section className="container">
               <HeaderContainer isLandingPage={isLandingPage} />
               <div className="routingContainer">
@@ -39,9 +39,9 @@ function App() {
                 <Route path="/process" component={ProcessRouter} />
               </div>
             </section>
+            </ThemeProvider>
           </>
         </Switch>
-      </ThemeProvider>
     </Router>
   );
 }
