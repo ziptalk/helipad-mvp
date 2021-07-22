@@ -17,7 +17,7 @@ function App() {
         <Switch>
           <>
             <ThemeProvider theme={theme}>
-            <GlobalStyle />
+            {/* <GlobalStyle /> */}
             <section className="container">
               <HeaderContainer isLandingPage={isLandingPage} />
               <div className="routingContainer">
