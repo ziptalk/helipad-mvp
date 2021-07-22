@@ -31,19 +31,18 @@ export class MapContainer extends React.Component {
             height: '100vh'
         };
 
-        console.log(this.props.data)
-
         return (
             <Container id="google-map-container">
+                {this.props.data[1] != undefined ?
                 <Map
                     google={this.props.google}
                     zoom={12}
                     style={mapStyles}
                     initialCenter={{
-                        // lat: 40.711,
-                        // lng: -73.955
-                        lat: 34.0864142,
-                        lng: -118.4139961
+                        lat: this.props.data[1].assetLat,
+                        lng: this.props.data[1].assetLng
+                        // lat: 34.1141982//,
+                        // lng: -118.4017738
                     }}>
                 {this.props.data.map(asset=>
                     <Marker key="marker_1"
@@ -62,7 +61,7 @@ export class MapContainer extends React.Component {
                    </Marker>
                 )}
 
-                </Map>
+                </Map>:<></>}
             </Container>
         );
     }

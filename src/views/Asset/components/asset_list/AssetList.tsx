@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import AssetCard from "./AssetCard";
 import styled from "styled-components";
 import { ReactComponent as ArrowUp } from "../../../../images/ic_down.svg";
@@ -12,6 +12,8 @@ import Geocode from "react-geocode";
 // import RangeSliders from "./RangeSlider";
 import RangeSliders from "./PriceRangeSlider";
 import DoubleRangeSlider from "./DoubleRangeSlider";
+import { AuthContext } from "../../../../router/config/Provider/AuthProvider";
+
 
 Geocode.setApiKey("AIzaSyAHHYSWgQGMPHXYRqCMMUSlxTvqrDepyeA");
 Geocode.setLanguage("en");
@@ -32,6 +34,7 @@ const AssetList: React.FC<AssetListProperties> = ({ history }: any) => {
     Definition.FOR_INVESTMENT
   );
   const [ascend, setAscend] = useState(true);
+  const { user, setHeaderMode } = useContext(AuthContext);
   const [assets, setAssets] = useState<Asset[]>([]);
   const [locations, setLocations] = useState([
     {
@@ -48,8 +51,10 @@ const AssetList: React.FC<AssetListProperties> = ({ history }: any) => {
 
   useEffect(() => {
     async function wholeFunction() {
+      setHeaderMode('');
       GetAsset.getAssetListByNeighborhood(history.location.state).then(
         (value) => {
+          console.log(history.location.state)
           setAssets(value);
           console.log("data", value);
 
@@ -93,6 +98,7 @@ const AssetList: React.FC<AssetListProperties> = ({ history }: any) => {
                 assetLabel: priceLabel,
               });
               id++;
+              console.log(assetStateList);
               return id;
             });
 
@@ -153,7 +159,7 @@ const AssetList: React.FC<AssetListProperties> = ({ history }: any) => {
         <GoogleMap
           bootstrapURLKeys={{ key: "AIzaSyAHHYSWgQGMPHXYRqCMMUSlxTvqrDepyeA" }}
           defaultZoom={15}
-          defaultCenter={{ lat: 0, lng: 0 }}
+          defaultCenter={{ lat: locations[0].assetLat, lng: locations[0].assetLng }}
           // data={assets}
           data={locations}
           // data = {assets}
@@ -166,7 +172,7 @@ const AssetList: React.FC<AssetListProperties> = ({ history }: any) => {
             Purchase price
           </div>
           {/* <RangeSliders /> */}
-          <DoubleRangeSlider />
+          <DoubleRangeSlider history={history.location.state}/>
         </PriceControl>
         {/* {assets.map((asset) => (
           <AssetCard data={asset} />
