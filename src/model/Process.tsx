@@ -54,6 +54,7 @@ class Task {
         readonly deadline: Timestamp,
         readonly description: string,
         readonly done: boolean,
+        readonly doneDate: Timestamp,
         readonly day: number
     ) {}
 
@@ -63,6 +64,7 @@ class Task {
             object["deadline"] as Timestamp,
             object["description"] as string,
             object["done"] as boolean,
+            object["doneDate"] as Timestamp,
             object["day"] as number
         )
     }

@@ -29,7 +29,7 @@ interface MatchParams {
 
 const AdminProcess = ({ match }: RouteComponentProps<MatchParams>) => {
     let id = match.params.assetId;
-  const { user } = useContext(AuthContext);
+  const { user, setHeaderMode } = useContext(AuthContext);
   const [asset, setAsset] = useState<Asset>(Asset.emptyAsset());
   const [processes, setProcesses] = useState<Process>(Process.emptyProcess());
   const [processLoad, setProcessLoad] = useState(false);
@@ -40,11 +40,13 @@ const AdminProcess = ({ match }: RouteComponentProps<MatchParams>) => {
   const [description, setDescription] = useState('');
   const [done, setDone] = useState(false);
   const [deadline, setDeadline] = useState(new Date());
+  const [doneDate, setDoneDate] = useState(new Date());
   const [day, setDay] = useState(-1);
   const [today, setToday] = useState('');
 
 
   useEffect(() => {
+      setHeaderMode('');
     //   if(id == 'test_id_2'){
         var d = new Date(),
             month = '' + (d.getMonth() + 1),
@@ -113,6 +115,7 @@ const AdminProcess = ({ match }: RouteComponentProps<MatchParams>) => {
         deadline : processes.process[hoverState[0]].task[0].deadline,
         description : 'Please write a description',
         done : false,
+        doneDate: processes.process[hoverState[0]].task[0].deadline,
         day : processes.process[hoverState[0]].task[0].day
       }
       tmpDataset.process[hoverState[0]].task.splice(hoverState[1]+1, 0, tmpTask)
@@ -124,12 +127,14 @@ const AdminProcess = ({ match }: RouteComponentProps<MatchParams>) => {
       if(testValue == "[object Object]"){
           testValue = processes.process[hoverState[0]].task[hoverState[1]+1].deadline.seconds.toString();
           setDeadline(new Date(parseInt(testValue)*1000))
+          setDoneDate(new Date(parseInt(testValue)*1000))
       }else{
         let startIndex = testValue.indexOf("=")+1;
         let endIndex = testValue.indexOf(",");  
         let result = testValue.substring(startIndex, endIndex);
         console.log(new Date(parseInt(result)*1000));
         setDeadline(new Date(parseInt(result)*1000))
+        setDoneDate(new Date(parseInt(result)*1000))
       }
       
       setDone(false)
@@ -139,6 +144,7 @@ const AdminProcess = ({ match }: RouteComponentProps<MatchParams>) => {
   const editButtonOnClick = () => {
       setDone(processes.process[hoverState[0]].task[hoverState[1]].done)
       let testValue = processes.process[hoverState[0]].task[hoverState[1]].deadline.toString();
+      var testValue2 = ''
       setEditState([hoverState[0], hoverState[1]])
       setAgent(processes.process[hoverState[0]].task[hoverState[1]].agent)
       setDescription(processes.process[hoverState[0]].task[hoverState[1]].description)
@@ -146,12 +152,24 @@ const AdminProcess = ({ match }: RouteComponentProps<MatchParams>) => {
         if(testValue == "[object Object]"){
             testValue = processes.process[hoverState[0]].task[hoverState[1]].deadline.seconds.toString();
             setDeadline(new Date(parseInt(testValue)*1000))
+            if(processes.process[hoverState[0]].task[hoverState[1]].doneDate != undefined){
+                testValue2 = processes.process[hoverState[0]].task[hoverState[1]].deadline.seconds.toString();
+                setDoneDate(new Date(parseInt(testValue2)*1000))
+            }else{
+                setDoneDate(new Date(parseInt(testValue)*1000))
+            }
         }else{
-        let startIndex = testValue.indexOf("=")+1;
-        let endIndex = testValue.indexOf(",");  
-        let result = testValue.substring(startIndex, endIndex);
-        console.log(new Date(parseInt(result)*1000));
-        setDeadline(new Date(parseInt(result)*1000))
+            let startIndex = testValue.indexOf("=")+1;
+            let endIndex = testValue.indexOf(",");  
+            let result = testValue.substring(startIndex, endIndex);
+            console.log(new Date(parseInt(result)*1000));
+            setDeadline(new Date(parseInt(result)*1000))
+            if(processes.process[hoverState[0]].task[hoverState[1]].doneDate != undefined){
+                testValue2 = processes.process[hoverState[0]].task[hoverState[1]].deadline.seconds.toString();
+                setDoneDate(new Date(parseInt(testValue2)*1000))
+            }else{
+                setDoneDate(new Date(parseInt(result)*1000))
+            }
         }
       setDay(processes.process[hoverState[0]].task[0].day)
   }
@@ -189,12 +207,18 @@ const AdminProcess = ({ match }: RouteComponentProps<MatchParams>) => {
     //   let tmpEditStatus1 = editState[0]
     //   let tmpEditStatus2 = editState[1]
       let tmpDay = processes.process[editState[0]].task[0].day
+    
       let tmpTask = {
           agent: agent,
           deadline: firebase.firestore.Timestamp.fromDate(deadline),
           description: description,
           done: done,
+          doneDate: firebase.firestore.Timestamp.fromDate(doneDate),
           day: day
+      }
+
+      if(done){
+          tmpTask.doneDate = firebase.firestore.Timestamp.fromDate(new Date())
       }
 
       let removeTask = processes.process[editState[0]].task[editState[1]]
@@ -270,7 +294,7 @@ const AdminProcess = ({ match }: RouteComponentProps<MatchParams>) => {
   }
 
   const deleteOnChange = () => {
-      processes.process[editState[0]].task.splice(editState[1]-1, 1)
+      processes.process[editState[0]].task.splice(editState[1], 1)
       if(processes.process[editState[0]].task[0] == undefined){
           processes.process.splice(editState[0], 1)
       }
@@ -293,8 +317,6 @@ const AdminProcess = ({ match }: RouteComponentProps<MatchParams>) => {
     } else {
         alert("Errer!")
     }
-
-    
   }
 
 
@@ -382,10 +404,23 @@ const AdminProcess = ({ match }: RouteComponentProps<MatchParams>) => {
                                         <AddCircle onClick={addButtonOnClick}>+</AddCircle>
                                         :<SemiCircle />}
                                         <SemiLine />
-                                        {tasks.agent == "BUYER" ? <AgentBox style={{backgroundColor:"#3F8EB0"}}><CgProfile style={{marginRight:"3px"}}/><div>{tasks.agent}</div></AgentBox> : <>
-                                        {tasks.agent == "HELIPAD" ? <AgentBox style={{backgroundColor:"#B69142"}}><CgProfile style={{marginRight:"3px"}}/><div>{tasks.agent}</div></AgentBox> : <AgentBox style={{backgroundColor:"#CE723E"}}><CgProfile style={{marginRight:"3px"}}/><div>{tasks.agent}</div></AgentBox>}
-                                        </>}
-                                        
+                                        <div style={{width:"123px"}}>
+                                            {tasks.agent == "BUYER" ? <AgentBox style={{backgroundColor:"#3F8EB0"}}><CgProfile style={{marginRight:"3px"}}/><div>{tasks.agent}</div></AgentBox> : <>
+                                            {tasks.agent == "HELIPAD" ? <AgentBox style={{backgroundColor:"#B69142"}}><CgProfile style={{marginRight:"3px"}}/><div>{tasks.agent}</div></AgentBox> : <AgentBox style={{backgroundColor:"#CE723E"}}><CgProfile style={{marginRight:"3px"}}/><div>{tasks.agent}</div></AgentBox>}
+                                            </>}
+                                        </div>
+                                        {tasks.done ? <><div style={{fontSize:"14px", fontWeight:400, color:"#359545", marginRight:"20px", width:"167px", textAlign:"left"}}>Completed 
+                                        {tasks.doneDate != undefined ? <>
+                                        {' ' + [
+                                            (new Date(parseInt(tasks.doneDate.seconds.toString())*1000)).getFullYear(), 
+                                            (((new Date(parseInt(tasks.doneDate.seconds.toString())*1000)).getMonth()+1).toString().length<2?
+                                            '0'+((new Date(parseInt(tasks.doneDate.seconds.toString())*1000)).getMonth()+1).toString():
+                                            (new Date(parseInt(tasks.doneDate.seconds.toString())*1000)).getMonth()+1).toString(), 
+                                            (((new Date(parseInt(tasks.doneDate.seconds.toString())*1000)).getDate()).toString().length<2?
+                                            '0'+((new Date(parseInt(tasks.doneDate.seconds.toString())*1000)).getDate()).toString():
+                                            (new Date(parseInt(tasks.doneDate.seconds.toString())*1000)).getDate()).toString()
+                                        ].join('.')}
+                                        </> : <></>}</div></> : <></>}
                                         <div style={{fontSize:"18px", fontWeight:400}}>{tasks.description.toString()}</div>
                                         {(hoverState[0] == index && hoverState[1] == index2) ?
                                         <EditButton onClick={editButtonOnClick}>✍️ edit</EditButton>
@@ -514,6 +549,7 @@ const AgentBox = styled.div`
     display: flex;
     align-items: center;
     height: 28px;
+    width: fit-content;
     border-radius: 14px;
     color: white;
     font-size: 14px;

@@ -6,7 +6,7 @@ import Slider from 'react-rangeslider'
 // import RangeSlider, { RangeSliderPosition, RangeSliderProps } from '@gilbarbara/react-range-slider';
 import RangeSlider, { RangeSliderPosition, RangeSliderProps }  from '../asset_slider';
 
-const DoubleRangeSlider = () => {
+const DoubleRangeSlider = ({ history }: any) => {
     const [assets, setAssets] = useState<Asset[]>([]);
 
     const [sliderWidth, setSliderWidth] = useState(0)
@@ -37,7 +37,7 @@ const DoubleRangeSlider = () => {
 
     useEffect(() => {
         async function wholeFunction(){
-          GetAsset.getAssetList().then((value) => {
+          GetAsset.getAssetListByNeighborhood(history).then((value) => {
             console.log(value);
             setAssets(value);
             setFullAssets(value);
