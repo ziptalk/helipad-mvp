@@ -20,7 +20,10 @@ const ContentPresenter = ({
         <Title id="no">No.</Title>
         <Title id="name">Name</Title>
         <Title id="listing">Listing</Title>
-        <Title id="request">Requested helipad contact date</Title>
+        <Title id="request">
+          Requested helipad
+          <br /> contact date
+        </Title>
         <Title id="initial">Helipad initial contact date</Title>
         <Title id="accepted">Offer accepted date</Title>
         <Title id="escrow">In Escrow</Title>
@@ -50,7 +53,7 @@ const TitleContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 1482px;
+  width: 82%;
   height: 70px;
   margin: 0 auto;
   border-top: 1px solid black;
@@ -93,9 +96,7 @@ const TitleContainer = styled.div`
 `;
 const Title = styled.div`
   text-align: center;
-  text-align: center;
-  font-family: Poppins;
-  font-size: 18px;
+  font-size: 1rem;
   font-style: normal;
   font-weight: 500;
   line-height: 22px;
@@ -111,7 +112,7 @@ const ItemContainer = styled.div`
   }
 `;
 const Item = styled.div`
-  width: 1482px;
+  width: 82%;
   height: 102px;
   margin: 0 auto;
   display: flex;
@@ -131,6 +132,7 @@ const Name = styled.div`
   width: 263px;
   height: 20px;
   margin-left: 20px;
+  text-align: center;
 `;
 const Listing: any = styled.div`
   width: 124px;

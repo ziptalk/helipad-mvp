@@ -3,42 +3,47 @@ import { AuthContext } from "../../router/config/Provider/AuthProvider";
 import HeaderPresenter from "./HeaderPresenter";
 
 enum DropDownMenu {
-  mypage = "MY Page",
-  signout = "Sign Out",
-  register = "Register",
-  signin = "Sign In",
-  korean = "KOR",
-  english = "ENG",
+  ACCOUNT = "Account",
+  MYPAGE = "My Page",
+  SIGNOUT = "Sign Out",
+  REGISTER = "Register",
+  SIGNIN = "Sign In",
+  KOREAN = "KOR",
+  ENGLISH = "ENG",
 }
 const HeaderContainer = ({ isLandingPage }: any) => {
-  const { headerMode, authenticated } = useContext(AuthContext);
+  const { headerMode, authenticated, userInfo } = useContext(AuthContext);
   const [userIconCategory, setUserIconCategory] = useState({
+    account: "",
     mypageOrRegister: "",
     signOutOrSignIn: "",
   });
   const [globalIconCategory, setGlobalIconCategory] = useState({
-    korean: DropDownMenu.korean,
-    english: DropDownMenu.english,
+    korean: DropDownMenu.KOREAN,
+    english: DropDownMenu.ENGLISH,
   });
 
   useEffect(() => {
     if (authenticated) {
       setUserIconCategory({
         ...userIconCategory,
-        mypageOrRegister: DropDownMenu.mypage,
-        signOutOrSignIn: DropDownMenu.signout,
+        account: DropDownMenu.ACCOUNT,
+        mypageOrRegister: DropDownMenu.MYPAGE,
+        signOutOrSignIn: DropDownMenu.SIGNOUT,
       });
     } else {
       setUserIconCategory({
         ...userIconCategory,
-        mypageOrRegister: DropDownMenu.register,
-        signOutOrSignIn: DropDownMenu.signin,
+        mypageOrRegister: DropDownMenu.REGISTER,
+        signOutOrSignIn: DropDownMenu.SIGNIN,
       });
     }
   }, [authenticated]);
   const onClickUserIcon = () => {};
   return (
     <HeaderPresenter
+      userInfo={userInfo}
+      authenticated={authenticated}
       headerMode={headerMode}
       isLandingPage={isLandingPage}
       userIconCategory={userIconCategory}

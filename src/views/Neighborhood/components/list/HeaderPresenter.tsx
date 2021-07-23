@@ -38,7 +38,7 @@ const LandingBlock: any = styled.div`
   width: 100%;
   height: 900px;
   background: url(${(props: any) => props.imgPath});
-  background-size: 100% 900px;
+  background-size: cover;
   display: flex;
   flex-direction: column;
   justify-content: center;

@@ -11,13 +11,12 @@ import { ReactComponent as SearchSvg } from "../../images/Header/ic_search.svg";
 import DropdownMenu from "../DropdownMenu";
 const HeaderPresenter = ({
   headerMode,
+  authenticated,
   isLandingPage,
   userIconCategory,
   globalIconCategory,
+  userInfo,
 }: any) => {
-  console.log("headerMode:", headerMode);
-  console.log("isLandingPage:", isLandingPage);
-
   const renderByHeaderMode = () => {
     switch (headerMode) {
       case "inviteCodeForm":
@@ -46,20 +45,43 @@ const HeaderPresenter = ({
         {renderByHeaderMode()}
         <BlackChatBot></BlackChatBot>
         <IconBlock>
-          <DropDownContainer>
-            <DropdownMenu
-              Component={() => <BlackUser color={headerMode} />}
-              mypageOrRegister={userIconCategory.mypageOrRegister}
-              signOutOrSignIn={userIconCategory.signOutOrSignIn}
-            />
-          </DropDownContainer>
-          <DropDownContainer>
-            <DropdownMenu
-              Component={() => <BlackGlobal color={headerMode} />}
-              mypageOrRegister={globalIconCategory.korean}
-              signOutOrSignIn={globalIconCategory.english}
-            />
-          </DropDownContainer>
+          {authenticated ? (
+            <IconBlock>
+              <DropDownContainer>
+                <DropdownMenu
+                  Component={() => <BlackUser color={headerMode} />}
+                  account={userIconCategory.account}
+                  mypageOrRegister={userIconCategory.mypageOrRegister}
+                  signOutOrSignIn={userIconCategory.signOutOrSignIn}
+                />
+              </DropDownContainer>
+              <DropDownContainer>
+                <DropdownMenu
+                  Component={() => <BlackGlobal color={headerMode} />}
+                  mypageOrRegister={globalIconCategory.korean}
+                  signOutOrSignIn={globalIconCategory.english}
+                />
+              </DropDownContainer>
+            </IconBlock>
+          ) : (
+            <IconBlock>
+              <DropDownContainer>
+                <DropdownMenu
+                  Component={() => <BlackUser color={headerMode} />}
+                  userInfo={userInfo}
+                  mypageOrRegister={userIconCategory.mypageOrRegister}
+                  signOutOrSignIn={userIconCategory.signOutOrSignIn}
+                />
+              </DropDownContainer>
+              <DropDownContainer>
+                <DropdownMenu
+                  Component={() => <BlackGlobal color={headerMode} />}
+                  mypageOrRegister={globalIconCategory.korean}
+                  signOutOrSignIn={globalIconCategory.english}
+                />
+              </DropDownContainer>
+            </IconBlock>
+          )}
         </IconBlock>
       </Container>
     </>
@@ -119,7 +141,6 @@ const About: any = styled.div`
   font-weight: 500;
   line-height: 27px;
   letter-spacing: 0px;
-  padding-right: 20px;
 
   color: ${(props: any) =>
     props.color === "inviteCodeForm"
