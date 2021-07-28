@@ -28,7 +28,6 @@ const LoginPresenter = ({
           />
         </SocialIcon>
       </SocialContainer>
-
       {loginResult ? (
         <InputContainer>
           <Input
@@ -64,7 +63,6 @@ const LoginPresenter = ({
           ></InvalidInput>
         </InputContainer>
       )}
-
       <RememberContainer>
         <Remember id="remember"></Remember>
         <RememberLabel htmlFor="remember"></RememberLabel>
@@ -79,8 +77,9 @@ const LoginPresenter = ({
     </Container>
   );
 };
-
 const Container = styled.div`
+  width: 100%;
+  max-width: 80vw;
   height: 100%;
 `;
 const SocialContainer = styled.div`
@@ -111,7 +110,6 @@ const InputContainer = styled.div`
   align-items: center;
   justify-content: space-between;
 `;
-
 const Input: any = styled.input.attrs((props: any) => ({
   type: props.password ? "password" : "text",
 }))`
@@ -119,7 +117,6 @@ const Input: any = styled.input.attrs((props: any) => ({
   width: 410px;
   height: 56px;
   padding: 16px;
-
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
@@ -129,19 +126,15 @@ const Input: any = styled.input.attrs((props: any) => ({
   &:focus {
     outline: 1px solid #9a9a9a;
   }
-
   /* background: ${(props: any) => props.loginResult === false && "red"}; */
-
   /* 유효성 검사가 완료되면  */
   /* outline: 1px solid #b69142 로 변경 */
 `;
-
 const InvalidInput = styled(Input)`
   background: rgba(241, 85, 36, 0.1);
   border: 1px solid #f15524;
   color: #a3a3a3;
 `;
-
 const RememberContainer = styled.div`
   padding-left: 30px;
   display: flex;
@@ -164,7 +157,6 @@ const Remember = styled.input.attrs({
   width: 24px;
   height: 24px;
   display: none;
-
   &:checked + ${RememberLabel} {
     background: url(${checkButtonImg});
   }
@@ -208,5 +200,4 @@ const RegisterButton = styled.div`
   color: #b69142;
   cursor: pointer;
 `;
-
 export default LoginPresenter;

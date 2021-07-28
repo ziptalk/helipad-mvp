@@ -54,20 +54,21 @@ const LoginAndRegisterPresenter = ({
     </Container>
   );
 };
-
+// height: ${(props: any) =>
+  // props.selectedCategory === SelectedCategory.REGISTER ? "170vh" : "100vh"};
 const Container: any = styled.div`
   width: 100%;
-  height: ${(props: any) =>
-    props.selectedCategory === SelectedCategory.REGISTER ? "170vh" : "100vh"};
-
+  min-height: 100vh;
   background-color: ${({ theme }) => theme.colors.beige};
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin: 0px;
+  padding-bottom: 200px;
 `;
 const FormContainer = styled.div`
   background-color: ${({ theme }) => theme.colors.white};
-  margin-top: 200px;
+  margin-top: 66px;
 `;
 const HeaderContainer = styled.div`
   width: 474px;
@@ -85,14 +86,12 @@ const Title = styled.div`
   line-height: 40px;
   letter-spacing: 0px;
   text-align: center;
-
   font-size: 32px;
   font-style: normal;
   font-weight: 600;
   line-height: 40px;
   letter-spacing: 0px;
   text-align: center;
-
   margin: 40px 32px 24px;
 `;
 const Category = styled.div`
@@ -112,7 +111,6 @@ const Item = styled.div`
   padding-top: 15px;
   text-align: center;
   color: #a3a3a3;
-
   width: 83px;
   height: 100%;
 `;
@@ -120,5 +118,4 @@ const SelectedItem = styled(Item)`
   color: #212121;
   border-bottom: 2px solid black;
 `;
-
 export default LoginAndRegisterPresenter;

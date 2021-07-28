@@ -1,13 +1,18 @@
 import styled from "styled-components";
+import { RiKakaoTalkFill } from "react-icons/ri";
+
 const RegisterPresenter = () => {
   return (
     <Container>
       <InputContainer>
         <NameContainer>
-          <Name placeholder="Last name"></Name>
+          <Name placeholder="Last name" style={{marginRight:"20px"}}></Name>
           <Name placeholder="First name"></Name>
         </NameContainer>
-        <KakaoTitle>@ Kakao Talk ID</KakaoTitle>
+        <KakaoTitle>
+          <RiKakaoTalkFill style={{fontSize:"20px", marginRight:"10px"}}/> 
+          <div>Kakao Talk ID</div>
+        </KakaoTitle>
         <KakaoContent></KakaoContent>
         <Email></Email>
         <Password></Password>
@@ -23,7 +28,7 @@ const RegisterPresenter = () => {
         <QuestionTitleContainer>
           <QuestionIcon>Q</QuestionIcon>
           <QuestionTitle>
-            What types of properties are you interested in? <br />
+            What types of properties are you interested <br/> in?
             (check all that apply)
           </QuestionTitle>
         </QuestionTitleContainer>
@@ -39,7 +44,7 @@ const RegisterPresenter = () => {
               <QuestionCheckButton></QuestionCheckButton>
             </QuestionItem>
           </QuestionList>
-          <QuestionSubTitle>2.Commercial</QuestionSubTitle>
+          <QuestionSubTitle>2. Commercial</QuestionSubTitle>
           <QuestionList>
             <QuestionItem>
               <Question>Multifamily units</Question>
@@ -64,7 +69,6 @@ const RegisterPresenter = () => {
               <Question>Search engine (Google, Naver, etc.)</Question>
               <QuestionCheckButton></QuestionCheckButton>
             </QuestionItem>
-
             <QuestionItem>
               <Question>Recommended by friend or colleague</Question>
               <QuestionCheckButton></QuestionCheckButton>
@@ -86,7 +90,6 @@ const RegisterPresenter = () => {
             (check all that apply)
           </QuestionTitle>
         </QuestionTitleContainer>
-
         <QuestionContentContainer>
           <QuestionList>
             <QuestionItem>
@@ -106,7 +109,7 @@ const RegisterPresenter = () => {
               <QuestionCheckButton></QuestionCheckButton>
             </QuestionItem>
             <QuestionItem>
-              <Question>Child’s U.S. Education</Question>
+              <Question>Child's U.S. Education</Question>
               <QuestionCheckButton></QuestionCheckButton>
             </QuestionItem>
           </QuestionList>
@@ -118,7 +121,6 @@ const RegisterPresenter = () => {
             (check all that apply)
           </QuestionTitle>
         </QuestionTitleContainer>
-
         <QuestionContentContainer>
           <QuestionList>
             <QuestionItem>
@@ -150,7 +152,6 @@ const RegisterPresenter = () => {
             (check all that apply)
           </QuestionTitle>
         </QuestionTitleContainer>
-
         <QuestionContentContainer>
           <QuestionList>
             <QuestionItem>
@@ -189,34 +190,51 @@ const RegisterPresenter = () => {
         </QuestionContentContainer>
       </QuestionContainer>
       <ButtonContainer>
-        <RegisterButton>Register</RegisterButton>
+        <RegisterButton>Registeration</RegisterButton>
         <LoginButton>Login</LoginButton>
       </ButtonContainer>
     </Container>
   );
 };
-
 const Container = styled.div``;
 const InputContainer = styled.div`
   margin: 0 auto;
   width: 410px;
-  height: 468px;
+  // height: 468px;
+  padding-top: 32px;
 `;
 const NameContainer = styled.div`
   display: flex;
+  width: 100%;
+  margin-bottom: 22px;
 `;
 const Name = styled.input.attrs({ type: "text" })`
   width: 195px;
   height: 56px;
+  border: solid 1px #EAEAEA;
+  padding-left: 10px;
+  font-size: 16px;
+  color: #A3A3A3;
+  font-weight: 400;
 `;
-
-const KakaoTitle = styled.div``;
+const KakaoTitle = styled.div`
+  font-size: 16px;
+  align-items: center;
+  height: 30px;
+  display: flex;
+`;
 const KakaoContent = styled.input.attrs({
   type: "text",
   placeholder: "KaKao Talk ID",
 })`
   width: 410px;
   height: 56px;
+  border: solid 1px #EAEAEA;
+  padding-left: 10px;
+  margin: 10px 0 10px 0;
+  font-size: 16px;
+  color: #A3A3A3;
+  font-weight: 400;
 `;
 const Email = styled.input.attrs({
   type: "email",
@@ -224,6 +242,13 @@ const Email = styled.input.attrs({
 })`
   width: 410px;
   height: 56px;
+  border: solid 1px #EAEAEA;
+  margin: 10px 0 10px 0;
+  padding-left: 10px;
+  font-size: 16px;
+  color: #A3A3A3;
+  font-weight: 400;
+  background-color: #FAFAFA;
 `;
 const Password = styled.input.attrs({
   type: "password",
@@ -231,6 +256,13 @@ const Password = styled.input.attrs({
 })`
   width: 410px;
   height: 56px;
+  border: solid 1px #EAEAEA;
+  margin: 10px 0 10px 0;
+  padding-left: 10px;
+  font-size: 16px;
+  color: #A3A3A3;
+  font-weight: 400;
+  background-color: #FAFAFA;
 `;
 const PasswordConfirm = styled.input.attrs({
   type: "password",
@@ -238,6 +270,12 @@ const PasswordConfirm = styled.input.attrs({
 })`
   width: 410px;
   height: 56px;
+  border: solid 1px #EAEAEA;
+  margin: 10px 0 20px 0;
+  padding-left: 10px;
+  font-size: 16px;
+  color: #A3A3A3;
+  font-weight: 400;
 `;
 const BankerOrAgentContainer = styled.div`
   width: 410px;
@@ -246,7 +284,12 @@ const BankerOrAgentContainer = styled.div`
   align-items: center;
   background: #edfdff;
 `;
-const BankerOrAgentCheckButton = styled.input.attrs({ type: "checkbox" })``;
+const BankerOrAgentCheckButton = styled.input.attrs({ type: "checkbox" })`
+  width: 24px;
+  height: 24px;
+  border-radius: 4px;
+  border: 1px solid #EAEAEA;
+`;
 const BankerOrAgentContent = styled.div``;
 const QuestionContainer = styled.div`
   width: 411px;
@@ -258,6 +301,7 @@ const QuestionTitleContainer = styled.div`
   display: flex;
   align-items: center;
   height: 76px;
+  margin-top: 35px;
 `;
 const QuestionTitle = styled.div`
   font-size: 16px;
@@ -268,23 +312,36 @@ const QuestionTitle = styled.div`
   text-align: left;
 `;
 const QuestionIcon = styled.div`
-  width: 16px;
-  height: 24px;
+  width: 44px;
+  height: 100%;
+  font-size: 20px;
+  font-weight: 600;
+  // vertical-align: top;
+  text-align: center;
+  padding-top: 10px;
 `;
-const QuestionContentContainer = styled.div``;
-
+const QuestionContentContainer = styled.div`
+  padding: 10px;
+  padding-left: 44px;
+`;
 const QuestionSubTitle = styled.div`
   font-size: 14px;
-  font-style: normal;
-  font-weight: 600;
+  font-style: bold;
+  font-weight: 900;
   line-height: 24px;
   letter-spacing: 0px;
   text-align: left;
+  margin-bottom: 6px;
 `;
-const QuestionList = styled.div``;
+const QuestionList = styled.div`
+  margin-bottom: 14px;
+  padding-left: 20px;
+`;
 const QuestionItem = styled.div`
   display: flex;
-  justify-content: space-betwen;
+  justify-content: space-between;
+  margin-bottom: 6px;
+
 `;
 const Question = styled.div`
   font-size: 14px;
@@ -296,7 +353,15 @@ const Question = styled.div`
 `;
 const QuestionCheckButton = styled.input.attrs({
   type: "checkbox",
-})``;
+})`
+  width: 24px;
+  height: 24px;
+  border-radius: 4px;
+  border: 1px solid #EAEAEA;
+  background-color: ${(props) => (props.checked ? "#B69142" : "papayawhip")}
+  // background-color: #B69142;
+  color: white;
+`;
 const ButtonContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -332,5 +397,4 @@ const LoginButton = styled.div`
   color: #b69142;
   cursor: pointer;
 `;
-
 export default RegisterPresenter;
