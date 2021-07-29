@@ -16,13 +16,11 @@ const LoginContainer = () => {
     setHeaderMode("black");
     loginResult === false && emailInput.current && emailInput.current.focus();
   }, [loginResult]);
-
   const onChangeInputValue = (event: React.ChangeEvent<HTMLInputElement>) => {
     const key = event.target.name;
     const value = event.target.value;
     setUserInfo({ ...userInfo, [key]: value });
   };
-
   const onClickLogin = () => {
     LoginUseCase.execute({
       email: userInfo.email,
@@ -38,7 +36,6 @@ const LoginContainer = () => {
         setLoginResult(false);
       });
   };
-
   const onEnterLogin = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter") {
       onClickLogin();
