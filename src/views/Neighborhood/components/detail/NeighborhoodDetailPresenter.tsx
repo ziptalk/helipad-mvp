@@ -12,7 +12,6 @@ const NeighborhoodDetailPresenter = ({
   regionInfo,
   onClickHomesForSale,
 }: DetailPresenterProps) => {
-  console.log("regionInfo:", regionInfo);
   return (
     <Container>
       <HeaderPresenter
@@ -21,11 +20,14 @@ const NeighborhoodDetailPresenter = ({
       />
       <MapPresenter regionInfo={regionInfo} />
       <PropertyPresenter regionInfo={regionInfo} />
-      <FooterPresenter />
     </Container>
   );
 };
 const Container = styled.div`
-  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
 `;
 export default NeighborhoodDetailPresenter;

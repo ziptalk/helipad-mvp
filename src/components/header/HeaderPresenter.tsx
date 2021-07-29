@@ -92,7 +92,12 @@ const Container: any = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 100%;
+  height: 112px;
+  width: 100vw;
+  margin: 0 auto;
+  max-width: 1920px;
+  position: fixed;
+  top: 0px;
 
   background-color: ${(props: any) =>
     (props.color === "inviteCodeForm" || props.color === "neighborhoodList") &&
@@ -103,9 +108,15 @@ const Container: any = styled.div`
   top: ${(props: any) =>
     (props.color === "inviteCodeForm" || props.color === "neighborhoodList") &&
     "0px"};
+  text-align: ${(props: any) =>
+    (props.color === "inviteCodeForm" || props.color === "neighborhoodList") &&
+    "center"};
   z-index: ${(props: any) =>
     (props.color === "inviteCodeForm" || props.color === "neighborhoodList") &&
-    1};
+    3};
+  max-width: ${(props: any) =>
+    (props.color === "inviteCodeForm" || props.color === "neighborhoodList") &&
+    "1920px"};
 `;
 
 const CategoryContainer = styled.div`

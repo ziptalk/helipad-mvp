@@ -4,8 +4,6 @@ type MapPresenterProps = {
   regionInfo: NeighborhoodItem;
 };
 const MapPresenter = ({ regionInfo }: MapPresenterProps) => {
-  console.log("regionInfo:", regionInfo);
-
   return (
     <Container>
       <MapBlock></MapBlock>
@@ -18,21 +16,28 @@ const MapPresenter = ({ regionInfo }: MapPresenterProps) => {
 };
 
 const Container = styled.div`
+  max-width: 1920px;
   margin-bottom: 60px;
-  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 const MapBlock = styled.div`
-  width: 100%;
   height: 880px;
+  max-width: 1920px;
+  width: 100vw;
   background: gray;
+  margin-left: 0;
+  margin-right: 0;
 `;
 const AttributeBlock = styled.div`
+  max-width: 80vw;
+  width: 80vw;
   display: flex;
   align-items: center;
-  width: 80%;
   height: 27px;
   margin-top: 20px;
-  margin-left: 212px;
 `;
 const AttributeTitle = styled.div`
   font-family: Poppins;

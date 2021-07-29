@@ -36,7 +36,6 @@ const Summary: React.FC<SummaryProps> = ({ data }) => {
       style={{
         backgroundColor: "black",
         color: "white",
-        width: "100%",
         padding: "20px 100px 20px 100px",
       }}
     >
@@ -105,7 +104,9 @@ const Container = styled.div`
   display: flex;
   flex-direction: row;
   // width: 1452px;
+  max-width: 100vw;
   width: 100%;
+  overflow: auto;
   justify-content: space-between;
   // margin-top: 112px;
 `;

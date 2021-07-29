@@ -81,6 +81,8 @@ const LoginPresenter = ({
 };
 
 const Container = styled.div`
+  width: 100%;
+  max-width: 80vw;
   height: 100%;
 `;
 const SocialContainer = styled.div`

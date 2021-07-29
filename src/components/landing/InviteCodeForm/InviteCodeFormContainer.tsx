@@ -69,6 +69,7 @@ const InviteCodeFormContainer = ({ isLandingPage, setIsLandingPage }: any) => {
   );
 };
 const Container = styled.div`
+  max-width: 100vw;
   width: 100%;
   height: 100%;
 `;

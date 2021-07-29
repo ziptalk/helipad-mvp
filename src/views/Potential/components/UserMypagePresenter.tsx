@@ -1,16 +1,32 @@
 import styled from "styled-components";
 import ContentPresenter from "./ContentPresenter";
+import { useEffect, useState } from "react";
+import UserContentPresenter from "./UserContentPresenter";
 
 enum SelectedCategory {
   FAVORITE = "Favorite",
   ONGOING = "On Going",
 }
 const UserMypagePresenter = ({
+  isAgent,
   selectedCategory,
   onClickedCategory,
   onClickCheckButton,
-  mockData,
+  favoriteList,
+  getFavoriteList,
+  onGoingList,
+  getOnGoingList,
+  moveToFavoriteList,
+  moveToOnGoingList,
 }: any) => {
+  useEffect(() => {
+    getFavoriteList();
+    getOnGoingList();
+  }, []);
+  const [click, setClick] = useState(false);
+  const onClickEvent = () => {
+    setClick(!click);
+  };
   const renderSelectedCategory = (
     selectedCategory: string = SelectedCategory.FAVORITE
   ) => {
@@ -39,24 +55,68 @@ const UserMypagePresenter = ({
         );
     }
   };
+  const renderContentBySelectedCategory = (
+    selectedCategory: string = SelectedCategory.FAVORITE
+  ) => {
+    switch (selectedCategory) {
+      case SelectedCategory.FAVORITE:
+        return (
+          <>
+            {favoriteList.length > 0 &&
+              favoriteList.map((item: any, idx: number) => (
+                <UserContentPresenter
+                  item={item}
+                  onClickCheckButton={onClickCheckButton}
+                  moveTo={moveToOnGoingList}
+                  onClickEvent={onClickEvent}
+                ></UserContentPresenter>
+              ))}
+          </>
+        );
+      case SelectedCategory.ONGOING:
+        return (
+          <>
+            {onGoingList.length > 0 &&
+              onGoingList.map((item: any, idx: number) => (
+                <UserContentPresenter
+                  item={item}
+                  onClickCheckButton={onClickCheckButton}
+                  moveTo={moveToFavoriteList}
+                  onClickEvent={onClickEvent}
+                ></UserContentPresenter>
+              ))}
+          </>
+        );
+    }
+  };
   return (
     <Container>
-      <Title>User Mypage</Title>
+      <Header>User Mypage</Header>
       {renderSelectedCategory(selectedCategory)}
-      <ContentPresenter
-        list={mockData}
-        onClickCheckButton={onClickCheckButton}
-      ></ContentPresenter>
+      <TitleContainer>
+        <Title id="no">No.</Title>
+        <Title id="name">Name</Title>
+        <Title id="listing">Listing</Title>
+        <Title id="request">
+          Requested helipad
+          <br /> contact date
+        </Title>
+        <Title id="initial">Helipad initial contact date</Title>
+        <Title id="accepted">Offer accepted date</Title>
+        <Title id="escrow">In Escrow</Title>
+      </TitleContainer>
+      {renderContentBySelectedCategory(selectedCategory)}
     </Container>
   );
 };
 
 const Container = styled.div`
+  margin: 0 auto;
+  max-width: 80vw;
   width: 100%;
   height: 110vh;
-  background: #f2f2f2;
 `;
-const Title = styled.div`
+const Header = styled.div`
   padding-top: 46px;
   margin-bottom: 21px;
   font-family: Poppins;
@@ -67,6 +127,7 @@ const Title = styled.div`
   letter-spacing: 0em;
   text-align: center;
 `;
+
 const CategoryContainer = styled.div`
   width: 30%;
   height: 52px;
@@ -101,4 +162,61 @@ const ContentContainer = styled.div`
   align-items: center;
   justify-content: center;
 `;
+const TitleContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 70px;
+  margin: 0 auto;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+  margin-bottom: 10px;
+  #no {
+    width: 64.39px;
+    height: 22px;
+      min-width: 70px;
+  }
+  #name {
+    width: 169.4px;
+    height: 22px;
+      min-width: 100px;
+  }
+  #listing {
+    width: 122.84px;
+    height: 22px;
+      min-width: 100px;
+  #request {
+    width: 179.31px;
+    height: 44px;
+      min-width: 180px;
+      
+  }
+  #initial {
+    width: 163.46px;
+    height: 44px;
+      min-width: 180px;
+  }
+  #accepted {
+    width: 163.46px;
+    height: 44px;
+      min-width: 180px;
+  }
+  #escrow {
+    width: 122.84px;
+    height: 22px;
+      min-width: 180px;
+  }
+`;
+
+const Title = styled.div`
+  text-align: center;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 22px;
+  letter-spacing: 0em;
+  max-width: 190px;
+`;
+const PresenterContainer = styled.div``;
 export default UserMypagePresenter;

@@ -17,26 +17,18 @@ const HeaderPresenter = () => {
         </TitleBlock>
         <Scroll />
       </LandingBlock>
-
-      <MainHeaderBlock>
-        <MainTitle>Neighborhood</MainTitle>
-        <MainSubTitle>
-          We are currently available in these Los Angeles
-        </MainSubTitle>
-      </MainHeaderBlock>
     </Container>
   );
 };
 
 const Container: any = styled.div`
   position: relative;
-  width: 100%;
-  height: 1200px;
+  width: 100vw;
 `;
 const LandingBlock: any = styled.div`
   position: relative;
   width: 100%;
-  height: 900px;
+  height: 80vh;
   background: url(${(props: any) => props.imgPath});
   background-size: cover;
   display: flex;

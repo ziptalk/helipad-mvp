@@ -56,6 +56,8 @@ const LoginAndRegisterPresenter = ({
 };
 
 const Container: any = styled.div`
+  margin: 0 auto;
+  max-width: 100vw;
   width: 100%;
   height: ${(props: any) =>
     props.selectedCategory === SelectedCategory.REGISTER ? "170vh" : "100vh"};

@@ -3,20 +3,28 @@ import checkButtonImg from "../../../images/Potential/checkButtonImg.svg";
 import { RouteComponentProps } from "react-router-dom";
 import GetPotentialList from "../../../domain/GetAdminList";
 import List from "../../../model/PotentialList";
+import { CgNpm } from "react-icons/cg";
+import { useState } from "react";
 type ContentPresenterProps = {
+  isAgent: boolean;
   onClickCheckButton: (event: any, selectedItemId: number) => void;
   list: List[];
+  moveTo: () => void;
 };
 const ContentPresenter = ({
+  isAgent,
   onClickCheckButton,
   list,
-}: ContentPresenterProps) => {
+  moveTo,
+}: any) => {
   if (list === undefined) {
     return <div>Loading</div>;
   }
+
+  console.log("list", list);
   return (
     <Container>
-      <TitleContainer>
+      {/* <TitleContainer>
         <Title id="no">No.</Title>
         <Title id="name">Name</Title>
         <Title id="listing">Listing</Title>
@@ -27,23 +35,45 @@ const ContentPresenter = ({
         <Title id="initial">Helipad initial contact date</Title>
         <Title id="accepted">Offer accepted date</Title>
         <Title id="escrow">In Escrow</Title>
-      </TitleContainer>
+      </TitleContainer> */}
       <ItemContainer>
-        {list.map((item: List, idx: number) => (
-          <Item key={idx}>
-            <No>{item.no}</No>
-            <Name>{item.name}</Name>
-            <Listing imgPath={item.listing}></Listing>
-            <RequestedDate>{item.requestedContactDate}</RequestedDate>
-            <InitialDate readOnly={true}></InitialDate>
-            <AcceptedDate readOnly={true}></AcceptedDate>
-            <Escrow id={`${item.id}`}></Escrow>
-            <EscrowLabel
-              onClick={(event: any) => onClickCheckButton(event, item.id)}
-              htmlFor={`${item.id}`}
-            ></EscrowLabel>
-          </Item>
-        ))}
+        {list.map((item: any, idx: number) =>
+          item.list.inEscrow ? (
+            <Item className="check" key={idx}>
+              <No>{item.list.no}</No>
+              <Name>{item.list.name}</Name>
+              <Listing imgPath={item.list.listing}></Listing>
+              <RequestedDate>{item.list.requestedHelipad}</RequestedDate>
+              <InitialDate readOnly={true}></InitialDate>
+              <AcceptedDate readOnly={true}></AcceptedDate>
+              <Escrow checked={item.list.inEscrow} id={`${item.assetId}`} />
+              <EscrowLabel
+                onClick={(event: any) => {
+                  moveTo(item.list, item.userId, item.assetId);
+                  onClickCheckButton(event);
+                }}
+                htmlFor={`${item.assetId}`}
+              ></EscrowLabel>
+            </Item>
+          ) : (
+            <Item className="" key={idx}>
+              <No>{item.list.no}</No>
+              <Name>{item.list.name}</Name>
+              <Listing imgPath={item.list.listing}></Listing>
+              <RequestedDate>{item.list.requestedHelipad}</RequestedDate>
+              <InitialDate readOnly={true}></InitialDate>
+              <AcceptedDate readOnly={true}></AcceptedDate>
+              <Escrow id={`${item.assetId}`} />
+              <EscrowLabel
+                onClick={(event: any) => {
+                  moveTo(item.list, item.userId, item.assetId);
+                  onClickCheckButton(event);
+                }}
+                htmlFor={`${item.assetId}`}
+              ></EscrowLabel>
+            </Item>
+          )
+        )}
       </ItemContainer>
     </Container>
   );
@@ -138,6 +168,7 @@ const Listing: any = styled.div`
   width: 124px;
   height: 86px;
   background-image: url(${(props: any) => props.imgPath});
+  background-size: cover;
   margin-left: 84px;
 `;
 const RequestedDate = styled.div`
@@ -176,7 +207,7 @@ const EscrowLabel: any = styled.label`
   margin-left: 84px;
   margin-right: 55px;
 `;
-const Escrow = styled.input.attrs({
+const Escrow: any = styled.input.attrs({
   type: "checkbox",
 })`
   width: 24px;

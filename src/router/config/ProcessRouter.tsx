@@ -16,19 +16,15 @@ const ProcessRouter = ({ match }: RouteComponentProps) => {
   return (
     <Switch>
       <>
-        <section className="container">
-          <div className="routingContainer">
-            {/* <PrivateRoutes path={`${match.url}/process`} component={Process} /> */}
-            <PrivateRoutes
-              path={`${match.url}/userprocess`}
-              component={ProcessRoutes}
-            />
-            <PrivateRoutes
-              path={`${match.url}/adminprocess`}
-              component={AdminProcessRoutes}
-            />
-          </div>
-        </section>
+        {/* <PrivateRoutes path={`${match.url}/process`} component={Process} /> */}
+        <PrivateRoutes
+          path={`${match.url}/userprocess`}
+          component={ProcessRoutes}
+        />
+        <PrivateRoutes
+          path={`${match.url}/adminprocess`}
+          component={AdminProcessRoutes}
+        />
       </>
     </Switch>
   );

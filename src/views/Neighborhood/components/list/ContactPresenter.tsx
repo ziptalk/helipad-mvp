@@ -18,15 +18,10 @@ const ContactPresenter = () => {
         </TitleBlock>
         <AdminInfoBlock>
           <InfoBlock>
-            <AdminPhoneSvg />
-            <Info>++00-000-0000-0000</Info>
-          </InfoBlock>
-          <InfoBlock>
             <AdminEmailSvg />
             <Info>brian@helipadrealty.com</Info>
           </InfoBlock>
         </AdminInfoBlock>
-
         <ContactButton to="">
           Get in touch
           <Pointer />
@@ -38,7 +33,8 @@ const ContactPresenter = () => {
 
 const Container = styled.div`
   margin-top: 139px;
-  width: 100%;
+  width: 100vw;
+  max-width: 1920px;
   height: 740px;
 
   background-image: url(${BackgroundJpg});

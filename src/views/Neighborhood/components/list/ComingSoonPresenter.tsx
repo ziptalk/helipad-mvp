@@ -8,8 +8,6 @@ const ComingSoonPresenter = () => {
       <Content>
         <ImageBlock>
           <Image imgPath={LasVegasSvg}>Las Vegas</Image>
-        </ImageBlock>
-        <ImageBlock>
           <Image imgPath={SanDiegoSvg}>San Diego</Image>
         </ImageBlock>
       </Content>
@@ -18,6 +16,8 @@ const ComingSoonPresenter = () => {
 };
 
 const Container = styled.div`
+  width: 100vw;
+  max-width: 1920px;
   margin-top: 103px;
 `;
 const Title = styled.div`
@@ -36,14 +36,20 @@ const Content = styled.div`
   justify-content: space-between;
 `;
 
-const ImageBlock = styled.div``;
+const ImageBlock = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 100vw;
+  max-width: 100vw;
+  gap: 20px;
+`;
 // const Image: any = styled.img.attrs((props: any) => ({
 //   src: props.imgPath,
 // }))``;
 
 const Image: any = styled.div`
-  width: 878px;
-  height: 562px;
+  width: 100%;
+
   background: url(${(props: any) => props.imgPath});
   background-size: cover;
 

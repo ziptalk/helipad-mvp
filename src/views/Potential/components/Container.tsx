@@ -6,6 +6,9 @@ import GetUserInfo from "../../../domain/GetUserInfo";
 import User from "../../../model/User";
 import GetPotentialAndEscrowList from "../../../domain/GetAdminList";
 import List from "../../../model/PotentialList";
+import MypageListDomain from "../../../domain/MypageList";
+import MypageList from "../../../model/MypageList";
+import styled from "styled-components";
 enum SelectedCategory {
   POTENTIAL = "Potential",
   INESCROW = "In Escrow",
@@ -23,8 +26,10 @@ const MypageContainer = () => {
     email: "",
     isAgent: false,
   });
-  const [potentialList, setPotentialList] = useState();
-  const [escrowList, setEscrowList] = useState();
+  const [potentialList, setPotentialList] = useState<List[]>([]);
+  const [escrowList, setEscrowList] = useState<List[]>([]);
+  const [favoriteList, setFavoriteList] = useState<List[]>([]);
+  const [onGoingList, setOnGoingList] = useState<List[]>([]);
   const [mockData, setMockData] = useState<List[]>();
   useEffect(() => {
     setLoading(true);
@@ -32,7 +37,7 @@ const MypageContainer = () => {
     if (user !== null && user !== undefined) {
       GetUserInfo.execute(user.uid).then((result) => setUserInfo(result));
     }
-    setMockData(GetPotentialAndEscrowList.getOnGoingList());
+    // setMockData(GetPotentialAndEscrowList.getOnGoingList());
     setLoading(false);
   }, []);
 
@@ -55,10 +60,66 @@ const MypageContainer = () => {
 
   const onClickCheckButton = (event: any, selectedItemId: number) => {
     const item = event.target.parentNode.classList;
+    console.log("item", event.target.parentNode);
     if (item.contains("check")) {
       item.remove("check");
     } else {
       item.add("check");
+    }
+    setLoading(true);
+    setLoading(false);
+  };
+  const getPotentialList = async () => {
+    const result = await MypageListDomain.getPotentialList();
+    console.log("getPotentialList", result);
+    setPotentialList(result);
+  };
+  const getEscrowList = async () => {
+    const result = await MypageListDomain.getEscrowList();
+    setEscrowList(result);
+  };
+  const getFavoriteList = async () => {
+    if (user) {
+      const result = await MypageListDomain.getFavoriteList(user.uid);
+      setFavoriteList(result);
+    }
+  };
+  const getOnGoingList = async () => {
+    if (user) {
+      const result = await MypageListDomain.getOnGoingList(user.uid);
+
+      setOnGoingList(result);
+    }
+  };
+  const moveToPotentialList = async (list: any, userId: any, assetId: any) => {
+    if (user) {
+      await MypageListDomain.moveToPotentialList(list, userId, assetId);
+      await moveToFavoriteList(list, userId, assetId);
+      getPotentialList();
+      getEscrowList();
+    }
+  };
+  const moveToInEscrowList = async (list: any, userId: any, assetId: any) => {
+    if (user) {
+      await MypageListDomain.moveToEscrowList(list, userId, assetId);
+      await moveToOnGoingList(list, userId, assetId);
+      getPotentialList();
+      getEscrowList();
+    }
+  };
+
+  const moveToFavoriteList = async (list: any, userId: any, assetId: any) => {
+    if (user) {
+      await MypageListDomain.moveToFavoriteList(list, userId, assetId);
+      getFavoriteList();
+      getOnGoingList();
+    }
+  };
+  const moveToOnGoingList = async (list: any, userId: any, assetId: any) => {
+    if (user) {
+      await MypageListDomain.moveToOnGoingList(list, userId, assetId);
+      getFavoriteList();
+      getOnGoingList();
     }
   };
 
@@ -68,19 +129,31 @@ const MypageContainer = () => {
       case true:
         return (
           <AdminMypagePresenter
+            isAgent={isAgent}
             selectedCategory={selectedCategory}
             onClickedCategory={onClickedCategory}
             onClickCheckButton={onClickCheckButton}
-            mockData={mockData}
+            potentialList={potentialList}
+            getPotentialList={getPotentialList}
+            getEscrowList={getEscrowList}
+            escrowList={escrowList}
+            moveToPotentialList={moveToPotentialList}
+            moveToInEscrowList={moveToInEscrowList}
           />
         );
       case false:
         return (
           <UserMypagePresenter
+            isAgent={isAgent}
             selectedCategory={selectedCategory}
             onClickedCategory={onClickedCategory}
             onClickCheckButton={onClickCheckButton}
-            mockData={mockData}
+            favoriteList={favoriteList}
+            getFavoriteList={getFavoriteList}
+            onGoingList={onGoingList}
+            getOnGoingList={getOnGoingList}
+            moveToFavoriteList={moveToFavoriteList}
+            moveToOnGoingList={moveToOnGoingList}
           />
         );
     }
@@ -90,7 +163,10 @@ const MypageContainer = () => {
   }
   const { firstName, lastName, email, isAgent } = userInfo;
 
-  return <>{renderByIsAgent(isAgent)}</>;
+  return <Container>{renderByIsAgent(isAgent)}</Container>;
 };
-
+const Container = styled.div`
+  background: #f2f2f2;
+  width: 100%;
+`;
 export default MypageContainer;

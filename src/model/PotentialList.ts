@@ -3,7 +3,7 @@ export default class List {
   readonly no: string;
   readonly name: string;
   readonly listing: string;
-  readonly requestedContactDate: string;
+  readonly requestedHelipad: string;
   readonly initialContactDate: string;
   readonly acceptedDate: string;
   readonly inEscrow: boolean;
@@ -13,7 +13,7 @@ export default class List {
     no: string,
     name: string,
     listing: string,
-    requestedContactDate: string,
+    requestedHelipad: string,
     initialContactDate: string,
     acceptedDate: string,
     inEscrow: boolean
@@ -22,7 +22,7 @@ export default class List {
     this.no = no;
     this.name = name;
     this.listing = listing;
-    this.requestedContactDate = requestedContactDate;
+    this.requestedHelipad = requestedHelipad;
     this.initialContactDate = initialContactDate;
     this.acceptedDate = acceptedDate;
     this.inEscrow = inEscrow;

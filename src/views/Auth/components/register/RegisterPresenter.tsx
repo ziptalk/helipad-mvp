@@ -196,7 +196,10 @@ const RegisterPresenter = () => {
   );
 };
 
-const Container = styled.div``;
+const Container = styled.div`
+  width: 100%;
+  max-width: 80vw;
+`;
 const InputContainer = styled.div`
   margin: 0 auto;
   width: 410px;

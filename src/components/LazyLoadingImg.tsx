@@ -41,7 +41,7 @@ const LazyLoadingImg = ({ thumbnailUrl, width, height, children }: any) => {
         ref={imgRef}
         src={isLoad ? thumbnailUrl : PLACE_HOLDER}
         width={width ? width : "100%"}
-        height={height ? height : "880px"}
+        height={height ? height : "100%"}
         alt=""
       ></img>
     </Container>

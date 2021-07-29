@@ -65,7 +65,9 @@ export default class UserService {
   private static async initializeAccount({ ...props }) {
     let { uid } = props;
 
-    return userStore.doc(uid).set({ likes: [], ...props });
+    return userStore
+      .doc(uid)
+      .set({ favorite: [], onGoing: [], likes: [], ...props });
     // return userStore.doc(uid).set({
     //   firstName: firstName,
     //   lastName: lastName,

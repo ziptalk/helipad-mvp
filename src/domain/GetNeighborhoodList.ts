@@ -1,6 +1,7 @@
 import NeighborhoodItem from "../model/NeighborhoodItem";
-import beverlyHills from "../images/Neighborhood/List/beverly_hills_thumbnail.jpg";
-import malibu from "../images/Neighborhood/List/malibu_thumbnail.jpg";
+// import beverlyHills from "../images/Neighborhood/List/beverly_hills_thumbnail.jpg";
+import beverlyHills from "../images/Neighborhood/List/beverlyHills.jpg";
+import malibu from "../images/Neighborhood/List/malibu.jpg";
 import santaMonica from "../images/Neighborhood/List/santa_monica_thumbnail.jpg";
 import westHollywood from "../images/Neighborhood/List/west_hollywood_thumbnail.jpg";
 import studioCity from "../images/Neighborhood/List/studioCity_thumbnail.jpg";
