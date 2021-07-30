@@ -17,11 +17,10 @@ const ComingSoonPresenter = () => {
 
 const Container = styled.div`
   width: 100vw;
-  max-width: 1920px;
+  max-width: 1904px;
   margin-top: 103px;
 `;
 const Title = styled.div`
-  font-family: Poppins;
   font-size: 60px;
   font-style: normal;
   font-weight: 500;
@@ -53,7 +52,6 @@ const Image: any = styled.div`
   background: url(${(props: any) => props.imgPath});
   background-size: cover;
 
-  font-family: Poppins;
   font-size: 64px;
   font-style: normal;
   font-weight: 500;
@@ -68,7 +66,7 @@ const Image: any = styled.div`
 //   position: absolute;
 //   width: 312px;
 //   height: 96px;
-//   font-family: Poppins;
+//
 //   font-size: 64px;
 //   font-style: normal;
 //   font-weight: 500;

@@ -51,10 +51,9 @@ const Thumbnail: any = styled.div`
   min-height: 872px;
 
   background-image: url(${(props: any) => props.thumbnail && props.thumbnail});
-  background-size: contain;
+
   background-repeat: no-repeat;
   background-position: center center;
-  object-fit: fill;
 `;
 const Intro = styled.div`
   font-size: 18px;

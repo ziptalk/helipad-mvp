@@ -55,7 +55,6 @@ const HomeIcon = styled(HomeSvg)`
 `;
 
 const Title = styled.div`
-  font-family: Poppins;
   font-size: 52px;
   font-style: normal;
   font-weight: bold;
@@ -63,7 +62,6 @@ const Title = styled.div`
   letter-spacing: 0em;
 `;
 const SubTitle = styled.div`
-  font-family: Poppins;
   font-size: 24px;
   font-style: normal;
   font-weight: 400;
@@ -83,7 +81,6 @@ const MainHeaderBlock = styled.div`
   padding-top: 30px;
 `;
 const MainTitle = styled.div`
-  font-family: Poppins;
   font-size: 60px;
   font-style: normal;
   font-weight: 500;
@@ -93,7 +90,6 @@ const MainTitle = styled.div`
   margin-left: 212px;
 `;
 const MainSubTitle = styled.div`
-  font-family: Poppins;
   font-size: 28px;
   font-style: normal;
   font-weight: 400;

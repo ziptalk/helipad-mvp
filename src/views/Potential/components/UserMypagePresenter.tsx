@@ -1,8 +1,7 @@
 import styled from "styled-components";
-import ContentPresenter from "./ContentPresenter";
 import { useEffect, useState } from "react";
 import UserContentPresenter from "./UserContentPresenter";
-
+import { PagingContainer } from "./Pagination/index";
 enum SelectedCategory {
   FAVORITE = "Favorite",
   ONGOING = "On Going",
@@ -18,6 +17,10 @@ const UserMypagePresenter = ({
   getOnGoingList,
   moveToFavoriteList,
   moveToOnGoingList,
+  currentPage,
+  onChangePage,
+  favoriteTotalCount,
+  onGoingTotalCount,
 }: any) => {
   useEffect(() => {
     getFavoriteList();
@@ -71,6 +74,11 @@ const UserMypagePresenter = ({
                   onClickEvent={onClickEvent}
                 ></UserContentPresenter>
               ))}
+            <PagingContainer
+              currentPage={currentPage}
+              totalCount={favoriteTotalCount}
+              onChangePage={onChangePage}
+            />
           </>
         );
       case SelectedCategory.ONGOING:
@@ -85,6 +93,11 @@ const UserMypagePresenter = ({
                   onClickEvent={onClickEvent}
                 ></UserContentPresenter>
               ))}
+            <PagingContainer
+              currentPage={currentPage}
+              totalCount={onGoingTotalCount}
+              onChangePage={onChangePage}
+            />
           </>
         );
     }
@@ -112,14 +125,13 @@ const UserMypagePresenter = ({
 
 const Container = styled.div`
   margin: 0 auto;
-  max-width: 80vw;
-  width: 100%;
+  max-width: 80%;
+  width: 80vw;
   height: 110vh;
 `;
 const Header = styled.div`
   padding-top: 46px;
   margin-bottom: 21px;
-  font-family: Poppins;
   font-size: 48px;
   font-style: normal;
   font-weight: 600;
@@ -156,12 +168,6 @@ const Selected = styled(Category)`
   border-bottom: 2px solid black;
 `;
 
-const ContentContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-`;
 const TitleContainer = styled.div`
   display: flex;
   justify-content: space-between;

@@ -372,7 +372,6 @@ const RegisterButton = styled.button`
   background: #b69142;
   width: 410px;
   height: 56px;
-  font-family: Poppins;
   font-size: 18px;
   font-style: normal;
   font-weight: 600;
@@ -386,7 +385,6 @@ const RegisterButton = styled.button`
 const LoginButton = styled.div`
   height: 56px;
   padding: 22.5px 15px 15px;
-  font-family: Poppins;
   font-size: 18px;
   font-style: normal;
   font-weight: 600;

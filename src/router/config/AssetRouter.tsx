@@ -12,10 +12,7 @@ import Process from "../../views/MyPage/components/process/Process";
 import ContactHistory from "../../views/MyPage/components/mypage/ContactHistory";
 import NeighborhoodContainer from "../../views/Neighborhood/components/list/NeighborhoodContainer";
 import NeighborhoodDetailContainer from "../../views/Neighborhood/components/detail/NeighborhoodDetailContainer";
-import {
-  PotentialContainer,
-  MypageContainer,
-} from "../../views/Potential/index";
+import { MypageContainer } from "../../views/Potential/index";
 import FAQ from "../../views/Home/components/FAQ";
 const AssetRouter = ({ match }: RouteComponentProps) => {
   return (
@@ -37,10 +34,6 @@ const AssetRouter = ({ match }: RouteComponentProps) => {
         <PrivateRoutes
           path={`${match.url}/assetList`}
           component={AssetRoutes}
-        />
-        <PrivateRoutes
-          path={`${match.url}/potentialList`}
-          component={PotentialContainer}
         />
         <PrivateRoutes
           path={`${match.url}/mypage`}

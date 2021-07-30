@@ -62,7 +62,7 @@ const MainPresenter = ({ order, neighborhood }: NeighborhoodProps) => {
 };
 
 const Container = styled.div`
-  max-width: 1920px;
+  max-width: 1904px;
   width: 100vw;
   min-height: 600px;
   display: flex;
@@ -92,7 +92,6 @@ const StateBlock = styled.div`
 `;
 const StateIcon = styled(LineSvg)``;
 const State = styled.div`
-  font-family: Poppins;
   font-size: 18px;
   font-style: normal;
   font-weight: 600;
@@ -102,7 +101,6 @@ const State = styled.div`
   margin-left: 15px;
 `;
 const RegionName = styled.div`
-  font-family: Poppins;
   font-size: 64px;
   font-style: normal;
   font-weight: 500;
@@ -111,7 +109,6 @@ const RegionName = styled.div`
   text-align: left;
 `;
 const Intro = styled.div`
-  font-family: Poppins;
   font-size: 18px;
   font-style: normal;
   font-weight: 400;
@@ -135,7 +132,6 @@ const MainHeaderBlock = styled.div`
   padding-top: 30px;
 `;
 const MainTitle = styled.div`
-  font-family: Poppins;
   font-size: 60px;
   font-style: normal;
   font-weight: 500;
@@ -145,7 +141,6 @@ const MainTitle = styled.div`
   margin-left: 212px;
 `;
 const MainSubTitle = styled.div`
-  font-family: Poppins;
   font-size: 28px;
   font-style: normal;
   font-weight: 400;

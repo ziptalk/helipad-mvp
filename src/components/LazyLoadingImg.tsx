@@ -19,7 +19,7 @@ const LazyLoadingImg = ({ thumbnailUrl, width, height, children }: any) => {
   useEffect(() => {
     const options = {
       root: null,
-      threshold: [0.5, 1],
+      threshold: [0, 1],
     };
     if (!observerRef.current) {
       observerRef.current = new IntersectionObserver(onInterSection, options);

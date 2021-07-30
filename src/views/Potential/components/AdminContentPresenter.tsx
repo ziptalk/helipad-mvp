@@ -14,12 +14,11 @@ const AdminContentPresenter = ({
   onClickCheckButton,
   item,
   moveTo,
+  userMoveTo,
   onClickEvent,
 }: any) => {
-  console.log("item", item);
   const [inEscrow, setInEscrow] = useState(item.list.inEscrow);
-  console.log("isEscrow", inEscrow);
-  console.log("isEscrow2", item.list.inEscrow);
+
   return (
     <Container>
       <ItemContainer>
@@ -39,6 +38,7 @@ const AdminContentPresenter = ({
             onClick={(event: any) => {
               onClickCheckButton(event, item.assetId);
               moveTo(item.list, item.userId, item.assetId);
+              userMoveTo(item.list, item.userId, item.assetId);
               onClickEvent();
             }}
             htmlFor={`${item.assetId}`}
@@ -106,7 +106,6 @@ const ItemContainer = styled.div`
   display: flex;
   flex-direction: column;
   max-height: 1118px;
-  margin-bottom: 40px;
   .check {
     background-color: #fafafa;
   }

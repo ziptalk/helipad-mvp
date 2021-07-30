@@ -106,7 +106,7 @@ const Container = styled.div`
   // width: 1452px;
   max-width: 100vw;
   width: 100%;
-  overflow: auto;
+
   justify-content: space-between;
   // margin-top: 112px;
 `;

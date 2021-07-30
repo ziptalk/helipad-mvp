@@ -44,6 +44,7 @@
     "react-geocode": "^0.2.3",
     "react-i18next": "^11.8.15",
     "react-icons": "^4.2.0",
+    "react-js-pagination": "^3.0.3",
     "react-lazy-load-image-component": "^1.5.1",
     "react-player": "^2.9.0",
     "react-promise": "^3.0.2",

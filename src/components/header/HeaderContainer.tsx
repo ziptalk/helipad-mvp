@@ -22,6 +22,7 @@ const HeaderContainer = ({ isLandingPage }: any) => {
     korean: DropDownMenu.KOREAN,
     english: DropDownMenu.ENGLISH,
   });
+  const [scrollMove, setScrollMove] = useState(false);
 
   useEffect(() => {
     if (authenticated) {
@@ -39,9 +40,31 @@ const HeaderContainer = ({ isLandingPage }: any) => {
       });
     }
   }, [authenticated]);
+  const handleScroll = () => {
+    // console.log("Scroll event");
+    // console.log("window.scrollY", window.scrollY);
+    // console.log("window.pageYOffset", window.pageYOffset);
+    if (window.scrollY > 10) {
+      setScrollMove(true);
+      console.log("fix");
+    } else {
+      setScrollMove(false);
+    }
+  };
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  if (scrollMove) {
+    console.log("scroll");
+  }
   const onClickUserIcon = () => {};
   return (
     <HeaderPresenter
+      scrollMove={scrollMove}
       userInfo={userInfo}
       authenticated={authenticated}
       headerMode={headerMode}

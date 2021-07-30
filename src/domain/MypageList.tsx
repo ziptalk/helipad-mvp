@@ -73,4 +73,61 @@ export default class MypageListDomain {
   static async checkUserExistence(userId: any) {
     return await MypageService.checkUserExistence(userId);
   }
+
+  //! 페이징
+  //? admin
+  static async getAllPotentialListForPaging() {
+    return await MypageService.getAllPotentialListForPaging();
+  }
+  static async getPotentialListForPaging(
+    indexOfFirst: number,
+    postsPerPage: number
+  ) {
+    return await MypageService.getPotentialListForPaging(
+      indexOfFirst,
+      postsPerPage
+    );
+  }
+  static async getAllEscrowListForPaging() {
+    return await MypageService.getAllEscrowListForPaging();
+  }
+  static async getEscrowListForPaging(
+    indexOfFirst: number,
+    postsPerPage: number
+  ) {
+    return await MypageService.getEscrowListForPaging(
+      indexOfFirst,
+      postsPerPage
+    );
+  }
+
+  //? user
+  static async getAllFavoriteListForPaging(userId: any) {
+    return await MypageService.getAllFavoriteListForPaging(userId);
+  }
+  static async getFavoriteListForPaging(
+    userId: any,
+    indexOfFirst: number,
+    postsPerPage: number
+  ) {
+    return await MypageService.getFavoriteListForPaging(
+      userId,
+      indexOfFirst,
+      postsPerPage
+    );
+  }
+  static async getAllOnGoingListForPaging(userId: any) {
+    return await MypageService.getAllOnGoingListForPaging(userId);
+  }
+  static async getOnGoingListForPaging(
+    userId: any,
+    indexOfFirst: number,
+    postsPerPage: number
+  ) {
+    return await MypageService.getOnGoingListForPaging(
+      userId,
+      indexOfFirst,
+      postsPerPage
+    );
+  }
 }

@@ -189,7 +189,7 @@ const Container = styled.div`
   // width: 100vw;
   // width: 100%;
   // margin-top: 112px;
-  max-width: 1920px;
+  max-width: 1904px;
   width: 100vw;
 
   display: flex;
@@ -197,11 +197,10 @@ const Container = styled.div`
 `;
 
 const MapContainer = styled.div`
-  width: calc(1920px - 691px);
+  width: calc(1904px - 691px);
   align-items: right;
   margin-left: 0px;
   // width: 60%;
-  height: 100vh;
 `;
 
 const AssetContainer = styled.div`
@@ -209,7 +208,7 @@ const AssetContainer = styled.div`
   // width: 900px;
   // width: 40%;
   // background-color: #61dafb;
-  height: 100vh;
+
   background-color: #f4f4f4;
   overflow-y: scroll;
   z-index: 0;

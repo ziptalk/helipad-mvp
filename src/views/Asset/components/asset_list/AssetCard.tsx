@@ -25,37 +25,114 @@ const AssetCard = ({ data }: AssetCardProps) => {
 
   const heartOnClick = () => {
     setHeart(!heart);
-  }
+  };
 
   const onGoingOnClick = () => {
     setOnGoing(!onGoing);
-  }
+  };
 
   return (
-      <Container
-        background={data.buildingInformation.thumbnail}
-        onMouseOver={handlerMouseOver}
-        onMouseOut={handlerMouseOut}
-      >
-        
-          {mouseOver ? (
-            <>
-            <div style={{marginTop:"-31px", paddingTop:"0px"}}>
-              <ContainerContent2>
-                {/* <div style={{width:"100%", height:"30px"}}></div> */}
-                <div style={{display:"flex", alignItems:"right", width:"100%", marginTop:"0px", paddingTop:"30px", height:"30px"}}>
-                  {heart? 
-                  <button onClick={heartOnClick} style={{width:"32px", height:"32px", backgroundColor:"black", borderRadius:"16px", textAlign:"center", alignItems:"center", paddingTop:'6px', marginLeft:"200px", border:0}}><AiFillHeart style={{fontSize:"20px", color:"#EBB136"}}/></button>                  
-                  : 
-                  <button onClick={heartOnClick} style={{width:"32px", height:"32px", backgroundColor:"black", borderRadius:"16px", textAlign:"center", alignItems:"center", paddingTop:'6px', marginLeft:"200px", border:0}}><AiFillHeart style={{fontSize:"20px", color:"white"}}/></button>
-                  }
-                  {onGoing?
-                  <button onClick={onGoingOnClick} style={{width:"32px", height:"32px", backgroundColor:"black", borderRadius:"16px", textAlign:"center", alignItems:"center", paddingTop:'6px', marginLeft:"6px", border:0}}><FaHelicopter style={{fontSize:"20px", color:"#EBB136"}}/></button>
-                  :
-                  <button onClick={onGoingOnClick} style={{width:"32px", height:"32px", backgroundColor:"black", borderRadius:"16px", textAlign:"center", alignItems:"center", paddingTop:'6px', marginLeft:"6px", border:0}}><FaHelicopter style={{fontSize:"20px", color:"white"}}/></button>
-                }
-                </div>
-                <Link to={`/asset/assetList/${data.id}`} style={{ textDecoration: "none" }}>
+    <Container
+      background={data.buildingInformation.thumbnail}
+      onMouseOver={handlerMouseOver}
+      onMouseOut={handlerMouseOut}
+    >
+      {mouseOver ? (
+        <>
+          <div style={{ marginTop: "-31px", paddingTop: "0px" }}>
+            <ContainerContent2>
+              {/* <div style={{width:"100%", height:"30px"}}></div> */}
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "right",
+                  width: "100%",
+                  marginTop: "0px",
+                  paddingTop: "30px",
+                  height: "30px",
+                }}
+              >
+                {heart ? (
+                  <button
+                    onClick={heartOnClick}
+                    style={{
+                      width: "32px",
+                      height: "32px",
+                      backgroundColor: "black",
+                      borderRadius: "16px",
+                      textAlign: "center",
+                      alignItems: "center",
+                      paddingTop: "6px",
+                      marginLeft: "200px",
+                      border: 0,
+                    }}
+                  >
+                    <AiFillHeart
+                      style={{ fontSize: "20px", color: "#EBB136" }}
+                    />
+                  </button>
+                ) : (
+                  <button
+                    onClick={heartOnClick}
+                    style={{
+                      width: "32px",
+                      height: "32px",
+                      backgroundColor: "black",
+                      borderRadius: "16px",
+                      textAlign: "center",
+                      alignItems: "center",
+                      paddingTop: "6px",
+                      marginLeft: "200px",
+                      border: 0,
+                    }}
+                  >
+                    <AiFillHeart style={{ fontSize: "20px", color: "white" }} />
+                  </button>
+                )}
+                {onGoing ? (
+                  <button
+                    onClick={onGoingOnClick}
+                    style={{
+                      width: "32px",
+                      height: "32px",
+                      backgroundColor: "black",
+                      borderRadius: "16px",
+                      textAlign: "center",
+                      alignItems: "center",
+                      paddingTop: "6px",
+                      marginLeft: "6px",
+                      border: 0,
+                    }}
+                  >
+                    <FaHelicopter
+                      style={{ fontSize: "20px", color: "#EBB136" }}
+                    />
+                  </button>
+                ) : (
+                  <button
+                    onClick={onGoingOnClick}
+                    style={{
+                      width: "32px",
+                      height: "32px",
+                      backgroundColor: "black",
+                      borderRadius: "16px",
+                      textAlign: "center",
+                      alignItems: "center",
+                      paddingTop: "6px",
+                      marginLeft: "6px",
+                      border: 0,
+                    }}
+                  >
+                    <FaHelicopter
+                      style={{ fontSize: "20px", color: "white" }}
+                    />
+                  </button>
+                )}
+              </div>
+              <Link
+                to={`/asset/assetList/${data.id}`}
+                style={{ textDecoration: "none" }}
+              >
                 <div
                   style={{
                     display: "flex",
@@ -63,9 +140,9 @@ const AssetCard = ({ data }: AssetCardProps) => {
                     justifyContent: "space-between",
                     width: "100%",
                     // marginTop:"-50px",
-                    marginTop:"50px",
-                    paddingTop:"30px",
-                    height:"30px"
+                    marginTop: "50px",
+                    paddingTop: "30px",
+                    height: "30px",
                   }}
                 >
                   <button
@@ -97,7 +174,7 @@ const AssetCard = ({ data }: AssetCardProps) => {
                     // position: "absolute",
                     alignItems: "center",
                     textAlign: "center",
-                    paddingTop:"30px",
+                    paddingTop: "30px",
                     // height:"20px"
                   }}
                 >
@@ -112,59 +189,72 @@ const AssetCard = ({ data }: AssetCardProps) => {
                       height: "20px",
                       alignItems: "center",
                       textAlign: "center",
-                      marginBottom:"0px"
+                      marginBottom: "0px",
                     }}
                   >
                     01 of 01
                   </div>
                 </div>
-                </Link>
-              </ContainerContent2>
-              </div>
-            </>
-          ) : (
-            <Link to={`/asset/assetList/${data.id}`} style={{ textDecoration: "none" }}>
-            <ContainerGradient>
+              </Link>
+            </ContainerContent2>
+          </div>
+        </>
+      ) : (
+        <Link
+          to={`/asset/assetList/${data.id}`}
+          style={{ textDecoration: "none" }}
+        >
+          <ContainerGradient>
             <div>
-            <ContainerContent>
-              <LeftSide>
-                <PriceBlock>
-                  <PriceDollar>
-                    ${data.price.toLocaleString("en-US")}
-                  </PriceDollar>
-                </PriceBlock>
-                <PlaceInfoBlock>
-                  <StreetInfo>{data.buildingInformation.street}</StreetInfo>
-                  <AddressInfo>{data.buildingInformation.address}</AddressInfo>
-                </PlaceInfoBlock>
-              </LeftSide>
-              <Divider />
-              <RightSide>
-                <RoomInfoBlock>
-                  <RoomInfo>
-                    <RoomInfoNum>{data.buildingInformation.nBedrooms}</RoomInfoNum>
-                    <div>Beds</div>
-                  </RoomInfo>
-                  <RoomInfo>
-                    <RoomInfoNum>{data.buildingInformation.nBathrooms} </RoomInfoNum>
-                    <div>Bath</div>
-                  </RoomInfo>
-                  <RoomInfo>
-                    <RoomInfoNum>{data.buildingInformation.square}</RoomInfoNum>
-                    <div>Sq m</div>
+              <ContainerContent>
+                <LeftSide>
+                  <PriceBlock>
+                    <PriceDollar>
+                      ${data.price.toLocaleString("en-US")}
+                    </PriceDollar>
+                  </PriceBlock>
+                  <PlaceInfoBlock>
+                    <StreetInfo>{data.buildingInformation.street}</StreetInfo>
+                    <AddressInfo>
+                      {data.buildingInformation.address}
+                    </AddressInfo>
+                  </PlaceInfoBlock>
+                </LeftSide>
+                <Divider />
+                <RightSide>
+                  <RoomInfoBlock>
+                    <RoomInfo>
+                      <RoomInfoNum>
+                        {data.buildingInformation.nBedrooms}
+                      </RoomInfoNum>
+                      <div>Beds</div>
                     </RoomInfo>
-                  <RoomInfo>
-                  <RoomInfoNum>{Math.round(data.buildingInformation.square / 3.3)}</RoomInfoNum>
-                  Pyung
-                  </RoomInfo>
-                </RoomInfoBlock>
-              </RightSide>
-            </ContainerContent>
+                    <RoomInfo>
+                      <RoomInfoNum>
+                        {data.buildingInformation.nBathrooms}{" "}
+                      </RoomInfoNum>
+                      <div>Bath</div>
+                    </RoomInfo>
+                    <RoomInfo>
+                      <RoomInfoNum>
+                        {data.buildingInformation.square}
+                      </RoomInfoNum>
+                      <div>Sq m</div>
+                    </RoomInfo>
+                    <RoomInfo>
+                      <RoomInfoNum>
+                        {Math.round(data.buildingInformation.square / 3.3)}
+                      </RoomInfoNum>
+                      Pyung
+                    </RoomInfo>
+                  </RoomInfoBlock>
+                </RightSide>
+              </ContainerContent>
             </div>
-            </ContainerGradient>
-            </Link>
-          )}
-      </Container>
+          </ContainerGradient>
+        </Link>
+      )}
+    </Container>
   );
 };
 
@@ -232,7 +322,6 @@ const PriceBlock = styled.div`
 const PriceDollar = styled.div``;
 const PriceWon = styled.div``;
 const PlaceInfoBlock = styled.div`
-  font-family: "Helvetica Neue";
   // font-size: 15px;
   font-size: 10px;
   // -webkit-transform:scale(0.9);
@@ -240,12 +329,12 @@ const PlaceInfoBlock = styled.div`
   padding: 0px 0;
 `;
 const StreetInfo = styled.div`
-  font-size: 12px
-  font-weight: 400
+  font-size: 12px;
+  font-weight: 400;
 `;
 const AddressInfo = styled.div`
-  font-size: 12px
-  font-weight: 400
+  font-size: 12px;
+  font-weight: 400;
 `;
 
 const Divider = styled.div`
@@ -257,7 +346,6 @@ const RightSide = styled.div`
   width: 35%;
 `;
 const RoomInfoBlock = styled.div`
-  font-family: "Helvetica Neue";
   // font-size: 18px;
   font-size: 9px;
   font-weight: 400;
@@ -271,9 +359,9 @@ const RoomInfo = styled.div`
 `;
 
 const RoomInfoNum = styled.div`
-  width : 30px;
-  font-size : 10px;
-  font-weight : 500;
-`
+  width: 30px;
+  font-size: 10px;
+  font-weight: 500;
+`;
 
 export default AssetCard;

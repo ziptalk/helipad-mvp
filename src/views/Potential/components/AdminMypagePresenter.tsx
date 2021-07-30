@@ -1,13 +1,16 @@
 import styled from "styled-components";
-import ContentPresenter from "./ContentPresenter";
 import { useEffect, useState } from "react";
 import AdminContentPresenter from "./AdminContentPresenter";
+import { PagingContainer } from "./Pagination/index";
 enum SelectedCategory {
   POTENTIAL = "Potential",
   INESCROW = "In Escrow",
 }
 const AdminMypagePresenter = ({
-  isAgent,
+  potentialTotalCount,
+  escrowTotalCount,
+  currentPage,
+  onChangePage,
   selectedCategory,
   onClickedCategory,
   onClickCheckButton,
@@ -17,19 +20,15 @@ const AdminMypagePresenter = ({
   getEscrowList,
   moveToPotentialList,
   moveToInEscrowList,
+  moveToFavoriteList,
+  moveToOnGoingList,
 }: any) => {
-  useEffect(() => {
-    getPotentialList();
-    getEscrowList();
-  }, []);
+  // useEffect(() => {
+  //   getPotentialList();
+  //   getEscrowList();
+  // }, []);
   const [click, setClick] = useState(false);
-  console.log(
-    "potential",
-    potentialList,
-    "escrow",
-    escrowList,
-    escrowList.length
-  );
+
   const onClickEvent = () => {
     setClick(!click);
   };
@@ -74,9 +73,15 @@ const AdminMypagePresenter = ({
                   item={item}
                   onClickCheckButton={onClickCheckButton}
                   moveTo={moveToInEscrowList}
+                  userMoveTo={moveToOnGoingList}
                   onClickEvent={onClickEvent}
                 ></AdminContentPresenter>
               ))}
+            <PagingContainer
+              currentPage={currentPage}
+              totalCount={potentialTotalCount}
+              onChangePage={onChangePage}
+            />
           </>
         );
       case SelectedCategory.INESCROW:
@@ -88,13 +93,20 @@ const AdminMypagePresenter = ({
                   item={item}
                   onClickCheckButton={onClickCheckButton}
                   moveTo={moveToPotentialList}
+                  userMoveTo={moveToFavoriteList}
                   onClickEvent={onClickEvent}
                 ></AdminContentPresenter>
               ))}
+            <PagingContainer
+              currentPage={currentPage}
+              totalCount={escrowTotalCount}
+              onChangePage={onChangePage}
+            />
           </>
         );
     }
   };
+
   return (
     <Container>
       <Header>Admin Mypage</Header>
@@ -117,8 +129,8 @@ const AdminMypagePresenter = ({
 };
 const Container = styled.div`
   margin: 0 auto;
-  max-width: 80vw;
-  width: 100%;
+  max-width: 80%;
+  width: 80vw;
   height: 110vh;
 `;
 const Header = styled.div`

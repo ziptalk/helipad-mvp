@@ -1,6 +1,7 @@
 import { mypageStore, userStore, assetStore } from "../../shared/Firebase";
 import MypageList from "../../model/MypageList";
 import firebase from "firebase";
+import List from "../../model/PotentialList";
 export default class MypageService {
   // add potential list
   static async addPotentialList(list: any, userId: any, assetId: any) {
@@ -88,23 +89,24 @@ export default class MypageService {
       .doc(userId)
       .update({
         favoriteList: firebase.firestore.FieldValue.arrayUnion({
+          assetId,
           list,
           userId,
-          assetId,
         }),
       });
   }
 
   static async removeFavoriteList(list: any, userId: any, assetId: any) {
+    console.log("list", list, "userId", userId, "assetId", assetId);
     const removeValue = await mypageStore
       .doc("user")
       .collection("userInfo")
       .doc(userId)
       .update({
         favoriteList: firebase.firestore.FieldValue.arrayRemove({
+          assetId,
           list,
           userId,
-          assetId,
         }),
       });
     return removeValue;
@@ -117,9 +119,9 @@ export default class MypageService {
       .doc(userId)
       .update({
         onGoingList: firebase.firestore.FieldValue.arrayUnion({
+          assetId,
           list,
           userId,
-          assetId,
         }),
       });
   }
@@ -130,9 +132,9 @@ export default class MypageService {
       .doc(userId)
       .update({
         onGoingList: firebase.firestore.FieldValue.arrayRemove({
+          assetId,
           list,
           userId,
-          assetId,
         }),
       });
 
@@ -157,7 +159,6 @@ export default class MypageService {
   }
   static async moveToOnGoingList(list: any, userId: any, assetId: any) {
     // favorite => ongoing
-
     await this.removeFavoriteList(list, userId, assetId);
     list.inEscrow = true;
     await this.addOnGoingList(list, userId, assetId);
@@ -189,5 +190,81 @@ export default class MypageService {
       .doc(userId)
       .get();
     return result.exists;
+  }
+
+  //! 페이징
+  //? admin
+  static async getAllPotentialListForPaging() {
+    const documentQuerySnapshot = await mypageStore.doc("admin").get();
+    const result = documentQuerySnapshot.get("potentialList").length;
+    return result;
+  }
+  static async getPotentialListForPaging(
+    indexOfFirst: number,
+    postsPerPage: number
+  ) {
+    const documentQuerySnapshot = await mypageStore.doc("admin").get();
+    const result = documentQuerySnapshot.get("potentialList");
+    return result.slice(indexOfFirst, indexOfFirst + postsPerPage) as List[];
+  }
+  static async getAllEscrowListForPaging() {
+    const documentQuerySnapshot = await mypageStore.doc("admin").get();
+    const result = documentQuerySnapshot.get("inEscrowList").length;
+    return result;
+  }
+  static async getEscrowListForPaging(
+    indexOfFirst: number,
+    postsPerPage: number
+  ) {
+    const documentQuerySnapshot = await mypageStore.doc("admin").get();
+    const result = documentQuerySnapshot.get("inEscrowList");
+    return result.slice(indexOfFirst, indexOfFirst + postsPerPage) as List[];
+  }
+  //? user
+  static async getAllFavoriteListForPaging(userId: any) {
+    const documentQuerySnapshot = await mypageStore
+      .doc("user")
+      .collection("userInfo")
+      .doc(userId)
+      .get();
+    const result = documentQuerySnapshot.get("favoriteList").length;
+    return result;
+  }
+
+  static async getFavoriteListForPaging(
+    userId: any,
+    indexOfFirst: number,
+    postsPerPage: number
+  ) {
+    const documentQuerySnapshot = await mypageStore
+      .doc("user")
+      .collection("userInfo")
+      .doc(userId)
+      .get();
+    const result = documentQuerySnapshot.get("favoriteList");
+    return result.slice(indexOfFirst, indexOfFirst + postsPerPage) as List[];
+  }
+
+  static async getAllOnGoingListForPaging(userId: any) {
+    const documentQuerySnapshot = await mypageStore
+      .doc("user")
+      .collection("userInfo")
+      .doc(userId)
+      .get();
+    const result = documentQuerySnapshot.get("onGoingList").length;
+    return result;
+  }
+  static async getOnGoingListForPaging(
+    userId: any,
+    indexOfFirst: number,
+    postsPerPage: number
+  ) {
+    const documentQuerySnapshot = await mypageStore
+      .doc("user")
+      .collection("userInfo")
+      .doc(userId)
+      .get();
+    const result = documentQuerySnapshot.get("onGoingList");
+    return result.slice(indexOfFirst, indexOfFirst + postsPerPage) as List[];
   }
 }

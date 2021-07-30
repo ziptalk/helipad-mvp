@@ -1,6 +1,6 @@
-import React from 'react';
-import styled from 'styled-components';
-import img from '../../../../images/helipad.png';
+import React from "react";
+import styled from "styled-components";
+import img from "../../../../images/helipad.png";
 /**
  *  figma에 나온 willamsburg 사진나온 컴포넌트 => 무슨 용도인지 몰라서
  */
@@ -26,8 +26,8 @@ const IDontKnow: React.FC<any> = ({ IDontKnowProps }) => {
           inceptos himenaeos.
         </Description>
         <ButtonBlock>
-          <Button>{'Williamsburg Guide >'}</Button>
-          <Button>{'All Neighborhoods >'}</Button>
+          <Button>{"Williamsburg Guide >"}</Button>
+          <Button>{"All Neighborhoods >"}</Button>
         </ButtonBlock>
       </DescriptionContainer>
     </Container>
@@ -60,14 +60,12 @@ const Title = styled.div`
   color: #4542e2;
   font-size: 48px;
   font-weight: 600;
-  font-family: ${'Termina'};
   line-height: 70.8px;
   padding: 20px 0px;
 `;
 const Description = styled.div`
   font-size: 18px;
   font-weight: 300;
-  font-family: ${'Helvetica Neue'};
 `;
 const ButtonBlock = styled.div`
   display: flex;
@@ -77,7 +75,6 @@ const ButtonBlock = styled.div`
   width: 100%;
 `;
 const Button = styled.button`
-  font-family: ${'Helvetica Neue'};
   font-weight: 400;
   font-size: 18px;
   background: none;

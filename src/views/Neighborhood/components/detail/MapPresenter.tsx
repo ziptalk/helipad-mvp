@@ -16,7 +16,7 @@ const MapPresenter = ({ regionInfo }: MapPresenterProps) => {
 };
 
 const Container = styled.div`
-  max-width: 1920px;
+  max-width: 1904px;
   margin-bottom: 60px;
   margin: 0 auto;
   display: flex;
@@ -25,7 +25,7 @@ const Container = styled.div`
 `;
 const MapBlock = styled.div`
   height: 880px;
-  max-width: 1920px;
+  max-width: 1904px;
   width: 100vw;
   background: gray;
   margin-left: 0;
@@ -40,7 +40,6 @@ const AttributeBlock = styled.div`
   margin-top: 20px;
 `;
 const AttributeTitle = styled.div`
-  font-family: Poppins;
   font-size: 18px;
   font-style: normal;
   font-weight: 600;

@@ -14,6 +14,7 @@ const UserContentPresenter = ({
   onClickCheckButton,
   item,
   moveTo,
+
   onClickEvent,
 }: any) => {
   const [inEscrow, setInEscrow] = useState(item.list.inEscrow);

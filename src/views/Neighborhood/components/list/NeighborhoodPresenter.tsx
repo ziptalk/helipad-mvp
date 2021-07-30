@@ -33,7 +33,7 @@ const Container = styled.div`
   align-items: center;
   background: transparent;
   width: 100vw;
-  max-width: 1920px;
+  max-width: 1904px;
 `;
 const MainHeaderBlock = styled.div`
   max-width: 80vw;
@@ -44,7 +44,6 @@ const MainHeaderBlock = styled.div`
   padding-top: 30px;
 `;
 const MainTitle = styled.div`
-  font-family: Poppins;
   font-size: 60px;
   font-style: normal;
   font-weight: 500;
@@ -54,7 +53,6 @@ const MainTitle = styled.div`
   margin-left: 212px;
 `;
 const MainSubTitle = styled.div`
-  font-family: Poppins;
   font-size: 28px;
   font-style: normal;
   font-weight: 400;
