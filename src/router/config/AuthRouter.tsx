@@ -10,6 +10,7 @@ import PrivateRoutes from "./PrivateRouter/PrivateRoutes";
 import { Login, Logout, RegisterForm } from "../../views/Auth/components";
 import LoginAndRegisterContainer from "../../views/Auth";
 import MyPage from "../../views/MyPage/components/mypage/MyPage";
+import AccountPage from "../../views/Account/components/AccountPage";
 
 const AuthRouter = ({ match }: RouteComponentProps) => {
   return (
@@ -21,6 +22,10 @@ const AuthRouter = ({ match }: RouteComponentProps) => {
       <Route
         path={`${match.url}/registerForm`}
         component={LoginAndRegisterContainer}
+      />
+      <Route 
+        path={`${match.url}/account`}
+        component={AccountPage}
       />
       <PrivateRoutes path={`${match.url}/logout`} component={Logout} />
       <PrivateRoutes path={`${match.url}/mypage`} component={MyPage} />
