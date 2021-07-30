@@ -22,10 +22,10 @@ const UserMypagePresenter = ({
   favoriteTotalCount,
   onGoingTotalCount,
 }: any) => {
-  useEffect(() => {
-    getFavoriteList();
-    getOnGoingList();
-  }, []);
+  // useEffect(() => {
+  //   getFavoriteList();
+  //   getOnGoingList();
+  // }, []);
   const [click, setClick] = useState(false);
   const onClickEvent = () => {
     setClick(!click);

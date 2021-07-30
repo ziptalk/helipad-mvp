@@ -26,10 +26,9 @@ const DropdownMenu = ({
   const history = useHistory();
   const onClick = (event: any) => {
     const clickedButton = event.target.innerText;
-    console.log("clickedButton", typeof clickedButton, clickedButton);
-    console.log(MenuName.MYPAGE);
     switch (clickedButton) {
       case MenuName.ACCOUNT:
+        history.push("/auth/account");
         break;
       case MenuName.MYPAGE:
         history.push("/asset/mypage");
