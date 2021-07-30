@@ -6,32 +6,35 @@ import { ReactComponent as BlackUserSvg } from "../../images/Header/ic_blackUser
 import { ReactComponent as WhiteUserSvg } from "../../images/Header/ic_whiteUser.svg";
 import { ReactComponent as BlackGlobalSvg } from "../../images/Header/ic_blackGlobal.svg";
 import { ReactComponent as WhiteGlobalSvg } from "../../images/Header/ic_whiteGlobal.svg";
+import { ReactComponent as ContactUsSvg } from "../../images/Header/ic_contactUs.svg";
 import BlackChatBot from "../BlackChatBot";
 import { ReactComponent as SearchSvg } from "../../images/Header/ic_search.svg";
 import DropdownMenu from "../DropdownMenu";
 const HeaderPresenter = ({
+  scrollMove,
   headerMode,
+  authenticated,
   isLandingPage,
   userIconCategory,
   globalIconCategory,
+  userInfo,
 }: any) => {
-  console.log("headerMode:", headerMode);
-  console.log("isLandingPage:", isLandingPage);
-
   const renderByHeaderMode = () => {
     switch (headerMode) {
       case "inviteCodeForm":
-        return <></>;
-      case "neighborhoodList":
         return <></>;
       default:
         return (
           <CategoryContainer>
             <Link to="/aboutUs">
-              <About color={headerMode}>About us</About>
+              <About scrollMove={scrollMove} color={headerMode}>
+                About us
+              </About>
             </Link>
             <Link to="/asset/neighborhood">
-              <Neighborhood color={headerMode}>Neighborhood</Neighborhood>
+              <Neighborhood scrollMove={scrollMove} color={headerMode}>
+                Neighborhood
+              </Neighborhood>
             </Link>
           </CategoryContainer>
         );
@@ -39,27 +42,64 @@ const HeaderPresenter = ({
   };
   return (
     <>
-      <Container color={headerMode} isLandingPage={isLandingPage}>
+      <Container
+        scrollMove={scrollMove}
+        color={headerMode}
+        isLandingPage={isLandingPage}
+      >
         <Link to="/asset/neighborhood">
-          <BlackLogo color={headerMode} />
+          <BlackLogo scrollMove={scrollMove} color={headerMode} />
         </Link>
         {renderByHeaderMode()}
         <BlackChatBot></BlackChatBot>
         <IconBlock>
-          <DropDownContainer>
-            <DropdownMenu
-              Component={() => <BlackUser color={headerMode} />}
-              mypageOrRegister={userIconCategory.mypageOrRegister}
-              signOutOrSignIn={userIconCategory.signOutOrSignIn}
-            />
-          </DropDownContainer>
-          <DropDownContainer>
-            <DropdownMenu
-              Component={() => <BlackGlobal color={headerMode} />}
-              mypageOrRegister={globalIconCategory.korean}
-              signOutOrSignIn={globalIconCategory.english}
-            />
-          </DropDownContainer>
+          {authenticated ? (
+            <IconBlock>
+              <DropDownContainer>
+                <DropdownMenu
+                  Component={() => (
+                    <BlackUser scrollMove={scrollMove} color={headerMode} />
+                  )}
+                  account={userIconCategory.account}
+                  mypageOrRegister={userIconCategory.mypageOrRegister}
+                  signOutOrSignIn={userIconCategory.signOutOrSignIn}
+                />
+              </DropDownContainer>
+              <DropDownContainer>
+                <DropdownMenu
+                  Component={() => (
+                    <BlackGlobal scrollMove={scrollMove} color={headerMode} />
+                  )}
+                  mypageOrRegister={globalIconCategory.korean}
+                  signOutOrSignIn={globalIconCategory.english}
+                />
+              </DropDownContainer>
+              <ContactUs scrollMove={scrollMove} color={headerMode} />
+            </IconBlock>
+          ) : (
+            <IconBlock>
+              <DropDownContainer>
+                <DropdownMenu
+                  Component={() => (
+                    <BlackUser scrollMove={scrollMove} color={headerMode} />
+                  )}
+                  userInfo={userInfo}
+                  mypageOrRegister={userIconCategory.mypageOrRegister}
+                  signOutOrSignIn={userIconCategory.signOutOrSignIn}
+                />
+              </DropDownContainer>
+              <DropDownContainer>
+                <DropdownMenu
+                  Component={() => (
+                    <BlackGlobal scrollMove={scrollMove} color={headerMode} />
+                  )}
+                  mypageOrRegister={globalIconCategory.korean}
+                  signOutOrSignIn={globalIconCategory.english}
+                />
+              </DropDownContainer>
+              <ContactUs scrollMove={scrollMove} color={headerMode} />
+            </IconBlock>
+          )}
         </IconBlock>
       </Container>
     </>
@@ -70,7 +110,13 @@ const Container: any = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 100%;
+  height: 112px;
+  width: 100vw;
+  margin: 0 auto;
+  max-width: 1904px;
+  position: relative;
+  top: 0px;
+  z-index: 3;
 
   background-color: ${(props: any) =>
     (props.color === "inviteCodeForm" || props.color === "neighborhoodList") &&
@@ -81,9 +127,21 @@ const Container: any = styled.div`
   top: ${(props: any) =>
     (props.color === "inviteCodeForm" || props.color === "neighborhoodList") &&
     "0px"};
+  text-align: ${(props: any) =>
+    (props.color === "inviteCodeForm" || props.color === "neighborhoodList") &&
+    "center"};
   z-index: ${(props: any) =>
     (props.color === "inviteCodeForm" || props.color === "neighborhoodList") &&
-    1};
+    3};
+  max-width: ${(props: any) =>
+    (props.color === "inviteCodeForm" || props.color === "neighborhoodList") &&
+    "1904px"};
+
+  background-color: ${(props: any) => props.scrollMove && "white"};
+  color: ${(props: any) => props.scrollMove && "#212121"};
+  position: ${(props: any) => props.scrollMove && "fixed"};
+  top: ${(props: any) => props.scrollMove && "0px"};
+  transition: 0.3s ease-in-out;
 `;
 
 const CategoryContainer = styled.div`
@@ -105,6 +163,7 @@ const BlackLogo: any = styled(BlackLogoSvg)`
       : props.color === "neighborhoodList"
       ? "black"
       : "black"};
+  fill: ${(props: any) => props.scrollMove && "black"};
 
   @media ${({ theme }) => theme.mediaQueryOnDevice.notebookS} {
     margin-left: 30px;
@@ -113,26 +172,25 @@ const BlackLogo: any = styled(BlackLogoSvg)`
 const About: any = styled.div`
   min-width: 145px;
   text-align: center;
-  font-family: Poppins;
   font-size: 18px;
   font-style: normal;
   font-weight: 500;
   line-height: 27px;
   letter-spacing: 0px;
-  padding-right: 20px;
 
   color: ${(props: any) =>
     props.color === "inviteCodeForm"
       ? "white"
       : props.color === "neighborhoodList"
-      ? "black"
+      ? "white"
       : "black"};
+  color: ${(props: any) => props.scrollMove && "#212121"};
   position: relative;
   z-index: 1;
 `;
 const Neighborhood: any = styled(About)``;
 const FAQ: any = styled(About)``;
-const ContactUs: any = styled(About)``;
+
 const IconBlock = styled.div`
   display: flex;
   align-items: center;
@@ -149,7 +207,7 @@ const BlackUser: any = styled(BlackUserSvg)`
       : props.color === "neighborhoodList"
       ? "white"
       : "black"};
-
+  stroke: ${(props: any) => props.scrollMove && "#212121"};
   transform: scale 1s ease-in;
   &:hover {
     cursor: pointer;
@@ -157,6 +215,24 @@ const BlackUser: any = styled(BlackUserSvg)`
   }
 `;
 const BlackGlobal: any = styled(BlackGlobalSvg)`
+  margin-left: 9px;
+  margin-right: 15px;
+  position: relative;
+  z-index: 1;
+  stroke: ${(props: any) =>
+    props.color === "inviteCodeForm"
+      ? "white"
+      : props.color === "neighborhoodList"
+      ? "white"
+      : "black"};
+  stroke: ${(props: any) => props.scrollMove && "#212121"};
+  transform: scale 1s ease-in;
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+  }
+`;
+const ContactUs: any = styled(ContactUsSvg)`
   margin-left: 9px;
   margin-right: 34px;
   position: relative;
@@ -167,6 +243,7 @@ const BlackGlobal: any = styled(BlackGlobalSvg)`
       : props.color === "neighborhoodList"
       ? "white"
       : "black"};
+  stroke: ${(props: any) => props.scrollMove && "#212121"};
   transform: scale 1s ease-in;
   &:hover {
     cursor: pointer;

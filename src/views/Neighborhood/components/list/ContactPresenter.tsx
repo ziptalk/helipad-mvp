@@ -18,15 +18,10 @@ const ContactPresenter = () => {
         </TitleBlock>
         <AdminInfoBlock>
           <InfoBlock>
-            <AdminPhoneSvg />
-            <Info>++00-000-0000-0000</Info>
-          </InfoBlock>
-          <InfoBlock>
             <AdminEmailSvg />
             <Info>brian@helipadrealty.com</Info>
           </InfoBlock>
         </AdminInfoBlock>
-
         <ContactButton to="">
           Get in touch
           <Pointer />
@@ -38,7 +33,8 @@ const ContactPresenter = () => {
 
 const Container = styled.div`
   margin-top: 139px;
-  width: 100%;
+  width: 100vw;
+  max-width: 1904px;
   height: 740px;
 
   background-image: url(${BackgroundJpg});
@@ -60,7 +56,6 @@ const TitleBlock = styled.div`
 `;
 const Title = styled.div`
   height: 195px;
-  font-family: Poppins;
   font-size: 130px;
   font-style: normal;
   font-weight: 500;
@@ -70,7 +65,6 @@ const Title = styled.div`
 `;
 const SubTitle = styled.div`
   height: 27px;
-  font-family: Poppins;
   font-size: 18px;
   font-style: normal;
   font-weight: 400;
@@ -93,7 +87,6 @@ const InfoBlock = styled.div`
 `;
 
 const Info = styled.div`
-  font-family: Poppins;
   font-size: 24px;
   font-style: normal;
   font-weight: 500;

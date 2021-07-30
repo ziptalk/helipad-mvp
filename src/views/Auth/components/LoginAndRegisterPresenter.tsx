@@ -55,20 +55,23 @@ const LoginAndRegisterPresenter = ({
   );
 };
 // height: ${(props: any) =>
-  // props.selectedCategory === SelectedCategory.REGISTER ? "170vh" : "100vh"};
+// props.selectedCategory === SelectedCategory.REGISTER ? "170vh" : "100vh"};
 const Container: any = styled.div`
+  margin: 0 auto;
+  max-width: 100vw;
   width: 100%;
   min-height: 100vh;
   background-color: ${({ theme }) => theme.colors.beige};
   display: flex;
   flex-direction: column;
   align-items: center;
+
   margin: 0px;
   padding-bottom: 200px;
 `;
 const FormContainer = styled.div`
   background-color: ${({ theme }) => theme.colors.white};
-  margin-top: 66px;
+  margin-top: 13vh;
 `;
 const HeaderContainer = styled.div`
   width: 474px;

@@ -31,7 +31,9 @@ const FooterPresenter = () => {
 };
 
 const Container = styled.div`
+  margin: 0 auto;
   width: 100%;
+  max-width: 100vw;
   height: 430px;
   background: #222222;
   display: flex;
@@ -48,7 +50,6 @@ const Category = styled.div`
   height: 24px;
 `;
 const Item = styled.div`
-  font-family: Poppins;
   font-size: 16px;
   font-style: normal;
   font-weight: 500;

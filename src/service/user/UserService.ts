@@ -4,6 +4,7 @@ import { inviteCodeStore } from "../../shared/Firebase";
 import User from "../../model/User";
 import { setTokenSourceMapRange } from "typescript";
 import { dividerChecker } from "../../views/MyPage/components/process/processService";
+import { resolveAny } from "dns";
 
 export default class UserService {
   static logInWithEmailAndPassword(email: string, password: string) {
@@ -57,13 +58,16 @@ export default class UserService {
 
   static async getUser(userId: string): Promise<User> {
     let user = await userStore.doc(userId).get();
+
     return User.fromObject(user.data());
   }
 
   private static async initializeAccount({ ...props }) {
     let { uid } = props;
 
-    return userStore.doc(uid).set({ likes: [], ...props });
+    return userStore
+      .doc(uid)
+      .set({ favorite: [], onGoing: [], likes: [], ...props });
     // return userStore.doc(uid).set({
     //   firstName: firstName,
     //   lastName: lastName,

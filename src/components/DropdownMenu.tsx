@@ -3,18 +3,22 @@ import { useHistory } from "react-router-dom";
 import "react-dropdown/style.css";
 import styled from "styled-components";
 import UnopDropdown from "unop-react-dropdown";
+import User from "../model/User";
 type DropdownMenuProps = {
   mypageOrRegister: string;
   signOutOrSignIn: string;
+  userInfo: User;
 };
 
 enum MenuName {
+  ACCOUNT = "Account",
   MYPAGE = "My Page",
   REGISTER = "Register",
   SIGNOUT = "Sign Out",
   SIGNIN = "Sign In",
 }
 const DropdownMenu = ({
+  account,
   mypageOrRegister,
   signOutOrSignIn,
   Component,
@@ -23,7 +27,11 @@ const DropdownMenu = ({
   const onClick = (event: any) => {
     const clickedButton = event.target.innerText;
     switch (clickedButton) {
+      case MenuName.ACCOUNT:
+        history.push("/auth/account");
+        break;
       case MenuName.MYPAGE:
+        history.push("/asset/mypage");
         break;
       case MenuName.REGISTER:
         history.push("/auth/registerForm");
@@ -42,6 +50,11 @@ const DropdownMenu = ({
     <Container>
       <UnopDropdown hover trigger={<Component />}>
         <ItemContainer>
+          {account && (
+            <>
+              <Item onClick={onClick}>{account}</Item> <Divider />
+            </>
+          )}
           <Item onClick={onClick}>{mypageOrRegister}</Item>
           <Divider />
           <Item onClick={onClick}>{signOutOrSignIn}</Item>
@@ -58,7 +71,7 @@ const Container = styled.div`
 
 const ItemContainer = styled.div`
   width: 111px;
-  height: 71px;
+
   position: relative;
   display: flex;
   flex-direction: column;
@@ -81,7 +94,7 @@ const Item = styled.div`
   height: 31px;
   text-align: center;
   position: relative;
-
+  padding: 5px;
   &:hover {
     color: #b69142;
     background-color: #f3f3f3;

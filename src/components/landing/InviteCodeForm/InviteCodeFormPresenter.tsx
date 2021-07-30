@@ -35,9 +35,14 @@ const InviteCodeFormPresenter = ({
 };
 export default InviteCodeFormPresenter;
 const Container = styled.div`
-  width: 100%;
-  height: 100vh;
   background-color: transparent;
+  width: 100%;
+
+  max-width: 1920px;
+  height: 100%;
+  position: absolute;
+  top: 0px;
+  z-index: 1;
 `;
 // 가운데 정렬을 위한 SubContainer => 이 페이지만 background가 black임
 const SubContainer = styled.div`
@@ -51,9 +56,6 @@ const SubContainer = styled.div`
   justify-content: center;
   align-items: center;
   padding-bottom: 250px;
-  @media ${({ theme }) => theme.mediaQueryOnDevice.notebookS} {
-    padding-left: 150px;
-  }
 `;
 
 const Title = styled.div`

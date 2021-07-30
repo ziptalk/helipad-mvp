@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import AssetCard from "./AssetCard";
 import styled from "styled-components";
 import { ReactComponent as ArrowUp } from "../../../../images/ic_down.svg";
+
 import { ReactComponent as ArrowDown } from "../../../../images/ic_up.svg";
 import GetAsset from "../../../../domain/GetAsset";
 import Asset from "../../../../model/Asset";
@@ -13,7 +14,6 @@ import Geocode from "react-geocode";
 import RangeSliders from "./PriceRangeSlider";
 import DoubleRangeSlider from "./DoubleRangeSlider";
 import { AuthContext } from "../../../../router/config/Provider/AuthProvider";
-
 
 Geocode.setApiKey("AIzaSyAHHYSWgQGMPHXYRqCMMUSlxTvqrDepyeA");
 Geocode.setLanguage("en");
@@ -51,10 +51,10 @@ const AssetList: React.FC<AssetListProperties> = ({ history }: any) => {
 
   useEffect(() => {
     async function wholeFunction() {
-      setHeaderMode('');
+      setHeaderMode("");
       GetAsset.getAssetListByNeighborhood(history.location.state).then(
         (value) => {
-          console.log(history.location.state)
+          console.log(history.location.state);
           setAssets(value);
           console.log("data", value);
 
@@ -159,7 +159,10 @@ const AssetList: React.FC<AssetListProperties> = ({ history }: any) => {
         <GoogleMap
           bootstrapURLKeys={{ key: "AIzaSyAHHYSWgQGMPHXYRqCMMUSlxTvqrDepyeA" }}
           defaultZoom={15}
-          defaultCenter={{ lat: locations[0].assetLat, lng: locations[0].assetLng }}
+          defaultCenter={{
+            lat: locations[0].assetLat,
+            lng: locations[0].assetLng,
+          }}
           // data={assets}
           data={locations}
           // data = {assets}
@@ -172,7 +175,7 @@ const AssetList: React.FC<AssetListProperties> = ({ history }: any) => {
             Purchase price
           </div>
           {/* <RangeSliders /> */}
-          <DoubleRangeSlider history={history.location.state}/>
+          <DoubleRangeSlider history={history.location.state} />
         </PriceControl>
         {/* {assets.map((asset) => (
           <AssetCard data={asset} />
@@ -184,28 +187,28 @@ const AssetList: React.FC<AssetListProperties> = ({ history }: any) => {
 
 const Container = styled.div`
   // width: 100vw;
-  width: 100%;
   // width: 100%;
-  height: calc(100vh - 100px);
-  display: flex;
-  flex-direction: row;
   // margin-top: 112px;
+  max-width: 1904px;
+  width: 100vw;
+
+  display: flex;
+  margin: 0 auto;
 `;
 
 const MapContainer = styled.div`
-  width: calc(100vw - 691px);
+  width: calc(1904px - 691px);
   align-items: right;
   margin-left: 0px;
   // width: 60%;
-  height: 100vh;
 `;
 
 const AssetContainer = styled.div`
   width: 691px;
   // width: 900px;
   // width: 40%;
-  height: 100vh;
   // background-color: #61dafb;
+
   background-color: #f4f4f4;
   overflow-y: scroll;
   z-index: 0;

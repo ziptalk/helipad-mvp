@@ -104,7 +104,7 @@ const PropertyPresenter = ({ regionInfo }: PropertyPresenterProps) => {
           <Image imgPath={FallInLove2} />
           <Image imgPath={FallInLove3} />
           <Image imgPath={FallInLove4} />
-          <Image imgPath={FallInLove5} />
+
           {/* {fallInLoveWith.images.map((img, idx) => (
             <Image key={idx} imgPath={img} />
           ))} */}
@@ -125,7 +125,8 @@ const PropertyPresenter = ({ regionInfo }: PropertyPresenterProps) => {
 };
 
 const Container = styled.div`
-  width: 100%;
+  width: 80vw;
+  max-width: 80vw;
 `;
 const Category = styled.div`
   margin-bottom: 60px;
@@ -139,7 +140,6 @@ const TextBlock = styled.div`
   margin: auto;
 `;
 const CategoryName = styled.div`
-  font-family: Poppins;
   font-size: 30px;
   font-style: normal;
   font-weight: 600;
@@ -150,7 +150,6 @@ const CategoryName = styled.div`
 `;
 
 const Title = styled.div`
-  font-family: Poppins;
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
@@ -161,7 +160,6 @@ const Title = styled.div`
   margin-bottom: 20px;
 `;
 const Content = styled.div`
-  font-family: Poppins;
   font-size: 18px;
   font-style: normal;
   font-weight: 400;
@@ -170,23 +168,25 @@ const Content = styled.div`
   text-align: left;
 `;
 const ImageBlock: any = styled.div`
-  margin: 0 212px;
-  width: 85%;
-  min-height: 70vh;
+  /* max-width: 80vw;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 2fr)); */
   display: flex;
-
+  justify-content: center;
   flex-wrap: wrap;
+  max-width: 80vw;
+  gap: 26px;
+  @media screen and (max-width: 1870px) {
+    justify-content: center;
+  }
 `;
 
 const Image: any = styled.img.attrs((props: any) => ({
   src: props.imgPath,
 }))`
-  max-width: 100%;
-  height: auto;
-  flex: 1;
-
-  &:nth-child(odd) {
-    margin-right: 20px;
+  max-width: 80vw;
+  @media screen and (max-width: 1870px) {
+    width: 80vw;
   }
 `;
 const ListButtonBlock = styled.div`
@@ -199,7 +199,6 @@ const ListButton = styled.button`
   border: 2px solid black;
   background: white;
   margin: 0 auto;
-  font-family: Poppins;
   font-size: 18px;
   font-style: normal;
   font-weight: 600;

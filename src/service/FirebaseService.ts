@@ -42,7 +42,7 @@ export default class FirebaseService {
   }
 
   static async getUserInfo(userId: string): Promise<User> {
-    return UserService.getUser(userId);
+    return await UserService.getUser(userId);
   }
 
   static async contactToAgent(userEmail: string, assetId: string) {
@@ -60,7 +60,13 @@ export default class FirebaseService {
     return AssetService.getSavedAsset(userId);
   }
 
-  static sendMessage(from: string, to: string, message: string, asset: string, type: string) {
+  static sendMessage(
+    from: string,
+    to: string,
+    message: string,
+    asset: string,
+    type: string
+  ) {
     return ContactService.sendMessage(from, to, message, asset, type);
   }
 

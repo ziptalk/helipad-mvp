@@ -38,12 +38,14 @@ const ChatBotButton = styled.button`
   position: fixed;
   right: 44px;
   bottom: 138px;
+  z-index: 1;
 `;
 
 const Contact = styled.div`
   position: fixed;
   right: 59.5px;
   bottom: 41px;
+  z-index: 1;
 `;
 
 const CopyRight = styled.div`
@@ -58,6 +60,7 @@ const CopyRight = styled.div`
   line-height: 16px;
   letter-spacing: 0px;
   text-align: left;
+  z-index: 1;
 `;
 
 const SocialBlock = styled.div`
@@ -77,6 +80,7 @@ const SocialBlock = styled.div`
   left: 60px;
   top: 42vh;
   transform: rotate(90deg);
+  z-index: 1;
 `;
 const FollowUs = styled.div``;
 const Twitter = styled(TwitterSvg)``;

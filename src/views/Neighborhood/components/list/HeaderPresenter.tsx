@@ -17,28 +17,20 @@ const HeaderPresenter = () => {
         </TitleBlock>
         <Scroll />
       </LandingBlock>
-
-      <MainHeaderBlock>
-        <MainTitle>Neighborhood</MainTitle>
-        <MainSubTitle>
-          We are currently available in these Los Angeles
-        </MainSubTitle>
-      </MainHeaderBlock>
     </Container>
   );
 };
 
 const Container: any = styled.div`
   position: relative;
-  width: 100%;
-  height: 1200px;
+  width: 100vw;
 `;
 const LandingBlock: any = styled.div`
   position: relative;
   width: 100%;
-  height: 900px;
+  height: 80vh;
   background: url(${(props: any) => props.imgPath});
-  background-size: 100% 900px;
+  background-size: cover;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -63,7 +55,6 @@ const HomeIcon = styled(HomeSvg)`
 `;
 
 const Title = styled.div`
-  font-family: Poppins;
   font-size: 52px;
   font-style: normal;
   font-weight: bold;
@@ -71,7 +62,6 @@ const Title = styled.div`
   letter-spacing: 0em;
 `;
 const SubTitle = styled.div`
-  font-family: Poppins;
   font-size: 24px;
   font-style: normal;
   font-weight: 400;
@@ -91,7 +81,6 @@ const MainHeaderBlock = styled.div`
   padding-top: 30px;
 `;
 const MainTitle = styled.div`
-  font-family: Poppins;
   font-size: 60px;
   font-style: normal;
   font-weight: 500;
@@ -101,7 +90,6 @@ const MainTitle = styled.div`
   margin-left: 212px;
 `;
 const MainSubTitle = styled.div`
-  font-family: Poppins;
   font-size: 28px;
   font-style: normal;
   font-weight: 400;

@@ -6,11 +6,11 @@ const RegisterPresenter = () => {
     <Container>
       <InputContainer>
         <NameContainer>
-          <Name placeholder="Last name" style={{marginRight:"20px"}}></Name>
+          <Name placeholder="Last name" style={{ marginRight: "20px" }}></Name>
           <Name placeholder="First name"></Name>
         </NameContainer>
         <KakaoTitle>
-          <RiKakaoTalkFill style={{fontSize:"20px", marginRight:"10px"}}/> 
+          <RiKakaoTalkFill style={{ fontSize: "20px", marginRight: "10px" }} />
           <div>Kakao Talk ID</div>
         </KakaoTitle>
         <KakaoContent></KakaoContent>
@@ -28,8 +28,8 @@ const RegisterPresenter = () => {
         <QuestionTitleContainer>
           <QuestionIcon>Q</QuestionIcon>
           <QuestionTitle>
-            What types of properties are you interested <br/> in?
-            (check all that apply)
+            What types of properties are you interested <br /> in? (check all
+            that apply)
           </QuestionTitle>
         </QuestionTitleContainer>
         <QuestionContentContainer>
@@ -211,10 +211,10 @@ const NameContainer = styled.div`
 const Name = styled.input.attrs({ type: "text" })`
   width: 195px;
   height: 56px;
-  border: solid 1px #EAEAEA;
+  border: solid 1px #eaeaea;
   padding-left: 10px;
   font-size: 16px;
-  color: #A3A3A3;
+  color: #a3a3a3;
   font-weight: 400;
 `;
 const KakaoTitle = styled.div`
@@ -229,11 +229,11 @@ const KakaoContent = styled.input.attrs({
 })`
   width: 410px;
   height: 56px;
-  border: solid 1px #EAEAEA;
+  border: solid 1px #eaeaea;
   padding-left: 10px;
   margin: 10px 0 10px 0;
   font-size: 16px;
-  color: #A3A3A3;
+  color: #a3a3a3;
   font-weight: 400;
 `;
 const Email = styled.input.attrs({
@@ -242,13 +242,13 @@ const Email = styled.input.attrs({
 })`
   width: 410px;
   height: 56px;
-  border: solid 1px #EAEAEA;
+  border: solid 1px #eaeaea;
   margin: 10px 0 10px 0;
   padding-left: 10px;
   font-size: 16px;
-  color: #A3A3A3;
+  color: #a3a3a3;
   font-weight: 400;
-  background-color: #FAFAFA;
+  background-color: #fafafa;
 `;
 const Password = styled.input.attrs({
   type: "password",
@@ -256,13 +256,13 @@ const Password = styled.input.attrs({
 })`
   width: 410px;
   height: 56px;
-  border: solid 1px #EAEAEA;
+  border: solid 1px #eaeaea;
   margin: 10px 0 10px 0;
   padding-left: 10px;
   font-size: 16px;
-  color: #A3A3A3;
+  color: #a3a3a3;
   font-weight: 400;
-  background-color: #FAFAFA;
+  background-color: #fafafa;
 `;
 const PasswordConfirm = styled.input.attrs({
   type: "password",
@@ -270,11 +270,11 @@ const PasswordConfirm = styled.input.attrs({
 })`
   width: 410px;
   height: 56px;
-  border: solid 1px #EAEAEA;
+  border: solid 1px #eaeaea;
   margin: 10px 0 20px 0;
   padding-left: 10px;
   font-size: 16px;
-  color: #A3A3A3;
+  color: #a3a3a3;
   font-weight: 400;
 `;
 const BankerOrAgentContainer = styled.div`
@@ -288,7 +288,7 @@ const BankerOrAgentCheckButton = styled.input.attrs({ type: "checkbox" })`
   width: 24px;
   height: 24px;
   border-radius: 4px;
-  border: 1px solid #EAEAEA;
+  border: 1px solid #eaeaea;
 `;
 const BankerOrAgentContent = styled.div``;
 const QuestionContainer = styled.div`
@@ -341,7 +341,6 @@ const QuestionItem = styled.div`
   display: flex;
   justify-content: space-between;
   margin-bottom: 6px;
-
 `;
 const Question = styled.div`
   font-size: 14px;
@@ -373,7 +372,6 @@ const RegisterButton = styled.button`
   background: #b69142;
   width: 410px;
   height: 56px;
-  font-family: Poppins;
   font-size: 18px;
   font-style: normal;
   font-weight: 600;
@@ -387,7 +385,6 @@ const RegisterButton = styled.button`
 const LoginButton = styled.div`
   height: 56px;
   padding: 22.5px 15px 15px;
-  font-family: Poppins;
   font-size: 18px;
   font-style: normal;
   font-weight: 600;

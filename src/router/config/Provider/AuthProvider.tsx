@@ -7,7 +7,8 @@ import React, {
 } from "react";
 import LoginUseCase from "../../../domain/LoginUseCase";
 import { firebase } from "../../../shared/Firebase";
-
+import GetUserInfo from "../../../domain/GetUserInfo";
+import User from "../../../model/User";
 type State = {
   invitationCode: {
     validation: boolean;
@@ -52,6 +53,7 @@ type ContextProps = {
   setInviteCodeValidation: any;
   headerMode: string;
   setHeaderMode: any;
+  userInfo: User;
 };
 
 export const AuthContext = React.createContext<Partial<ContextProps>>({});
@@ -62,12 +64,17 @@ export const AuthProvider = ({ children }: any) => {
   const [loadingAuthState, setLoadingAuthState] = useState(true);
   const [inviteCodeValidation, setInviteCodeValidation] = useState(true);
   const [headerMode, setHeaderMode] = useState("inviteCodeForm");
+  const [userInfo, setUserInfo] = useState<User>({
+    firstName: "",
+    lastName: "",
+    email: "",
+    isAgent: false,
+  });
   useEffect(() => {
     firebase.auth().onAuthStateChanged((user: any) => {
       setUser(user);
       setLoadingAuthState(false);
-      console.log(user, "ap user");
-      console.log(user !== null, "ap authenticated");
+      GetUserInfo.execute(user.uid).then((result) => setUserInfo(result));
     });
   }, []);
 
@@ -84,6 +91,7 @@ export const AuthProvider = ({ children }: any) => {
         setInviteCodeValidation,
         headerMode,
         setHeaderMode,
+        userInfo,
       }}
     >
       {children}

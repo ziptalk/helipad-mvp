@@ -62,14 +62,15 @@ const MainPresenter = ({ order, neighborhood }: NeighborhoodProps) => {
 };
 
 const Container = styled.div`
-  width: 100%;
+  max-width: 1904px;
+  width: 100vw;
+  min-height: 600px;
   display: flex;
   color: black;
 `;
 const Thumbnail: any = styled.div`
   flex: 1;
   /* width: 952px; */
-  height: 880px;
   width: 50%;
   background: url(${(props: any) => props.thumbnail});
   background-size: cover;
@@ -91,7 +92,6 @@ const StateBlock = styled.div`
 `;
 const StateIcon = styled(LineSvg)``;
 const State = styled.div`
-  font-family: Poppins;
   font-size: 18px;
   font-style: normal;
   font-weight: 600;
@@ -101,7 +101,6 @@ const State = styled.div`
   margin-left: 15px;
 `;
 const RegionName = styled.div`
-  font-family: Poppins;
   font-size: 64px;
   font-style: normal;
   font-weight: 500;
@@ -110,14 +109,13 @@ const RegionName = styled.div`
   text-align: left;
 `;
 const Intro = styled.div`
-  font-family: Poppins;
   font-size: 18px;
   font-style: normal;
   font-weight: 400;
   line-height: 27px;
   letter-spacing: 0px;
   text-align: left;
-  width: 643px;
+  width: 90%;
   margin-bottom: 29px;
 `;
 const ReadMoreButton = styled(Link)`
@@ -126,5 +124,30 @@ const ReadMoreButton = styled(Link)`
   outline: none;
 `;
 const ReadMore = styled(readMoreSvg)``;
-
+const MainHeaderBlock = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  height: 286px;
+  padding-top: 30px;
+`;
+const MainTitle = styled.div`
+  font-size: 60px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 90px;
+  letter-spacing: -2px;
+  text-align: left;
+  margin-left: 212px;
+`;
+const MainSubTitle = styled.div`
+  font-size: 28px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 42px;
+  letter-spacing: 0px;
+  text-align: left;
+  margin-left: 45px;
+  padding-top: 17px;
+`;
 export default MainPresenter;

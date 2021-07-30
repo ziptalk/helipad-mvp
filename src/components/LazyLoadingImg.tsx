@@ -19,7 +19,7 @@ const LazyLoadingImg = ({ thumbnailUrl, width, height, children }: any) => {
   useEffect(() => {
     const options = {
       root: null,
-      threshold: [0.5, 1],
+      threshold: [0, 1],
     };
     if (!observerRef.current) {
       observerRef.current = new IntersectionObserver(onInterSection, options);
@@ -41,7 +41,7 @@ const LazyLoadingImg = ({ thumbnailUrl, width, height, children }: any) => {
         ref={imgRef}
         src={isLoad ? thumbnailUrl : PLACE_HOLDER}
         width={width ? width : "100%"}
-        height={height ? height : "880px"}
+        height={height ? height : "100%"}
         alt=""
       ></img>
     </Container>

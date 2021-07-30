@@ -21,7 +21,7 @@ const LoginAndRegisterContainer = () => {
 };
 
 const Container = styled.div`
-  // max-width: 80vw;
+  max-width: 100vw;
   width: 100%;
   height: 100%;
   margin: 0 auto;

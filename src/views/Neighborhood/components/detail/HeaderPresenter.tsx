@@ -10,7 +10,7 @@ const HeaderPresenter = ({
   onClickHomesForSale,
 }: HeaderPresenterProps) => {
   const { regionName, thumbnailUrl, intro } = regionInfo;
-
+  console.log("thumbnailUrl", thumbnailUrl);
   return (
     <Container>
       <Content>
@@ -26,17 +26,16 @@ const HeaderPresenter = ({
 };
 
 const Container = styled.div`
-  width: 100%;
+  max-width: 80vw;
+  width: 80vw;
 `;
 const Content = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* width: 1496px; */
-  height: 1260px;
+  margin-top: 50px;
 `;
 const RegionName = styled.div`
-  font-family: Poppins;
   font-size: 64px;
   font-style: normal;
   font-weight: 500;
@@ -47,15 +46,16 @@ const RegionName = styled.div`
   margin-bottom: 30px;
 `;
 const Thumbnail: any = styled.div`
-  width: 80%;
-  height: 880px;
   margin-bottom: 58px;
-  background: url(${(props: any) => props.thumbnail});
-  background-size: cover;
+  width: 100%;
+  min-height: 872px;
+
+  background-image: url(${(props: any) => props.thumbnail && props.thumbnail});
+
+  background-repeat: no-repeat;
+  background-position: center center;
 `;
 const Intro = styled.div`
-  width: 80%;
-  font-family: Poppins;
   font-size: 18px;
   font-style: normal;
   font-weight: 400;
