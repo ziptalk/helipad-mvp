@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Link, RouteComponentProps, useHistory } from "react-router-dom";
 import "./AssetCard.css";
 import Asset from "../../../../model/Asset";
 import styled from "styled-components";
 import { FaHelicopter } from "react-icons/fa";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
+import { AuthContext } from "../../../../router/config/Provider/AuthProvider";
+import { userStore } from "../../../../shared/Firebase";
+
 
 type AssetCardProps = {
   data: Asset;
@@ -14,13 +17,46 @@ const AssetCard = ({ data }: AssetCardProps) => {
   const [mouseOver, setMouseOver] = useState(false);
   const [heart, setHeart] = useState(false);
   const [onGoing, setOnGoing] = useState(false);
+  const [isAgent, setIsAgent] = useState(false);
+  const { user } = useContext(AuthContext);
+
+
+  async function getUserInfo() {
+    if (user) {
+      let contacts = await userStore.doc(user.uid.toString()).get();
+      console.log(contacts);
+      if (!contacts) {
+        console.log("No such document!");
+      } else {
+        let dataResult = contacts.data();
+        if (dataResult) {
+          if (dataResult.isAgent != undefined) {
+            console.log(dataResult.isAgent);
+            setIsAgent(dataResult.isAgent);
+          }
+        }
+        console.log("Document data:", contacts.data());
+      }
+    }
+  }
+
+  useEffect(() => {
+    if (user) {
+      getUserInfo();
+    }
+  }, []);
+
 
   const handlerMouseOver = (event: Event) => {
-    setMouseOver(true);
+    if(mouseOver == false){
+      setMouseOver(true);
+    }
   };
 
   const handlerMouseOut = (event: Event) => {
-    setMouseOver(false);
+    if(mouseOver == true){
+      setMouseOver(false);
+    }
   };
 
   const heartOnClick = () => {
@@ -34,14 +70,15 @@ const AssetCard = ({ data }: AssetCardProps) => {
   return (
     <Container
       background={data.buildingInformation.thumbnail}
-      onMouseOver={handlerMouseOver}
-      onMouseOut={handlerMouseOut}
+      onMouseEnter={handlerMouseOver}
+      onMouseLeave={handlerMouseOut}
     >
       {mouseOver ? (
         <>
           <div style={{ marginTop: "-31px", paddingTop: "0px" }}>
             <ContainerContent2>
               {/* <div style={{width:"100%", height:"30px"}}></div> */}
+
               <div
                 style={{
                   display: "flex",
@@ -52,6 +89,7 @@ const AssetCard = ({ data }: AssetCardProps) => {
                   height: "30px",
                 }}
               >
+              {isAgent ? <></> : <>
                 {heart ? (
                   <button
                     onClick={heartOnClick}
@@ -127,8 +165,10 @@ const AssetCard = ({ data }: AssetCardProps) => {
                       style={{ fontSize: "20px", color: "white" }}
                     />
                   </button>
-                )}
+                )}</>}
               </div>
+
+
               <Link
                 to={`/asset/assetList/${data.id}`}
                 style={{ textDecoration: "none" }}

@@ -1,7 +1,12 @@
-import * as React from 'react';
+import * as React from "react";
 
-import { RangeSliderPosition, RangeSliderProps, RangeSliderSize, RangeSliderState } from './types';
-import getStyles from './styles';
+import {
+  RangeSliderPosition,
+  RangeSliderProps,
+  RangeSliderSize,
+  RangeSliderState,
+} from "./types";
+import getStyles from "./styles";
 import {
   getBaseProps,
   getCoordinates,
@@ -9,7 +14,7 @@ import {
   getPosition,
   isUndefined,
   removeProperties,
-} from './utils';
+} from "./utils";
 
 class RangeSlider extends React.Component<RangeSliderProps, RangeSliderState> {
   private lastCoordinates = { x: 0, y: 0 };
@@ -29,8 +34,8 @@ class RangeSlider extends React.Component<RangeSliderProps, RangeSliderState> {
 
     this.state = {
       isDragging: false,
-      x: getNormalizedValue('x', props),
-      y: getNormalizedValue('y', props),
+      x: getNormalizedValue("x", props),
+      y: getNormalizedValue("y", props),
     };
   }
 
@@ -68,7 +73,7 @@ class RangeSlider extends React.Component<RangeSliderProps, RangeSliderState> {
     }
     // bottom shouldn't be set with X axis
     /* istanbul ignore else */
-    if (axis === 'x') {
+    if (axis === "x") {
       bottom = 0;
     }
 
@@ -80,7 +85,7 @@ class RangeSlider extends React.Component<RangeSliderProps, RangeSliderState> {
     }
     // left shouldn't be set with Y axis
     /* istanbul ignore else */
-    if (axis === 'y') {
+    if (axis === "y") {
       left = 0;
     }
 
@@ -133,7 +138,7 @@ class RangeSlider extends React.Component<RangeSliderProps, RangeSliderState> {
   };
 
   private handleBlur = () => {
-    document.removeEventListener('keydown', this.handleKeydown);
+    document.removeEventListener("keydown", this.handleKeydown);
   };
 
   private handleClickTrack = (e: MouseEvent | TouchEvent) => {
@@ -153,7 +158,10 @@ class RangeSlider extends React.Component<RangeSliderProps, RangeSliderState> {
       this.updatePosition(nextPosition);
 
       if (onAfterEnd) {
-        onAfterEnd(getPosition(nextPosition, this.props, this.slider.current), this.props);
+        onAfterEnd(
+          getPosition(nextPosition, this.props, this.slider.current),
+          this.props
+        );
       }
     } else if (this.mounted) {
       this.setState({ isDragging: false });
@@ -175,15 +183,15 @@ class RangeSlider extends React.Component<RangeSliderProps, RangeSliderState> {
     const position = getPosition(
       this.getDragPosition(getCoordinates(e, this.lastCoordinates)),
       this.props,
-      this.slider.current,
+      this.slider.current
     );
 
-    document.removeEventListener('mousemove', this.handleDrag);
-    document.removeEventListener('mouseup', this.handleDragEnd);
+    document.removeEventListener("mousemove", this.handleDrag);
+    document.removeEventListener("mouseup", this.handleDragEnd);
 
-    document.removeEventListener('touchmove', this.handleDrag);
-    document.removeEventListener('touchend', this.handleDragEnd);
-    document.removeEventListener('touchcancel', this.handleDragEnd);
+    document.removeEventListener("touchmove", this.handleDrag);
+    document.removeEventListener("touchend", this.handleDragEnd);
+    document.removeEventListener("touchcancel", this.handleDragEnd);
 
     /* istanbul ignore else */
     if (onDragEnd) {
@@ -197,23 +205,32 @@ class RangeSlider extends React.Component<RangeSliderProps, RangeSliderState> {
   };
 
   private handleFocus = () => {
-    document.addEventListener('keydown', this.handleKeydown, { passive: false });
+    document.addEventListener("keydown", this.handleKeydown, {
+      passive: false,
+    });
   };
 
   private handleKeydown = (e: KeyboardEvent) => {
     const { x: innerX, y: innerY } = this.state;
     const { x, y } = this.props;
-    const { axis, xMax, xMin, xStep, yMax, yMin, yStep } = getBaseProps(this.props);
+    const { axis, xMax, xMin, xStep, yMax, yMin, yStep } = getBaseProps(
+      this.props
+    );
 
-    const codes = { down: 'ArrowDown', left: 'ArrowLeft', up: 'ArrowUp', right: 'ArrowRight' };
+    const codes = {
+      down: "ArrowDown",
+      left: "ArrowLeft",
+      up: "ArrowUp",
+      right: "ArrowRight",
+    };
 
     /* istanbul ignore else */
     if (Object.values(codes).indexOf(e.code) > -1) {
       e.preventDefault();
 
       const position = {
-        x: isUndefined(x) ? innerX : getNormalizedValue('x', this.props),
-        y: isUndefined(y) ? innerY : getNormalizedValue('y', this.props),
+        x: isUndefined(x) ? innerX : getNormalizedValue("x", this.props),
+        y: isUndefined(y) ? innerY : getNormalizedValue("y", this.props),
       };
       const xMinus = position.x - xStep <= xMin ? xMin : position.x - xStep;
       const xPlus = position.x + xStep >= xMax ? xMax : position.x + xStep;
@@ -222,7 +239,7 @@ class RangeSlider extends React.Component<RangeSliderProps, RangeSliderState> {
 
       switch (e.code) {
         case codes.up: {
-          if (axis === 'x') {
+          if (axis === "x") {
             position.x = xPlus;
           } else {
             position.y = yPlus;
@@ -230,7 +247,7 @@ class RangeSlider extends React.Component<RangeSliderProps, RangeSliderState> {
           break;
         }
         case codes.down: {
-          if (axis === 'x') {
+          if (axis === "x") {
             position.x = xMinus;
           } else {
             position.y = yMinus;
@@ -239,7 +256,7 @@ class RangeSlider extends React.Component<RangeSliderProps, RangeSliderState> {
           break;
         }
         case codes.left: {
-          if (axis === 'y') {
+          if (axis === "y") {
             position.y = yMinus;
           } else {
             position.x = xMinus;
@@ -248,7 +265,7 @@ class RangeSlider extends React.Component<RangeSliderProps, RangeSliderState> {
         }
         case codes.right:
         default: {
-          if (axis === 'y') {
+          if (axis === "y") {
             position.y = yPlus;
           } else {
             position.x = xPlus;
@@ -268,8 +285,8 @@ class RangeSlider extends React.Component<RangeSliderProps, RangeSliderState> {
 
     this.setState({ isDragging: true });
 
-    document.addEventListener('mousemove', this.handleDrag);
-    document.addEventListener('mouseup', this.handleDragEnd);
+    document.addEventListener("mousemove", this.handleDrag);
+    document.addEventListener("mouseup", this.handleDragEnd);
   };
 
   private handleTouchStart = (e: TouchEvent) => {
@@ -277,36 +294,40 @@ class RangeSlider extends React.Component<RangeSliderProps, RangeSliderState> {
 
     this.updateOptions(getCoordinates(e, this.lastCoordinates));
 
-    document.addEventListener('touchmove', this.handleDrag, { passive: false });
-    document.addEventListener('touchend', this.handleDragEnd, { passive: false });
-    document.addEventListener('touchcancel', this.handleDragEnd, { passive: false });
+    document.addEventListener("touchmove", this.handleDrag, { passive: false });
+    document.addEventListener("touchend", this.handleDragEnd, {
+      passive: false,
+    });
+    document.addEventListener("touchcancel", this.handleDragEnd, {
+      passive: false,
+    });
   };
 
   public render() {
     const { axis, className, xMin, xMax, yMin, yMax } = this.props;
     const rest = removeProperties(
       this.props,
-      'axis',
-      'className',
-      'onAfterEnd',
-      'onChange',
-      'onDragEnd',
-      'styles',
-      'x',
-      'xMin',
-      'xMax',
-      'xStep',
-      'y',
-      'yMin',
-      'yMax',
-      'yStep',
+      "axis",
+      "className",
+      "onAfterEnd",
+      "onChange",
+      "onDragEnd",
+      "styles",
+      "x",
+      "xMin",
+      "xMax",
+      "xStep",
+      "y",
+      "yMin",
+      "yMax",
+      "yStep"
     );
 
     const { x: xPos, y: yPos } = this.position;
     const position = { left: `${xPos}%`, bottom: `${yPos}%` };
     const size: RangeSliderSize = {};
 
-    let orientation: 'horizontal' | 'vertical' | undefined;
+    let orientation: "horizontal" | "vertical" | undefined;
     let range;
     let slider;
     let thumb;
@@ -316,30 +337,30 @@ class RangeSlider extends React.Component<RangeSliderProps, RangeSliderState> {
     let valuenow = this.x;
 
     /* istanbul ignore else */
-    if (axis === 'x') {
+    if (axis === "x") {
       size.width = `${xPos}%`;
       slider = this.styles.sliderX;
-      orientation = 'horizontal';
+      orientation = "horizontal";
       range = this.styles.rangeX;
       track = this.styles.trackX;
       thumb = this.styles.thumbX;
     }
 
     /* istanbul ignore else */
-    if (axis === 'y') {
+    if (axis === "y") {
       size.height = `${yPos}%`;
       slider = this.styles.sliderY;
       range = this.styles.rangeY;
       track = this.styles.trackY;
       thumb = this.styles.thumbY;
-      orientation = 'vertical';
+      orientation = "vertical";
       valuemax = yMax;
       valuemin = yMin;
       valuenow = this.y;
     }
 
     /* istanbul ignore else */
-    if (axis === 'xy') {
+    if (axis === "xy") {
       size.height = `${yPos}%`;
       size.width = `${xPos}%`;
       slider = this.styles.sliderXY;
@@ -349,53 +370,94 @@ class RangeSlider extends React.Component<RangeSliderProps, RangeSliderState> {
     }
 
     return (
-    <>
-      <div ref={this.slider} className={className} style={slider} {...rest}>
-        <div
-          className={className && `${className}__track`}
-          ref={this.track}
-          style={track}
-          role="presentation"
-          // @ts-ignore We can't use React's events because the listeners
-          onClick={this.handleClickTrack}
-        >
-          <div className={className && `${className}__range`} style={{ ...size, ...range }} />
+      <>
+        <div ref={this.slider} className={className} style={slider} {...rest}>
           <div
-            ref={this.rail}
-            style={{ ...this.styles.rail, ...position }}
+            className={className && `${className}__track`}
+            ref={this.track}
+            style={track}
             role="presentation"
             // @ts-ignore We can't use React's events because the listeners
-            onTouchStart={this.handleTouchStart}
-            // @ts-ignore We can't use React's events because the listeners
-            onMouseDown={this.handleMouseDown}
+            onClick={this.handleClickTrack}
           >
-            <span
-              className={className && `${className}__thumb`}
-              onBlur={this.handleBlur}
-              onFocus={this.handleFocus}
-              style={thumb}
-              tabIndex={0}
-              role="slider"
-              aria-label="slider handle"
-              aria-orientation={orientation}
-              aria-valuemin={valuemin}
-              aria-valuenow={valuenow}
-              aria-valuemax={valuemax}
+            <div
+              className={className && `${className}__range`}
+              style={{ ...size, ...range }}
             />
-            <div style={{fontSize:"15px", paddingTop:"22px", marginLeft:"-3px"}}>${valuenow?.toLocaleString('en-AU')}</div>
+            <div
+              ref={this.rail}
+              style={{ ...this.styles.rail, ...position }}
+              role="presentation"
+              // @ts-ignore We can't use React's events because the listeners
+              onTouchStart={this.handleTouchStart}
+              // @ts-ignore We can't use React's events because the listeners
+              onMouseDown={this.handleMouseDown}
+            >
+              <span
+                className={className && `${className}__thumb`}
+                onBlur={this.handleBlur}
+                onFocus={this.handleFocus}
+                style={thumb}
+                tabIndex={0}
+                role="slider"
+                aria-label="slider handle"
+                aria-orientation={orientation}
+                aria-valuemin={valuemin}
+                aria-valuenow={valuenow}
+                aria-valuemax={valuemax}
+              />
+              {xMax == undefined || xMin == undefined ? (
+                <></>
+              ) : (
+                <>
+                  {valuenow > (xMax - xMin) / 2 ? (
+                    <div
+                      style={{
+                        fontSize: "15px",
+                        paddingTop: "22px",
+                        marginLeft: "-86px",
+                      }}
+                    >
+                      ${valuenow?.toLocaleString("en-AU")}
+                    </div>
+                  ) : (
+                    <div
+                      style={{
+                        fontSize: "15px",
+                        paddingTop: "22px",
+                        marginLeft: "-3px",
+                      }}
+                    >
+                      ${valuenow?.toLocaleString("en-AU")}
+                    </div>
+                  )}
+                </>
+              )}
+            </div>
           </div>
         </div>
-      </div>
-      <div style={{paddingLeft:"20px" ,display:"flex", marginTop:"0px", justifyContent:"space-between", fontSize:"15px"}}>
-        <div style={{paddingLeft:"4px"}}>${valuemin}</div>
-        {/* <div>${valuenow}</div> */}
-        <div style={{marginRight:"30px", color:"#A3A3A3"}}>${valuemax?.toLocaleString('en-AU')}</div>
-      </div>
-    </>
+        <div
+          style={{
+            paddingLeft: "20px",
+            display: "flex",
+            marginTop: "0px",
+            justifyContent: "space-between",
+            fontSize: "15px",
+          }}
+        >
+          <div style={{ paddingLeft: "4px" }}>
+            ${valuemin?.toLocaleString("en-AU")}
+          </div>
+          {/* <div>${valuenow}</div> */}
+          <div style={{ marginRight: "30px", color: "#A3A3A3" }}>
+            ${valuemax?.toLocaleString("en-AU")}
+          </div>
+        </div>
+      </>
     );
   }
 }
 
-export * from './types';
+export * from "./types";
 
 export default RangeSlider;

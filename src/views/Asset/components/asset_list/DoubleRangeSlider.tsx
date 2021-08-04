@@ -14,13 +14,13 @@ const DoubleRangeSlider = ({ history }: any) => {
     const [min, setMin] = useState(0)
     const [max, setMax] = useState(200)
     const [minValueBetween, setMinValueBetween] = useState(10)
-    const [currentMin, setcurrentMin] = useState(55)
+    const [currentMin, setCurrentMin] = useState(55)
     const [inputMin, setInputMin] = useState(55)
     const [currentMax, setCurrentMax] = useState(100)
     const [inputMax, setInputMax] = useState(100)
     const [fullAssets, setFullAssets] = useState<Asset[]>([]);
 
-    const [x, setX] = useState(500000000);
+    const [x, setX] = useState(10000000);
 
     useEffect(() => {
         // console.log(x)
@@ -42,6 +42,23 @@ const DoubleRangeSlider = ({ history }: any) => {
             setAssets(value);
             setFullAssets(value);
             console.log('data', value);
+
+            var priceList : number[] = []
+
+            value.map(values => {
+              priceList.push(values.price)
+            })
+
+            var maxValue = Math.max.apply(null, priceList)
+            var minValue = Math.min.apply(null, priceList)
+            var stepValue = Math.floor((maxValue-minValue)/100)
+            var xValue = (maxValue + minValue) / 2
+
+            setCurrentMax(maxValue)
+            setCurrentMin(minValue)
+            setMinValueBetween(stepValue)
+            // setX(xValue)
+            setX(maxValue)
     
             let assetStateList = [
               {
@@ -103,9 +120,9 @@ const DoubleRangeSlider = ({ history }: any) => {
                 // styles={{rangeColor:"black"}} 
                 axis="x" 
                 x={x} 
-                xMin={0}
-                xMax={1234567890}
-                xStep={100}
+                xMin={currentMin}
+                xMax={currentMax}
+                xStep={minValueBetween}
                 onChange={handleChange} />
             <div style={{display:"flex"}}>
                 <div style={{fontSize:"14px", padding:"20px", paddingLeft:"30px", paddingRight:"0px", display:"flex"}}>
