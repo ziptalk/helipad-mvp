@@ -43,6 +43,14 @@ const MypageContainer = () => {
     setLoading(true);
     setHeaderMode("");
     if (user !== null && user !== undefined) {
+      const checkExistence = async () => {
+        const exist = await MypageListDomain.checkUserExistence(user.uid);
+        console.log("container exist", exist);
+        if (!exist) {
+          await MypageListDomain.initUserMypageList(user.uid);
+        }
+      };
+      checkExistence();
       GetUserInfo.execute(user.uid).then((result) => setUserInfo(result));
       MypageListDomain.getPotentialListForPaging(
         indexOfFirst,
@@ -61,6 +69,7 @@ const MypageContainer = () => {
       MypageListDomain.getAllEscrowListForPaging().then((result) =>
         setEscrowTotalCount(result)
       );
+
       MypageListDomain.getFavoriteListForPaging(
         user.uid,
         indexOfFirst,
@@ -150,8 +159,6 @@ const MypageContainer = () => {
   const moveToPotentialList = async (list: any, userId: any, assetId: any) => {
     if (user) {
       await MypageListDomain.moveToPotentialList(list, userId, assetId);
-      // await MypageListDomain.moveToFavoriteList(list, userId, assetId);
-      // await moveToFavoriteList(list, userId, assetId);
       getPotentialList();
       getEscrowList();
     }
@@ -159,9 +166,6 @@ const MypageContainer = () => {
   const moveToInEscrowList = async (list: any, userId: any, assetId: any) => {
     if (user) {
       await MypageListDomain.moveToEscrowList(list, userId, assetId);
-      // await MypageListDomain.moveToOnGoingList(list, userId, assetId);
-
-      // await moveToOnGoingList(list, userId, assetId);
       getPotentialList();
       getEscrowList();
     }

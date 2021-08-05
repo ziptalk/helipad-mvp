@@ -21,95 +21,52 @@ const AdminContentPresenter = ({
 
   return (
     <Container>
-      <ItemContainer>
-        <Item className={inEscrow ? "check" : ""}>
-          <No>{item.list.no}</No>
-          <Name>{item.list.name}</Name>
-          <Listing imgPath={item.list.listing}></Listing>
-          <RequestedDate>{item.list.requestedHelipad}</RequestedDate>
-          <InitialDate readOnly={true}></InitialDate>
-          <AcceptedDate readOnly={true}></AcceptedDate>
-          <Escrow
-            checked={item.list.inEscrow}
-            readOnly
-            id={`${item.assetId}`}
-          ></Escrow>
-          <EscrowLabel
-            onClick={(event: any) => {
-              onClickCheckButton(event, item.assetId);
-              moveTo(item.list, item.userId, item.assetId);
-              userMoveTo(item.list, item.userId, item.assetId);
-              onClickEvent();
-            }}
-            htmlFor={`${item.assetId}`}
-          ></EscrowLabel>
-        </Item>
-      </ItemContainer>
+      <Item className={inEscrow ? "check" : ""}>
+        <No>{item.list.no}</No>
+        <Name>{item.list.name}</Name>
+        <Listing imgPath={item.list.listing}></Listing>
+        <RequestedDate>{item.list.requestedHelipad}</RequestedDate>
+        <InitialDate readOnly={true}></InitialDate>
+        <AcceptedDate readOnly={true}></AcceptedDate>
+        <Escrow
+          checked={item.list.inEscrow}
+          readOnly
+          id={`${item.assetId}`}
+        ></Escrow>
+        <EscrowLabel
+          onClick={(event: any) => {
+            onClickCheckButton(event, item.assetId);
+            moveTo(item.list, item.userId, item.assetId);
+            userMoveTo(item.list, item.userId, item.assetId);
+            onClickEvent();
+          }}
+          htmlFor={`${item.assetId}`}
+        ></EscrowLabel>
+      </Item>
     </Container>
   );
 };
-const Container = styled.div``;
-const TitleContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 82%;
-  height: 70px;
-  margin: 0 auto;
-  border-top: 1px solid black;
-  border-bottom: 1px solid black;
-  margin-bottom: 10px;
-  #no {
-    width: 64.39px;
-    height: 22px;
-    margin-right: 74.3px;
+const Container = styled.div`
+  border-bottom: 1px solid #f2f2f2;
+  &:last-child {
+    border-bottom: none;
   }
-  #name {
-    width: 169.4px;
-    height: 22px;
-    margin-right: 114.91px;
-  }
-  #listing {
-    width: 122.84px;
-    height: 22px;
-    margin-right: 114.91px;
-  }
-  #request {
-    width: 179.31px;
-    height: 44px;
-    margin-right: 91.14px;
-  }
-  #initial {
-    width: 163.46px;
-    height: 44px;
-    margin-right: 72.32px;
-  }
-  #accepted {
-    width: 163.46px;
-    height: 44px;
-    margin-right: 28.73px;
-  }
-  #escrow {
-    width: 122.84px;
-    height: 22px;
-  }
-`;
-const Title = styled.div`
-  text-align: center;
-  font-size: 1rem;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 22px;
-  letter-spacing: 0em;
-`;
-const ItemContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  max-height: 1118px;
   .check {
     background-color: #fafafa;
   }
 `;
+// const ItemContainer = styled.div`
+//   /* display: flex;
+//   flex-direction: column;
+//   max-height: 1118px;
+//   /* border-bottom: 1px solid red; */
+//   .check {
+//     background-color: #fafafa;
+//   }
+//   &:last-child {
+//     border: none;
+//   } */
+// `;
 const Item = styled.div`
   width: 100%;
   height: 102px;
@@ -117,7 +74,7 @@ const Item = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid #f2f2f2;
+  /* border-bottom: 1px solid #f2f2f2; */
   background: #ffffff;
 
   &:last-child {

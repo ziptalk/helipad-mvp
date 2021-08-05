@@ -24,6 +24,7 @@ const NeighborhoodDetailContainer = ({
   const onClickHomesForSale = (event: any) => {
     event.preventDefault();
     setHeaderMode("");
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
     history.push("/asset/assetList", regionName);
   };
   if (!regionInfo) {

@@ -6,7 +6,7 @@ import { ReactComponent as TwitterSvg } from "../../../images/InviteCodeForm/ic_
 import styled from "styled-components";
 const InviteCodeFormEtcPresenter = () => {
   return (
-    <>
+    <Container>
       <Contact>
         <Call />
         <Email />
@@ -17,10 +17,16 @@ const InviteCodeFormEtcPresenter = () => {
         <Instagram />
         <Twitter />
       </SocialBlock>
-    </>
+    </Container>
   );
 };
-
+const Container = styled.div`
+  max-width: 1904px;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0px;
+`;
 const Call = styled(CallSvg)`
   margin-right: 20px;
 `;
@@ -35,14 +41,14 @@ const ChatBotButton = styled.button`
   cursor: pointer;
   background-color: inherit;
   border: none;
-  position: fixed;
+  position: absolute;
   right: 44px;
   bottom: 138px;
   z-index: 1;
 `;
 
 const Contact = styled.div`
-  position: fixed;
+  position: absolute;
   right: 59.5px;
   bottom: 41px;
   z-index: 1;
@@ -50,10 +56,9 @@ const Contact = styled.div`
 
 const CopyRight = styled.div`
   color: white;
-  position: fixed;
+  position: absolute;
   left: 60px;
   bottom: 41px;
-  font-family: Roboto;
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
@@ -64,7 +69,6 @@ const CopyRight = styled.div`
 `;
 
 const SocialBlock = styled.div`
-  font-family: Roboto;
   font-size: 14px;
   font-weight: 400;
   line-height: 16px;
@@ -76,7 +80,7 @@ const SocialBlock = styled.div`
   justify-content: space-between;
   align-items: center;
   color: white;
-  position: fixed;
+  position: absolute;
   left: 60px;
   top: 42vh;
   transform: rotate(90deg);

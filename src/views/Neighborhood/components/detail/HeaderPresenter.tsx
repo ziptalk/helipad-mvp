@@ -26,7 +26,7 @@ const HeaderPresenter = ({
 };
 
 const Container = styled.div`
-  max-width: 80vw;
+  max-width: calc(1904px * 0.8);
   width: 80vw;
 `;
 const Content = styled.div`
@@ -56,6 +56,8 @@ const Thumbnail: any = styled.div`
   background-position: center center;
 `;
 const Intro = styled.div`
+  max-width: 1904px;
+  width: 100%;
   font-size: 18px;
   font-style: normal;
   font-weight: 400;

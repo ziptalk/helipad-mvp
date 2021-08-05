@@ -12,8 +12,14 @@ const colors = {
   black: "#000000",
   white: "#FFFFFF",
 };
+const imageSize = {
+  large: {
+    width: "100%",
+  },
+};
 const theme = {
   mediaQueryOnDevice,
   colors,
+  imageSize,
 };
 export default theme;

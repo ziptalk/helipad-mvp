@@ -75,15 +75,15 @@ const AssetList: React.FC<AssetListProperties> = ({ history }: any) => {
             const listSetting = value.map(async function (asset) {
               let price = asset.price / 1000; //won -> dollar
               let priceLabel = "";
-              if (1000000 > price && price >= 1000) {
+              if (10000 > price && price >= 0) {
                 priceLabel =
-                  (price / 1000)
-                    .toFixed(0)
+                  price
+                    .toFixed()
                     .toString()
                     .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",") + "K";
-              } else if (price >= 1000000) {
+              } else if (price >= 10000) {
                 priceLabel =
-                  (price / 1000000)
+                  (price / 1000)
                     .toFixed(1)
                     .toString()
                     .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",") + "M";
@@ -191,20 +191,20 @@ const Container = styled.div`
   // margin-top: 112px;
   max-width: 1904px;
   width: 100vw;
-
+  height: 100%;
   display: flex;
   margin: 0 auto;
 `;
 
 const MapContainer = styled.div`
-  width: calc(1904px - 691px);
+  width: calc(100% - 40%);
   align-items: right;
   margin-left: 0px;
   // width: 60%;
 `;
 
 const AssetContainer = styled.div`
-  width: 691px;
+  width: 40%;
   // width: 900px;
   // width: 40%;
   // background-color: #61dafb;

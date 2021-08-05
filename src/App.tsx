@@ -11,6 +11,7 @@ import GlobalStyle from "./GlobalStyle";
 import theme from "./globalStyle/theme";
 import { AboutUs, ContactUs, FAQ } from "./views/Home/components";
 import { ThemeProvider } from "styled-components";
+import Logout from "./views/Auth/components/login/Logout";
 function App() {
   const [isLandingPage, setIsLandingPage] = useState(false);
   return (

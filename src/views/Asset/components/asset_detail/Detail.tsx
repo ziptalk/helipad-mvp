@@ -11,6 +11,7 @@ import SchoolNearBy2 from "./SchoolNearBy/SchoolNearBy2";
 import IDontKnow from "./IDontKnow";
 import Neighborhood from "./Neighborhood";
 import Footer from "../../../../components/Footer";
+import { AuthContext } from "../../../../router/config/Provider/AuthProvider";
 import {
   AiOutlinePlayCircle,
   AiOutlineArrowRight,
@@ -22,12 +23,19 @@ import { Md3DRotation } from "react-icons/md";
 import Modal from "./modal";
 import GoogleMap from "../../../../shared/GoogleMapPrivate";
 import Geocode from "react-geocode";
-
+import User from "../../../../model/User";
 type DetailProps = {
   data: Asset;
 };
-
+// type User = {
+//   firstName: string;
+//   lastName: string;
+//   email: string;
+//   isAgent: boolean;
+// };
 const Detail: React.FC<DetailProps> = ({ data }) => {
+  const { userInfo } = useContext(AuthContext);
+  console.log(userInfo?.isAgent);
   const [categoryClick, setCategoryClick] = useState(0);
   const [viewallOpen, setViewallOpen] = useState(false);
   const [popupClick, setPopupClick] = useState(0);
@@ -656,6 +664,7 @@ const Detail: React.FC<DetailProps> = ({ data }) => {
           <IDontKnow />
           <Neighborhood />
         </LeftBody>
+
         <RightBody>
           <Category>
             <div
@@ -714,11 +723,13 @@ const Detail: React.FC<DetailProps> = ({ data }) => {
               </StatusItem> */}
             </Status>
           </StatusContainer>
-          <Contact
-            agent={data.agent}
-            assetId={data.id}
-            buildingInformation={data}
-          />
+          {userInfo?.isAgent === false && (
+            <Contact
+              agent={data.agent}
+              assetId={data.id}
+              buildingInformation={data}
+            />
+          )}
         </RightBody>
       </Body>
     </Container>

@@ -22,7 +22,7 @@ const InviteCodeFormPresenter = ({
           {Content.SECONDTITLE}
         </Title>
         <SubTitle>{Content.SUBTITLE}</SubTitle>
-        {!inviteCodeValidation && (
+        {inviteCodeValidation === "invalid" && (
           <ErrorMessage>{Content.ERRORMESSAGE}</ErrorMessage>
         )}
         <InputBlock onChange={handleOnChange}>
@@ -38,8 +38,8 @@ const Container = styled.div`
   background-color: transparent;
   width: 100%;
 
-  max-width: 1920px;
-  height: 100%;
+  /* max-width: 1904px; */
+  height: 100vh;
   position: absolute;
   top: 0px;
   z-index: 1;
@@ -67,12 +67,10 @@ const Title = styled.div`
   font-weight: 400;
   line-height: 96px;
   letter-spacing: 0em;
-
   margin-bottom: 26px;
   text-align: left;
 `;
 const SubTitle = styled.div`
-  font-family: Roboto;
   font-size: 18px;
   font-style: normal;
   font-weight: 400;
@@ -83,7 +81,8 @@ const SubTitle = styled.div`
 `;
 
 const InputBlock = styled.div`
-  border: 2px solid white;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+
   width: 422px;
   height: 62px;
   display: flex;
@@ -107,7 +106,7 @@ const Input = styled.input.attrs({
   outline: none;
   margin-left: 15px;
   ::placeholder {
-    color: white;
+    color: rgba(255, 255, 255, 0.5);
   }
 `;
 const SendButton = styled.button`
@@ -117,7 +116,6 @@ const SendButton = styled.button`
   margin-right: 10px;
   padding: 0;
 
-  font-family: Roboto;
   font-weight: bold;
   font-size: 16px;
   line-height: 19px;

@@ -49,7 +49,7 @@ type ContextProps = {
   authenticated: boolean;
   setUser: any;
   loadingAuthState: boolean;
-  inviteCodeValidation: boolean;
+  inviteCodeValidation: string;
   setInviteCodeValidation: any;
   headerMode: string;
   setHeaderMode: any;
@@ -62,7 +62,7 @@ export const AuthProvider = ({ children }: any) => {
   // TODO : remove dependency between view and firebase
   const [user, setUser] = useState(null);
   const [loadingAuthState, setLoadingAuthState] = useState(true);
-  const [inviteCodeValidation, setInviteCodeValidation] = useState(true);
+  const [inviteCodeValidation, setInviteCodeValidation] = useState("default");
   const [headerMode, setHeaderMode] = useState("inviteCodeForm");
   const [userInfo, setUserInfo] = useState<User>({
     firstName: "",

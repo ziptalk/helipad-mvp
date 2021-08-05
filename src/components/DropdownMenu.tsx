@@ -28,18 +28,23 @@ const DropdownMenu = ({
     const clickedButton = event.target.innerText;
     switch (clickedButton) {
       case MenuName.ACCOUNT:
+        window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
         history.push("/auth/account");
         break;
       case MenuName.MYPAGE:
+        window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
         history.push("/asset/mypage");
         break;
       case MenuName.REGISTER:
+        window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
         history.push("/auth/registerForm");
         break;
       case MenuName.SIGNOUT:
+        window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
         history.push("/auth/logout");
         break;
       case MenuName.SIGNIN:
+        window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
         history.push("/auth/login");
         break;
       default:
