@@ -23,6 +23,7 @@ const AuthRouter = ({ match }: RouteComponentProps) => {
         path={`${match.url}/registerForm`}
         component={LoginAndRegisterContainer}
       />
+      <Route path={`${match.url}/contact`} component={ContactPage} />
       <Route path={`${match.url}/account`} component={AccountPage} />
       <Route path={`${match.url}/logout`} component={Logout} />
       {/* <PrivateRoutes path={`${match.url}/logout`} component={Logout} /> */}

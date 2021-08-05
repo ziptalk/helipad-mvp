@@ -664,72 +664,73 @@ const Detail: React.FC<DetailProps> = ({ data }) => {
           <IDontKnow />
           <Neighborhood />
         </LeftBody>
-        {userInfo?.isAgent === false && (
-          <RightBody>
-            <Category>
-              <div
-                style={{
-                  fontSize: "18px",
-                  fontWeight: 700,
-                  paddingTop: "10px",
-                  color: "#212121",
-                }}
-              >
-                Information
-              </div>
-            </Category>
-            <StatusContainer>
-              <Status>
-                <StatusItem>
-                  <StatusCategory>Status</StatusCategory>
-                  <StatusContent>{data.status}</StatusContent>
-                </StatusItem>
-                <StatusItem>
-                  <StatusCategory>Days on Market</StatusCategory>
-                  <StatusContent>{data.daysOnMarket}</StatusContent>
-                </StatusItem>
 
-                <StatusItem>
-                  <StatusCategory>Estimated Property Tax</StatusCategory>
-                  <StatusContent>{data.taxPerMonth}</StatusContent>
-                </StatusItem>
-                <StatusItem>
-                  <StatusCategory>HOA Fees</StatusCategory>
-                  <StatusContent>{data.hoaFee} / month</StatusContent>
-                </StatusItem>
-                <StatusItem>
-                  <StatusCategory>Lot Size</StatusCategory>
-                  <StatusContent>{data.lotSize} SF</StatusContent>
-                </StatusItem>
-                <StatusItem>
-                  <StatusCategory>MLS Type</StatusCategory>
-                  <StatusContent>{data.mlsType}</StatusContent>
-                </StatusItem>
-                <StatusItem>
-                  <StatusCategory>Year Built</StatusCategory>
-                  <StatusContent>
-                    {data.buildingInformation.yearBuilt}
-                  </StatusContent>
-                </StatusItem>
-                {/* <StatusItem>
+        <RightBody>
+          <Category>
+            <div
+              style={{
+                fontSize: "18px",
+                fontWeight: 700,
+                paddingTop: "10px",
+                color: "#212121",
+              }}
+            >
+              Information
+            </div>
+          </Category>
+          <StatusContainer>
+            <Status>
+              <StatusItem>
+                <StatusCategory>Status</StatusCategory>
+                <StatusContent>{data.status}</StatusContent>
+              </StatusItem>
+              <StatusItem>
+                <StatusCategory>Days on Market</StatusCategory>
+                <StatusContent>{data.daysOnMarket}</StatusContent>
+              </StatusItem>
+
+              <StatusItem>
+                <StatusCategory>Estimated Property Tax</StatusCategory>
+                <StatusContent>{data.taxPerMonth}</StatusContent>
+              </StatusItem>
+              <StatusItem>
+                <StatusCategory>HOA Fees</StatusCategory>
+                <StatusContent>{data.hoaFee} / month</StatusContent>
+              </StatusItem>
+              <StatusItem>
+                <StatusCategory>Lot Size</StatusCategory>
+                <StatusContent>{data.lotSize} SF</StatusContent>
+              </StatusItem>
+              <StatusItem>
+                <StatusCategory>MLS Type</StatusCategory>
+                <StatusContent>{data.mlsType}</StatusContent>
+              </StatusItem>
+              <StatusItem>
+                <StatusCategory>Year Built</StatusCategory>
+                <StatusContent>
+                  {data.buildingInformation.yearBuilt}
+                </StatusContent>
+              </StatusItem>
+              {/* <StatusItem>
                 <StatusCategory>Country</StatusCategory>
                 <StatusContent>
                   {data.buildingInformation.country}
                 </StatusContent>
               </StatusItem> */}
-                {/* <StatusItem>
+              {/* <StatusItem>
                 <StatusCategory>Expected monthly payment</StatusCategory>
                 <StatusContent>${data.expectedMonthlyPayment}</StatusContent>
               </StatusItem> */}
-              </Status>
-            </StatusContainer>
+            </Status>
+          </StatusContainer>
+          {userInfo?.isAgent === false && (
             <Contact
               agent={data.agent}
               assetId={data.id}
               buildingInformation={data}
             />
-          </RightBody>
-        )}
+          )}
+        </RightBody>
       </Body>
     </Container>
   );
