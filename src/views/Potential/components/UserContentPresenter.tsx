@@ -19,7 +19,7 @@ const UserContentPresenter = ({
 }: any) => {
   const [inEscrow, setInEscrow] = useState(item.list.inEscrow);
   return (
-    <ItemContainer>
+    <Container>
       <Item className={inEscrow ? "check" : ""}>
         <No>{item.list.no}</No>
         <Name>{item.list.name}</Name>
@@ -41,68 +41,15 @@ const UserContentPresenter = ({
           htmlFor={`${item.assetId}`}
         ></EscrowLabel>
       </Item>
-    </ItemContainer>
+    </Container>
   );
 };
 
-const TitleContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 82%;
-  height: 70px;
-  margin: 0 auto;
-  border-top: 1px solid black;
-  border-bottom: 1px solid black;
-  margin-bottom: 10px;
-  #no {
-    width: 64.39px;
-    height: 22px;
-    margin-right: 74.3px;
+const Container = styled.div`
+  border-bottom: 1px solid #f2f2f2;
+  &:last-child {
+    border-bottom: none;
   }
-  #name {
-    width: 169.4px;
-    height: 22px;
-    margin-right: 114.91px;
-  }
-  #listing {
-    width: 122.84px;
-    height: 22px;
-    margin-right: 114.91px;
-  }
-  #request {
-    width: 179.31px;
-    height: 44px;
-    margin-right: 91.14px;
-  }
-  #initial {
-    width: 163.46px;
-    height: 44px;
-    margin-right: 72.32px;
-  }
-  #accepted {
-    width: 163.46px;
-    height: 44px;
-    margin-right: 28.73px;
-  }
-  #escrow {
-    width: 122.84px;
-    height: 22px;
-  }
-`;
-const Title = styled.div`
-  text-align: center;
-  font-size: 1rem;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 22px;
-  letter-spacing: 0em;
-`;
-const ItemContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  max-height: 1118px;
-
   .check {
     background-color: #fafafa;
   }

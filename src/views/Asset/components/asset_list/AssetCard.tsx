@@ -39,7 +39,13 @@ const AssetCard = ({ data }: AssetCardProps) => {
     >
       {mouseOver ? (
         <>
-          <div style={{ marginTop: "-31px", paddingTop: "0px" }}>
+          <div
+            style={{
+              // marginTop: "-21px",
+              marginTop: "5px",
+              paddingTop: "0px",
+            }}
+          >
             <ContainerContent2>
               {/* <div style={{width:"100%", height:"30px"}}></div> */}
               <div
@@ -136,13 +142,14 @@ const AssetCard = ({ data }: AssetCardProps) => {
                 <div
                   style={{
                     display: "flex",
-                    // position:"relative",
+                    // position: "relative",
                     justifyContent: "space-between",
                     width: "100%",
-                    // marginTop:"-50px",
+
+                    // marginTop: "-50px",
                     marginTop: "50px",
                     paddingTop: "30px",
-                    height: "30px",
+                    height: "100%",
                   }}
                 >
                   <button
@@ -182,7 +189,7 @@ const AssetCard = ({ data }: AssetCardProps) => {
                     style={{
                       backgroundColor: "black",
                       marginLeft: "100px",
-                      // marginTop: "30px",
+                      marginTop: "-20px",
                       color: "white",
                       fontSize: "12px",
                       width: "72px",
@@ -264,13 +271,15 @@ const Container: any = styled.div`
   // width: 512px;
   // height: 353px;
   margin: 19px;
-  width: 306px;
-  height: 214px;
+  width: 90%;
+  height: 80%;
   // width: 100%;
   // max-width: 300px;
 
   background: url(${(props: any) => props.background});
   background-size: cover;
+  background-repeat: no-repeat;
+
   text-decoration: none;
 `;
 

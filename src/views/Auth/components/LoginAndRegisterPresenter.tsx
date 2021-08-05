@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import LoginContainer from "./login/LoginContainer";
 import RegisterContainer from "./register/RegisterContainer";
+import { Link } from "react-router-dom";
 enum SelectedCategory {
   TITLE = "Login/Register",
   LOGIN = "Login",
@@ -16,22 +17,30 @@ const LoginAndRegisterPresenter = ({
       case SelectedCategory.LOGIN:
         return (
           <Category>
-            <SelectedItem>{SelectedCategory.LOGIN}</SelectedItem>
-            <Item
-              onClick={() => setSelectedCategory(SelectedCategory.REGISTER)}
-            >
-              {SelectedCategory.REGISTER}
-            </Item>
+            <Link to="/auth/login">
+              <SelectedItem>{SelectedCategory.LOGIN}</SelectedItem>
+            </Link>
+            <Link to="/auth/registerForm">
+              <Item
+                onClick={() => setSelectedCategory(SelectedCategory.REGISTER)}
+              >
+                {SelectedCategory.REGISTER}
+              </Item>
+            </Link>
           </Category>
         );
         break;
       case SelectedCategory.REGISTER:
         return (
           <Category>
-            <Item onClick={() => setSelectedCategory(SelectedCategory.LOGIN)}>
-              {SelectedCategory.LOGIN}
-            </Item>
-            <SelectedItem>{SelectedCategory.REGISTER}</SelectedItem>
+            <Link to="/auth/login">
+              <Item onClick={() => setSelectedCategory(SelectedCategory.LOGIN)}>
+                {SelectedCategory.LOGIN}
+              </Item>
+            </Link>
+            <Link to="/auth/registerForm">
+              <SelectedItem>{SelectedCategory.REGISTER}</SelectedItem>
+            </Link>
           </Category>
         );
         break;
@@ -71,7 +80,7 @@ const Container: any = styled.div`
 `;
 const FormContainer = styled.div`
   background-color: ${({ theme }) => theme.colors.white};
-  margin-top: 13vh;
+  margin-top: 5vh;
 `;
 const HeaderContainer = styled.div`
   width: 474px;

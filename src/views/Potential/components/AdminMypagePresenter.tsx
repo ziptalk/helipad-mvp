@@ -70,6 +70,7 @@ const AdminMypagePresenter = ({
             {potentialList.length > 0 &&
               potentialList.map((item: any, idx: number) => (
                 <AdminContentPresenter
+                  className="contentPresenter"
                   item={item}
                   onClickCheckButton={onClickCheckButton}
                   moveTo={moveToInEscrowList}
@@ -77,6 +78,7 @@ const AdminMypagePresenter = ({
                   onClickEvent={onClickEvent}
                 ></AdminContentPresenter>
               ))}
+
             <PagingContainer
               currentPage={currentPage}
               totalCount={potentialTotalCount}
@@ -172,12 +174,6 @@ const Selected = styled(Category)`
   border-bottom: 2px solid black;
 `;
 
-const ContentContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-`;
 const TitleContainer = styled.div`
   display: flex;
   justify-content: space-between;
@@ -234,4 +230,5 @@ const Title = styled.div`
   letter-spacing: 0em;
   max-width: 190px;
 `;
+
 export default AdminMypagePresenter;

@@ -36,7 +36,7 @@ const Container = styled.div`
   max-width: 1904px;
 `;
 const MainHeaderBlock = styled.div`
-  max-width: 80vw;
+  max-width: 1904px;
   width: 80vw;
   display: flex;
   align-items: center;

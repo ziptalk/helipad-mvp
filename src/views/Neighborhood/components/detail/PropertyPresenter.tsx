@@ -32,6 +32,10 @@ const PropertyPresenter = ({ regionInfo }: PropertyPresenterProps) => {
   } = regionInfo;
   return (
     <Container>
+      <AttributeBlock>
+        <AttributeTitle>Attributes</AttributeTitle>
+        <Attribute>{regionInfo.attribute}</Attribute>
+      </AttributeBlock>
       <Category>
         <ImageBlock>
           <Image imgPath={Slogan1} />
@@ -84,7 +88,7 @@ const PropertyPresenter = ({ regionInfo }: PropertyPresenterProps) => {
       </Category>
       <Category>
         <ImageBlock>
-          <Image imgPath={Market1} />
+          <Image imgPath={Market1} bigSize />
           <Image imgPath={Market2} />
           <Image imgPath={Market3} />
 
@@ -126,16 +130,39 @@ const PropertyPresenter = ({ regionInfo }: PropertyPresenterProps) => {
 
 const Container = styled.div`
   width: 80vw;
-  max-width: 80vw;
+
+  max-width: calc(1904px * 0.8);
 `;
 const Category = styled.div`
   margin-bottom: 60px;
-  width: 100%;
 `;
-const TextBlock = styled.div`
-  width: 77%;
-  height: 149px;
+const AttributeBlock = styled.div`
+  max-width: 1904px;
+  width: 80vw;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  height: 27px;
+  margin-top: 20px;
   margin-bottom: 60px;
+`;
+const AttributeTitle = styled.div`
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 27px;
+  letter-spacing: 0px;
+  text-align: left;
+
+  margin-right: 20px;
+`;
+const Attribute = styled.div``;
+const TextBlock = styled.div`
+  max-width: 1904px;
+  width: 100%;
+  height: 149px;
+  margin-top: 30px;
+
   text-align: center;
   margin: auto;
 `;
@@ -174,8 +201,9 @@ const ImageBlock: any = styled.div`
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  max-width: 80vw;
-  gap: 26px;
+  max-width: 1904px;
+  margin-bottom: 60px;
+  gap: 13px;
   @media screen and (max-width: 1870px) {
     justify-content: center;
   }
@@ -184,14 +212,22 @@ const ImageBlock: any = styled.div`
 const Image: any = styled.img.attrs((props: any) => ({
   src: props.imgPath,
 }))`
-  max-width: 80vw;
+  max-width: 1904px;
+  width: ${(props: any) => props.bigSize && "97.5%"};
+  /* 
+  margin: 10px;
+  margin: ${(props: any) => props.bigSize && "10px 6px 10px"}; */
   @media screen and (max-width: 1870px) {
-    width: 80vw;
+    max-width: 80vw;
+    width: 39vw;
+    background-size: contain;
+    width: ${(props: any) => props.bigSize && "98.5%"};
   }
 `;
+
 const ListButtonBlock = styled.div`
   text-align: center;
-  margin-bottom: 158px;
+  margin-bottom: 300px;
 `;
 const ListButton = styled.button`
   width: 160px;

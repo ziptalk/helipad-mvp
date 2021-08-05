@@ -6,7 +6,7 @@ import { AuthContext } from "../../../router/config/Provider/AuthProvider";
 const Container2 = styled.div`
   width: 100%;
   min-height: 100vh;
-  background-color: #F4F4F4;
+
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -21,8 +21,13 @@ const FormContainer = styled.div`
 const Container = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
   /* width: 1904px; */
   width: 100%;
+  max-width: 1904px;
+
+  background-color: #f4f4f4;
 `;
 
 const Divider = styled.div`
@@ -32,21 +37,21 @@ const Divider = styled.div`
 `;
 
 const AccountPage = () => {
-    const { user, setHeaderMode } = useContext(AuthContext);
+  const { user, setHeaderMode } = useContext(AuthContext);
 
-    useEffect(() => {
-        setHeaderMode("black");
+  useEffect(() => {
+    setHeaderMode("black");
 
-        window.scroll({ top: 0 });
-    }, []);
+    window.scroll({ top: 0 });
+  }, []);
 
-    return (
-        <Container>
-            <Container2>
-                <Account />
-            </Container2>
-        </Container>
-    );
-}
+  return (
+    <Container>
+      <Container2>
+        <Account />
+      </Container2>
+    </Container>
+  );
+};
 
 export default AccountPage;

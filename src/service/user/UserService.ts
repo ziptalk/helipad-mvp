@@ -53,7 +53,8 @@ export default class UserService {
     delete props.passwordConfirm;
     let uid = credential.user.uid;
     props = { uid, ...props };
-    return this.initializeAccount(props);
+    this.initializeAccount(props);
+    return uid;
   }
 
   static async getUser(userId: string): Promise<User> {

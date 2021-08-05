@@ -11,6 +11,7 @@ import SchoolNearBy2 from "./SchoolNearBy/SchoolNearBy2";
 import IDontKnow from "./IDontKnow";
 import Neighborhood from "./Neighborhood";
 import Footer from "../../../../components/Footer";
+import { AuthContext } from "../../../../router/config/Provider/AuthProvider";
 import {
   AiOutlinePlayCircle,
   AiOutlineArrowRight,
@@ -22,12 +23,19 @@ import { Md3DRotation } from "react-icons/md";
 import Modal from "./modal";
 import GoogleMap from "../../../../shared/GoogleMapPrivate";
 import Geocode from "react-geocode";
-
+import User from "../../../../model/User";
 type DetailProps = {
   data: Asset;
 };
-
+// type User = {
+//   firstName: string;
+//   lastName: string;
+//   email: string;
+//   isAgent: boolean;
+// };
 const Detail: React.FC<DetailProps> = ({ data }) => {
+  const { userInfo } = useContext(AuthContext);
+  console.log(userInfo?.isAgent);
   const [categoryClick, setCategoryClick] = useState(0);
   const [viewallOpen, setViewallOpen] = useState(false);
   const [popupClick, setPopupClick] = useState(0);
@@ -656,70 +664,72 @@ const Detail: React.FC<DetailProps> = ({ data }) => {
           <IDontKnow />
           <Neighborhood />
         </LeftBody>
-        <RightBody>
-          <Category>
-            <div
-              style={{
-                fontSize: "18px",
-                fontWeight: 700,
-                paddingTop: "10px",
-                color: "#212121",
-              }}
-            >
-              Information
-            </div>
-          </Category>
-          <StatusContainer>
-            <Status>
-              <StatusItem>
-                <StatusCategory>Status</StatusCategory>
-                <StatusContent>{data.status}</StatusContent>
-              </StatusItem>
-              <StatusItem>
-                <StatusCategory>Days on Market</StatusCategory>
-                <StatusContent>{data.daysOnMarket}</StatusContent>
-              </StatusItem>
+        {userInfo?.isAgent === false && (
+          <RightBody>
+            <Category>
+              <div
+                style={{
+                  fontSize: "18px",
+                  fontWeight: 700,
+                  paddingTop: "10px",
+                  color: "#212121",
+                }}
+              >
+                Information
+              </div>
+            </Category>
+            <StatusContainer>
+              <Status>
+                <StatusItem>
+                  <StatusCategory>Status</StatusCategory>
+                  <StatusContent>{data.status}</StatusContent>
+                </StatusItem>
+                <StatusItem>
+                  <StatusCategory>Days on Market</StatusCategory>
+                  <StatusContent>{data.daysOnMarket}</StatusContent>
+                </StatusItem>
 
-              <StatusItem>
-                <StatusCategory>Estimated Property Tax</StatusCategory>
-                <StatusContent>{data.taxPerMonth}</StatusContent>
-              </StatusItem>
-              <StatusItem>
-                <StatusCategory>HOA Fees</StatusCategory>
-                <StatusContent>{data.hoaFee} / month</StatusContent>
-              </StatusItem>
-              <StatusItem>
-                <StatusCategory>Lot Size</StatusCategory>
-                <StatusContent>{data.lotSize} SF</StatusContent>
-              </StatusItem>
-              <StatusItem>
-                <StatusCategory>MLS Type</StatusCategory>
-                <StatusContent>{data.mlsType}</StatusContent>
-              </StatusItem>
-              <StatusItem>
-                <StatusCategory>Year Built</StatusCategory>
-                <StatusContent>
-                  {data.buildingInformation.yearBuilt}
-                </StatusContent>
-              </StatusItem>
-              {/* <StatusItem>
+                <StatusItem>
+                  <StatusCategory>Estimated Property Tax</StatusCategory>
+                  <StatusContent>{data.taxPerMonth}</StatusContent>
+                </StatusItem>
+                <StatusItem>
+                  <StatusCategory>HOA Fees</StatusCategory>
+                  <StatusContent>{data.hoaFee} / month</StatusContent>
+                </StatusItem>
+                <StatusItem>
+                  <StatusCategory>Lot Size</StatusCategory>
+                  <StatusContent>{data.lotSize} SF</StatusContent>
+                </StatusItem>
+                <StatusItem>
+                  <StatusCategory>MLS Type</StatusCategory>
+                  <StatusContent>{data.mlsType}</StatusContent>
+                </StatusItem>
+                <StatusItem>
+                  <StatusCategory>Year Built</StatusCategory>
+                  <StatusContent>
+                    {data.buildingInformation.yearBuilt}
+                  </StatusContent>
+                </StatusItem>
+                {/* <StatusItem>
                 <StatusCategory>Country</StatusCategory>
                 <StatusContent>
                   {data.buildingInformation.country}
                 </StatusContent>
               </StatusItem> */}
-              {/* <StatusItem>
+                {/* <StatusItem>
                 <StatusCategory>Expected monthly payment</StatusCategory>
                 <StatusContent>${data.expectedMonthlyPayment}</StatusContent>
               </StatusItem> */}
-            </Status>
-          </StatusContainer>
-          <Contact
-            agent={data.agent}
-            assetId={data.id}
-            buildingInformation={data}
-          />
-        </RightBody>
+              </Status>
+            </StatusContainer>
+            <Contact
+              agent={data.agent}
+              assetId={data.id}
+              buildingInformation={data}
+            />
+          </RightBody>
+        )}
       </Body>
     </Container>
   );

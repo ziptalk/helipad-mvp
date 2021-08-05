@@ -7,6 +7,11 @@ import styled from "styled-components";
 import InviteCodeFormPresenter from "./InviteCodeFormPresenter";
 import InviteCodeFormEtcPresenter from "./InviteCodeFormEtcPresenter";
 import VideoPlayerPresenter from "./videoPlayerPresenter";
+import HelipadIs from "./HelipadIs";
+import OurMission from "./OurMission";
+import OurArea from "./OurArea";
+import PartnerAndRelation from "./PartnerAndRelation";
+import ContactPresenter from "../../ContactPresenter";
 const InviteCodeFormContainer = ({ isLandingPage, setIsLandingPage }: any) => {
   const [inviteCode, setInviteCode] = useState("");
   const history = useHistory();
@@ -21,6 +26,7 @@ const InviteCodeFormContainer = ({ isLandingPage, setIsLandingPage }: any) => {
   useEffect(() => {
     setHeaderMode("inviteCodeForm");
     setIsLandingPage(true);
+
     return () => {
       setIsLandingPage(false);
     };
@@ -39,20 +45,19 @@ const InviteCodeFormContainer = ({ isLandingPage, setIsLandingPage }: any) => {
   };
 
   const checkInviteCodeWithEnterKey = async (event: any) => {
-    console.log("keyCode :", event.key);
     if (event.key === "Enter") {
       await checkInviteCode();
     }
   };
   const checkInviteCode = async () => {
-    console.log(inviteCode);
     let firebaseResult = await CheckInviteCode.checkInviteCode(inviteCode);
 
     if (firebaseResult) {
-      setInviteCodeValidation(false);
+      setInviteCodeValidation("valid");
       history.push("/auth/registerForm");
+      window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
     } else {
-      setInviteCodeValidation(true);
+      setInviteCodeValidation("invalid");
     }
   };
   return (
@@ -64,13 +69,22 @@ const InviteCodeFormContainer = ({ isLandingPage, setIsLandingPage }: any) => {
         checkInviteCode={checkInviteCode}
         checkInviteCodeWithEnterKey={checkInviteCodeWithEnterKey}
       />
+
       <InviteCodeFormEtcPresenter />
+      <HelipadIs></HelipadIs>
+      <OurMission></OurMission>
+      <OurArea></OurArea>
+      <PartnerAndRelation></PartnerAndRelation>
+      <ContactPresenter></ContactPresenter>
     </Container>
   );
 };
 const Container = styled.div`
-  max-width: 100vw;
-  width: 100%;
+  max-width: 1904px;
+  width: 100vw;
   height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 export default InviteCodeFormContainer;

@@ -11,6 +11,7 @@ const NeighborhoodContainer = () => {
 
   useEffect(() => {
     setHeaderMode("neighborhoodList");
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
     const newNeighborhoodList = GenNeighborhoodList.get();
     setNeighborhoodList([...neighborhoodList, ...newNeighborhoodList]);
   }, []);

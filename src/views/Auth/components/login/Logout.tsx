@@ -13,8 +13,9 @@ const Logout = () => {
       console.log("logout result : " + result);
       setUser(null);
       setHeaderMode("black");
-      setInviteCodeValidation(true);
-      setTimeout(() => history.push("/"), 2000);
+      setInviteCodeValidation("default");
+      history.push("/", 2000);
+      // setTimeout(() => history.push("/"), 2000);
     });
   });
 
@@ -22,7 +23,8 @@ const Logout = () => {
 };
 
 const Container = styled.div`
-  width: 460px;
+  width: 100vw;
+  height: 100vh;
 `;
 
 export default Logout;
