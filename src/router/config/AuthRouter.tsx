@@ -10,6 +10,7 @@ import { Logout } from "../../views/Auth/components";
 import LoginAndRegisterContainer from "../../views/Auth";
 import MyPage from "../../views/MyPage/components/mypage/MyPage";
 import AccountPage from "../../views/Account/components/AccountPage";
+import ContactPage from "../../views/Contact/components/ContactPage";
 
 const AuthRouter = ({ match }: RouteComponentProps) => {
   return (
