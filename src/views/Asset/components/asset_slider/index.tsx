@@ -64,6 +64,10 @@ class RangeSlider extends React.Component<RangeSliderProps, RangeSliderState> {
     const { axis, xMax, xMin, yMax, yMin } = getBaseProps(this.props);
     let bottom: number = ((this.y - yMin) / (yMax - yMin)) * 100;
     let left: number = ((this.x - xMin) / (xMax - xMin)) * 100;
+    // // let left: number = 100;
+    console.log("valuecheck")
+    // console.log(xMin)
+    console.log(this.x)
 
     if (bottom > 100) {
       bottom = 100;
@@ -113,8 +117,10 @@ class RangeSlider extends React.Component<RangeSliderProps, RangeSliderState> {
   }
 
   private getDragPosition = ({ x, y }: RangeSliderPosition) => {
+    console.log("start.x")
+    console.log(this.start.x)
     return {
-      x: x + this.start.x - this.offset.x,
+      x: x + (this.start.x * 1.1) - this.offset.x, // 여기서 비율 조정으로 오류 야매로 수정
       y: this.offset.y + this.start.y - y,
     };
   };
@@ -124,12 +130,19 @@ class RangeSlider extends React.Component<RangeSliderProps, RangeSliderState> {
 
     this.start = {
       x: rail.current?.offsetLeft ?? 0,
+      // x: rail.current.offsetLeft,
+      // x:
+      //   (track.current?.offsetWidth ?? 0) -
+      //   (rail.current?.offsetLeft ?? 0) -
+      //   (rail.current?.offsetWidth ?? 0),
       y:
         (track.current?.offsetHeight ?? 0) -
         (rail.current?.offsetTop ?? 0) -
         (rail.current?.offsetHeight ?? 0),
     };
     this.lastCoordinates = { x, y };
+    // console.log("check")
+    // console.log(x)
     this.offset = { x, y };
   };
 
@@ -334,7 +347,8 @@ class RangeSlider extends React.Component<RangeSliderProps, RangeSliderState> {
     let track;
     let valuemax = xMax;
     let valuemin = xMin;
-    let valuenow = this.x;
+    // let valuenow = this.x + (xMin?xMin:0);
+    let valuenow = this.x
 
     /* istanbul ignore else */
     if (axis === "x") {
@@ -418,7 +432,7 @@ class RangeSlider extends React.Component<RangeSliderProps, RangeSliderState> {
                         marginLeft: "-86px",
                       }}
                     >
-                      ${valuenow?.toLocaleString("en-AU")}
+                      ${(valuenow)?.toLocaleString("en-AU")}
                     </div>
                   ) : (
                     <div
@@ -428,7 +442,7 @@ class RangeSlider extends React.Component<RangeSliderProps, RangeSliderState> {
                         marginLeft: "-3px",
                       }}
                     >
-                      ${valuenow?.toLocaleString("en-AU")}
+                      ${(valuenow)?.toLocaleString("en-AU")}
                     </div>
                   )}
                 </>

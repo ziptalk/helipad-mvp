@@ -55,7 +55,7 @@ const DoubleRangeSlider = ({ history }: any) => {
 
         var maxValue = Math.max.apply(null, priceList);
         var minValue = Math.min.apply(null, priceList);
-        var stepValue = Math.floor((maxValue - minValue) / 100);
+        var stepValue = Math.floor((maxValue - minValue) / 200);
         var xValue = (maxValue + minValue) / 2;
 
         setCurrentMax(maxValue);
@@ -120,7 +120,7 @@ const DoubleRangeSlider = ({ history }: any) => {
     position: RangeSliderPosition,
     props: RangeSliderProps
   ) => {
-    setX(position.x);
+    setX(position.x + currentMin);
   };
 
   return (
