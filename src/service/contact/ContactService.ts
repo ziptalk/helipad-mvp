@@ -1,4 +1,4 @@
-import { assetStore, contactStore } from '../../shared/Firebase';
+import { assetStore, contactStore, contactUsStore } from '../../shared/Firebase';
 import { MessageContainer } from '../../model/MessageContainer';
 import firebase from 'firebase';
 
@@ -32,6 +32,23 @@ export default class ContactService {
       // return MessageContainer.fromObject(contacts.data());
     );
       
+  }
+
+  static async contactUsSendMessage(name: string, email: string, regard: string, phone: string, message: string, date:Date) {
+    let doc = await contactUsStore.get();
+    console.log(doc);
+    console.log(doc.size);
+    console.log("여기는 와?")
+
+    return contactUsStore.add({
+      name: name,
+      email: email,
+      regard: regard,
+      phone: phone,
+      message: message,
+      date: date
+    })
+
   }
 
   static async sendMessage(userId: string, agentId: string, message: string, asset: string, type: string) {

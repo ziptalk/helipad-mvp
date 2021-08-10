@@ -70,6 +70,17 @@ export default class FirebaseService {
     return ContactService.sendMessage(from, to, message, asset, type);
   }
 
+  static contactUsSendMessage(
+    name: string,
+    email: string,
+    regard: string,
+    phone: string,
+    message: string,
+    date: Date
+  ){
+    return ContactService.contactUsSendMessage(name, email, regard, phone, message, date)
+  }
+
   static getContactHistory(userId: string, agentId: string) {
     return ContactService.getContactHistory(userId, agentId);
   }
