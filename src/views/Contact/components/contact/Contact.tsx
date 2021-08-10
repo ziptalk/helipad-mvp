@@ -1,17 +1,67 @@
 import styled from "styled-components";
 import { useState, useEffect, useContext } from "react";
 import useCollapse from "react-collapsed";
+import ContactUseCase from "../../../../domain/ContactUseCase";
+import { BsChevronDown, BsArrowRight, BsChevronUp } from "react-icons/bs";
+import { GoCheck } from "react-icons/go";
 
 
 const Contact = () => {
     const [savedSearchOften, setSaveSearchOften] = useState(0);
-    const { getCollapseProps, getToggleProps, isExpanded } = useCollapse();
+    // const { getCollapseProps, getToggleProps, isExpanded } = useCollapse();
+    const [isExpanded, setExpanded] = useState(false);
+    const { getCollapseProps, getToggleProps } = useCollapse({ isExpanded });
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [regard, setRegard] = useState('');
+    const [message, setMessage] = useState('');
+    const [phone, setPhone] = useState('');
 
-    const sendButtonOnClick = () => {
-        alert("메세지가 전송되었습니다.")
-        window.location.reload()
-    }
+    const regardingList = ['Buying', 'Renting', 'Selling', 'Property Management', 'Other']
 
+    const handleName = (event: any) => {
+        setName(event.target.value)
+    };
+
+    const handleEmail = (event: any) => {
+        setEmail(event.target.value)
+    };
+
+    const handleRegard = (value: string) => {
+        setRegard(value)
+        setExpanded(false)
+    };
+
+    const handlePhone = (event: any) => {
+        setPhone(event.target.value)
+    };
+
+    const handleMessage = (event: any) => {
+        setMessage(event.target.value)
+    };
+
+    const sendButtonOnClick = async () => {
+        if(name != '' && email != '' && regard != '' && message != ''){
+            ContactUseCase.contactUsSend(
+                name,
+                email,
+                regard,
+                phone,
+                message,
+                new Date()
+            ).then((value) => {
+                console.log("success");
+                console.log(value);
+                alert("Successfully sent. We'll get back to you right away.");
+                window.location.reload()
+
+            })
+            .catch((err) => console.log(err));
+        }
+        else{
+            alert("There is something missing. Please check again.")
+        }
+      };
 
     return(
         <div>
@@ -21,27 +71,42 @@ const Contact = () => {
                     <InputBox>
                         <div style={{display:"flex"}}>
                             <div style={{width:"100%"}}><SemiTitle style={{marginRight:"10px"}}>Name</SemiTitle>
-                            <InputIndividualBox placeholder="Name" style={{marginRight:"10px"}}/></div>
+                            <InputIndividualBox placeholder="Name" value={name} onChange={handleName} style={{marginRight:"10px"}}/></div>
                             <div style={{width:"100%"}}><SemiTitle style={{marginLeft:"10px"}}>Email</SemiTitle>
-                            <InputIndividualBox placeholder="email" style={{marginLeft:"10px"}}/></div>
+                            <InputIndividualBox placeholder="email" value={email} onChange={handleEmail} style={{marginLeft:"10px"}}/></div>
                         </div>
                         <div style={{display:"flex"}}>
                             <div style={{width:"100%"}}><SemiTitle style={{marginRight:"10px"}}>What is this regarding?</SemiTitle>
-                                <div {...getToggleProps()}>
-                                    <InputIndividualBox placeholder="Select ..." style={{marginRight:"10px"}}/>
+                                <div style={{position: "relative"}} {...getToggleProps({
+                                    onClick: () => setExpanded((prevExpanded) => !prevExpanded)
+                                })}>
+                                    <InputIndividualBox placeholder="Select ..." value={regard} style={{marginRight:"10px"}}/>
+                                    <ArrowBox>
+                                        {isExpanded ? (
+                                            <BsChevronUp style={{ width: "24px", height: "24px" }} />
+                                        ) : (
+                                            <BsChevronDown style={{ width: "24px", height: "24px", color:"#8D8D8D" }} />
+                                        )}
+                                    </ArrowBox>
                                 </div>
                                 <section {...getCollapseProps()}>
-                                    <div style={{backgroundColor:"#EEEEEE"}}>
-                                        <SelectList>list 1</SelectList>
-                                        <SelectList>list 2</SelectList>
+                                    <div style={{backgroundColor:"#FFFFFF"}}>
+                                        {regardingList.map(value => (
+                                            <div style={{position: "relative"}}>
+                                                <SelectList onClick={()=>handleRegard(value)}>{value}</SelectList>
+                                                {value == regard ? <ArrowBox>
+                                                <GoCheck style={{ width: "24px", height: "24px"}}/>
+                                                </ArrowBox> : <></>}
+                                            </div>
+                                        ))}
                                     </div>
                                 </section>
                             </div>
                             <div style={{width:"100%"}}><SemiTitle style={{marginLeft:"10px"}}>Phone (optional)</SemiTitle>
-                            <InputIndividualBox placeholder="Phone" style={{marginLeft:"10px"}}/></div>
+                            <InputIndividualBox placeholder="Phone" value={phone} onChange={handlePhone} style={{marginLeft:"10px"}}/></div>
                         </div>
                         <SemiTitle>Message</SemiTitle>
-                        <TextArea placeholder="Please leave a message."/>
+                        <TextArea placeholder="Please leave a message." value={message} onChange={handleMessage}/>
                         <SaveButton onClick={()=>sendButtonOnClick()}>Send Message</SaveButton>
                     </InputBox>
                 </InputHalfBox>
@@ -59,6 +124,15 @@ const SelectList = styled.button`
     text-align: left;
     height: 56px;
     padding: 16px;
+    position: relative;
+`
+
+const ArrowBox = styled.div`
+    position: absolute;
+    right: 10px;
+    top: 16px;
+    font-weight: bold;
+    font-style: bold;
 `
 
 const AccountTitle = styled.div`

@@ -184,6 +184,10 @@ const Container: any = styled.div`
     height: 80px;
   }
 
+  @media ${({ theme }) => theme.mediaQueryOnDevice.notebookS} {
+    height: 80px;
+  }
+
   background-color: ${(props: any) => props.scrollMove && "white"};
   color: ${(props: any) => props.scrollMove && "#212121"};
   position: ${(props: any) => props.scrollMove && "fixed"};

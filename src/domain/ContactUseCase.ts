@@ -6,6 +6,10 @@ export default class ContactUseCase {
         return FirebaseService.sendMessage(userId, agentId, message, asset, type);
     }
 
+    static contactUsSend(name: string, email: string, regard: string, phone: string, message: string, date: Date) {
+        return FirebaseService.contactUsSendMessage(name, email, regard, phone, message, date)
+    }
+
     static getMyContactHistory(userId: string): Promise<MessageContainer[]> {
         return FirebaseService.getMyContactHistory(userId);
     }

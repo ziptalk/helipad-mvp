@@ -81,7 +81,7 @@ const DropdownMenu = ({
 };
 const Container = styled.div`
   position: relative;
-  z-index: 2;
+  z-index: 5;
   padding-top: 7px;
 `;
 

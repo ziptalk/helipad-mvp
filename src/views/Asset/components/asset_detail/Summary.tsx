@@ -130,7 +130,7 @@ const Container: any = styled.div`
   background-color: ${(props: any) => props.scrollMove && "black"};
   position: ${(props: any) => props.scrollMove && "fixed"};
   top: ${(props: any) => props.scrollMove && "112px"};
-  z-index: ${(props: any) => props.scrollMove && 3};
+  z-index: ${(props: any) => props.scrollMove && 2};
   @media ${({ theme }) => theme.mediaQueryOnDevice.notebookS} {
     top: ${(props: any) => props.scrollMove && "80px"};
   }

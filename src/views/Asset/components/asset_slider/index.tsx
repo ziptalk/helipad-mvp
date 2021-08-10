@@ -439,7 +439,7 @@ class RangeSlider extends React.Component<RangeSliderProps, RangeSliderState> {
                       style={{
                         fontSize: "15px",
                         paddingTop: "22px",
-                        marginLeft: "-3px",
+                        marginLeft: "-6px",
                       }}
                     >
                       ${(valuenow)?.toLocaleString("en-AU")}
