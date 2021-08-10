@@ -24,7 +24,9 @@ const AdminContentPresenter = ({
       <Item className={inEscrow ? "check" : ""}>
         <No>{item.list.no}</No>
         <Name>{item.list.name}</Name>
-        <Listing imgPath={item.list.listing}></Listing>
+        <ListingBlock>
+          <Listing imgPath={item.list.listing}></Listing>
+        </ListingBlock>
         <RequestedDate>{item.list.requestedHelipad}</RequestedDate>
         <InitialDate readOnly={true}></InitialDate>
         <AcceptedDate readOnly={true}></AcceptedDate>
@@ -55,62 +57,75 @@ const Container = styled.div`
     background-color: #fafafa;
   }
 `;
-// const ItemContainer = styled.div`
-//   /* display: flex;
-//   flex-direction: column;
-//   max-height: 1118px;
-//   /* border-bottom: 1px solid red; */
-//   .check {
-//     background-color: #fafafa;
-//   }
-//   &:last-child {
-//     border: none;
-//   } */
-// `;
 const Item = styled.div`
   width: 100%;
   height: 102px;
-  margin: 0 auto;
+  /* margin: 0 auto; */
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* border-bottom: 1px solid #f2f2f2; */
+  display: grid;
+  grid-template-columns: 0.3fr 1fr 1.5fr 1fr 1fr 1fr 0.5fr;
+  justify-items: center;
+  border-bottom: 1px solid #f2f2f2;
   background: #ffffff;
-
+  font-size: 18px;
+  @media ${({ theme }) => theme.mediaQueryOnDevice.notebookS} {
+    height: 80px;
+    font-size: 12px;
+  }
   &:last-child {
     border: none;
   }
 `;
 const No = styled.div`
-  margin-left: 14px;
+  min-width: 70px;
+  height: 22px;
+  text-align: center;
 `;
 const Name = styled.div`
-  width: 263px;
+  max-width: 240px;
   height: 20px;
-  margin-left: 20px;
+  min-width: 100px;
+  padding-right: 15px;
   text-align: center;
 `;
-const Listing: any = styled.div`
-  width: 124px;
-  height: 86px;
-  background-image: url(${(props: any) => props.imgPath});
-  background-size: cover;
-  margin-left: 84px;
+const ListingBlock = styled.div`
+  width: 160px;
+  min-width: 100px;
+  text-align: center;
+  @media ${({ theme }) => theme.mediaQueryOnDevice.notebookS} {
+    width: 90px;
+  }
+`;
+const Listing: any = styled.img.attrs((props: any) => ({
+  src: props.imgPath,
+}))`
+  width: 100%;
+  height: auto;
+
+  /* background-image: url(${(props: any) => props.imgPath});
+  background-size: cover; */
+  @media ${({ theme }) => theme.mediaQueryOnDevice.notebookS} {
+  }
 `;
 const RequestedDate = styled.div`
-  width: 220px;
-  height: 20px;
-  margin-left: 84px;
   text-align: center;
+  min-width: 100px;
+  justify-self: start;
 `;
 const InitialDate = styled.input.attrs({
   type: "date",
   pattern: "d{4}-d{2}-d{2}",
 })`
   width: 150px;
-  height: 40px;
-  text-align: center;
-  margin-left: 84px;
+  justify-self: start;
+
+  @media ${({ theme }) => theme.mediaQueryOnDevice.notebookS} {
+    width: 90px;
+    font-size: 10px;
+    justify-self: center;
+  }
 `;
 const AcceptedDate = styled.input.attrs({
   type: "date",
@@ -118,9 +133,13 @@ const AcceptedDate = styled.input.attrs({
   pattern: "d{4}-d{2}-d{2}",
 })`
   width: 150px;
-  height: 40px;
-  text-align: center;
-  margin-left: 84px;
+  justify-self: start;
+
+  @media ${({ theme }) => theme.mediaQueryOnDevice.notebookS} {
+    width: 90px;
+    font-size: 10px;
+    justify-self: center;
+  }
 `;
 
 const EscrowLabel: any = styled.label`
@@ -130,8 +149,9 @@ const EscrowLabel: any = styled.label`
   background: white;
   border: 1px solid #eaeaea;
   border-radius: 4px;
-  margin-left: 84px;
-  margin-right: 55px;
+  /* margin-left: 84px; */
+  margin-right: 20px;
+  justify-self: end;
 `;
 const Escrow = styled.input.attrs({
   type: "checkbox",

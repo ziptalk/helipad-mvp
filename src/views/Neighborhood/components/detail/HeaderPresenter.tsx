@@ -44,16 +44,26 @@ const RegionName = styled.div`
   height: 96px;
   margin: auto;
   margin-bottom: 30px;
+  @media ${({ theme }) => theme.mediaQueryOnDevice.notebookS} {
+    font-size: 50px;
+    line-height: 70px;
+  }
 `;
-const Thumbnail: any = styled.div`
+const Thumbnail: any = styled.img.attrs((props: any) => ({
+  src: props.thumbnail,
+}))`
   margin-bottom: 58px;
   width: 100%;
-  min-height: 872px;
-
-  background-image: url(${(props: any) => props.thumbnail && props.thumbnail});
+  height: auto;
+  max-height: 990px;
+  @media ${({ theme }) => theme.mediaQueryOnDevice.notebookS} {
+    max-height: 600px;
+  }
+  /* background-image: url(${(props: any) =>
+    props.thumbnail && props.thumbnail});
 
   background-repeat: no-repeat;
-  background-position: center center;
+  background-position: center center; */
 `;
 const Intro = styled.div`
   max-width: 1904px;
@@ -65,6 +75,10 @@ const Intro = styled.div`
   letter-spacing: 0px;
   text-align: left;
   margin-bottom: 29px;
+  @media ${({ theme }) => theme.mediaQueryOnDevice.notebookS} {
+    font-size: 14px;
+    line-height: 22px;
+  }
 `;
 const SalesButton = styled.button`
   width: 387px;
@@ -73,7 +87,15 @@ const SalesButton = styled.button`
   border: none;
   cursor: pointer;
   margin-bottom: 60px;
+  @media ${({ theme }) => theme.mediaQueryOnDevice.notebookS} {
+    width: 300px;
+    height: 50px;
+  }
 `;
-const ForSale = styled(ForSaleSvg)``;
+const ForSale = styled(ForSaleSvg)`
+  @media ${({ theme }) => theme.mediaQueryOnDevice.notebookS} {
+    width: 280px;
+  }
+`;
 
 export default HeaderPresenter;

@@ -39,28 +39,33 @@ const Container = styled.div`
   background-image: url(${BackgroundJpg});
   background-size: cover;
   color: white;
+  @media ${({ theme }) => theme.mediaQueryOnDevice.notebookS} {
+    height: 500px;
+  }
 `;
 const Content = styled.div`
-  position: absolute;
+  position: relative;
   z-index: 2;
   margin-top: 133px;
   margin-left: 212px;
-  width: 883px;
-  height: 508px;
 `;
 const TitleBlock = styled.div`
-  width: 885px;
-  height: 216px;
   margin-bottom: 70px;
+  @media ${({ theme }) => theme.mediaQueryOnDevice.notebookS} {
+    margin-bottom: 40px;
+  }
 `;
 const Title = styled.div`
-  height: 195px;
   font-size: 130px;
   font-style: normal;
   font-weight: 500;
   line-height: 195px;
   letter-spacing: -5px;
   text-align: left;
+  @media ${({ theme }) => theme.mediaQueryOnDevice.notebookS} {
+    font-size: 70px;
+    line-height: 100px;
+  }
 `;
 const SubTitle = styled.div`
   height: 27px;
@@ -70,19 +75,22 @@ const SubTitle = styled.div`
   line-height: 27px;
   letter-spacing: 0px;
   text-align: left;
+  @media ${({ theme }) => theme.mediaQueryOnDevice.notebookS} {
+    font-size: 13px;
+    line-height: 15px;
+  }
 `;
 const AdminInfoBlock = styled.div`
   width: 355px;
-  height: 92px;
+
   margin-bottom: 70px;
+  @media ${({ theme }) => theme.mediaQueryOnDevice.notebookS} {
+    margin-bottom: 50px;
+  }
 `;
 const InfoBlock = styled.div`
   display: flex;
   align-items: center;
-
-  &:first-child {
-    margin-bottom: 20px;
-  }
 `;
 
 const Info = styled.div`
@@ -94,6 +102,18 @@ const Info = styled.div`
   text-align: left;
   border-bottom: 1px solid white;
   margin-left: 16px;
+  @media ${({ theme }) => theme.mediaQueryOnDevice.notebookS} {
+    font-size: 13px;
+    line-height: 15px;
+  }
+`;
+const AdminEmail = styled(AdminEmailSvg)`
+  @media ${({ theme }) => theme.mediaQueryOnDevice.notebookS} {
+    width: 13px;
+    height: 13px;
+    font-size: 13px;
+    line-height: 15px;
+  }
 `;
 const ContactButton = styled(Link)`
   width: 200px;

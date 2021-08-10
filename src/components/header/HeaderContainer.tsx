@@ -46,7 +46,6 @@ const HeaderContainer = ({ isLandingPage }: any) => {
     // console.log("window.pageYOffset", window.pageYOffset);
     if (window.scrollY > 10) {
       setScrollMove(true);
-      console.log("fix");
     } else {
       setScrollMove(false);
     }

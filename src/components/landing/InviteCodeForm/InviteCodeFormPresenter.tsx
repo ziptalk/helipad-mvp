@@ -35,9 +35,9 @@ const InviteCodeFormPresenter = ({
 };
 export default InviteCodeFormPresenter;
 const Container = styled.div`
-  background-color: transparent;
+  /* background-color: transparent; */
   width: 100%;
-
+  background-color: rgba(0, 0, 0, 0.3);
   /* max-width: 1904px; */
   height: 100vh;
   position: absolute;
@@ -46,29 +46,37 @@ const Container = styled.div`
 `;
 // 가운데 정렬을 위한 SubContainer => 이 페이지만 background가 black임
 const SubContainer = styled.div`
-  width: 100%;
+  max-width: 1482px;
+  width: 50%;
   height: 100%;
   color: white;
   margin: auto;
-  background-color: rgba(0, 0, 0, 0.3);
+
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+
   padding-bottom: 250px;
+  @media ${({ theme }) => theme.mediaQueryOnDevice.notebookS} {
+    width: 60%;
+  }
 `;
 
 const Title = styled.div`
   /* font-family: Helvetica; */
+  min-width: 800px;
   /* font-family: Roboto; */
-  font-family: Poppins, sans-serif;
-  font-size: 80px;
+  font-size: 76px;
   font-style: normal;
   font-weight: 400;
   line-height: 96px;
   letter-spacing: 0em;
   margin-bottom: 26px;
   text-align: left;
+  @media ${({ theme }) => theme.mediaQueryOnDevice.notebookS} {
+    font-size: 60px;
+    line-height: 70px;
+  }
 `;
 const SubTitle = styled.div`
   font-size: 18px;
@@ -77,7 +85,11 @@ const SubTitle = styled.div`
   line-height: 21px;
   letter-spacing: 0px;
   margin-bottom: 56px;
-  text-align: left;
+
+  @media ${({ theme }) => theme.mediaQueryOnDevice.notebookS} {
+    font-size: 16px;
+    line-height: 19px;
+  }
 `;
 
 const InputBlock = styled.div`
@@ -87,6 +99,12 @@ const InputBlock = styled.div`
   height: 62px;
   display: flex;
   align-items: center;
+  margin-right: 21%;
+  @media ${({ theme }) => theme.mediaQueryOnDevice.notebookS} {
+    width: 300px;
+    height: 50px;
+    /* line-height: 70px; */
+  }
 `;
 const Input = styled.input.attrs({
   type: "password",
@@ -96,7 +114,6 @@ const Input = styled.input.attrs({
   height: 40px;
   background-color: inherit;
   color: white;
-  font-family: Roboto;
   font-size: 16px;
   font-weight: 400;
   line-height: 19px;
@@ -107,6 +124,10 @@ const Input = styled.input.attrs({
   margin-left: 15px;
   ::placeholder {
     color: rgba(255, 255, 255, 0.5);
+  }
+  @media ${({ theme }) => theme.mediaQueryOnDevice.notebookS} {
+    width: 180px;
+    font-size: 14px;
   }
 `;
 const SendButton = styled.button`
@@ -121,6 +142,10 @@ const SendButton = styled.button`
   line-height: 19px;
   border: none;
   color: #000000;
+  @media ${({ theme }) => theme.mediaQueryOnDevice.notebookS} {
+    font-size: 14px;
+    line-height: 16px;
+  }
 `;
 
 const ErrorMessage = styled.div`

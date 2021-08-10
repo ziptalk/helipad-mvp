@@ -67,7 +67,9 @@ const Account = () => {
               ) : (
                 <CheckBox onClick={() => setSaveSearchOften(0)} />
               )}
-              <div style={{ height: "24px" }}>Immediately</div>
+              <CheckboxItem style={{ height: "24px" }}>
+                Immediately
+              </CheckboxItem>
             </div>
             <div style={{ display: "flex", marginBottom: "10px" }}>
               {savedSearchOften == 1 ? (
@@ -75,7 +77,7 @@ const Account = () => {
               ) : (
                 <CheckBox onClick={() => setSaveSearchOften(1)} />
               )}
-              <div style={{ height: "24px" }}>Daily</div>
+              <CheckboxItem style={{ height: "24px" }}>Daily</CheckboxItem>
             </div>
             <div style={{ display: "flex", marginBottom: "10px" }}>
               {savedSearchOften == 2 ? (
@@ -83,7 +85,7 @@ const Account = () => {
               ) : (
                 <CheckBox onClick={() => setSaveSearchOften(2)} />
               )}
-              <div style={{ height: "24px" }}>Never</div>
+              <CheckboxItem style={{ height: "24px" }}>Never</CheckboxItem>
             </div>
             <SaveButton>Save</SaveButton>
           </InputBox>
@@ -121,6 +123,9 @@ const AccountTitle = styled.div`
   font-weight: 600;
   color: #212121;
   width: 100%;
+  @media ${({ theme }) => theme.mediaQueryOnDevice.notebookS} {
+    font-size: 32px;
+  }
 `;
 
 const InputContainer = styled.div`
@@ -149,6 +154,9 @@ const BoxTitle = styled.div`
   padding-bottom: 14px;
   border-bottom: 1px solid #9a9a9a;
   margin-bottom: 20px;
+  @media ${({ theme }) => theme.mediaQueryOnDevice.notebookS} {
+    font-size: 14px;
+  }
 `;
 
 const InputIndividualBox = styled.input`
@@ -164,6 +172,10 @@ const InputIndividualBox = styled.input`
   &:focus {
     outline: 1px solid #b69142;
   }
+  @media ${({ theme }) => theme.mediaQueryOnDevice.notebookS} {
+    font-size: 12px;
+    height: 45px;
+  }
 `;
 
 const SaveButton = styled.button`
@@ -175,6 +187,11 @@ const SaveButton = styled.button`
   height: 56px;
   background-color: white;
   font-family: Poppins;
+  @media ${({ theme }) => theme.mediaQueryOnDevice.notebookS} {
+    font-size: 13px;
+    height: 35px;
+    width: 25%;
+  }
 `;
 
 const SubTitle = styled.div`
@@ -182,10 +199,16 @@ const SubTitle = styled.div`
   color: #666666;
   height: 24px;
   margin-bottom: 6px;
+  @media ${({ theme }) => theme.mediaQueryOnDevice.notebookS} {
+    font-size: 13px;
+  }
 `;
 
 const Description = styled.div`
   font-size: 16px;
+  @media ${({ theme }) => theme.mediaQueryOnDevice.notebookS} {
+    font-size: 11px;
+  }
 `;
 
 const LinkComment = styled.div`
@@ -193,6 +216,9 @@ const LinkComment = styled.div`
   color: #b69142;
   margin-left: 5px;
   text-decoration: underline;
+  @media ${({ theme }) => theme.mediaQueryOnDevice.notebookS} {
+    font-size: 11px;
+  }
 `;
 
 const CheckBox = styled.button`
@@ -203,7 +229,11 @@ const CheckBox = styled.button`
   border: 1px solid #eaeaea;
   background-color: white;
 `;
-
+const CheckboxItem = styled.div`
+  @media ${({ theme }) => theme.mediaQueryOnDevice.notebookS} {
+    font-size: 12px;
+  }
+`;
 const DoneCheckBox = styled.button`
   width: 24px;
   height: 24px;
@@ -223,6 +253,11 @@ const DeleteButton = styled.button`
   background-color: #f15524;
   font-family: Poppins;
   color: white;
+  @media ${({ theme }) => theme.mediaQueryOnDevice.notebookS} {
+    font-size: 12px;
+    width: 45%;
+    height: 37px;
+  }
 `;
 
 export default Account;

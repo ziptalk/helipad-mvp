@@ -10,6 +10,7 @@ import SchoolNearby from "./SchoolNearby";
 import SchoolNearBy2 from "./SchoolNearBy/SchoolNearBy2";
 import IDontKnow from "./IDontKnow";
 import Neighborhood from "./Neighborhood";
+import SimilarHomes from "./SimilarHomes";
 import Footer from "../../../../components/Footer";
 import { AuthContext } from "../../../../router/config/Provider/AuthProvider";
 import {
@@ -35,7 +36,7 @@ type DetailProps = {
 // };
 const Detail: React.FC<DetailProps> = ({ data }) => {
   const { userInfo } = useContext(AuthContext);
-  console.log(userInfo?.isAgent);
+  const [scrollMove, setScrollMove] = useState(false);
   const [categoryClick, setCategoryClick] = useState(0);
   const [viewallOpen, setViewallOpen] = useState(false);
   const [popupClick, setPopupClick] = useState(0);
@@ -59,7 +60,19 @@ const Detail: React.FC<DetailProps> = ({ data }) => {
 
   console.log("data :", data);
   const virtualTourLink = data.buildingInformation.virtualTour;
-
+  const handleScroll = () => {
+    if (window.scrollY > 50) {
+      setScrollMove(true);
+    } else {
+      setScrollMove(false);
+    }
+  };
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
   useEffect(() => {
     var tmpPart = [0, 1];
 
@@ -273,9 +286,6 @@ const Detail: React.FC<DetailProps> = ({ data }) => {
                 </CategoryItem>
               )}
             </CategoryTitle>
-            {/* <InformationTitle>
-            Information
-          </InformationTitle> */}
           </Category>
           <Thumbnail src={data.buildingInformation.thumbnail} />
           {virtualTourLink && (
@@ -358,7 +368,7 @@ const Detail: React.FC<DetailProps> = ({ data }) => {
                 }}
               >
                 <BsGrid style={{ width: "20px", height: "20px" }} />
-                <div>View All</div>
+                <BsTitle>View All</BsTitle>
               </button>
               <button
                 onClick={() => popupOnClick(1)}
@@ -369,7 +379,7 @@ const Detail: React.FC<DetailProps> = ({ data }) => {
                 }}
               >
                 <BsMap style={{ width: "20px", height: "20px" }} />
-                <div>Map</div>
+                <BsTitle>Map</BsTitle>
               </button>
               <button
                 onClick={() => popupOnClick(2)}
@@ -380,7 +390,7 @@ const Detail: React.FC<DetailProps> = ({ data }) => {
                 }}
               >
                 <BiStreetView style={{ width: "20px", height: "20px" }} />
-                <div>Street View</div>
+                <BsTitle>Street View</BsTitle>
               </button>
               <button
                 onClick={() => popupOnClick(3)}
@@ -391,7 +401,7 @@ const Detail: React.FC<DetailProps> = ({ data }) => {
                 }}
               >
                 <Md3DRotation style={{ width: "20px", height: "20px" }} />
-                <div>Virtual Tour</div>
+                <BsTitle>Virtual Tour</BsTitle>
               </button>
             </ButtonContainer>
           </UnderBarContainer>
@@ -660,23 +670,12 @@ const Detail: React.FC<DetailProps> = ({ data }) => {
           <BuildingInfo buildingInformation={data.buildingInformation} />
           <InvestmentProfile data={data} />
           <SchoolNearby />
-
-          <IDontKnow />
-          <Neighborhood />
+          <SimilarHomes />
         </LeftBody>
 
-        <RightBody>
+        <RightBody scrollMove={scrollMove}>
           <Category>
-            <div
-              style={{
-                fontSize: "18px",
-                fontWeight: 700,
-                paddingTop: "10px",
-                color: "#212121",
-              }}
-            >
-              Information
-            </div>
+            <InformationTitle>Information</InformationTitle>
           </Category>
           <StatusContainer>
             <Status>
@@ -770,6 +769,9 @@ const CategoryItem = styled.button`
   background-color: transparent;
   box-shadow: inset 0px -3px 0px #cfd4da;
   color: #cfd4da;
+  @media ${({ theme }) => theme.mediaQueryOnDevice.notebookS} {
+    font-size: 15px;
+  }
 `;
 
 const CategoryDivider = styled.div`
@@ -777,18 +779,28 @@ const CategoryDivider = styled.div`
 `;
 
 const InformationTitle = styled.div`
-  width: 45%;
+  font-size: 18px;
+  font-weight: 700;
+  padding-top: 15px;
+  color: #212121;
+  @media ${({ theme }) => theme.mediaQueryOnDevice.notebookS} {
+    font-size: 15px;
+  }
 `;
 
 const Body = styled.div`
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  gap: 30px;
+  /* display: grid;
+  grid-template-columns: 2.5fr 1fr;
+  gap: 30px; */
 `;
 
 const LeftBody = styled.div`
+  width: 70%;
   display: flex;
   flex-direction: column;
+  @media ${({ theme }) => theme.mediaQueryOnDevice.notebookS} {
+    width: 60%;
+  }
 `;
 const VirtualTourButton = styled.a`
   margin-top: 20px;
@@ -805,14 +817,37 @@ const Thumbnail = styled.img.attrs((props) => ({
   src: props.src,
 }))`
   width: 100%;
-  height: 624px;
+  /* height: 624px; */
+  height: auto;
 `;
-
+const BsTitle = styled.div`
+  @media ${({ theme }) => theme.mediaQueryOnDevice.notebookS} {
+    font-size: 10px;
+  }
+`;
 const Information = styled.div`
   margin-top: 25px;
+  font-size: 16px;
+  @media ${({ theme }) => theme.mediaQueryOnDevice.notebookS} {
+    font-size: 14px;
+  }
 `;
 
-const RightBody = styled.div``;
+const RightBody: any = styled.div`
+  position: fixed;
+  top: 200px;
+  right: 8%;
+  width: 380px;
+  position: ${(props: any) => props.scrollMove && "fixed"};
+  top: ${(props: any) => props.scrollMove && "200px"};
+  right: ${(props: any) => props.scrollMove && "8%"};
+  width: ${(props: any) => props.scrollMove && "380px"};
+  background-color: ${(props: any) => props.scrollMove && "white"};
+  z-index: ${(props: any) => props.scrollMove && 3};
+  @media ${({ theme }) => theme.mediaQueryOnDevice.notebookS} {
+    width: 320px;
+  }
+`;
 
 const StatusContainer = styled.div`
   margin-bottom: 62px;
@@ -831,16 +866,20 @@ const StatusItem = styled.div`
   border-bottom: 1px solid #e9e9e9;
   padding-top: 7px;
   padding-bottom: 7px;
+  @media ${({ theme }) => theme.mediaQueryOnDevice.notebookS} {
+    font-size: 12px;
+  }
 `;
 
 const StatusCategory = styled.div`
-  // font-weight: bold;
+  /* // font-weight: bold; */
+  font-weight: 400;
   width: 260px;
   flex: 2.5;
 `;
 
 const StatusContent = styled.div`
-  font-weight: 500;
+  font-weight: 600;
   flex: 2.5;
 `;
 

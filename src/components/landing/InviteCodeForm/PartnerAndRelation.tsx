@@ -16,10 +16,7 @@ const PartnerAndRelation = () => {
               Experience an exceptional level of service based on Helipad's
               trust, knowledge, and experience.
             </Title>
-            We work with local financial advisors overseas such as private
-            bankers and local real estate professionals to better assist our
-            clients in efficient ways. Ask your financial advisors about our
-            services.
+
             <Content>
               Helipad has established various professional relationship with
               contractors, financial advisors, CPA’s, attorneys to bring you the
@@ -60,7 +57,8 @@ const Container = styled.div`
   max-width: 1904px;
 `;
 const Section = styled.div`
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 `;
 const Line = styled(LineSvg)``;
 const Category = styled.div`
@@ -76,6 +74,11 @@ const Category = styled.div`
   color: #b69142;
   ${Line} {
     margin-right: 24px;
+  }
+
+  @media ${({ theme }) => theme.mediaQueryOnDevice.notebookS} {
+    font-size: 13px;
+    line-height: 23px;
   }
 `;
 const TextContainer = styled.div`
@@ -101,6 +104,10 @@ const Title = styled.div`
   letter-spacing: 0em;
 
   margin-bottom: 27px;
+  @media ${({ theme }) => theme.mediaQueryOnDevice.notebookS} {
+    font-size: 19px;
+    line-height: 30px;
+  }
 `;
 const Content = styled.div`
   font-size: 18px;
@@ -108,12 +115,16 @@ const Content = styled.div`
   font-weight: 400;
   line-height: 27px;
   letter-spacing: 0px;
+  @media ${({ theme }) => theme.mediaQueryOnDevice.notebookS} {
+    font-size: 12px;
+    line-height: 17px;
+  }
 `;
-const ImageContainer: any = styled.div`
+const ImageContainer: any = styled.img.attrs((props: any) => ({
+  src: props.imgPath,
+}))`
   flex: 1;
   width: 100%;
-  height: 800px;
-  background: url(${(props: any) => props.imgPath});
-  background-size: cover;
+  height: auto;
 `;
 export default PartnerAndRelation;

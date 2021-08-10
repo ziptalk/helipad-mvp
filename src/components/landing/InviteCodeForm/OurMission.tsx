@@ -36,14 +36,18 @@ const Category = styled.div`
   align-items: center;
   margin-bottom: 27px;
 
-  font-size: 18px;
+  font-size: 0.9vw;
   font-style: normal;
   font-weight: 600;
-  line-height: 27px;
+  line-height: 1.4vw;
   letter-spacing: 4px;
   color: #b69142;
   ${Line} {
     margin-right: 24px;
+  }
+  @media ${({ theme }) => theme.mediaQueryOnDevice.notebookS} {
+    font-size: 13px;
+    line-height: 23px;
   }
 `;
 const Title = styled.div`
@@ -53,6 +57,10 @@ const Title = styled.div`
   line-height: 48px;
   letter-spacing: 0px;
   margin-bottom: 27px;
+  @media ${({ theme }) => theme.mediaQueryOnDevice.notebookS} {
+    font-size: 19px;
+    line-height: 30px;
+  }
 `;
 const SubTitle = styled.div`
   font-size: 20px;
@@ -70,11 +78,15 @@ const Content = styled.li`
   line-height: 27px;
   letter-spacing: 0px;
   text-align: left;
+  @media ${({ theme }) => theme.mediaQueryOnDevice.notebookS} {
+    font-size: 12px;
+    line-height: 17px;
+  }
 `;
-const ImageContainer: any = styled.div`
+const ImageContainer: any = styled.img.attrs((props: any) => ({
+  src: props.imgPath,
+}))`
   width: 100%;
-  height: 800px;
-  background: url(${(props: any) => props.imgPath});
-  background-size: cover;
+  height: auto;
 `;
 export default OurMission;

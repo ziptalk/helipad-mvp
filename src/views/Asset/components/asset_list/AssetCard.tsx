@@ -398,7 +398,11 @@ const PriceBlock = styled.div`
   font-weight: 600;
   padding-bottom: 2px;
 `;
-const PriceDollar = styled.div``;
+const PriceDollar = styled.div`
+  @media ${({ theme }) => theme.mediaQueryOnDevice.notebookS} {
+    font-size: 16px;
+  }
+`;
 const PriceWon = styled.div``;
 const PlaceInfoBlock = styled.div`
   // font-size: 15px;
@@ -410,15 +414,24 @@ const PlaceInfoBlock = styled.div`
 const StreetInfo = styled.div`
   font-size: 12px;
   font-weight: 400;
+  @media ${({ theme }) => theme.mediaQueryOnDevice.notebookS} {
+    font-size: 10px;
+  }
 `;
 const AddressInfo = styled.div`
   font-size: 12px;
   font-weight: 400;
+  @media ${({ theme }) => theme.mediaQueryOnDevice.notebookS} {
+    font-size: 10px;
+  }
 `;
 
 const Divider = styled.div`
   border-right: 0px solid #ffffff;
   margin: 0px 20px;
+  @media ${({ theme }) => theme.mediaQueryOnDevice.notebookS} {
+    margin: 5px;
+  }
 `;
 
 const RightSide = styled.div`
@@ -435,6 +448,9 @@ const RoomInfo = styled.div`
   display: flex;
   font-weight: 300;
   font-size: 10px;
+  @media ${({ theme }) => theme.mediaQueryOnDevice.notebookS} {
+    margin: 3px 0px;
+  }
 `;
 
 const RoomInfoNum = styled.div`
