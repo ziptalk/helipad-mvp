@@ -19,7 +19,7 @@ const HeaderContainer = ({ isLandingPage }: any) => {
     signOutOrSignIn: "",
   });
   const [globalIconCategory, setGlobalIconCategory] = useState(
-    DropDownMenu.KOREAN
+    DropDownMenu.ENGLISH
     // english: DropDownMenu.ENGLISH,
   );
   const [scrollMove, setScrollMove] = useState(false);
