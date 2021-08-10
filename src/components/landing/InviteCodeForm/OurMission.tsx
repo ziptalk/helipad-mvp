@@ -28,7 +28,7 @@ const OurMission = () => {
 const Container = styled.div`
   margin-bottom: 100px;
   width: 80vw;
-  max-width: 80%;
+  max-width: 1904px;
 `;
 const Line = styled(LineSvg)``;
 const Category = styled.div`

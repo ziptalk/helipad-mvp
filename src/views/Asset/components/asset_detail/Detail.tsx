@@ -674,61 +674,63 @@ const Detail: React.FC<DetailProps> = ({ data }) => {
         </LeftBody>
 
         <RightBody scrollMove={scrollMove}>
-          <Category>
-            <InformationTitle>Information</InformationTitle>
-          </Category>
-          <StatusContainer>
-            <Status>
-              <StatusItem>
-                <StatusCategory>Status</StatusCategory>
-                <StatusContent>{data.status}</StatusContent>
-              </StatusItem>
-              <StatusItem>
-                <StatusCategory>Days on Market</StatusCategory>
-                <StatusContent>{data.daysOnMarket}</StatusContent>
-              </StatusItem>
+          <RightBodyContent>
+            <Category>
+              <InformationTitle>Information</InformationTitle>
+            </Category>
+            <StatusContainer>
+              <Status>
+                <StatusItem>
+                  <StatusCategory>Status</StatusCategory>
+                  <StatusContent>{data.status}</StatusContent>
+                </StatusItem>
+                <StatusItem>
+                  <StatusCategory>Days on Market</StatusCategory>
+                  <StatusContent>{data.daysOnMarket}</StatusContent>
+                </StatusItem>
 
-              <StatusItem>
-                <StatusCategory>Estimated Property Tax</StatusCategory>
-                <StatusContent>{data.taxPerMonth}</StatusContent>
-              </StatusItem>
-              <StatusItem>
-                <StatusCategory>HOA Fees</StatusCategory>
-                <StatusContent>{data.hoaFee} / month</StatusContent>
-              </StatusItem>
-              <StatusItem>
-                <StatusCategory>Lot Size</StatusCategory>
-                <StatusContent>{data.lotSize} SF</StatusContent>
-              </StatusItem>
-              <StatusItem>
-                <StatusCategory>MLS Type</StatusCategory>
-                <StatusContent>{data.mlsType}</StatusContent>
-              </StatusItem>
-              <StatusItem>
-                <StatusCategory>Year Built</StatusCategory>
-                <StatusContent>
-                  {data.buildingInformation.yearBuilt}
-                </StatusContent>
-              </StatusItem>
-              {/* <StatusItem>
+                <StatusItem>
+                  <StatusCategory>Estimated Property Tax</StatusCategory>
+                  <StatusContent>{data.taxPerMonth}</StatusContent>
+                </StatusItem>
+                <StatusItem>
+                  <StatusCategory>HOA Fees</StatusCategory>
+                  <StatusContent>{data.hoaFee} / month</StatusContent>
+                </StatusItem>
+                <StatusItem>
+                  <StatusCategory>Lot Size</StatusCategory>
+                  <StatusContent>{data.lotSize} SF</StatusContent>
+                </StatusItem>
+                <StatusItem>
+                  <StatusCategory>MLS Type</StatusCategory>
+                  <StatusContent>{data.mlsType}</StatusContent>
+                </StatusItem>
+                <StatusItem>
+                  <StatusCategory>Year Built</StatusCategory>
+                  <StatusContent>
+                    {data.buildingInformation.yearBuilt}
+                  </StatusContent>
+                </StatusItem>
+                {/* <StatusItem>
                 <StatusCategory>Country</StatusCategory>
                 <StatusContent>
                   {data.buildingInformation.country}
                 </StatusContent>
               </StatusItem> */}
-              {/* <StatusItem>
+                {/* <StatusItem>
                 <StatusCategory>Expected monthly payment</StatusCategory>
                 <StatusContent>${data.expectedMonthlyPayment}</StatusContent>
               </StatusItem> */}
-            </Status>
-          </StatusContainer>
-          {userInfo?.isAgent === false && (
-            <Contact
-              agent={data.agent}
-              assetId={data.id}
-              buildingInformation={data}
-            />
-          )}
+              </Status>
+            </StatusContainer>
+            {userInfo?.isAgent === false && (
+              <Contact
+                agent={data.agent}
+                assetId={data.id}
+                buildingInformation={data}
+              />
+            )}
+          </RightBodyContent>
         </RightBody>
       </Body>
     </Container>
@@ -789,17 +791,19 @@ const InformationTitle = styled.div`
 `;
 
 const Body = styled.div`
-  /* display: grid;
+  display: grid;
   grid-template-columns: 2.5fr 1fr;
-  gap: 30px; */
+  grid-template-areas: "left right";
+  gap: 30px;
+  height: 100%;
 `;
 
 const LeftBody = styled.div`
-  width: 70%;
+  width: 100%;
   display: flex;
   flex-direction: column;
+  grid-area: left;
   @media ${({ theme }) => theme.mediaQueryOnDevice.notebookS} {
-    width: 60%;
   }
 `;
 const VirtualTourButton = styled.a`
@@ -834,21 +838,27 @@ const Information = styled.div`
 `;
 
 const RightBody: any = styled.div`
-  position: fixed;
+  grid-area: right;
+  height: 100%;
+
+  /* position: fixed;
   top: 200px;
-  right: 8%;
-  width: 380px;
+  left: 65vw;
+  width: 320px;
   position: ${(props: any) => props.scrollMove && "fixed"};
   top: ${(props: any) => props.scrollMove && "200px"};
-  right: ${(props: any) => props.scrollMove && "8%"};
+  left: ${(props: any) => props.scrollMove && "65vw"};
   width: ${(props: any) => props.scrollMove && "380px"};
   background-color: ${(props: any) => props.scrollMove && "white"};
-  z-index: ${(props: any) => props.scrollMove && 3};
+  z-index: ${(props: any) => props.scrollMove && 3}; */
+`;
+const RightBodyContent = styled.div`
+  position: sticky;
+  top: 210px;
   @media ${({ theme }) => theme.mediaQueryOnDevice.notebookS} {
-    width: 320px;
+    top: 178px;
   }
 `;
-
 const StatusContainer = styled.div`
   margin-bottom: 62px;
 `;

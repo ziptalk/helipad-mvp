@@ -10,6 +10,15 @@ import { ReactComponent as ContactUsSvg } from "../../images/Header/ic_contactUs
 import BlackChatBot from "../BlackChatBot";
 import { ReactComponent as SearchSvg } from "../../images/Header/ic_search.svg";
 import DropdownMenu from "../DropdownMenu";
+enum DropDownMenu {
+  ACCOUNT = "Account",
+  MYPAGE = "My Page",
+  SIGNOUT = "Sign Out",
+  REGISTER = "Register",
+  SIGNIN = "Sign In",
+  KOREAN = "KOR",
+  ENGLISH = "ENG",
+}
 const HeaderPresenter = ({
   scrollMove,
   headerMode,
@@ -17,15 +26,17 @@ const HeaderPresenter = ({
   isLandingPage,
   userIconCategory,
   globalIconCategory,
+  setGlobalIconCategory,
   userInfo,
 }: any) => {
+  console.log("header username:", userInfo);
   const renderByHeaderMode = () => {
     switch (headerMode) {
       case "inviteCodeForm":
         return <></>;
       default:
         return (
-          <CategoryContainer>
+          <CategoryContainer authenticated={authenticated}>
             <Link to="/aboutUs">
               <About scrollMove={scrollMove} color={headerMode}>
                 About us
@@ -41,8 +52,12 @@ const HeaderPresenter = ({
     }
   };
   return (
-    <>
-      <Container
+    <Container
+      scrollMove={scrollMove}
+      color={headerMode}
+      isLandingPage={isLandingPage}
+    >
+      <ContentContainer
         scrollMove={scrollMove}
         color={headerMode}
         isLandingPage={isLandingPage}
@@ -64,15 +79,23 @@ const HeaderPresenter = ({
                   mypageOrRegister={userIconCategory.mypageOrRegister}
                   signOutOrSignIn={userIconCategory.signOutOrSignIn}
                 />
+                <Username
+                  scrollMove={scrollMove}
+                  color={headerMode}
+                >{`${userInfo.firstName} ${userInfo.lastName}`}</Username>
               </DropDownContainer>
               <DropDownContainer>
                 <DropdownMenu
                   Component={() => (
                     <BlackGlobal scrollMove={scrollMove} color={headerMode} />
                   )}
-                  mypageOrRegister={globalIconCategory.korean}
-                  signOutOrSignIn={globalIconCategory.english}
+                  setGlobalIconCategory={setGlobalIconCategory}
+                  mypageOrRegister={DropDownMenu.KOREAN}
+                  signOutOrSignIn={DropDownMenu.ENGLISH}
                 />
+                <Language scrollMove={scrollMove} color={headerMode}>
+                  {globalIconCategory}
+                </Language>
               </DropDownContainer>
               <Link to="/auth/contact">
                 <ContactUs
@@ -99,9 +122,13 @@ const HeaderPresenter = ({
                   Component={() => (
                     <BlackGlobal scrollMove={scrollMove} color={headerMode} />
                   )}
-                  mypageOrRegister={globalIconCategory.korean}
-                  signOutOrSignIn={globalIconCategory.english}
+                  setGlobalIconCategory={setGlobalIconCategory}
+                  mypageOrRegister={DropDownMenu.KOREAN}
+                  signOutOrSignIn={DropDownMenu.ENGLISH}
                 />
+                <Language scrollMove={scrollMove} color={headerMode}>
+                  {globalIconCategory}
+                </Language>
               </DropDownContainer>
               <Link to="/auth/contact">
                 <ContactUs
@@ -113,24 +140,15 @@ const HeaderPresenter = ({
             </IconBlock>
           )}
         </IconBlock>
-      </Container>
-    </>
+      </ContentContainer>
+    </Container>
   );
 };
-
 const Container: any = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   height: 112px;
   width: 100vw;
-  margin: 0 auto;
-  max-width: 1904px;
-  position: relative;
-  top: 0px;
   z-index: 3;
   background-color: white;
-
   background-color: ${(props: any) =>
     (props.color === "inviteCodeForm" ||
       props.color === "neighborhoodList" ||
@@ -156,11 +174,15 @@ const Container: any = styled.div`
       props.color === "neighborhoodList" ||
       props.color === "contactForm") &&
     3};
-  max-width: ${(props: any) =>
+  /* max-width: ${(props: any) =>
     (props.color === "inviteCodeForm" ||
       props.color === "neighborhoodList" ||
       props.color === "contactForm") &&
-    "1904px"};
+    "1904px"}; */
+
+  @media ${({ theme }) => theme.mediaQueryOnDevice.notebookS} {
+    height: 80px;
+  }
 
   @media ${({ theme }) => theme.mediaQueryOnDevice.notebookS} {
     height: 80px;
@@ -172,18 +194,39 @@ const Container: any = styled.div`
   top: ${(props: any) => props.scrollMove && "0px"};
   transition: all ease-in-out 0.5s;
 `;
+const ContentContainer: any = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* height: 112px;
+  width: 100vw; */
+  /* margin: 0 auto; */
+  max-width: 1904px;
+  position: relative;
+  top: 0px;
+  /* z-index: 3; */
+  background-color: white;
+  margin: 0 auto;
+  height: 100%;
+  background-color: ${(props: any) =>
+    (props.color === "inviteCodeForm" ||
+      props.color === "neighborhoodList" ||
+      props.color === "contactForm") &&
+    "transparent"};
+`;
 
-const CategoryContainer = styled.div`
+const CategoryContainer: any = styled.div`
   width: 12%;
   display: flex;
   justify-content: space-between;
   margin-right: 120px;
+  margin-right: ${(props: any) => props.authenticated && "0px"};
   @media ${({ theme }) => theme.mediaQueryOnDevice.notebookS} {
     width: 18%;
   }
 `;
 const BlackLogo: any = styled(BlackLogoSvg)`
-  margin-left: 60px;
+  margin-left: 1vw;
   position: relative;
   z-index: 1;
   fill: ${(props: any) =>
@@ -195,7 +238,7 @@ const BlackLogo: any = styled(BlackLogoSvg)`
   fill: ${(props: any) => props.scrollMove && "black"};
 
   @media ${({ theme }) => theme.mediaQueryOnDevice.notebookS} {
-    margin-left: 30px;
+    margin-left: 4vw;
     width: 150px;
   }
 `;
@@ -229,7 +272,23 @@ const IconBlock = styled.div`
   align-items: center;
   margin-right: 30px;
 `;
-const DropDownContainer = styled.div``;
+const DropDownContainer = styled.div`
+  display: flex;
+  align-items: center;
+`;
+const Username: any = styled.div`
+  padding-top: 2px;
+  font-size: 12px;
+  color: white;
+  color: ${(props: any) =>
+    props.color === "inviteCodeForm"
+      ? "white"
+      : props.color === "neighborhoodList" || props.color === "contactForm"
+      ? "white"
+      : "black"};
+  color: ${(props: any) => props.scrollMove && "#212121"};
+`;
+const Language: any = styled(Username)``;
 const BlackUser: any = styled(BlackUserSvg)`
   margin-right: 9px;
   position: relative;
@@ -241,7 +300,7 @@ const BlackUser: any = styled(BlackUserSvg)`
       ? "white"
       : "black"};
   stroke: ${(props: any) => props.scrollMove && "#212121"};
-  transform: scale 1s ease-in;
+
   &:hover {
     cursor: pointer;
     transform: scale(1.1);
@@ -253,7 +312,7 @@ const BlackUser: any = styled(BlackUserSvg)`
 `;
 const BlackGlobal: any = styled(BlackGlobalSvg)`
   margin-left: 9px;
-  margin-right: 15px;
+  margin-right: 5px;
   position: relative;
   z-index: 1;
   stroke: ${(props: any) =>
@@ -263,7 +322,7 @@ const BlackGlobal: any = styled(BlackGlobalSvg)`
       ? "white"
       : "black"};
   stroke: ${(props: any) => props.scrollMove && "#212121"};
-  transform: scale 1s ease-in;
+
   &:hover {
     cursor: pointer;
     transform: scale(1.1);
@@ -284,7 +343,7 @@ const ContactUs: any = styled(ContactUsSvg)`
       ? "white"
       : "black"};
   stroke: ${(props: any) => props.scrollMove && "#212121"};
-  transform: scale 1s ease-in;
+
   &:hover {
     cursor: pointer;
     transform: scale(1.1);

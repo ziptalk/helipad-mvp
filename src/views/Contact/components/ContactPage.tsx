@@ -13,6 +13,7 @@ const Container2 = styled.div`
   align-items: center;
   margin: 0px;
   padding-bottom: 200px;
+  max-width: 1904px;
 `;
 const FormContainer = styled.div`
   background-color: white;
@@ -32,7 +33,6 @@ const Container = styled.div`
   align-items: center;
   background: transparent;
   width: 100vw;
-  max-width: 1904px;
 `;
 
 const Divider = styled.div`
@@ -42,22 +42,22 @@ const Divider = styled.div`
 `;
 
 const ContactPage = () => {
-    const { user, setHeaderMode } = useContext(AuthContext);
+  const { user, setHeaderMode } = useContext(AuthContext);
 
-    useEffect(() => {
-        setHeaderMode("contactForm");
+  useEffect(() => {
+    setHeaderMode("contactForm");
 
-        window.scroll({ top: 0 });
-    }, []);
+    window.scroll({ top: 0 });
+  }, []);
 
-    return (
-        <Container>
-            <HeaderPresenter />
-            <Container2>
-                <Contact />
-            </Container2>
-        </Container>
-    );
-}
+  return (
+    <Container>
+      <HeaderPresenter />
+      <Container2>
+        <Contact />
+      </Container2>
+    </Container>
+  );
+};
 
 export default ContactPage;

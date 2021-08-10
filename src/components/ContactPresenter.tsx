@@ -31,9 +31,9 @@ const ContactPresenter = () => {
 };
 
 const Container = styled.div`
+  position: relative;
   margin-top: 139px;
   width: 100vw;
-  max-width: 1904px;
   height: 740px;
 
   background-image: url(${BackgroundJpg});
@@ -46,8 +46,11 @@ const Container = styled.div`
 const Content = styled.div`
   position: relative;
   z-index: 2;
-  margin-top: 133px;
-  margin-left: 212px;
+
+  max-width: 1904px;
+  margin: 0 auto;
+  padding-top: 133px;
+  padding-left: 212px;
 `;
 const TitleBlock = styled.div`
   margin-bottom: 70px;

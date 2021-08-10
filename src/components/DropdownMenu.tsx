@@ -16,12 +16,15 @@ enum MenuName {
   REGISTER = "Register",
   SIGNOUT = "Sign Out",
   SIGNIN = "Sign In",
+  KOREAN = "KOR",
+  ENGLISH = "ENG",
 }
 const DropdownMenu = ({
   account,
   mypageOrRegister,
   signOutOrSignIn,
   Component,
+  setGlobalIconCategory,
 }: any) => {
   const history = useHistory();
   const onClick = (event: any) => {
@@ -47,6 +50,14 @@ const DropdownMenu = ({
         window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
         history.push("/auth/login");
         break;
+      case MenuName.KOREAN:
+        window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+        setGlobalIconCategory(MenuName.KOREAN);
+        break;
+      case MenuName.ENGLISH:
+        window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+        setGlobalIconCategory(MenuName.ENGLISH);
+        break;
       default:
         console.log("default");
     }
@@ -70,7 +81,7 @@ const DropdownMenu = ({
 };
 const Container = styled.div`
   position: relative;
-  z-index: 2;
+  z-index: 5;
   padding-top: 7px;
 `;
 

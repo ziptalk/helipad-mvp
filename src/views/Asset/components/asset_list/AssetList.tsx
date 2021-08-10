@@ -175,8 +175,8 @@ const AssetList: React.FC<AssetListProperties> = ({ history }: any) => {
             Purchase price
           </PriceTitle>
           {/* <RangeSliders /> */}
-          <DoubleRangeSlider history={history.location.state} />
         </PriceControl>
+        <DoubleRangeSlider history={history.location.state} />
         {/* {assets.map((asset) => (
           <AssetCard data={asset} />
         ))} */}
@@ -189,11 +189,11 @@ const Container = styled.div`
   // width: 100vw;
   // width: 100%;
   // margin-top: 112px;
-  max-width: 1904px;
+  /* max-width: 1904px; */
   width: 100vw;
   height: 100%;
   display: grid;
-  grid-template-columns: 1.5fr 1fr;
+  grid-template-columns: 1.5fr minmax(auto, 800px);
   margin: 0 auto;
   @media ${({ theme }) => theme.mediaQueryOnDevice.notebookS} {
     grid-template-columns: 1.3fr 1.2fr;
@@ -212,8 +212,9 @@ const AssetContainer = styled.div`
   // width: 900px;
   // width: 40%;
   // background-color: #61dafb;
-
-  background-color: #f4f4f4;
+  justify-self: end;
+  /* background-color: #f4f4f4; */
+  background-color: white;
   overflow-y: scroll;
   z-index: 0;
 `;
@@ -237,7 +238,7 @@ const PriceTitle = styled.div`
 `;
 const PriceControl = styled.div`
   width: 100%;
-  height: 200px;
+
   background-color: white;
   color: black;
   font-size: 22px;

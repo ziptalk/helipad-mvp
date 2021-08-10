@@ -25,7 +25,7 @@ const Container = styled.div`
   margin: 0 auto;
   /* width: 1904px; */
   width: 100%;
-  max-width: 1904px;
+  /* max-width: 1904px; */
 
   background-color: #f4f4f4;
 `;

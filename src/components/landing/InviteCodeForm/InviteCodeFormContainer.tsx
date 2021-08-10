@@ -70,7 +70,7 @@ const InviteCodeFormContainer = ({ isLandingPage, setIsLandingPage }: any) => {
         checkInviteCodeWithEnterKey={checkInviteCodeWithEnterKey}
       />
 
-      <InviteCodeFormEtcPresenter />
+      {/* <InviteCodeFormEtcPresenter /> */}
       <HelipadIs></HelipadIs>
       <OurMission></OurMission>
       <OurArea></OurArea>
@@ -80,7 +80,7 @@ const InviteCodeFormContainer = ({ isLandingPage, setIsLandingPage }: any) => {
   );
 };
 const Container = styled.div`
-  max-width: 1904px;
+  /* max-width: 1904px; */
   width: 100vw;
   height: 100%;
   display: flex;

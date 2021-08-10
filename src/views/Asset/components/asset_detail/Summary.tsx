@@ -24,7 +24,7 @@ const Summary: React.FC<SummaryProps> = ({ data }) => {
     });
   }
   const handleScroll = () => {
-    if (window.scrollY > 10) {
+    if (window.scrollY > 20) {
       setScrollMove(true);
     } else {
       setScrollMove(false);
@@ -129,9 +129,11 @@ const Container: any = styled.div`
   height: 98px;
   background-color: ${(props: any) => props.scrollMove && "black"};
   position: ${(props: any) => props.scrollMove && "fixed"};
-  top: ${(props: any) => props.scrollMove && "80px"};
-  z-index: ${(props: any) => props.scrollMove && 3};
-
+  top: ${(props: any) => props.scrollMove && "112px"};
+  z-index: ${(props: any) => props.scrollMove && 2};
+  @media ${({ theme }) => theme.mediaQueryOnDevice.notebookS} {
+    top: ${(props: any) => props.scrollMove && "80px"};
+  }
   transition: background-color ease-in-out 0.3s;
 `;
 const ContentBlock = styled.div`
@@ -141,6 +143,7 @@ const ContentBlock = styled.div`
   /* max-width:  */
   color: white;
   margin: 0 auto;
+  max-width: 1904px;
 `;
 const AddressWrapper = styled.div`
   flex: 1;

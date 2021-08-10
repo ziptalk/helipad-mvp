@@ -124,7 +124,7 @@ const DoubleRangeSlider = ({ history }: any) => {
   };
 
   return (
-    <div>
+    <div style={{ height: "100%" }}>
       <div
         style={{
           display: "flex",
@@ -192,5 +192,6 @@ const DoubleRangeSlider = ({ history }: any) => {
 const Container = styled.div`
   display: grid;
   grid-template-columns: 50% 50%;
+  grid-auto-rows: minmax(300px, auto);
 `;
 export default DoubleRangeSlider;

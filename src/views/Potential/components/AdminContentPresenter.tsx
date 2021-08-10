@@ -94,14 +94,16 @@ const ListingBlock = styled.div`
   width: 160px;
   min-width: 100px;
   text-align: center;
+  margin-right: 50px;
   @media ${({ theme }) => theme.mediaQueryOnDevice.notebookS} {
     width: 90px;
+    margin-right: 0px;
   }
 `;
 const Listing: any = styled.img.attrs((props: any) => ({
   src: props.imgPath,
 }))`
-  width: 100%;
+  width: 80%;
   height: auto;
 
   /* background-image: url(${(props: any) => props.imgPath});

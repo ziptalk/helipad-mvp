@@ -33,7 +33,7 @@ const Container = styled.div`
   align-items: center;
   background: transparent;
   width: 100vw;
-  max-width: 1904px;
+  /* max-width: 1904px; */
 `;
 const MainHeaderBlock = styled.div`
   max-width: 1904px;

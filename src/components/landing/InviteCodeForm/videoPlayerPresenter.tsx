@@ -18,7 +18,7 @@ const VideoPlayerPresenter = () => {
 const Container = styled.div`
   /* width: 100%; */
 
-  height: 100vh;
+  height: 90vh;
 
   #video {
     /* width: 100%; */
