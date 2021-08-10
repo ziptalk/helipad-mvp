@@ -1,8 +1,186 @@
 import styled from "styled-components";
 import { useState, useEffect, useContext } from "react";
+import { AuthContext } from "../../../../router/config/Provider/AuthProvider";
+import { userStore, firebase } from "../../../../shared/Firebase";
+import { useHistory } from "react-router-dom";
+
 
 const Account = () => {
+    const { user } = useContext(AuthContext);
   const [savedSearchOften, setSaveSearchOften] = useState(0);
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [phone, setPhone] = useState('');
+  const [email, setEmail] = useState('');
+  const [fixedFirstName, setFixedFirstName] = useState('');
+  const [fixedLastName, setFixedLastName] = useState('');
+  const [fixedPhone, setFixedPhone] = useState('phone');
+  const history = useHistory();
+  const [currentPassword, setCurrentPassword] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+
+  async function getUserInfo() {
+    if (user) {
+      let contacts = await userStore.doc(user.uid.toString()).get();
+      console.log(contacts);
+      if (!contacts) {
+        console.log("No such document!");
+      } else {
+        let dataResult = contacts.data();
+        if (dataResult) {
+          if (dataResult.isAgent != undefined) {
+            console.log(dataResult.isAgent);
+            setFixedFirstName(dataResult.firstName)
+            setFixedLastName(dataResult.lastName)
+            if(dataResult.phone){
+                setFixedPhone(dataResult.phone)
+            }
+            if(dataResult.searchNotifications){
+                if(dataResult.searchNotifications == 'Immediately'){
+                    setSaveSearchOften(0)
+                }else if(dataResult.searchNotifications == 'Daily'){
+                    setSaveSearchOften(1)
+                }else{
+                    setSaveSearchOften(2)
+                }
+            }
+            setEmail(dataResult.email);
+          }
+        }
+        console.log("Document data:", contacts.data());
+      }
+    }
+  }
+  
+  useEffect(() => {
+    if (user) {
+      getUserInfo();
+    }
+  }, [user]);
+
+  async function oftenSaveOnClick(){
+      if(user){
+          let searchNotifications = ''
+          if(savedSearchOften == 0){
+              searchNotifications = 'Immediately'
+          }else if(savedSearchOften == 1){
+              searchNotifications = 'Daily'
+          }else{
+              searchNotifications = 'Never'
+          }
+          let contacts = await userStore.doc(user.uid.toString());
+          if(!contacts){
+              alert("Something wrong!")
+          }else{
+              contacts.update({
+                  searchNotifications: searchNotifications
+              }).then(()=>{
+                alert('Save Successfully!')
+                window.location.reload()
+            })
+                .catch(()=>(alert('Something wrong!')))
+            }
+      }
+  }
+
+  async function saveOnClick () {
+      if (user) {
+          let firstNameTmp = fixedFirstName
+          let lastNameTmp = fixedLastName
+          let phoneTmp = fixedPhone
+        if(firstName != ''){
+            firstNameTmp = firstName
+        }
+        if(lastName != ''){
+            lastNameTmp = lastName
+        }
+        if(phone != ''){
+            phoneTmp = phone
+        }
+          let contacts = await userStore.doc(user.uid.toString());
+          if(!contacts) {
+              alert("Something wrong!")
+          }else{
+              
+              contacts.update({
+                  firstName: firstNameTmp,
+                  lastName: lastNameTmp,
+                  phone: phoneTmp
+              }).then(()=>{
+                  alert('Save Successfully!')
+                  window.location.reload()
+            })
+              .catch(()=>(alert('Something wrong!')))
+          }
+      }
+  }
+
+  const signOutOnclick = () => {
+    history.push("/auth/logout");
+  }
+
+  const handleFirstName = (e: any) => {
+    setFirstName(e.target.value)
+  }
+
+  const handleLastName = (e: any) => {
+      setLastName(e.target.value)
+  }
+
+  const handlePhone = (e: any) => {
+      setPhone(e.target.value)
+  }
+
+  const handleCurrentPassword = (e: any) => {
+      setCurrentPassword(e.target.value)
+  }
+
+  const handleNewPassword = (e: any) => {
+      setNewPassword(e.target.value)
+  }
+
+  const handleConfirmPassword = (e: any) => {
+      setConfirmPassword(e.target.value)
+  }
+
+  const reauthenticate = (currentPassword: any) => {
+    var user = firebase.auth().currentUser;
+    if(user){
+        if(user.email){
+            console.log(user.email)
+            var cred = firebase.auth.EmailAuthProvider.credential(
+                user.email, currentPassword);
+            return user.reauthenticateWithCredential(cred);
+        }else{
+            return (null)
+        }
+    }else{
+        return (null)
+    }
+  }
+
+  const changePassword = (currentPassword: any, newPassword: any) => {
+      if(currentPassword){
+          if(newPassword == confirmPassword){
+              reauthenticate(currentPassword)?.then(() => {
+                var user = firebase.auth().currentUser;
+                if(user){
+                user.updatePassword(newPassword).then(() => {
+                    console.log("Password updated!");
+                    alert("Password updated!")
+                    window.location.reload()
+                    }).catch((error) => { console.log(error); });
+                }
+            }).catch((error) => { 
+                console.log(error); 
+                alert("The current password is invalid or the user does not have a password.") 
+            }); 
+        }else{
+            alert("Password is different! Please check the confirm password again.")
+        }
+      }
+  }
 
   return (
     <Container>
@@ -13,31 +191,36 @@ const Account = () => {
             <BoxTitle>Profile</BoxTitle>
             <div style={{ display: "flex" }}>
               <InputIndividualBox
-                placeholder="Blake"
+                placeholder={fixedFirstName}
+                value={firstName}
+                onChange={handleFirstName}
                 style={{ marginRight: "10px" }}
               />
               <InputIndividualBox
-                placeholder="Park"
+                placeholder={fixedLastName}
+                value={lastName}
+                onChange={handleLastName}
                 style={{ marginLeft: "10px" }}
               />
             </div>
             <InputIndividualBox
-              placeholder="Black@teraark.com"
+              placeholder={email}
+              value={email}
               style={{ backgroundColor: "#F4F4F4" }}
             />
-            <InputIndividualBox placeholder="Phone" />
-            <SaveButton>Save</SaveButton>
+            <InputIndividualBox value={phone} onChange={handlePhone} placeholder={fixedPhone} />
+            <SaveButton onClick={saveOnClick}>Save</SaveButton>
           </InputBox>
 
           <InputBox>
             <BoxTitle>Change password</BoxTitle>
             <SubTitle>Current Password</SubTitle>
-            <InputIndividualBox placeholder="********" />
+            <InputIndividualBox value={currentPassword} onChange={handleCurrentPassword} placeholder="********" />
             <SubTitle>New Password</SubTitle>
-            <InputIndividualBox placeholder="********" />
+            <InputIndividualBox value={newPassword} onChange={handleNewPassword} placeholder="********" />
             <SubTitle>Confirm Password</SubTitle>
-            <InputIndividualBox placeholder="********" />
-            <SaveButton>Save</SaveButton>
+            <InputIndividualBox value={confirmPassword} onChange={handleConfirmPassword} placeholder="********" />
+            <SaveButton onClick={()=>changePassword(currentPassword, newPassword)}>Save</SaveButton>
           </InputBox>
         </InputHalfBox>
 
@@ -87,7 +270,7 @@ const Account = () => {
               )}
               <CheckboxItem style={{ height: "24px" }}>Never</CheckboxItem>
             </div>
-            <SaveButton>Save</SaveButton>
+            <SaveButton onClick={oftenSaveOnClick}>Save</SaveButton>
           </InputBox>
           <InputBox>
             <BoxTitle>Delete Account</BoxTitle>
@@ -101,7 +284,7 @@ const Account = () => {
             <Description>
               If you Sign out, you can sign back in anytime.
             </Description>
-            <SaveButton style={{ marginTop: "20px" }}>Sign Out</SaveButton>
+            <SaveButton onClick={signOutOnclick} style={{ marginTop: "20px" }}>Sign Out</SaveButton>
           </InputBox>
         </InputHalfBox>
       </InputContainer>
