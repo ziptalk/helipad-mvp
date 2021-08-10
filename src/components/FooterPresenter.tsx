@@ -41,8 +41,17 @@ const Container = styled.div`
   align-items: center;
   justify-content: space-around;
   color: white;
+
+  @media ${({ theme }) => theme.mediaQueryOnDevice.notebookS} {
+    height: 350px;
+  }
 `;
-const Logo = styled(LogoSvg)``;
+const Logo = styled(LogoSvg)`
+  @media ${({ theme }) => theme.mediaQueryOnDevice.notebookS} {
+    width: 90px;
+    height: 80px;
+  }
+`;
 const Category = styled.div`
   display: flex;
   justify-content: space-between;
@@ -56,6 +65,10 @@ const Item = styled.div`
   line-height: 24px;
   letter-spacing: -0.20454545319080353px;
   text-align: left;
+  @media ${({ theme }) => theme.mediaQueryOnDevice.notebookS} {
+    font-size: 13px;
+    line-height: 20px;
+  }
 `; // Link로 연결
 const SocialCategory = styled.div`
   width: 134px;
@@ -66,5 +79,9 @@ const SocialCategory = styled.div`
 const Social = styled.div``; // social로 연결 ? => 우선 svg로 대체
 const CopyRight = styled.div`
   opacity: 0.5;
+
+  @media ${({ theme }) => theme.mediaQueryOnDevice.notebookS} {
+    font-size: 12px;
+  }
 `;
 export default FooterPresenter;

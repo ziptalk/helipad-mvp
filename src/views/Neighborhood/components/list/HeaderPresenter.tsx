@@ -60,6 +60,11 @@ const Title = styled.div`
   font-weight: bold;
   line-height: 78px;
   letter-spacing: 0em;
+
+  @media ${({ theme }) => theme.mediaQueryOnDevice.notebookS} {
+    font-size: 36px;
+    line-height: 60px;
+  }
 `;
 const SubTitle = styled.div`
   font-size: 24px;
@@ -67,6 +72,11 @@ const SubTitle = styled.div`
   font-weight: 400;
   line-height: 36px;
   letter-spacing: 0em;
+
+  @media ${({ theme }) => theme.mediaQueryOnDevice.notebookS} {
+    font-size: 18px;
+    line-height: 24px;
+  }
 `;
 const Scroll = styled(ScrollSvg)`
   position: relative;

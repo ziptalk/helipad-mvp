@@ -228,6 +228,9 @@ const Image: any = styled.img.attrs((props: any) => ({
 const ListButtonBlock = styled.div`
   text-align: center;
   margin-bottom: 300px;
+  @media ${({ theme }) => theme.mediaQueryOnDevice.notebookS} {
+    margin-bottom: 100px;
+  }
 `;
 const ListButton = styled.button`
   width: 160px;
@@ -241,6 +244,11 @@ const ListButton = styled.button`
   line-height: 27px;
   letter-spacing: 0px;
   cursor: pointer;
+
+  @media ${({ theme }) => theme.mediaQueryOnDevice.notebookS} {
+    width: 130px;
+    height: 50px;
+  }
 `;
 
 export default PropertyPresenter;

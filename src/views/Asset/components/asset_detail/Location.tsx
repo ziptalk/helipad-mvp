@@ -1,7 +1,7 @@
 // import * as React from 'react';
 import React, { useContext, useEffect, useState } from "react";
-import styled from 'styled-components';
-import { Header } from '../../../../components/header/Header';
+import styled from "styled-components";
+import { Header } from "../../../../components/header/Header";
 import GoogleMap from "../../../../shared/GoogleMapAsset";
 import Geocode from "react-geocode";
 import Asset from "../../../../model/Asset";
@@ -12,83 +12,76 @@ type LocationProps = {
 };
 
 const Location: React.FC<LocationProps> = ({ address, data }) => {
-  const [locations, setLocations] = useState(
-    {
-      assetId: "",
-      assetAddress: "",
-      assetLat: 1000,
-      assetLng: 1000,
-      assetLabel: "1,234,567,890,001",
-    }
-  );
+  const [locations, setLocations] = useState({
+    assetId: "",
+    assetAddress: "",
+    assetLat: 1000,
+    assetLng: 1000,
+    assetLabel: "1,234,567,890,001",
+  });
   const [effectDone, setEffectDone] = useState(false);
 
   useEffect(() => {
-    var tmpPart = [0, 1]
+    var tmpPart = [0, 1];
 
-    console.log(address)
-    
-    async function innerFunction(){
-    async function wholeFunction(){
-          var tmpMap = [1, 2]
-          let assetState = 
-            {
-              assetId: "",
-              assetAddress: "",
-              assetLat: 1000,
-              assetLng: 1000,
-              // assetLabel: "1,234,567,890,001"
-              assetLabel: "996K",
-            }
+    console.log(address);
 
-          async function forSettingLocation() {
-            let priceLabel = "H";
-            assetState = {
-              assetId: data.id,
-              assetAddress: data.buildingInformation.address,
-              assetLat: 0,
-              assetLng: 0,
-              assetLabel: priceLabel,
-            }
-            console.log("hello")
+    async function innerFunction() {
+      async function wholeFunction() {
+        var tmpMap = [1, 2];
+        let assetState = {
+          assetId: "",
+          assetAddress: "",
+          assetLat: 1000,
+          assetLng: 1000,
+          // assetLabel: "1,234,567,890,001"
+          assetLabel: "996K",
+        };
 
-            const GoogleMapLocate = async (
-              currentAddr: string
-            ) => {
-              await Geocode.fromAddress(currentAddr)
-                .then((response) => {
-                  const { lat, lng } = response.results[0].geometry.location;
-                  assetState.assetLat = lat;
-                  assetState.assetLng = lng;
-                  console.log(lat) 
-                  console.log(lng)
-                  return { lat, lng };
-                })
-                .catch((err) => console.log(err));
-            };
+        async function forSettingLocation() {
+          let priceLabel = "H";
+          assetState = {
+            assetId: data.id,
+            assetAddress: data.buildingInformation.address,
+            assetLat: 0,
+            assetLng: 0,
+            assetLabel: priceLabel,
+          };
+          console.log("hello");
 
-            const geoSetting = tmpMap.map(async function (asset, index) {
-              await GoogleMapLocate(
-                address
-              );
-              return address;
-            });
-            await Promise.all(geoSetting).then((res) => console.log(`${res}`));
+          const GoogleMapLocate = async (currentAddr: string) => {
+            await Geocode.fromAddress(currentAddr)
+              .then((response) => {
+                const { lat, lng } = response.results[0].geometry.location;
+                assetState.assetLat = lat;
+                assetState.assetLng = lng;
+                console.log(lat);
+                console.log(lng);
+                return { lat, lng };
+              })
+              .catch((err) => console.log(err));
+          };
 
-            await setLocations(assetState);
-            // await Promise.all(listSetting).then((res) => console.log(`${res}`));
-          }
+          const geoSetting = tmpMap.map(async function (asset, index) {
+            await GoogleMapLocate(address);
+            return address;
+          });
+          await Promise.all(geoSetting).then((res) => console.log(`${res}`));
 
-          forSettingLocation();
+          await setLocations(assetState);
+          // await Promise.all(listSetting).then((res) => console.log(`${res}`));
         }
 
-          const wholePart = tmpPart.map(tmp => {
-            wholeFunction()
-          })
-          await Promise.all(wholePart).then((res) =>  console.log(`${res}`));
+        forSettingLocation();
+      }
+
+      const wholePart = tmpPart.map((tmp) => {
+        wholeFunction();
+      });
+      await Promise.all(wholePart).then((res) => console.log(`${res}`));
     }
     innerFunction();
-    setEffectDone(true)
+    setEffectDone(true);
   }, [address]);
 
   return (
@@ -119,22 +112,35 @@ const Container = styled.div`
 
 const TitleWrapper = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   margin-bottom: 15px;
 `;
 
 const Title = styled.div`
   width: 300px;
   font-size: 18px;
-  font-weight: bold;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 27px;
+  letter-spacing: 0px;
+  text-align: left;
+  color: #212121;
 `;
 
-const Address = styled.div``;
+const Address = styled.div`
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 21px;
+  letter-spacing: 0px;
+  text-align: left;
+  color: #212121;
+`;
 
 const Map = styled.div`
   width: 100%;
   height: 250px;
-  border: 1px solid #000000;
+  /* border: 1px solid #000000; */
 `;
 
 export default Location;

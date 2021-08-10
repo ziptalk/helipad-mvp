@@ -155,6 +155,10 @@ const Category = styled.div`
     margin-right: 24px;
   }
   margin-bottom: 54px;
+  @media ${({ theme }) => theme.mediaQueryOnDevice.notebookS} {
+    font-size: 13px;
+    line-height: 23px;
+  }
 `;
 const ListContainer = styled.div`
   display: flex;
@@ -163,13 +167,15 @@ const ListContainer = styled.div`
 `;
 
 const ItemBlock = styled.div`
-  padding: 30px 0;
+  padding: 25px 0;
   display: flex;
   &:first-child {
     border-top: 1px solid #eaeaea;
   }
   border-bottom: 1px solid #eaeaea;
-
+  @media ${({ theme }) => theme.mediaQueryOnDevice.notebookS} {
+    padding: 15px 0;
+  }
   .comingSoon {
     color: #a3a3a3;
     display: flex;
@@ -181,6 +187,7 @@ const ItemBlock = styled.div`
 const ContentBlock = styled.div`
   flex: 8;
   padding-right: 15%;
+  padding: 10px 0;
 `;
 const Title = styled.div`
   font-size: 46px;
@@ -189,13 +196,20 @@ const Title = styled.div`
   line-height: 69px;
   letter-spacing: -1px;
   text-align: left;
+
+  @media ${({ theme }) => theme.mediaQueryOnDevice.notebookS} {
+    font-size: 28px;
+    line-height: 50px;
+  }
 `;
 
 const SubTitle = styled.div`
   margin-right: 10%;
 `;
 const Content: any = styled.div`
-  padding: 30px 0;
+  padding: 1.4vw 0;
+  font-size: 18px;
+  line-height: 27px;
   display: ${(props: any) => props.clicked === false && "none"};
 `;
 const PlusButton = styled(PlusSvg)`

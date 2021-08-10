@@ -41,7 +41,7 @@ const LazyLoadingImg = ({ thumbnailUrl, width, height, children }: any) => {
         ref={imgRef}
         src={isLoad ? thumbnailUrl : PLACE_HOLDER}
         width={width ? width : "100%"}
-        height={height ? height : "100%"}
+        height={height ? height : "auto"}
         alt=""
       ></img>
     </Container>
@@ -51,7 +51,7 @@ const Container = styled.div`
   flex: 1;
   position: relative;
   z-index: 0;
-  .className {
+  .image {
     position: relative;
     z-index: 0;
   }
@@ -61,6 +61,6 @@ const Image: any = styled.img.attrs({
     props.isLoad ? props.thumbnailUrl : props.PLACE_HOLDER}`,
 })`
   width: ${(props: any) => (props.width ? props.width : "100%")};
-  height: ${(props: any) => (props.height ? props.height : "880px")};
+  height: ${(props: any) => (props.height ? props.height : "auto")};
 `;
 export default LazyLoadingImg;

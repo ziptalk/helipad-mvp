@@ -189,14 +189,7 @@ const Contact: React.FC<ContactFieldProps> = ({
       {/* <button onClick={copyFirebaseOnClick}>파베 복사</button> */}
       {isAgent ? (
         <Link to={`/process/adminprocess/${assetId}`}>
-          <Send
-            style={{
-              display: "flex",
-              alignItems: "center",
-              paddingLeft: "100px",
-            }}
-            onClick={escrowProcessOnClick}
-          >
+          <Send onClick={escrowProcessOnClick}>
             <div>Proceed to Escrow Process</div>
             <BsArrowRight
               style={{ marginLeft: "10px", width: "33px", height: "33px" }}
@@ -209,7 +202,8 @@ const Contact: React.FC<ContactFieldProps> = ({
             style={{
               display: "flex",
               alignItems: "center",
-              paddingLeft: "100px",
+              justifyContent: "center",
+              // paddingLeft: "100px",
             }}
             onClick={escrowProcessOnClick}
           >
@@ -335,7 +329,7 @@ const TextArea = styled.textarea`
 const Title = styled.div`
   padding-bottom: 15px;
   font-weight: 600;
-  font-size: 18px;
+  font-size: 16px;
   line-height: 26.55px;
   border-bottom: 1px solid #e9e9e9;
 `;
@@ -351,7 +345,7 @@ const Send = styled.button`
   // color: #ffffff;
   color: black;
   font-weight: 600;
-  font-size: 18px;
+  font-size: 16px;
   padding-top: 10px;
   padding-bottom: 10px;
   margin-bottom: 15px;

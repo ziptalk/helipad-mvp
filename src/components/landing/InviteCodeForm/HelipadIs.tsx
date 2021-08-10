@@ -44,7 +44,8 @@ const Container = styled.div`
   width: 100vw;
   max-width: 1904px;
   height: 100%;
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   margin: 100px 0px;
 `;
 const TextContainer = styled.div`
@@ -52,8 +53,8 @@ const TextContainer = styled.div`
   position: relative;
 `;
 const Text = styled.div`
-  width: 55%;
-  height: 80%;
+  width: 60%;
+
   position: absolute;
   top: 50%;
   left: 50%;
@@ -73,9 +74,13 @@ const Category = styled.div`
   font-weight: 600;
   line-height: 27px;
   letter-spacing: 4px;
-  color: #b69142;
+  color: #665a3f;
   ${Line} {
     margin-right: 24px;
+  }
+  @media ${({ theme }) => theme.mediaQueryOnDevice.notebookS} {
+    font-size: 13px;
+    line-height: 23px;
   }
 `;
 const Title = styled.div`
@@ -84,8 +89,11 @@ const Title = styled.div`
   font-weight: 600;
   line-height: 48px;
   letter-spacing: 0em;
-
   margin-bottom: 27px;
+  @media ${({ theme }) => theme.mediaQueryOnDevice.notebookS} {
+    font-size: 19px;
+    line-height: 30px;
+  }
 `;
 const ContentBlock = styled.ul``;
 const Content = styled.li`
@@ -96,24 +104,34 @@ const Content = styled.li`
   font-weight: 400;
   line-height: 27px;
   letter-spacing: 0px;
+
+  @media ${({ theme }) => theme.mediaQueryOnDevice.notebookS} {
+    font-size: 12px;
+    line-height: 17px;
+  }
 `;
 const ListContent = styled.li`
-  margin: 30px 0 30px 10px;
+  margin: 30px 10px 30px 30px;
 
   font-size: 18px;
   font-style: normal;
   font-weight: 400;
   line-height: 27px;
   letter-spacing: 0px;
+
+  @media ${({ theme }) => theme.mediaQueryOnDevice.notebookS} {
+    font-size: 12px;
+    line-height: 17px;
+    margin: 15px 5px 15px 5px;
+  }
 `;
-const ImageContainer: any = styled.div`
+const ImageContainer: any = styled.img.attrs((props: any) => ({
+  src: props.imgPath,
+}))`
   flex: 1;
   /* width: 952px;
   height: 880px; */
   width: 100%;
-  height: 880px;
-
-  background: url(${(props: any) => props.imgPath});
-  background-size: cover;
+  height: auto;
 `;
 export default HelipadIs;
