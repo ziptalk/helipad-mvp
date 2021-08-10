@@ -3,7 +3,8 @@ const deviceSizes = {
   notebookS: "1024px",
 };
 const mediaQueryOnDevice = {
-  notebookL: "only screen and (min-width: 2200px) and (max-width: 2844px)",
+  notebookXL: "only screen and (min-width: 2501px)",
+  notebookL: "only screen and (min-width: 1905px) and (max-width: 2500px)",
   notebookM: "only screen and (min-width: 1483px) and (max-width: 1904px)",
   notebookS: "only screen and (min-width: 1020px) and (max-width: 1482px)",
 };

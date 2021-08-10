@@ -137,7 +137,7 @@ const AdminMypagePresenter = ({
 };
 const Container = styled.div`
   margin: 0 auto;
-  max-width: 80%;
+  max-width: 1904px;
   width: 80vw;
   height: 110vh;
 `;

@@ -39,7 +39,7 @@ const Container = styled.div`
   width: 100%;
   background-color: rgba(0, 0, 0, 0.3);
   /* max-width: 1904px; */
-  height: 100vh;
+  height: 90vh;
   position: absolute;
   top: 0px;
   z-index: 1;
@@ -55,8 +55,11 @@ const SubContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-
+  padding-left: 3vw;
   padding-bottom: 250px;
+  @media ${({ theme }) => theme.mediaQueryOnDevice.notebookM} {
+    width: 60%;
+  }
   @media ${({ theme }) => theme.mediaQueryOnDevice.notebookS} {
     width: 60%;
   }

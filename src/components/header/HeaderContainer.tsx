@@ -18,10 +18,10 @@ const HeaderContainer = ({ isLandingPage }: any) => {
     mypageOrRegister: "",
     signOutOrSignIn: "",
   });
-  const [globalIconCategory, setGlobalIconCategory] = useState({
-    korean: DropDownMenu.KOREAN,
-    english: DropDownMenu.ENGLISH,
-  });
+  const [globalIconCategory, setGlobalIconCategory] = useState(
+    DropDownMenu.KOREAN
+    // english: DropDownMenu.ENGLISH,
+  );
   const [scrollMove, setScrollMove] = useState(false);
 
   useEffect(() => {
@@ -44,7 +44,7 @@ const HeaderContainer = ({ isLandingPage }: any) => {
     // console.log("Scroll event");
     // console.log("window.scrollY", window.scrollY);
     // console.log("window.pageYOffset", window.pageYOffset);
-    if (window.scrollY > 10) {
+    if (window.scrollY > 20) {
       setScrollMove(true);
     } else {
       setScrollMove(false);
@@ -70,6 +70,7 @@ const HeaderContainer = ({ isLandingPage }: any) => {
       isLandingPage={isLandingPage}
       userIconCategory={userIconCategory}
       globalIconCategory={globalIconCategory}
+      setGlobalIconCategory={setGlobalIconCategory}
       onClickUserIcon={onClickUserIcon}
     />
   );

@@ -16,13 +16,22 @@ const FooterPresenter = () => {
       </Category>
       <SocialCategory>
         <Social>
-          <FontAwesomeIcon icon={faFacebookF} />
+          <FontAwesomeIcon
+            style={{ width: "10px", height: "20px" }}
+            icon={faFacebookF}
+          />
         </Social>
         <Social>
-          <FontAwesomeIcon icon={faYoutube} />
+          <FontAwesomeIcon
+            style={{ width: "22px", height: "15px" }}
+            icon={faYoutube}
+          />
         </Social>
         <Social>
-          <FontAwesomeIcon icon={faInstagram} />
+          <FontAwesomeIcon
+            style={{ width: "22px", height: "22px" }}
+            icon={faInstagram}
+          />
         </Social>
       </SocialCategory>
       <CopyRight>Copyright © 2021. Helipad. All rights reserved.</CopyRight>
@@ -76,7 +85,10 @@ const SocialCategory = styled.div`
   display: flex;
   justify-content: space-between;
 `;
-const Social = styled.div``; // social로 연결 ? => 우선 svg로 대체
+const Social = styled.div`
+  width: 10px;
+  height: 20px;
+`; // social로 연결 ? => 우선 svg로 대체
 const CopyRight = styled.div`
   opacity: 0.5;
 

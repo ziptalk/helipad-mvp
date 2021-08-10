@@ -33,10 +33,11 @@
   color: #61dafb;
 }
 .container {
-  max-width: 1904px;
-  margin: 0 auto;
+  /* max-width: 1904px; */
+  /* margin: 0 auto; */
 }
 .routingContainer {
+  margin: 0 auto;
 }
 
 @keyframes App-logo-spin {

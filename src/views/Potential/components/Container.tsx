@@ -243,6 +243,5 @@ const MypageContainer = () => {
 const Container = styled.div`
   background: #f2f2f2;
   width: 100%;
-  max-width: 1904px;
 `;
 export default MypageContainer;
