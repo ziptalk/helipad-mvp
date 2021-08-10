@@ -74,8 +74,12 @@ const HeaderPresenter = ({
                   signOutOrSignIn={globalIconCategory.english}
                 />
               </DropDownContainer>
-              <Link to='/auth/contact'>
-                <ContactUs style={{marginTop:"10px"}} scrollMove={scrollMove} color={headerMode} />
+              <Link to="/auth/contact">
+                <ContactUs
+                  style={{ marginTop: "10px" }}
+                  scrollMove={scrollMove}
+                  color={headerMode}
+                />
               </Link>
             </IconBlock>
           ) : (
@@ -99,8 +103,12 @@ const HeaderPresenter = ({
                   signOutOrSignIn={globalIconCategory.english}
                 />
               </DropDownContainer>
-              <Link to='/auth/contact'>
-                <ContactUs style={{marginTop:"10px"}} scrollMove={scrollMove} color={headerMode} />
+              <Link to="/auth/contact">
+                <ContactUs
+                  style={{ marginTop: "10px" }}
+                  scrollMove={scrollMove}
+                  color={headerMode}
+                />
               </Link>
             </IconBlock>
           )}
@@ -121,31 +129,48 @@ const Container: any = styled.div`
   position: relative;
   top: 0px;
   z-index: 3;
+  background-color: white;
 
   background-color: ${(props: any) =>
-    (props.color === "inviteCodeForm" || props.color === "neighborhoodList" || props.color === "contactForm") &&
+    (props.color === "inviteCodeForm" ||
+      props.color === "neighborhoodList" ||
+      props.color === "contactForm") &&
     "transparent"};
   position: ${(props: any) =>
-    (props.color === "inviteCodeForm" || props.color === "neighborhoodList" || props.color === "contactForm") &&
+    (props.color === "inviteCodeForm" ||
+      props.color === "neighborhoodList" ||
+      props.color === "contactForm") &&
     "fixed"};
   top: ${(props: any) =>
-    (props.color === "inviteCodeForm" || props.color === "neighborhoodList" || props.color === "contactForm") &&
+    (props.color === "inviteCodeForm" ||
+      props.color === "neighborhoodList" ||
+      props.color === "contactForm") &&
     "0px"};
   text-align: ${(props: any) =>
-    (props.color === "inviteCodeForm" || props.color === "neighborhoodList" || props.color === "contactForm") &&
+    (props.color === "inviteCodeForm" ||
+      props.color === "neighborhoodList" ||
+      props.color === "contactForm") &&
     "center"};
   z-index: ${(props: any) =>
-    (props.color === "inviteCodeForm" || props.color === "neighborhoodList" || props.color === "contactForm") &&
+    (props.color === "inviteCodeForm" ||
+      props.color === "neighborhoodList" ||
+      props.color === "contactForm") &&
     3};
   max-width: ${(props: any) =>
-    (props.color === "inviteCodeForm" || props.color === "neighborhoodList" || props.color === "contactForm") &&
+    (props.color === "inviteCodeForm" ||
+      props.color === "neighborhoodList" ||
+      props.color === "contactForm") &&
     "1904px"};
+
+  @media ${({ theme }) => theme.mediaQueryOnDevice.notebookS} {
+    height: 80px;
+  }
 
   background-color: ${(props: any) => props.scrollMove && "white"};
   color: ${(props: any) => props.scrollMove && "#212121"};
   position: ${(props: any) => props.scrollMove && "fixed"};
   top: ${(props: any) => props.scrollMove && "0px"};
-  transition: 0.3s ease-in-out;
+  transition: all ease-in-out 0.5s;
 `;
 
 const CategoryContainer = styled.div`
@@ -162,7 +187,7 @@ const BlackLogo: any = styled(BlackLogoSvg)`
   position: relative;
   z-index: 1;
   fill: ${(props: any) =>
-    (props.color === "inviteCodeForm" || props.color === "contactForm")
+    props.color === "inviteCodeForm" || props.color === "contactForm"
       ? "white"
       : props.color === "neighborhoodList"
       ? "black"
@@ -171,6 +196,7 @@ const BlackLogo: any = styled(BlackLogoSvg)`
 
   @media ${({ theme }) => theme.mediaQueryOnDevice.notebookS} {
     margin-left: 30px;
+    width: 150px;
   }
 `;
 const About: any = styled.div`
@@ -185,12 +211,15 @@ const About: any = styled.div`
   color: ${(props: any) =>
     props.color === "inviteCodeForm"
       ? "white"
-      : (props.color === "neighborhoodList" || props.color === "contactForm")
+      : props.color === "neighborhoodList" || props.color === "contactForm"
       ? "white"
       : "black"};
   color: ${(props: any) => props.scrollMove && "#212121"};
   position: relative;
   z-index: 1;
+  @media ${({ theme }) => theme.mediaQueryOnDevice.notebookS} {
+    font-size: 15px;
+  }
 `;
 const Neighborhood: any = styled(About)``;
 const FAQ: any = styled(About)``;
@@ -208,7 +237,7 @@ const BlackUser: any = styled(BlackUserSvg)`
   stroke: ${(props: any) =>
     props.color === "inviteCodeForm"
       ? "white"
-      : (props.color === "neighborhoodList" || props.color === "contactForm")
+      : props.color === "neighborhoodList" || props.color === "contactForm"
       ? "white"
       : "black"};
   stroke: ${(props: any) => props.scrollMove && "#212121"};
@@ -216,6 +245,10 @@ const BlackUser: any = styled(BlackUserSvg)`
   &:hover {
     cursor: pointer;
     transform: scale(1.1);
+  }
+
+  @media ${({ theme }) => theme.mediaQueryOnDevice.notebookS} {
+    width: 30px;
   }
 `;
 const BlackGlobal: any = styled(BlackGlobalSvg)`
@@ -226,7 +259,7 @@ const BlackGlobal: any = styled(BlackGlobalSvg)`
   stroke: ${(props: any) =>
     props.color === "inviteCodeForm"
       ? "white"
-      : (props.color === "neighborhoodList" || props.color === "contactForm")
+      : props.color === "neighborhoodList" || props.color === "contactForm"
       ? "white"
       : "black"};
   stroke: ${(props: any) => props.scrollMove && "#212121"};
@@ -234,6 +267,9 @@ const BlackGlobal: any = styled(BlackGlobalSvg)`
   &:hover {
     cursor: pointer;
     transform: scale(1.1);
+  }
+  @media ${({ theme }) => theme.mediaQueryOnDevice.notebookS} {
+    width: 30px;
   }
 `;
 const ContactUs: any = styled(ContactUsSvg)`
@@ -244,7 +280,7 @@ const ContactUs: any = styled(ContactUsSvg)`
   stroke: ${(props: any) =>
     props.color === "inviteCodeForm"
       ? "white"
-      : (props.color === "neighborhoodList" || props.color === "contactForm")
+      : props.color === "neighborhoodList" || props.color === "contactForm"
       ? "white"
       : "black"};
   stroke: ${(props: any) => props.scrollMove && "#212121"};
@@ -252,6 +288,9 @@ const ContactUs: any = styled(ContactUsSvg)`
   &:hover {
     cursor: pointer;
     transform: scale(1.1);
+  }
+  @media ${({ theme }) => theme.mediaQueryOnDevice.notebookS} {
+    width: 22px;
   }
 `;
 

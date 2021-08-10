@@ -2,7 +2,7 @@ import styled from "styled-components";
 import HeaderPresenter from "./HeaderPresenter";
 import MainPresenter from "./MainPresenter";
 import ComingSoonPresenter from "./ComingSoonPresenter";
-import ContactPresenter from "./ContactPresenter";
+import ContactPresenter from "../../../../components/ContactPresenter";
 import FooterPresenter from "../../../../components/FooterPresenter";
 import NeighborhoodItem from "../../../../model/NeighborhoodItem";
 
@@ -40,8 +40,13 @@ const MainHeaderBlock = styled.div`
   width: 80vw;
   display: flex;
   align-items: center;
-  height: 286px;
-  padding-top: 30px;
+
+  padding-top: 40px;
+  margin-bottom: 40px;
+  @media ${({ theme }) => theme.mediaQueryOnDevice.notebookS} {
+    padding-top: 30px;
+    margin-bottom: 20px;
+  }
 `;
 const MainTitle = styled.div`
   font-size: 60px;
@@ -50,7 +55,10 @@ const MainTitle = styled.div`
   line-height: 90px;
   letter-spacing: -2px;
   text-align: left;
-  margin-left: 212px;
+  @media ${({ theme }) => theme.mediaQueryOnDevice.notebookS} {
+    font-size: 30px;
+    line-height: 60px;
+  }
 `;
 const MainSubTitle = styled.div`
   font-size: 28px;
@@ -61,5 +69,9 @@ const MainSubTitle = styled.div`
   text-align: left;
   margin-left: 45px;
   padding-top: 17px;
+  @media ${({ theme }) => theme.mediaQueryOnDevice.notebookS} {
+    font-size: 16px;
+    line-height: 26px;
+  }
 `;
 export default NeighborhoodPresenter;

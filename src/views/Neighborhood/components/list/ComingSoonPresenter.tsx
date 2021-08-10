@@ -18,7 +18,11 @@ const ComingSoonPresenter = () => {
 const Container = styled.div`
   width: 100vw;
   max-width: 1904px;
-  margin-top: 103px;
+  margin-top: 50px;
+
+  @media ${({ theme }) => theme.mediaQueryOnDevice.notebookS} {
+    margin-top: 30px;
+  }
 `;
 const Title = styled.div`
   font-size: 60px;
@@ -28,6 +32,11 @@ const Title = styled.div`
   letter-spacing: -2px;
   text-align: center;
   margin-bottom: 85px;
+  @media ${({ theme }) => theme.mediaQueryOnDevice.notebookS} {
+    font-size: 40px;
+    line-height: 60px;
+    margin-bottom: 50px;
+  }
 `;
 const Content = styled.div`
   margin: 0 60px;
@@ -60,6 +69,10 @@ const Image: any = styled.div`
   text-align: center;
   color: white;
   padding: 25%;
+  @media ${({ theme }) => theme.mediaQueryOnDevice.notebookS} {
+    font-size: 40px;
+    line-height: 60px;
+  }
 `;
 
 // const ImageName = styled.div`

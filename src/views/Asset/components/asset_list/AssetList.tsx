@@ -171,9 +171,9 @@ const AssetList: React.FC<AssetListProperties> = ({ history }: any) => {
       <AssetContainer>
         <AssetTitle>Beverly Hills, CA Homes for Sale & Real Estate</AssetTitle>
         <PriceControl>
-          <div style={{ paddingTop: "20px", paddingLeft: "30px" }}>
+          <PriceTitle style={{ paddingTop: "20px", paddingLeft: "30px" }}>
             Purchase price
-          </div>
+          </PriceTitle>
           {/* <RangeSliders /> */}
           <DoubleRangeSlider history={history.location.state} />
         </PriceControl>
@@ -192,19 +192,23 @@ const Container = styled.div`
   max-width: 1904px;
   width: 100vw;
   height: 100%;
-  display: flex;
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
   margin: 0 auto;
+  @media ${({ theme }) => theme.mediaQueryOnDevice.notebookS} {
+    grid-template-columns: 1.3fr 1.2fr;
+  }
 `;
 
 const MapContainer = styled.div`
-  width: calc(100% - 40%);
-  align-items: right;
-  margin-left: 0px;
+  /* width: calc(100% - 40%); */
+  width: 100%;
+
   // width: 60%;
 `;
 
 const AssetContainer = styled.div`
-  width: 40%;
+  width: 100%;
   // width: 900px;
   // width: 40%;
   // background-color: #61dafb;
@@ -212,74 +216,6 @@ const AssetContainer = styled.div`
   background-color: #f4f4f4;
   overflow-y: scroll;
   z-index: 0;
-`;
-
-const Category = styled.div`
-  display: flex;
-  justify-content: center;
-  font-weight: 300;
-  font-size: 24px;
-`;
-const InvestmentBlock = styled.button`
-  background: none;
-  border: none;
-  outline: none;
-  padding: 0 100px;
-  font-size: 24px;
-  font-weight: 300;
-  line-height: 30.29px;
-  cursor: pointer;
-`;
-
-const Selected = styled.div`
-  font-weight: bold;
-`;
-const Unselected = styled.div`
-  font-weight: 300;
-`;
-
-const Divider = styled.div``;
-const LivingBlock = styled.button`
-  background: none;
-  border: none;
-  outline: none;
-  padding: 0 100px;
-  font-size: 24px;
-  font-weight: 300;
-  line-height: 30.29px;
-  cursor: pointer;
-  &:focus {
-    font-weight: bold;
-  }
-`;
-
-const SortBlock = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-  align-items: center;
-  margin-bottom: 10px;
-`;
-const ArrowTitle = styled.div`
-  font-size: 18px;
-  font-weight: 500;
-  line-height: 22.71px;
-  margin-right: 10px;
-`;
-const ArrowBlock = styled.div`
-  padding: 5px 0;
-
-  &:focus {
-    color: red;
-  }
-`;
-
-const AssetListGrid = styled.div`
-  width: 100%;
-  display: grid;
-  grid-template-columns: 470px 470px 470px;
-  grid-gap: 15px;
 `;
 
 const AssetTitle = styled.div`
@@ -290,8 +226,15 @@ const AssetTitle = styled.div`
   color: white;
   text-align: center;
   padding-top: 10px;
+  @media ${({ theme }) => theme.mediaQueryOnDevice.notebookS} {
+    font-size: 18px;
+  }
 `;
-
+const PriceTitle = styled.div`
+  @media ${({ theme }) => theme.mediaQueryOnDevice.notebookS} {
+    font-size: 16px;
+  }
+`;
 const PriceControl = styled.div`
   width: 100%;
   height: 200px;

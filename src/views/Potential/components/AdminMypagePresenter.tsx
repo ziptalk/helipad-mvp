@@ -121,8 +121,14 @@ const AdminMypagePresenter = ({
           Requested helipad
           <br /> contact date
         </Title>
-        <Title id="initial">Helipad initial contact date</Title>
-        <Title id="accepted">Offer accepted date</Title>
+        <Title id="initial">
+          Helipad initial <br />
+          contact date
+        </Title>
+        <Title id="accepted">
+          Offer accepted <br />
+          date
+        </Title>
         <Title id="escrow">In Escrow</Title>
       </TitleContainer>
       {renderContentBySelectedCategory(selectedCategory)}
@@ -144,6 +150,9 @@ const Header = styled.div`
   line-height: 72px;
   letter-spacing: 0em;
   text-align: center;
+  @media ${({ theme }) => theme.mediaQueryOnDevice.notebookS} {
+    font-size: 36px;
+  }
 `;
 
 const CategoryContainer = styled.div`
@@ -184,38 +193,48 @@ const TitleContainer = styled.div`
   border-top: 1px solid black;
   border-bottom: 1px solid black;
   margin-bottom: 10px;
+  @media ${({ theme }) => theme.mediaQueryOnDevice.notebookS} {
+    height: 50px;
+  }
+  
   #no {
-    width: 64.39px;
+    max-width: 13%;
+    /* width: 64.39px; */
     height: 22px;
       min-width: 70px;
   }
   #name {
-    width: 169.4px;
+    /* width: 169.4px; */
+    max-width: 13%;
     height: 22px;
       min-width: 100px;
   }
   #listing {
-    width: 122.84px;
+    /* width: 122.84px; */
+    max-width: 13%;
     height: 22px;
       min-width: 100px;
   #request {
-    width: 179.31px;
+    /* width: 179.31px; */
+    max-width: 13%;
     height: 44px;
       min-width: 180px;
       
   }
   #initial {
-    width: 163.46px;
+    /* width: 163.46px; */
+    max-width: 13%;
     height: 44px;
       min-width: 180px;
   }
   #accepted {
-    width: 163.46px;
+    max-width: 13%;
     height: 44px;
       min-width: 180px;
   }
   #escrow {
-    width: 122.84px;
+    /* width: 122.84px; */
+    max-width: 13%;
     height: 22px;
       min-width: 180px;
   }
@@ -229,6 +248,10 @@ const Title = styled.div`
   line-height: 22px;
   letter-spacing: 0em;
   max-width: 190px;
+  @media ${({ theme }) => theme.mediaQueryOnDevice.notebookS} {
+    font-size: 13px;
+    line-height: 15px;
+  }
 `;
-
+const PresenterContainer = styled.div``;
 export default AdminMypagePresenter;
