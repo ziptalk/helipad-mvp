@@ -10,7 +10,7 @@ import RangeSlider, {
   RangeSliderProps,
 } from "../asset_slider";
 
-const DoubleRangeSlider = ({ history }: any) => {
+const DoubleRangeSlider = ({ assetData }: any) => {
   const [assets, setAssets] = useState<Asset[]>([]);
 
   const [sliderWidth, setSliderWidth] = useState(0);
@@ -27,35 +27,35 @@ const DoubleRangeSlider = ({ history }: any) => {
   const [x, setX] = useState(10000000);
 
   useEffect(() => {
-    // console.log(x)
     let tmpAsset: Asset[] = [];
     fullAssets.map((asset) => {
       if (asset.price <= x) {
         tmpAsset.push(asset);
-        // console.log(asset)
       }
     });
+    // localStorage.setItem('xValue', x.toString())
+    // console.log(localStorage.getItem('xValue'))
     setAssets(tmpAsset);
-    // console.log(assets.length)
   }, [x]);
 
   useEffect(() => {
     async function wholeFunction() {
-      GetAsset.getAssetListByNeighborhood(history).then((value) => {
-        console.log(value);
-        setAssets(value);
-        setFullAssets(value);
-        console.log("data", value);
+      // GetAsset.getAssetListByNeighborhood(history).then((value) => {
+        console.log(assetData);
+
+        setAssets(assetData);
+        setFullAssets(assetData);
+        console.log("data", assetData);
 
         var priceList: number[] = [];
 
-        value.map((values) => {
-          priceList.push(values.price);
+        assetData.map((assetDatas: any) => {
+          priceList.push(assetDatas.price);
         });
 
         var maxValue = Math.max.apply(null, priceList);
         var minValue = Math.min.apply(null, priceList);
-        var stepValue = Math.floor((maxValue - minValue) / 200);
+        var stepValue = Math.floor((maxValue - minValue) / 100);
         var xValue = (maxValue + minValue) / 2;
 
         setCurrentMax(maxValue);
@@ -63,58 +63,10 @@ const DoubleRangeSlider = ({ history }: any) => {
         setMinValueBetween(stepValue);
         // setX(xValue)
         setX(maxValue);
-
-        let assetStateList = [
-          {
-            assetId: "",
-            assetAddress: "",
-            assetLat: 1000,
-            assetLng: 1000,
-            // assetLabel: "1,234,567,890,001"
-            assetLabel: "996K",
-          },
-        ];
-
-        async function forSettingLocation() {
-          // setLocationsDone(true);
-          let id = 1;
-          const listSetting = value.map(async function (asset) {
-            let price = asset.price / 1000; //won -> dollar
-            let priceLabel = "";
-            if (1000000 > price && price >= 1000) {
-              priceLabel =
-                (price / 1000)
-                  .toFixed(0)
-                  .toString()
-                  .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",") + "K";
-            } else if (price >= 1000000) {
-              priceLabel =
-                (price / 1000000)
-                  .toFixed(1)
-                  .toString()
-                  .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",") + "M";
-            } else {
-              priceLabel = price.toString();
-            }
-            assetStateList = assetStateList.concat({
-              assetId: asset.id,
-              assetAddress: asset.buildingInformation.address,
-              assetLat: 0,
-              assetLng: 0,
-              assetLabel: priceLabel,
-            });
-            id++;
-            return id;
-          });
-
-          await Promise.all(listSetting).then((res) => console.log(`${res}`));
-        }
-
-        forSettingLocation();
-      });
+      // }
     }
     wholeFunction();
-  }, []);
+  }, [assetData]);
 
   const handleChange = (
     position: RangeSliderPosition,

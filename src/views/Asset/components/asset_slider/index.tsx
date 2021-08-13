@@ -65,9 +65,9 @@ class RangeSlider extends React.Component<RangeSliderProps, RangeSliderState> {
     let bottom: number = ((this.y - yMin) / (yMax - yMin)) * 100;
     let left: number = ((this.x - xMin) / (xMax - xMin)) * 100;
     // // let left: number = 100;
-    console.log("valuecheck")
+    // console.log("valuecheck")
     // console.log(xMin)
-    console.log(this.x)
+    // console.log(this.x)
 
     if (bottom > 100) {
       bottom = 100;
@@ -117,10 +117,10 @@ class RangeSlider extends React.Component<RangeSliderProps, RangeSliderState> {
   }
 
   private getDragPosition = ({ x, y }: RangeSliderPosition) => {
-    console.log("start.x")
-    console.log(this.start.x)
+    // console.log("start.x")
+    // console.log(this.start.x)
     return {
-      x: x + (this.start.x * 1.1) - this.offset.x, // 여기서 비율 조정으로 오류 야매로 수정
+      x: x + this.start.x * 1.1 - this.offset.x, // 여기서 비율 조정으로 오류 야매로 수정
       y: this.offset.y + this.start.y - y,
     };
   };
@@ -348,7 +348,7 @@ class RangeSlider extends React.Component<RangeSliderProps, RangeSliderState> {
     let valuemax = xMax;
     let valuemin = xMin;
     // let valuenow = this.x + (xMin?xMin:0);
-    let valuenow = this.x
+    let valuenow = this.x;
 
     /* istanbul ignore else */
     if (axis === "x") {
@@ -425,15 +425,29 @@ class RangeSlider extends React.Component<RangeSliderProps, RangeSliderState> {
               ) : (
                 <>
                   {valuenow > (xMax - xMin) / 2 ? (
-                    <div
-                      style={{
-                        fontSize: "15px",
-                        paddingTop: "22px",
-                        marginLeft: "-86px",
-                      }}
-                    >
-                      ${(valuenow)?.toLocaleString("en-AU")}
-                    </div>
+                    <>
+                      {valuenow > xMax ? (
+                        <div
+                          style={{
+                            fontSize: "15px",
+                            paddingTop: "22px",
+                            marginLeft: "-75px",
+                          }}
+                        >
+                          ${xMax?.toLocaleString("en-AU")}
+                        </div>
+                      ) : (
+                        <div
+                          style={{
+                            fontSize: "15px",
+                            paddingTop: "22px",
+                            marginLeft: "-86px",
+                          }}
+                        >
+                          ${valuenow?.toLocaleString("en-AU")}
+                        </div>
+                      )}
+                    </>
                   ) : (
                     <div
                       style={{
@@ -442,7 +456,7 @@ class RangeSlider extends React.Component<RangeSliderProps, RangeSliderState> {
                         marginLeft: "-6px",
                       }}
                     >
-                      ${(valuenow)?.toLocaleString("en-AU")}
+                      ${valuenow?.toLocaleString("en-AU")}
                     </div>
                   )}
                 </>

@@ -35,7 +35,7 @@ export class MapContainer extends React.Component {
         {this.props.data[1] != undefined ? (
           <Map
             google={this.props.google}
-            zoom={12}
+            zoom={11}
             style={mapStyles}
             initialCenter={{
               lat: this.props.data[1].assetLat,
