@@ -61,25 +61,25 @@ export default class BuildingInformation {
     );
   }
 
-  toMap(): Map<string, any> {
-    let map = new Map<string, any>();
-    map.set(COLUMNS.THUMBNAIL, this.thumbnail);
-    map.set(COLUMNS.ADDRESS, this.address);
-    map.set(COLUMNS.STREET, this.street);
-    map.set(COLUMNS.N_BED_ROOMS, this.nBedrooms);
-    map.set(COLUMNS.N_BATH_ROOMS, this.nBathrooms);
-    map.set(COLUMNS.N_ROOMS, this.nRooms);
-    map.set(COLUMNS.SQUARE, this.square);
-    map.set(COLUMNS.COUNTY, this.county);
-    map.set(COLUMNS.BUILDING_NAME, this.buildingName);
-    map.set(COLUMNS.FLOOR, this.floor);
-    map.set(COLUMNS.STORIES, this.stories);
-    map.set(COLUMNS.RESIDENCES, this.residences);
-    map.set(COLUMNS.PET_POLICY, this.petPolicy);
-    map.set(COLUMNS.YEAR_BUILT, this.yearBuilt);
-    map.set(COLUMNS.BUILDING_AGE, this.buildingAge);
-    map.set(COLUMNS.BUILDING_TYPE, this.buildingType);
-    map.set(COLUMNS.VIRTUAL_TOUR, this.virtualTour);
-    return map;
-  }
+  // toMap(): Map<string, any> {
+  //   let map = new Map<string, any>();
+  //   map.set(COLUMNS.THUMBNAIL, this.thumbnail);
+  //   map.set(COLUMNS.ADDRESS, this.address);
+  //   map.set(COLUMNS.STREET, this.street);
+  //   map.set(COLUMNS.N_BED_ROOMS, this.nBedrooms);
+  //   map.set(COLUMNS.N_BATH_ROOMS, this.nBathrooms);
+  //   map.set(COLUMNS.N_ROOMS, this.nRooms);
+  //   map.set(COLUMNS.SQUARE, this.square);
+  //   map.set(COLUMNS.COUNTY, this.county);
+  //   map.set(COLUMNS.BUILDING_NAME, this.buildingName);
+  //   map.set(COLUMNS.FLOOR, this.floor);
+  //   map.set(COLUMNS.STORIES, this.stories);
+  //   map.set(COLUMNS.RESIDENCES, this.residences);
+  //   map.set(COLUMNS.PET_POLICY, this.petPolicy);
+  //   map.set(COLUMNS.YEAR_BUILT, this.yearBuilt);
+  //   map.set(COLUMNS.BUILDING_AGE, this.buildingAge);
+  //   map.set(COLUMNS.BUILDING_TYPE, this.buildingType);
+  //   map.set(COLUMNS.VIRTUAL_TOUR, this.virtualTour);
+  //   return map;
+  // }
 }

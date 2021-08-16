@@ -85,8 +85,11 @@ export default class AssetService {
   private static async getAssetDocumentId(assetId: string): Promise<string> {
     let assetDocument = await assetStore.where("id", "==", assetId).get();
     if (assetDocument.size === 0) {
-      throw Error("Cannot find asset id " + assetId);
+      // throw Error("Cannot find asset id " + assetId);
+      // alert("Cannot find asset id " + assetId)
+      return assetId
+    }else{
+      return assetDocument.docs[0].id;
     }
-    return assetDocument.docs[0].id;
   }
 }
