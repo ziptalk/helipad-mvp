@@ -68,7 +68,8 @@ const AssetDetail = ({ match }: RouteComponentProps<MatchParams>) => {
                 address: res[i].address.full,
                 street: res[i].address.streetName,
                 nBedrooms: res[i].property.bedrooms,
-                nBathrooms: res[i].property.bathrooms,
+                // nBathrooms: res[i].property.bathrooms,
+                nBathrooms: 2,
                 nRooms: 3,
                 square: res[i].property.area,
                 county: res[i].geo.county, //...state? ex)"texas"
