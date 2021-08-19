@@ -29,7 +29,7 @@ const LoginContainer = () => {
       .then((result) => {
         onLoginSuccess({ user: result.user });
         setLoginResult(true);
-        history.push("/asset/neighborhood");
+        history.push("/asset/assetList");
         window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
       })
       .catch((error) => {

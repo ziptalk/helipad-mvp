@@ -1,5 +1,6 @@
 import React, { ChangeEvent, useState } from "react";
 import styled from "styled-components";
+import "./CheckField.css";
 
 type CheckboxFieldProps = {
   name: string;
@@ -14,7 +15,7 @@ const CheckField = ({ name, value, onChange }: CheckboxFieldProps) => {
   return (
     <Container>
       <Title htmlFor={name}>{value}</Title>
-      <input
+      <Label2
         id={name}
         type="checkbox"
         name={name}
@@ -33,6 +34,7 @@ const Container = styled.div`
   input {
     width: 24px;
     height: 24px;
+    border: 1px solid #EAEAEA;
   }
 `;
 const Title = styled.label`
@@ -51,6 +53,16 @@ const Label = styled.label`
 
   ${Title} {
     padding-left: 50px;
+  }
+`;
+
+const Label2 = styled.input.attrs({
+  type: "checkbox",
+})`
+  border: 1px solid #EAEAEA;
+
+  &:checked {
+    background-color: skyblue;
   }
 `;
 export default CheckField;

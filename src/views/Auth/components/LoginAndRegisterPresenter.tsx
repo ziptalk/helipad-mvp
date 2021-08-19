@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import LoginContainer from "./login/LoginContainer";
 import RegisterContainer from "./register/RegisterContainer";
+import RegisterContainer2 from "./register/RegisterContainer2";
+
 import { Link } from "react-router-dom";
 enum SelectedCategory {
   TITLE = "Login/Register",
@@ -48,19 +50,24 @@ const LoginAndRegisterPresenter = ({
         throw new Error("Invalid item");
     }
   };
-  return (
-    <Container selectedCategory={selectedCategory}>
-      <FormContainer>
-        <HeaderContainer>
-          <Title>{SelectedCategory.TITLE}</Title>
-          {renderSelectedItem()}
-        </HeaderContainer>
-        {selectedCategory === SelectedCategory.LOGIN && <LoginContainer />}
-        {selectedCategory === SelectedCategory.REGISTER && (
-          <RegisterContainer />
-        )}
-      </FormContainer>
-    </Container>
+  return (<>
+      {selectedCategory != SelectedCategory.REGISTER ? 
+        <Container selectedCategory={selectedCategory}>
+        <FormContainer>
+          <HeaderContainer>
+            <Title>{SelectedCategory.TITLE}</Title>
+            {renderSelectedItem()}
+          </HeaderContainer>
+          {selectedCategory === SelectedCategory.LOGIN && <LoginContainer />}
+          {selectedCategory === SelectedCategory.REGISTER && (
+            <RegisterContainer />
+          )}
+        </FormContainer>
+        </Container>
+        : <Container style={{backgroundColor:"black"}}>
+            <RegisterContainer2 />
+        </Container>}
+      </>
   );
 };
 // height: ${(props: any) =>
