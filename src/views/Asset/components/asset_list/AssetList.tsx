@@ -16,6 +16,11 @@ import RangeSliders from "./PriceRangeSlider";
 import DoubleRangeSlider from "./DoubleRangeSlider";
 import { AuthContext } from "../../../../router/config/Provider/AuthProvider";
 import $ from "jquery";
+import useCollapse from "react-collapsed";
+import { BsChevronDown, BsArrowRight, BsChevronUp } from "react-icons/bs";
+import { GoCheck } from "react-icons/go";
+import { Checkbox } from "@material-ui/core";
+
 
 Geocode.setApiKey("AIzaSyAHHYSWgQGMPHXYRqCMMUSlxTvqrDepyeA");
 Geocode.setLanguage("en");
@@ -57,6 +62,23 @@ const AssetList: React.FC<AssetListProperties> = ({ history }: any) => {
   const [fullAsset, setFullAsset] = useState<Asset[]>([]);
   const [nowPrice, setNowPrice] = useState(100000000);
   const [searchValue, setSearchValue] = useState('');
+  const [moreOption, setMoreOption] = useState(false);
+  const [isExpanded, setExpanded] = useState(false);
+  const { getCollapseProps, getToggleProps } = useCollapse({ isExpanded });
+  
+  const [hoaListValue, setHoaListValue] = useState('Any');
+  const [parkingSpots, setParkingSpots] = useState('Any');
+  const [squareLeft, setSquareLeft] = useState('Any');
+  const [squareRight, setSquareRight] = useState('Any');
+  const [lotSizeLeft, setLotSizeLeft] = useState('Any');
+  const [lotSizeRight, setLotSizeRight] = useState('Any');
+  const [daysOn, setDaysOn] = useState('Any');
+
+  const hoaList = ['Any', 'etc']
+  const parkingSpotsList = ['1+', '2+', '3+', '4+', '5+']
+  const squareFeetList = ['500', '1000', '1500', '2000', '2500', '3000', '3000+']
+  const lotSizeList = ['0 soft', '1,000 soft', '2,000 soft', '3,000 soft', '3,000+ soft']
+  const daysOnList = ['1 Day', '2 Days', '3 Days', '4 Days', '5+ Days']
 
   console.log(assets);
 
@@ -304,16 +326,52 @@ const AssetList: React.FC<AssetListProperties> = ({ history }: any) => {
   const setDescending = () => {
     setAscend(false);
   };
+
+  const handleHoa = (value: string) => {
+      setHoaListValue(value)
+      setExpanded(false)
+  };
+
+  const handleParkingSpots = (value: string) => {
+      setParkingSpots(value)
+      setExpanded(false)
+  };
+
+  const handleSquareLeft = (value: string) => {
+      setSquareLeft(value)
+      setExpanded(false)
+  };
+
+  const handleSquareRight = (value: string) => {
+      setSquareRight(value)
+      setExpanded(false)
+  };
+
+  const handleLotSizeLeft = (value: string) => {
+      setLotSizeLeft(value)
+      setExpanded(false)
+  };
+
+  const handleLotSizeRight = (value: string) => {
+      setLotSizeRight(value)
+      setExpanded(false)
+  };
+
+  const handleDaysOn= (value: string) => {
+      setDaysOn(value)
+      setExpanded(false)
+  };
+
   return (
     <Container>
       <MapContainer>
         <SearchBar>
           <SearchWindow value={searchValue} onChange={(e:any)=>(setSearchValue(e.target.value))} placeholder="Las Vegas, NV" />
           <SearchButton>Home Type</SearchButton>
-          <SearchButton onClick={() => setBBOption(true)}>
+          <SearchButton onClick={() => {setBBOption(true);setMoreOption(false);}}>
             Bed & Baths
           </SearchButton>
-          <SearchButton>More</SearchButton>
+          <SearchButton onClick={()=>{setMoreOption(true);setBBOption(false)}}>More</SearchButton>
           <SearchButton>Save Search</SearchButton>
         </SearchBar>
         {bbOption ? (
@@ -365,6 +423,368 @@ const AssetList: React.FC<AssetListProperties> = ({ history }: any) => {
         ) : (
           <></>
         )}
+
+        {moreOption?<>
+        <MoreOptionContainer>
+          <MoreListContainer>
+            <MoreLeftContainer>Max HOA</MoreLeftContainer>
+            <MoreRightContainer>
+              <div style={{position: "relative"}} {...getToggleProps({
+                  onClick: () => setExpanded((prevExpanded) => !prevExpanded)
+              })}>
+                  <InputIndividualBox placeholder="Any" value={hoaListValue} style={{marginRight:"10px"}}/>
+                  <ArrowBox>
+                      {isExpanded ? (
+                          <BsChevronUp style={{ width: "24px", height: "24px" }} />
+                      ) : (
+                          <BsChevronDown style={{ width: "24px", height: "24px", color:"#8D8D8D" }} />
+                      )}
+                  </ArrowBox>
+              </div>
+              <section {...getCollapseProps()}>
+                  <div style={{backgroundColor:"#FFFFFF"}}>
+                      {hoaList.map(value => (
+                          <div style={{position: "relative"}}>
+                              <SelectList onClick={()=>handleHoa(value)}>{value}</SelectList>
+                              {value == hoaListValue ? <ArrowBox>
+                              <GoCheck style={{ width: "24px", height: "24px"}}/>
+                              </ArrowBox> : <></>}
+                          </div>
+                      ))}
+                  </div>
+              </section>
+            </MoreRightContainer>
+          </MoreListContainer>
+          <MoreListContainer>
+            <MoreLeftContainer>Tours</MoreLeftContainer>
+            <MoreRightContainer>
+              <CheckBoxContainer>
+                <input
+                  type="checkbox"
+                  name="houseOpen"
+                ></input>
+                <div>Must have open house</div>
+              </CheckBoxContainer>
+              <CheckBoxContainer>
+                <input
+                  type="checkbox"
+                  name="houseOpen"
+                ></input>
+                <div>Must have 3D Tour</div>
+              </CheckBoxContainer>
+            </MoreRightContainer>
+          </MoreListContainer>
+          <MoreListContainer>
+            <MoreLeftContainer>Parking Spots</MoreLeftContainer>
+            <MoreRightContainer>
+              <div style={{position: "relative"}} {...getToggleProps({
+                  onClick: () => setExpanded((prevExpanded) => !prevExpanded)
+              })}>
+                  <InputIndividualBox placeholder="Any" value={parkingSpots} style={{marginRight:"10px"}}/>
+                  <ArrowBox>
+                      {isExpanded ? (
+                          <BsChevronUp style={{ width: "24px", height: "24px" }} />
+                      ) : (
+                          <BsChevronDown style={{ width: "24px", height: "24px", color:"#8D8D8D" }} />
+                      )}
+                  </ArrowBox>
+              </div>
+              <section {...getCollapseProps()}>
+                  <div style={{backgroundColor:"#FFFFFF"}}>
+                      {parkingSpotsList.map(value => (
+                          <div style={{position: "relative"}}>
+                              <SelectList onClick={()=>handleParkingSpots(value)}>{value}</SelectList>
+                              {value == parkingSpots ? <ArrowBox>
+                              <GoCheck style={{ width: "24px", height: "24px"}}/>
+                              </ArrowBox> : <></>}
+                          </div>
+                      ))}
+                  </div>
+              </section>
+              <CheckBoxContainer>
+                <input
+                  type="checkbox"
+                  name="houseOpen"
+                ></input>
+                <div>Must have garage</div>
+              </CheckBoxContainer>
+            </MoreRightContainer>
+          </MoreListContainer>
+          <MoreListContainer>
+            <MoreLeftContainer style={{flexDirection:"row-reverse", fontWeight:400, paddingRight:"50px"}}>Square Feet</MoreLeftContainer>
+            <MoreRightContainer>
+              <div style={{display:"flex", width:"100%"}}>
+                <div>
+                <div style={{position: "relative"}} {...getToggleProps({
+                    onClick: () => setExpanded((prevExpanded) => !prevExpanded)
+                })}>
+                    <InputIndividualBox placeholder="Any" value={squareLeft} style={{marginRight:"10px"}}/>
+                    <ArrowBox>
+                        {isExpanded ? (
+                            <BsChevronUp style={{ width: "24px", height: "24px" }} />
+                        ) : (
+                            <BsChevronDown style={{ width: "24px", height: "24px", color:"#8D8D8D" }} />
+                        )}
+                    </ArrowBox>
+                </div>
+                <section {...getCollapseProps()}>
+                    <div style={{backgroundColor:"#FFFFFF"}}>
+                        {squareFeetList.map(value => (
+                            <div style={{position: "relative"}}>
+                                <SelectList onClick={()=>handleSquareLeft(value)}>{value}</SelectList>
+                                {value == squareLeft ? <ArrowBox>
+                                <GoCheck style={{ width: "24px", height: "24px"}}/>
+                                </ArrowBox> : <></>}
+                            </div>
+                        ))}
+                    </div>
+                </section>
+                </div>
+                <div style={{margin:"5px", marginTop:"10px"}}>-</div>
+                <div>
+                <div style={{position: "relative"}} {...getToggleProps({
+                    onClick: () => setExpanded((prevExpanded) => !prevExpanded)
+                })}>
+                    <InputIndividualBox placeholder="Any" value={squareRight} style={{marginRight:"10px"}}/>
+                    <ArrowBox>
+                        {isExpanded ? (
+                            <BsChevronUp style={{ width: "24px", height: "24px" }} />
+                        ) : (
+                            <BsChevronDown style={{ width: "24px", height: "24px", color:"#8D8D8D" }} />
+                        )}
+                    </ArrowBox>
+                </div>
+                <section {...getCollapseProps()}>
+                    <div style={{backgroundColor:"#FFFFFF"}}>
+                        {squareFeetList.map(value => (
+                            <div style={{position: "relative"}}>
+                                <SelectList onClick={()=>handleSquareRight(value)}>{value}</SelectList>
+                                {value == squareRight ? <ArrowBox>
+                                <GoCheck style={{ width: "24px", height: "24px"}}/>
+                                </ArrowBox> : <></>}
+                            </div>
+                        ))}
+                    </div>
+                </section>
+                </div>
+              </div>
+            </MoreRightContainer>
+          </MoreListContainer>
+          <MoreListContainer>
+            <MoreLeftContainer style={{flexDirection:"row-reverse", fontWeight:400, paddingRight:"50px"}}>Lot Size</MoreLeftContainer>
+            <MoreRightContainer>
+            <div style={{display:"flex", width:"100%"}}>
+                <div>
+                <div style={{position: "relative"}} {...getToggleProps({
+                    onClick: () => setExpanded((prevExpanded) => !prevExpanded)
+                })}>
+                    <InputIndividualBox placeholder="Any" value={lotSizeLeft} style={{marginRight:"10px"}}/>
+                    <ArrowBox>
+                        {isExpanded ? (
+                            <BsChevronUp style={{ width: "24px", height: "24px" }} />
+                        ) : (
+                            <BsChevronDown style={{ width: "24px", height: "24px", color:"#8D8D8D" }} />
+                        )}
+                    </ArrowBox>
+                </div>
+                <section {...getCollapseProps()}>
+                    <div style={{backgroundColor:"#FFFFFF"}}>
+                        {lotSizeList.map(value => (
+                            <div style={{position: "relative"}}>
+                                <SelectList onClick={()=>handleLotSizeLeft(value)}>{value}</SelectList>
+                                {value == lotSizeLeft ? <ArrowBox>
+                                <GoCheck style={{ width: "24px", height: "24px"}}/>
+                                </ArrowBox> : <></>}
+                            </div>
+                        ))}
+                    </div>
+                </section>
+                </div>
+                <div style={{margin:"5px", marginTop:"10px"}}>-</div>
+                <div>
+                <div style={{position: "relative"}} {...getToggleProps({
+                    onClick: () => setExpanded((prevExpanded) => !prevExpanded)
+                })}>
+                    <InputIndividualBox placeholder="Any" value={lotSizeRight} style={{marginRight:"10px"}}/>
+                    <ArrowBox>
+                        {isExpanded ? (
+                            <BsChevronUp style={{ width: "24px", height: "24px" }} />
+                        ) : (
+                            <BsChevronDown style={{ width: "24px", height: "24px", color:"#8D8D8D" }} />
+                        )}
+                    </ArrowBox>
+                </div>
+                <section {...getCollapseProps()}>
+                    <div style={{backgroundColor:"#FFFFFF"}}>
+                        {lotSizeList.map(value => (
+                            <div style={{position: "relative"}}>
+                                <SelectList onClick={()=>handleLotSizeRight(value)}>{value}</SelectList>
+                                {value == lotSizeRight ? <ArrowBox>
+                                <GoCheck style={{ width: "24px", height: "24px"}}/>
+                                </ArrowBox> : <></>}
+                            </div>
+                        ))}
+                    </div>
+                </section>
+                </div>
+              </div>
+            </MoreRightContainer>
+          </MoreListContainer>
+          <MoreListContainer>
+            <MoreLeftContainer style={{flexDirection:"row-reverse", fontWeight:400, paddingRight:"50px"}}>Year Built</MoreLeftContainer>
+            <MoreRightContainer>
+            <div style={{display:"flex", width:"100%"}}>
+                <div>
+                    <InputIndividualBox placeholder="Min" style={{marginRight:"10px"}}/>
+                </div>
+                <div style={{margin:"5px", marginTop:"10px"}}>-</div>
+                <div>
+                  <InputIndividualBox placeholder="Max" style={{marginRight:"10px"}}/>
+                </div>
+              </div>
+            </MoreRightContainer>
+          </MoreListContainer>
+          <MoreListContainer>
+            <MoreLeftContainer>Basement</MoreLeftContainer>
+            <MoreRightContainer>
+              <CheckBoxContainer>
+                <input
+                  type="checkbox"
+                  name="basement"
+                ></input>
+                <div>Has Basement</div>
+              </CheckBoxContainer>
+            </MoreRightContainer>
+          </MoreListContainer>
+          <MoreListContainer>
+            <MoreLeftContainer>Number Of Stories</MoreLeftContainer>
+            <MoreRightContainer>
+              <CheckBoxContainer>
+                <input
+                  type="checkbox"
+                  name="stories"
+                ></input>
+                <div>Single-story only</div>
+              </CheckBoxContainer>
+            </MoreRightContainer>
+          </MoreListContainer>
+          <MoreListContainer>
+            <MoreLeftContainer>Other Amenities</MoreLeftContainer>
+            <MoreRightContainer>
+              <CheckBoxContainer>
+                <input
+                  type="checkbox"
+                  name="amenities"
+                ></input>
+                <div>Must have A/C</div>
+              </CheckBoxContainer>
+              <CheckBoxContainer>
+                <input
+                  type="checkbox"
+                  name="amenities"
+                ></input>
+                <div>Must have pool</div>
+              </CheckBoxContainer>
+              <CheckBoxContainer>
+                <input
+                  type="checkbox"
+                  name="amenities"
+                ></input>
+                <div>Waterfront</div>
+              </CheckBoxContainer>
+            </MoreRightContainer>
+          </MoreListContainer>
+          <MoreListContainer>
+            <MoreLeftContainer>View</MoreLeftContainer>
+            <MoreRightContainer>
+              <div style={{display:"flex"}}>
+                <CheckBoxContainer>
+                  <input
+                    type="checkbox"
+                    name="view"
+                  ></input>
+                  <div>City</div>
+                </CheckBoxContainer>
+                <CheckBoxContainer>
+                  <input
+                    type="checkbox"
+                    name="view"
+                  ></input>
+                  <div>Mountain</div>
+                </CheckBoxContainer>
+              </div>
+              <div style={{display:"flex"}}>
+                <CheckBoxContainer>
+                  <input
+                    type="checkbox"
+                    name="view"
+                  ></input>
+                  <div>Park</div>
+                </CheckBoxContainer>
+                <CheckBoxContainer>
+                  <input
+                    type="checkbox"
+                    name="view"
+                  ></input>
+                  <div>Water</div>
+                </CheckBoxContainer>
+              </div>
+            </MoreRightContainer>
+          </MoreListContainer>
+          <MoreListContainer>
+            <MoreLeftContainer>Helipad Owned</MoreLeftContainer>
+            <MoreRightContainer>
+              <CheckBoxContainer>
+                  <input
+                    type="checkbox"
+                    name="helipad-owned"
+                  ></input>
+                  <div>Move-in ready homes, evaluated and repaired by Helipad</div>
+                </CheckBoxContainer>
+            </MoreRightContainer>
+          </MoreListContainer>
+          <MoreListContainer>
+            <MoreLeftContainer>Days On Helipad</MoreLeftContainer>
+            <MoreRightContainer>
+              <div style={{position: "relative"}} {...getToggleProps({
+                  onClick: () => setExpanded((prevExpanded) => !prevExpanded)
+              })}>
+                  <InputIndividualBox placeholder="Any" value={daysOn} style={{marginRight:"10px"}}/>
+                  <ArrowBox>
+                      {isExpanded ? (
+                          <BsChevronUp style={{ width: "24px", height: "24px" }} />
+                      ) : (
+                          <BsChevronDown style={{ width: "24px", height: "24px", color:"#8D8D8D" }} />
+                      )}
+                  </ArrowBox>
+              </div>
+              <section {...getCollapseProps()}>
+                  <div style={{backgroundColor:"#FFFFFF"}}>
+                      {daysOnList.map(value => (
+                          <div style={{position: "relative"}}>
+                              <SelectList onClick={()=>handleDaysOn(value)}>{value}</SelectList>
+                              {value == daysOn ? <ArrowBox>
+                              <GoCheck style={{ width: "24px", height: "24px"}}/>
+                              </ArrowBox> : <></>}
+                          </div>
+                      ))}
+                  </div>
+              </section>
+            </MoreRightContainer>
+          </MoreListContainer>
+          <MoreListContainer>
+            <MoreLeftContainer>Keywords</MoreLeftContainer>
+            <MoreRightContainer>
+              <InputIndividualBox placeholder="Keywords" style={{marginRight:"10px"}}/>
+            </MoreRightContainer>
+          </MoreListContainer>
+          <BottomContainer>
+            <div>Reset all filters</div>
+            <MoreDoneButton onClick={()=>(setMoreOption(false))}>Done</MoreDoneButton>
+          </BottomContainer>
+        </MoreOptionContainer>
+        </>:<></>}
+
         {locations[0]?
         <GoogleMap
           bootstrapURLKeys={{ key: "AIzaSyAHHYSWgQGMPHXYRqCMMUSlxTvqrDepyeA" }}
@@ -440,6 +860,52 @@ const BBOptionContainer = styled.div`
   font-size: 14px;
   font-weight: 700;
 `;
+
+const MoreOptionContainer = styled.div`
+  position: absolute;
+  z-index: 2;
+  left: 530px;
+  width: 530px;
+  background-color: #FFFFFF;
+  font-size: 16px;
+`
+
+const MoreListContainer = styled.div`
+  width: 490px;
+  margin: 10px;
+  display: flex;
+  margin-left: 20px;
+  margin-right: 20px;
+`
+
+const MoreLeftContainer = styled.div`
+  display: flex;
+  width: 36%;
+  height: auto;
+  text-align: left;
+  align-items: center;
+  font-weight: bold;
+  padding-right: 10px;
+`
+
+const MoreRightContainer = styled.div`
+  width: 65%;
+  text-align: left;
+`
+
+const CheckBoxContainer = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: left;
+  margin-bottom: 5px;
+
+  input {
+    min-width: 20px;
+    min-height: 20px;
+    margin-right: 10px;
+    // flex: 1;
+  }
+`
 
 const NumberSelectContainer = styled.div`
   height: 42px;
@@ -527,5 +993,63 @@ const PriceControl = styled.div`
   // padding: 20px;
   // padding-left: 30px;
 `;
+
+const InputIndividualBox = styled.input`
+    width: 100%;
+    height: 44px;
+    padding: 16px;
+    // border: 1px solid #B69142;
+    border: 1px solid #EAEAEA;
+    margin-bottom: 10px;
+    font-size: 16px;
+    color: #212121;
+    font-family: Poppins;
+    &:focus {
+        outline:1px solid #B69142;
+    }
+`
+
+const SelectList = styled.button`
+    width: 100%;
+    border: 0;
+    border-bottom: 1px solid white;
+    background-color: transparent;
+    font-size: 16px;
+    text-align: left;
+    height: 56px;
+    padding: 16px;
+    position: relative;
+`
+
+const ArrowBox = styled.div`
+    position: absolute;
+    right: 15px;
+    top: 11px;
+    font-weight: bold;
+    font-style: bold;
+`
+
+const BottomContainer = styled.div`
+    width: 100%;
+    height: 60px;
+    background-color: #B69142;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    padding-left: 20px;
+    padding-right: 20px;
+    align-items: center;
+    font-size: 16px;
+`
+
+const MoreDoneButton = styled.button`
+    width: 75px;
+    height: 44px;
+    border: 0;
+    background-color: #FFFFFF;
+    font-weight: bold;
+    font-size: 16px;
+`
+
 
 export default AssetList;
