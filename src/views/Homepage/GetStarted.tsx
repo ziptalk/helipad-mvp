@@ -1,18 +1,45 @@
 import styled from "styled-components";
 import linear from "../../images/Homepage/linear.png";
 import { Link } from "react-router-dom";
+import React, { useContext, useEffect, useState } from "react";
+import { useTranslation } from 'react-i18next';
+import { Languages, languages } from '../../Locales/i18n';
+
 const GetStarted = () => {
+  const { t, i18n } = useTranslation();
+  
+  const handleChangeLanguage = (lang: Languages) => {
+    i18n.changeLanguage(lang);
+  }
+
+  useEffect(()=>{
+    function checkLanguage(){
+      let currentLanguage = localStorage.getItem('language');
+      console.log(currentLanguage)
+
+      if(currentLanguage=="en" || currentLanguage=="ko"){
+        handleChangeLanguage(currentLanguage)
+      }
+    }
+
+    window.addEventListener('storage', checkLanguage)
+
+    return () => {
+      window.removeEventListener('storage', checkLanguage)
+    }
+  },[])
+
   return (
     <Container>
       <ContentContainer>
         <Content>
           <TitleWrapper>
-            <Title>Get started now.</Title>
-            <SubTitle>Your newest property awaits you.</SubTitle>
+            <Title>{t('main_15')}</Title>
+            <SubTitle>{t('main_16')}</SubTitle>
           </TitleWrapper>
           <ButtonWrapper>
             <StyledLink to="">
-              <Button>Contact Us</Button>
+              <Button>{t('main_17')}</Button>
             </StyledLink>
           </ButtonWrapper>
         </Content>

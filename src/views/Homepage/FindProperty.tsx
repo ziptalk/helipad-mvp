@@ -1,7 +1,34 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import iphoneImg from "../../images/Homepage/iphone-image.jpg";
+import React, { useContext, useEffect, useState } from "react";
+import { useTranslation } from 'react-i18next';
+import { Languages, languages } from '../../Locales/i18n';
+
 const FindProperty = () => {
+  const { t, i18n } = useTranslation();
+  
+  const handleChangeLanguage = (lang: Languages) => {
+    i18n.changeLanguage(lang);
+  }
+
+  useEffect(()=>{
+    function checkLanguage(){
+      let currentLanguage = localStorage.getItem('language');
+      console.log(currentLanguage)
+
+      if(currentLanguage=="en" || currentLanguage=="ko"){
+        handleChangeLanguage(currentLanguage)
+      }
+    }
+
+    window.addEventListener('storage', checkLanguage)
+
+    return () => {
+      window.removeEventListener('storage', checkLanguage)
+    }
+  },[])
+
   return (
     <Container>
       <ContentContainer>
@@ -9,12 +36,9 @@ const FindProperty = () => {
         <ContentBlock>
           <TitleWrapper>
             <Category>부동산구매</Category>
-            <Title>Find the Right Property</Title>
+            <Title>{t('main_1')}</Title>
             <SubTitle>
-              Search through our handpicked listings on the site or talk to one
-              of our many experienced agents that will help you find the perfect
-              place for your vacation home, income property, new home, or place
-              for your family.
+            {t('main_2')}
             </SubTitle>
           </TitleWrapper>
           <ButtonWrapper>

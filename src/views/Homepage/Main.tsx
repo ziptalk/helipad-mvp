@@ -1,7 +1,34 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { ReactComponent as ArrowSvg } from "../../images/Homepage/arrow.svg";
+import React, { useContext, useEffect, useState } from "react";
+import { useTranslation } from 'react-i18next';
+import { Languages, languages } from '../../Locales/i18n';
+
 const Main = () => {
+  const { t, i18n } = useTranslation();
+  
+  const handleChangeLanguage = (lang: Languages) => {
+    i18n.changeLanguage(lang);
+  }
+
+  useEffect(()=>{
+    function checkLanguage(){
+      let currentLanguage = localStorage.getItem('language');
+      console.log(currentLanguage)
+
+      if(currentLanguage=="en" || currentLanguage=="ko"){
+        handleChangeLanguage(currentLanguage)
+      }
+    }
+
+    window.addEventListener('storage', checkLanguage)
+
+    return () => {
+      window.removeEventListener('storage', checkLanguage)
+    }
+  },[])
+
   return (
     <Container>
       <ContentContainer>
@@ -15,7 +42,7 @@ const Main = () => {
           </TitleBlock>
         </TitleWrapper>
         <ButtonWrapper>
-          <StyledLink to="/auth/waitlist">JOIN THE WAITLIST</StyledLink>
+          <StyledLink to="/auth/waitlist">{t('join_the_waitlist')}</StyledLink>
           <StyledLink to="/auth/vipclient">VIP 코드 입력</StyledLink>
         </ButtonWrapper>
         <ArrowWrapper>

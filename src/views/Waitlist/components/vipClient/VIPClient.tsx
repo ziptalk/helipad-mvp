@@ -4,6 +4,8 @@ import { AuthContext } from "../../../../router/config/Provider/AuthProvider";
 import { userStore, firebase } from "../../../../shared/Firebase";
 import { useHistory } from "react-router-dom";
 import Group from "../../../../images/Group.png";
+import { useTranslation } from 'react-i18next';
+import { Languages, languages } from '../../../../Locales/i18n';
 
 enum Content {
   FIRSTTITLE = "Real Estate Investing,",
@@ -21,6 +23,28 @@ const VIPClient = ({
   checkInviteCodeWithEnterKey,
 }: any) => {
     const { user } = useContext(AuthContext);
+    const { t, i18n } = useTranslation();
+  
+  const handleChangeLanguage = (lang: Languages) => {
+    i18n.changeLanguage(lang);
+  }
+
+  useEffect(()=>{
+    function checkLanguage(){
+      let currentLanguage = localStorage.getItem('language');
+      console.log(currentLanguage)
+
+      if(currentLanguage=="en" || currentLanguage=="ko"){
+        handleChangeLanguage(currentLanguage)
+      }
+    }
+
+    window.addEventListener('storage', checkLanguage)
+
+    return () => {
+      window.removeEventListener('storage', checkLanguage)
+    }
+  },[])
 
   async function getUserInfo() {
     if (user) {
@@ -44,22 +68,24 @@ const VIPClient = ({
   return (
     <Container>
       <img style={{paddingTop:"132px"}} src={Group}/>
-      <MainText>Welcome VIP Client</MainText>
+      <MainText>{t('vip_1')}</MainText>
       <div style={{display:"flex", width:"100%", justifyContent:'center'}}>
         <MiddleLine/>
       </div>
       <ContextBox>
-        <div>Helipad is a full service international real estate brokerage that helps</div>
-        <div style={{marginBottom:"30px"}}>buyers from Asia buy US properties.</div>
-        <div>We have only offered this service to referral-only high net worth private</div>
-        <div>banking clients inthe past, and now are opening up our client base.</div>
+        <div style={{display:"flex", justifyContent:"center", marginBottom:"30px"}}>
+          <div style={{width:"850px"}}>{t('vip_2')}</div>
+          </div>
+        <div style={{display:"flex", justifyContent:"center"}}>
+        <div style={{width:"870px"}}>{t('vip_3')}</div>
+        </div>
       </ContextBox>
       {inviteCodeValidation === "invalid" && (
           <ErrorMessage>{Content.ERRORMESSAGE}</ErrorMessage>
         )}
       <InputContainer onChange={handleOnChange}>
-        <InputBox onKeyDown={checkInviteCodeWithEnterKey} placeholder="Enter VIP Code"/>
-        <JoinButton onClick={checkInviteCode}>Login</JoinButton>
+        <InputBox onKeyDown={checkInviteCodeWithEnterKey} placeholder={t('vip_4')}/>
+        <JoinButton onClick={checkInviteCode}>{t('vip_5')}</JoinButton>
       </InputContainer>
     </Container>
   );
