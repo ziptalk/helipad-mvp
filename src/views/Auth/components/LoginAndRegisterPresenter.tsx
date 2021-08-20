@@ -4,6 +4,7 @@ import RegisterContainer from "./register/RegisterContainer";
 import RegisterContainer2 from "./register/RegisterContainer2";
 
 import { Link } from "react-router-dom";
+import loginImage from "../../../images/loginImage.png";
 enum SelectedCategory {
   TITLE = "Login/Register",
   LOGIN = "Login",
@@ -50,24 +51,27 @@ const LoginAndRegisterPresenter = ({
         throw new Error("Invalid item");
     }
   };
-  return (<>
-      {selectedCategory != SelectedCategory.REGISTER ? 
+  return (
+    <>
+      {selectedCategory != SelectedCategory.REGISTER ? (
         <Container selectedCategory={selectedCategory}>
-        <FormContainer>
-          <HeaderContainer>
-            <Title>{SelectedCategory.TITLE}</Title>
-            {renderSelectedItem()}
-          </HeaderContainer>
-          {selectedCategory === SelectedCategory.LOGIN && <LoginContainer />}
-          {selectedCategory === SelectedCategory.REGISTER && (
-            <RegisterContainer />
-          )}
-        </FormContainer>
+          <FormContainer>
+            <HeaderContainer>
+              <Title>{SelectedCategory.TITLE}</Title>
+              {renderSelectedItem()}
+            </HeaderContainer>
+            {selectedCategory === SelectedCategory.LOGIN && <LoginContainer />}
+            {selectedCategory === SelectedCategory.REGISTER && (
+              <RegisterContainer />
+            )}
+          </FormContainer>
         </Container>
-        : <Container style={{backgroundColor:"black"}}>
-            <RegisterContainer2 />
-        </Container>}
-      </>
+      ) : (
+        <Container style={{ backgroundColor: "black" }}>
+          <RegisterContainer2 />
+        </Container>
+      )}
+    </>
   );
 };
 // height: ${(props: any) =>
@@ -76,14 +80,18 @@ const Container: any = styled.div`
   margin: 0 auto;
   max-width: 100vw;
   width: 100%;
-  min-height: 100vh;
+  height: 100vh;
+  max-height: 1200px;
   background-color: ${({ theme }) => theme.colors.beige};
+  background-image: url(${loginImage});
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: black;
   display: flex;
   flex-direction: column;
   align-items: center;
-
   margin: 0px;
-  padding-bottom: 200px;
+  /* padding-bottom: 200px; */
 `;
 const FormContainer = styled.div`
   background-color: ${({ theme }) => theme.colors.white};

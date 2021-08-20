@@ -12,7 +12,7 @@ const Logout = () => {
     LoginUseCase.logout().then((result) => {
       console.log("logout result : " + result);
       setUser(null);
-      setHeaderMode("black");
+      setHeaderMode("homepage");
       setInviteCodeValidation("default");
       history.push("/", 2000);
       // setTimeout(() => history.push("/"), 2000);

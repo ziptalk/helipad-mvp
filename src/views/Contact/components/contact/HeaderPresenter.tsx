@@ -1,17 +1,15 @@
 import styled from "styled-components";
-
+import ContactImg from "../../../../images/contactUs.png";
 import HeaderBackground from "../../../../images/Neighborhood/headerBackgroundImg.jpg";
 
 const HeaderPresenter = () => {
   return (
     <Container>
-      <LandingBlock imgPath='https://me2.kr/a5gi6'>
-      {/* <LandingBlock imgPath={HeaderBackground}> */}
+      <LandingBlock imgPath={ContactImg}>
+        {/* <LandingBlock imgPath={HeaderBackground}> */}
         <TitleBlock>
           <Title>Say Hello.</Title>
-          <SubTitle>
-            Tell us how we can guide you.
-          </SubTitle>
+          <SubTitle>Tell us how we can guide you.</SubTitle>
         </TitleBlock>
       </LandingBlock>
     </Container>
@@ -28,6 +26,7 @@ const LandingBlock: any = styled.div`
   height: 700px;
   background: url(${(props: any) => props.imgPath});
   background-size: cover;
+  background-repeat: no-repeat;
   display: flex;
   flex-direction: column;
   justify-content: center;
