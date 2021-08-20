@@ -20,6 +20,8 @@ import useCollapse from "react-collapsed";
 import { BsChevronDown, BsArrowRight, BsChevronUp } from "react-icons/bs";
 import { GoCheck } from "react-icons/go";
 import { Checkbox } from "@material-ui/core";
+import { useTranslation } from 'react-i18next';
+import { Languages, languages } from '../../../../Locales/i18n';
 
 Geocode.setApiKey("AIzaSyAHHYSWgQGMPHXYRqCMMUSlxTvqrDepyeA");
 Geocode.setLanguage("en");
@@ -510,6 +512,11 @@ const AssetList: React.FC<AssetListProperties> = ({ history }: any) => {
   const [homeTypeOption, setHomeTypeOption] = useState(false);
   const [isExpanded, setExpanded] = useState(false);
   const [homeType, setHomeType] = useState(0);
+  const { t, i18n } = useTranslation();
+  
+  const handleChangeLanguage = (lang: Languages) => {
+    i18n.changeLanguage(lang);
+  }
 
   const { getCollapseProps, getToggleProps } = useCollapse({ isExpanded });
 
@@ -518,6 +525,34 @@ const AssetList: React.FC<AssetListProperties> = ({ history }: any) => {
   const hoaList = ["Any", "$50/Month"];
 
   console.log(assets);
+
+  useEffect(()=>{
+    // if(currentLanguage?.indexOf('en') || currentLanguage?.indexOf('En')){
+    //   currentLanguage = "en"
+    // }else if(currentLanguage?.indexOf('ko') || currentLanguage?.indexOf('Ko')){
+    //   currentLanguage = "ko"
+    // }
+
+    // if(currentLanguage=="en" || currentLanguage=="ko"){
+    //   handleChangeLanguage(currentLanguage)
+    // }else{
+    //   handleChangeLanguage("en")
+    // }
+    function checkLanguage(){
+      let currentLanguage = localStorage.getItem('language');
+      console.log(currentLanguage)
+
+      if(currentLanguage=="en" || currentLanguage=="ko"){
+        handleChangeLanguage(currentLanguage)
+      }
+    }
+
+    window.addEventListener('storage', checkLanguage)
+
+    return () => {
+      window.removeEventListener('storage', checkLanguage)
+    }
+  },[])
 
   useEffect(() => {
     setHeaderMode("");
@@ -1130,7 +1165,8 @@ const AssetList: React.FC<AssetListProperties> = ({ history }: any) => {
         ) : (
           <></>
         )}
-
+        <div>
+        </div>
         {locations[0] ? (
           <GoogleMap
             bootstrapURLKeys={{

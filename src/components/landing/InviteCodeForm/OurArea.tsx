@@ -1,8 +1,11 @@
 import styled from "styled-components";
-import { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { ReactComponent as LineSvg } from "../../../images/InviteCodeForm/ic_line.svg";
 import { ReactComponent as PlusSvg } from "../../../images/InviteCodeForm/ic_plusButton.svg";
 import { ReactComponent as CloseSvg } from "../../../images/InviteCodeForm/ic_closeButton.svg";
+import { useTranslation } from 'react-i18next';
+import { Languages, languages } from '../../../Locales/i18n';
+
 type Props = {
   buyerRepresentation: boolean;
   propertyManagement: boolean;
@@ -15,6 +18,28 @@ const OurArea = () => {
     propertyManagement: false,
     sellerRepresentation: false,
   });
+  const { t, i18n } = useTranslation();
+  
+  const handleChangeLanguage = (lang: Languages) => {
+    i18n.changeLanguage(lang);
+  }
+
+  useEffect(()=>{
+    function checkLanguage(){
+      let currentLanguage = localStorage.getItem('language');
+      console.log(currentLanguage)
+
+      if(currentLanguage=="en" || currentLanguage=="ko"){
+        handleChangeLanguage(currentLanguage)
+      }
+    }
+
+    window.addEventListener('storage', checkLanguage)
+
+    return () => {
+      window.removeEventListener('storage', checkLanguage)
+    }
+  },[])
 
   const onClickCategory = (event: any) => {
     console.log(clickState.clickCategory);
@@ -50,12 +75,12 @@ const OurArea = () => {
     <Container>
       <Category>
         <Line />
-        OUR AREAS OF EXPERTISE
+        {t('expertise_area_1')}
       </Category>
       <ListContainer>
         <ItemBlock>
           <ContentBlock>
-            <Title>Buyer Representation</Title>
+            <Title>{t('expertise_area_2')}</Title>
             <Content clicked={clickState.buyerRepresentation}>
               Our local Helipad experts in each area we serve will understand
               your needs and investment goals and help you find your dream home
@@ -73,7 +98,7 @@ const OurArea = () => {
         </ItemBlock>
         <ItemBlock>
           <ContentBlock>
-            <Title>Property management</Title>
+            <Title>{t('expertise_area_3')}</Title>
             <Content clicked={clickState.propertyManagement}>
               Your properties will be in good hands of Helipad. We will
               safeguard your assets, maximize income potential, and ensure you
@@ -91,7 +116,7 @@ const OurArea = () => {
         </ItemBlock>
         <ItemBlock>
           <ContentBlock>
-            <Title>Seller Representation</Title>
+            <Title>{t('expertise_area_4')}</Title>
             <Content clicked={clickState.sellerRepresentation}>
               If you already have your properties in the US, Helipad experts
               will find a right buyer for your property. We not only focus on
@@ -115,8 +140,8 @@ const OurArea = () => {
         </ItemBlock>
         <ItemBlock>
           <ContentBlock className="comingSoon">
-            <Title>Commercial Brokerages</Title>
-            <SubTitle>Coming Soon</SubTitle>
+            <Title>{t('expertise_area_5')}</Title>
+            <SubTitle>{t('expertise_area_6')}</SubTitle>
           </ContentBlock>
           <ButtonBlock>
             <PlusButton />
@@ -124,8 +149,8 @@ const OurArea = () => {
         </ItemBlock>
         <ItemBlock>
           <ContentBlock className="comingSoon">
-            <Title>Development</Title>
-            <SubTitle>Coming Soon</SubTitle>
+            <Title>{t('expertise_area_7')}</Title>
+            <SubTitle>{t('expertise_area_8')}</SubTitle>
           </ContentBlock>
           <ButtonBlock>
             <PlusButton />
