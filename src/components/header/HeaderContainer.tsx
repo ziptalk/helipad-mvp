@@ -11,7 +11,7 @@ enum DropDownMenu {
   KOREAN = "KOR",
   ENGLISH = "ENG",
 }
-const HeaderContainer = ({ isLandingPage }: any) => {
+const HeaderContainer = ({ isLandingPage, dashboardPage }: any) => {
   const { headerMode, authenticated, userInfo } = useContext(AuthContext);
   const [userIconCategory, setUserIconCategory] = useState({
     account: "",
@@ -67,6 +67,7 @@ const HeaderContainer = ({ isLandingPage }: any) => {
       userInfo={userInfo}
       authenticated={authenticated}
       headerMode={headerMode}
+      dashboardPage={dashboardPage}
       isLandingPage={isLandingPage}
       userIconCategory={userIconCategory}
       globalIconCategory={globalIconCategory}

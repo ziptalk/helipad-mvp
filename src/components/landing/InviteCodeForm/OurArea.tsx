@@ -17,7 +17,6 @@ const OurArea = () => {
   });
 
   const onClickCategory = (event: any) => {
-    console.log(clickState.clickCategory);
     let clickCategory = event.target.id;
     setClickState({
       ...clickState,

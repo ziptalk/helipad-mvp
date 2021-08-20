@@ -27,32 +27,48 @@ const HeaderPresenter = ({
   userIconCategory,
   globalIconCategory,
   setGlobalIconCategory,
+  dashboardPage,
   userInfo,
 }: any) => {
   console.log("header username:", userInfo);
+  console.log("header mode:", headerMode);
   const renderByHeaderMode = () => {
     switch (headerMode) {
-      case "inviteCodeForm":
-        return <></>;
       default:
         return (
           <CategoryContainer authenticated={authenticated}>
-            <Link to="/aboutUs">
-              <About scrollMove={scrollMove} color={headerMode}>
-                About us
-              </About>
-            </Link>
-            <Link to="/asset/neighborhood">
-              <Neighborhood scrollMove={scrollMove} color={headerMode}>
-                Neighborhood
-              </Neighborhood>
-            </Link>
+            <StyledLink to="/asset/assetList">
+              <CategoryName primary scrollMove={scrollMove} color={headerMode}>
+                구매
+              </CategoryName>
+            </StyledLink>
+            <StyledLink to="/asset/assetList">
+              <CategoryName primary scrollMove={scrollMove} color={headerMode}>
+                판매
+              </CategoryName>
+            </StyledLink>
+            <StyledLink to="">
+              <CategoryName scrollMove={scrollMove} color={headerMode}>
+                임대 관리
+              </CategoryName>
+            </StyledLink>
+            <StyledLink to="/asset/neighborhood">
+              <CategoryName scrollMove={scrollMove} color={headerMode}>
+                매물 찾기
+              </CategoryName>
+            </StyledLink>
+            <StyledLink to="/aboutus">
+              <CategoryName scrollMove={scrollMove} color={headerMode}>
+                회사 소개
+              </CategoryName>
+            </StyledLink>
           </CategoryContainer>
         );
     }
   };
   return (
     <Container
+      dashboardPage={dashboardPage}
       scrollMove={scrollMove}
       color={headerMode}
       isLandingPage={isLandingPage}
@@ -65,86 +81,92 @@ const HeaderPresenter = ({
         <Link to="/asset/neighborhood">
           <BlackLogo scrollMove={scrollMove} color={headerMode} />
         </Link>
-        {renderByHeaderMode()}
-        <BlackChatBot></BlackChatBot>
-        <IconBlock>
-          {authenticated ? (
-            <IconBlock>
-              <DropDownContainer>
-                <DropdownMenu
-                  Component={() => (
-                    <BlackUser scrollMove={scrollMove} color={headerMode} />
-                  )}
-                  account={userIconCategory.account}
-                  mypageOrRegister={userIconCategory.mypageOrRegister}
-                  signOutOrSignIn={userIconCategory.signOutOrSignIn}
-                />
-                <Username
-                  scrollMove={scrollMove}
-                  color={headerMode}
-                >{`${userInfo.firstName} ${userInfo.lastName}`}</Username>
-              </DropDownContainer>
-              <DropDownContainer>
-                <DropdownMenu
-                  Component={() => (
-                    <BlackGlobal scrollMove={scrollMove} color={headerMode} />
-                  )}
-                  setGlobalIconCategory={setGlobalIconCategory}
-                  mypageOrRegister={DropDownMenu.KOREAN}
-                  signOutOrSignIn={DropDownMenu.ENGLISH}
-                />
-                <Language scrollMove={scrollMove} color={headerMode}>
-                  {globalIconCategory}
-                </Language>
-              </DropDownContainer>
-              <Link to="/auth/contact">
-                <ContactUs
-                  style={{ marginTop: "10px" }}
-                  scrollMove={scrollMove}
-                  color={headerMode}
-                />
-              </Link>
-            </IconBlock>
-          ) : (
-            <IconBlock>
-              <DropDownContainer>
-                <DropdownMenu
-                  Component={() => (
-                    <BlackUser scrollMove={scrollMove} color={headerMode} />
-                  )}
-                  userInfo={userInfo}
-                  mypageOrRegister={userIconCategory.mypageOrRegister}
-                  signOutOrSignIn={userIconCategory.signOutOrSignIn}
-                />
-              </DropDownContainer>
-              <DropDownContainer>
-                <DropdownMenu
-                  Component={() => (
-                    <BlackGlobal scrollMove={scrollMove} color={headerMode} />
-                  )}
-                  setGlobalIconCategory={setGlobalIconCategory}
-                  mypageOrRegister={DropDownMenu.KOREAN}
-                  signOutOrSignIn={DropDownMenu.ENGLISH}
-                />
-                <Language scrollMove={scrollMove} color={headerMode}>
-                  {globalIconCategory}
-                </Language>
-              </DropDownContainer>
-              <Link to="/auth/contact">
-                <ContactUs
-                  style={{ marginTop: "10px" }}
-                  scrollMove={scrollMove}
-                  color={headerMode}
-                />
-              </Link>
-            </IconBlock>
-          )}
-        </IconBlock>
+        <MenuBlock>
+          {renderByHeaderMode()}
+          <BlackChatBot></BlackChatBot>
+          <StyledLink to="">
+            <LoginButton>SIGN IN</LoginButton>
+          </StyledLink>
+          <IconBlock>
+            {authenticated ? (
+              <IconBlock>
+                <DropDownContainer>
+                  <DropdownMenu
+                    Component={() => (
+                      <BlackUser scrollMove={scrollMove} color={headerMode} />
+                    )}
+                    account={userIconCategory.account}
+                    mypageOrRegister={userIconCategory.mypageOrRegister}
+                    signOutOrSignIn={userIconCategory.signOutOrSignIn}
+                  />
+                  <Username
+                    scrollMove={scrollMove}
+                    color={headerMode}
+                  >{`${userInfo.firstName} ${userInfo.lastName}`}</Username>
+                </DropDownContainer>
+                <DropDownContainer>
+                  <DropdownMenu
+                    Component={() => (
+                      <BlackGlobal scrollMove={scrollMove} color={headerMode} />
+                    )}
+                    setGlobalIconCategory={setGlobalIconCategory}
+                    mypageOrRegister={DropDownMenu.KOREAN}
+                    signOutOrSignIn={DropDownMenu.ENGLISH}
+                  />
+                  <Language scrollMove={scrollMove} color={headerMode}>
+                    {globalIconCategory}
+                  </Language>
+                </DropDownContainer>
+                <Link to="/auth/contact">
+                  <ContactUs
+                    style={{ marginTop: "10px" }}
+                    scrollMove={scrollMove}
+                    color={headerMode}
+                  />
+                </Link>
+              </IconBlock>
+            ) : (
+              <IconBlock>
+                <DropDownContainer>
+                  <DropdownMenu
+                    Component={() => (
+                      <BlackUser scrollMove={scrollMove} color={headerMode} />
+                    )}
+                    userInfo={userInfo}
+                    mypageOrRegister={userIconCategory.mypageOrRegister}
+                    signOutOrSignIn={userIconCategory.signOutOrSignIn}
+                  />
+                </DropDownContainer>
+                <DropDownContainer>
+                  <DropdownMenu
+                    Component={() => (
+                      <BlackGlobal scrollMove={scrollMove} color={headerMode} />
+                    )}
+                    setGlobalIconCategory={setGlobalIconCategory}
+                    mypageOrRegister={DropDownMenu.KOREAN}
+                    signOutOrSignIn={DropDownMenu.ENGLISH}
+                  />
+                  <Language scrollMove={scrollMove} color={headerMode}>
+                    {globalIconCategory}
+                  </Language>
+                </DropDownContainer>
+                <Link to="/auth/contact">
+                  <ContactUs
+                    style={{ marginTop: "10px" }}
+                    scrollMove={scrollMove}
+                    color={headerMode}
+                  />
+                </Link>
+              </IconBlock>
+            )}
+          </IconBlock>
+        </MenuBlock>
       </ContentContainer>
     </Container>
   );
 };
 const Container: any = styled.div`
+  display: ${(props: any) => props.dashboardPage && "none"};
   height: 112px;
   width: 100vw;
   z-index: 3;
@@ -154,6 +176,8 @@ const Container: any = styled.div`
       props.color === "neighborhoodList" ||
       props.color === "contactForm") &&
     "transparent"};
+
+  background-color: ${(props: any) => props.color === "homepage" && "black"};
   position: ${(props: any) =>
     (props.color === "inviteCodeForm" ||
       props.color === "neighborhoodList" ||
@@ -193,6 +217,7 @@ const Container: any = styled.div`
   position: ${(props: any) => props.scrollMove && "fixed"};
   top: ${(props: any) => props.scrollMove && "0px"};
   transition: all ease-in-out 0.5s;
+  border: none;
 `;
 const ContentContainer: any = styled.div`
   display: flex;
@@ -213,24 +238,38 @@ const ContentContainer: any = styled.div`
       props.color === "neighborhoodList" ||
       props.color === "contactForm") &&
     "transparent"};
+  background-color: ${(props: any) => props.color === "homepage" && "black"};
+  background-color: ${(props: any) => props.scrollMove && "white"};
+  transition: all ease-in-out 0.5s;
+  border: none;
 `;
 
 const CategoryContainer: any = styled.div`
-  width: 12%;
+  /* width: 12%; */
+  max-width: 600px;
+  width: 60%;
   display: flex;
   justify-content: space-between;
-  margin-right: 120px;
-  margin-right: ${(props: any) => props.authenticated && "0px"};
+  margin-right: 40px;
+  gap: 30px;
+  /* margin-right: ${(props: any) => props.authenticated && "100px"}; */
   @media ${({ theme }) => theme.mediaQueryOnDevice.notebookS} {
-    width: 18%;
+    width: 80%;
   }
+`;
+const StyledLink = styled(Link)`
+  width: 100%;
+`;
+const MenuBlock = styled.div`
+  display: flex;
+  align-items: center;
 `;
 const BlackLogo: any = styled(BlackLogoSvg)`
   margin-left: 1vw;
   position: relative;
   z-index: 1;
   fill: ${(props: any) =>
-    props.color === "inviteCodeForm" || props.color === "contactForm"
+    props.color === "contactForm" || props.color === "homepage"
       ? "white"
       : props.color === "neighborhoodList"
       ? "black"
@@ -242,17 +281,18 @@ const BlackLogo: any = styled(BlackLogoSvg)`
     width: 150px;
   }
 `;
-const About: any = styled.div`
-  min-width: 145px;
+const CategoryName: any = styled.div`
+  min-width: 100px;
   text-align: center;
   font-size: 18px;
+  font-size: clamp(14px, 1.1vw, 22px);
   font-style: normal;
   font-weight: 500;
   line-height: 27px;
   letter-spacing: 0px;
 
   color: ${(props: any) =>
-    props.color === "inviteCodeForm"
+    props.color === "homepage"
       ? "white"
       : props.color === "neighborhoodList" || props.color === "contactForm"
       ? "white"
@@ -263,9 +303,10 @@ const About: any = styled.div`
   @media ${({ theme }) => theme.mediaQueryOnDevice.notebookS} {
     font-size: 15px;
   }
+  min-width: ${(props: any) => props.primary && "60px"};
 `;
-const Neighborhood: any = styled(About)``;
-const FAQ: any = styled(About)``;
+const Neighborhood: any = styled(CategoryName)``;
+const FAQ: any = styled(CategoryName)``;
 
 const IconBlock = styled.div`
   display: flex;
@@ -281,7 +322,7 @@ const Username: any = styled.div`
   font-size: 12px;
   color: white;
   color: ${(props: any) =>
-    props.color === "inviteCodeForm"
+    props.color === "homepage"
       ? "white"
       : props.color === "neighborhoodList" || props.color === "contactForm"
       ? "white"
@@ -294,7 +335,7 @@ const BlackUser: any = styled(BlackUserSvg)`
   position: relative;
   z-index: 1;
   stroke: ${(props: any) =>
-    props.color === "inviteCodeForm"
+    props.color === "homepage"
       ? "white"
       : props.color === "neighborhoodList" || props.color === "contactForm"
       ? "white"
@@ -316,7 +357,7 @@ const BlackGlobal: any = styled(BlackGlobalSvg)`
   position: relative;
   z-index: 1;
   stroke: ${(props: any) =>
-    props.color === "inviteCodeForm"
+    props.color === "homepage"
       ? "white"
       : props.color === "neighborhoodList" || props.color === "contactForm"
       ? "white"
@@ -337,7 +378,7 @@ const ContactUs: any = styled(ContactUsSvg)`
   position: relative;
   z-index: 1;
   stroke: ${(props: any) =>
-    props.color === "inviteCodeForm"
+    props.color === "homepage"
       ? "white"
       : props.color === "neighborhoodList" || props.color === "contactForm"
       ? "white"
@@ -360,6 +401,20 @@ const SearchButton = styled.button`
   background-color: #b69142;
   position: relative;
   z-index: 1;
+`;
+
+const LoginButton = styled.button`
+  width: 151px;
+  height: 48px;
+  background: #ac7602;
+  border-radius: 50px;
+
+  font-size: 18px;
+  line-height: 21px;
+  letter-spacing: 0px;
+  color: #ffffff;
+  margin-right: 40px;
+  border: none;
 `;
 
 export default HeaderPresenter;

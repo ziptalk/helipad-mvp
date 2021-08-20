@@ -6,7 +6,7 @@ import { AuthContext } from "../../../router/config/Provider/AuthProvider";
 import styled from "styled-components";
 import InviteCodeFormPresenter from "./InviteCodeFormPresenter";
 import InviteCodeFormEtcPresenter from "./InviteCodeFormEtcPresenter";
-import VideoPlayerPresenter from "./videoPlayerPresenter";
+import VideoPlayerPresenter from "../../../views/Homepage/videoPlayerPresenter";
 import HelipadIs from "./HelipadIs";
 import OurMission from "./OurMission";
 import OurArea from "./OurArea";
@@ -62,13 +62,13 @@ const InviteCodeFormContainer = ({ isLandingPage, setIsLandingPage }: any) => {
   };
   return (
     <Container>
-      <VideoPlayerPresenter />
-      <InviteCodeFormPresenter
+      {/* <VideoPlayerPresenter /> */}
+      {/* <InviteCodeFormPresenter
         inviteCodeValidation={inviteCodeValidation}
         handleOnChange={handleOnChange}
         checkInviteCode={checkInviteCode}
         checkInviteCodeWithEnterKey={checkInviteCodeWithEnterKey}
-      />
+      /> */}
 
       {/* <InviteCodeFormEtcPresenter /> */}
       <HelipadIs></HelipadIs>

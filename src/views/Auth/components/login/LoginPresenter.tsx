@@ -3,8 +3,11 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import checkButtonImg from "../../../../images/Potential/checkButtonImg.svg";
 import { FcGoogle } from "react-icons/fc";
+import kakao_login from "../../../../images/kakao_login.png";
+
 type Props = {
   onChangeInputValue: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onClickKakaoLogin: () => void;
   onClickLogin: () => void;
   onEnterLogin: (event: React.KeyboardEvent<HTMLInputElement>) => void;
   loginResult: boolean;
@@ -12,6 +15,7 @@ type Props = {
 };
 const LoginPresenter = ({
   onChangeInputValue,
+  onClickKakaoLogin,
   onClickLogin,
   onEnterLogin,
   loginResult,
@@ -70,6 +74,10 @@ const LoginPresenter = ({
       </RememberContainer>
       <ButtonContainer>
         <LoginButton onClick={onClickLogin}>Login</LoginButton>
+        <KakaoLoginButton
+          imgPath={kakao_login}
+          onClick={onClickKakaoLogin}
+        ></KakaoLoginButton>
         <RegisterButton>
           <Link to="/auth/registerForm">Registration</Link>
         </RegisterButton>
@@ -77,6 +85,7 @@ const LoginPresenter = ({
     </Container>
   );
 };
+
 const Container = styled.div`
   width: 100%;
   max-width: 80vw;
@@ -171,6 +180,23 @@ const ButtonContainer = styled.div`
   text-align: center;
   align-items: center;
   margin-bottom: 35px;
+`;
+const KakaoLoginButton: any = styled.button`
+  background: url(${(props: any) => props.imgPath});
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 410px;
+  height: 56px;
+  font-family: Poppins;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 27px;
+  letter-spacing: 0px;
+  text-align: center;
+  /* color: #212121; */
+  border: none;
+  cursor: pointer;
 `;
 const LoginButton: any = styled.button`
   background: #b69142;

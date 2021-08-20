@@ -1,10 +1,12 @@
 import ReactPlayer from "react-player";
 import { useState, useEffect } from "react";
-import videoUrl from "../../../video/helipad_mainmov.mp4";
+import videoUrl from "../../video/helipad_mainmov.mp4";
 import styled from "styled-components";
+
 const VideoPlayerPresenter = () => {
   const [videoFileUrl, setVideoFileUrl] = useState("");
   useEffect(() => {
+    console.log("videoFileUrl", videoFileUrl);
     videoUrl && setVideoFileUrl(videoUrl);
   }, []);
   return (
