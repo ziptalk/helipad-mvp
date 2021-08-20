@@ -37,6 +37,451 @@ enum Definition {
 
 // localStorage.setItem('xValue', '10000000');
 
+const ParkingSpots = () => {
+  const [isExpanded, setExpanded] = useState(false);
+  const { getCollapseProps, getToggleProps } = useCollapse({ isExpanded });
+
+  const [parkingSpots, setParkingSpots] = useState("Any");
+  const parkingSpotsList = ["1+", "2+", "3+", "4+", "5+"];
+
+  const handleParkingSpots = (value: string) => {
+    setParkingSpots(value);
+    setExpanded(false);
+  };
+
+  return (
+    <>
+    <div
+      style={{ position: "relative" }}
+      {...getToggleProps({
+        onClick: () =>
+          setExpanded((prevExpanded) => !prevExpanded),
+      })}
+    >
+      <InputIndividualBox
+        placeholder="Any"
+        value={parkingSpots}
+        style={{ marginRight: "10px" }}
+      />
+      <ArrowBox>
+        {isExpanded ? (
+          <BsChevronUp
+            style={{ width: "24px", height: "24px" }}
+          />
+        ) : (
+          <BsChevronDown
+            style={{
+              width: "24px",
+              height: "24px",
+              color: "#8D8D8D",
+            }}
+          />
+        )}
+      </ArrowBox>
+    </div>
+    <section {...getCollapseProps()}>
+      <div style={{ backgroundColor: "#FFFFFF" }}>
+        {parkingSpotsList.map((value) => (
+          <div style={{ position: "relative" }}>
+            <SelectList onClick={() => handleParkingSpots(value)}>
+              {value}
+            </SelectList>
+            {value == parkingSpots ? (
+              <ArrowBox>
+                <GoCheck
+                  style={{ width: "24px", height: "24px" }}
+                />
+              </ArrowBox>
+            ) : (
+              <></>
+            )}
+          </div>
+        ))}
+      </div>
+    </section>
+    </>
+  )
+}
+
+const SquareFeetLeft = () => {
+  const [isExpanded, setExpanded] = useState(false);
+  const { getCollapseProps, getToggleProps } = useCollapse({ isExpanded });
+
+  const [squareLeft, setSquareLeft] = useState("Any");
+  const squareFeetList = [
+    "500",
+    "1000",
+    "1500",
+    "2000",
+    "2500",
+    "3000",
+    "3000+",
+  ];
+
+  const handleSquareLeft = (value: string) => {
+    setSquareLeft(value);
+    setExpanded(false);
+  };
+
+  return (
+    <>
+    <div>
+      <div
+        style={{ position: "relative" }}
+        {...getToggleProps({
+          onClick: () =>
+            setExpanded((prevExpanded) => !prevExpanded),
+        })}
+      >
+        <InputIndividualBox
+          placeholder="Any"
+          value={squareLeft}
+          style={{ marginRight: "10px" }}
+        />
+        <ArrowBox>
+          {isExpanded ? (
+            <BsChevronUp
+              style={{ width: "24px", height: "24px" }}
+            />
+          ) : (
+            <BsChevronDown
+              style={{
+                width: "24px",
+                height: "24px",
+                color: "#8D8D8D",
+              }}
+            />
+          )}
+        </ArrowBox>
+      </div>
+      <section {...getCollapseProps()}>
+        <div style={{ backgroundColor: "#FFFFFF" }}>
+          {squareFeetList.map((value) => (
+            <div style={{ position: "relative" }}>
+              <SelectList
+                onClick={() => handleSquareLeft(value)}
+              >
+                {value}
+              </SelectList>
+              {value == squareLeft ? (
+                <ArrowBox>
+                  <GoCheck
+                    style={{ width: "24px", height: "24px" }}
+                  />
+                </ArrowBox>
+              ) : (
+                <></>
+              )}
+            </div>
+          ))}
+        </div>
+      </section>
+    </div>
+    </>
+  )
+}
+
+const SquareFeetRight = () => {
+  const [isExpanded, setExpanded] = useState(false);
+  const { getCollapseProps, getToggleProps } = useCollapse({ isExpanded });
+
+  const [squareRight, setSquareRight] = useState("Any");
+  const squareFeetList = [
+    "500",
+    "1000",
+    "1500",
+    "2000",
+    "2500",
+    "3000",
+    "3000+",
+  ];
+
+  const handleSquareRight = (value: string) => {
+    setSquareRight(value);
+    setExpanded(false);
+  };
+
+  return (
+    <>
+    <div>
+      <div
+        style={{ position: "relative" }}
+        {...getToggleProps({
+          onClick: () =>
+            setExpanded((prevExpanded) => !prevExpanded),
+        })}
+      >
+        <InputIndividualBox
+          placeholder="Any"
+          value={squareRight}
+          style={{ marginRight: "10px" }}
+        />
+        <ArrowBox>
+          {isExpanded ? (
+            <BsChevronUp
+              style={{ width: "24px", height: "24px" }}
+            />
+          ) : (
+            <BsChevronDown
+              style={{
+                width: "24px",
+                height: "24px",
+                color: "#8D8D8D",
+              }}
+            />
+          )}
+        </ArrowBox>
+      </div>
+      <section {...getCollapseProps()}>
+        <div style={{ backgroundColor: "#FFFFFF" }}>
+          {squareFeetList.map((value) => (
+            <div style={{ position: "relative" }}>
+              <SelectList
+                onClick={() => handleSquareRight(value)}
+              >
+                {value}
+              </SelectList>
+              {value == squareRight ? (
+                <ArrowBox>
+                  <GoCheck
+                    style={{ width: "24px", height: "24px" }}
+                  />
+                </ArrowBox>
+              ) : (
+                <></>
+              )}
+            </div>
+          ))}
+        </div>
+      </section>
+    </div>
+    </>
+  )
+}
+
+const LotSizeLeft = () => {
+  const [isExpanded, setExpanded] = useState(false);
+  const { getCollapseProps, getToggleProps } = useCollapse({ isExpanded });
+
+  const [lotSizeLeft, setLotSizeLeft] = useState("Any");
+  const lotSizeList = [
+    "0 soft",
+    "1,000 soft",
+    "2,000 soft",
+    "3,000 soft",
+    "3,000+ soft",
+  ];
+
+  const handleLotSizeLeft = (value: string) => {
+    setLotSizeLeft(value);
+    setExpanded(false);
+  };
+
+  return (
+    <>
+    <div>
+      <div
+        style={{ position: "relative" }}
+        {...getToggleProps({
+          onClick: () =>
+            setExpanded((prevExpanded) => !prevExpanded),
+        })}
+      >
+        <InputIndividualBox
+          placeholder="Any"
+          value={lotSizeLeft}
+          style={{ marginRight: "10px" }}
+        />
+        <ArrowBox>
+          {isExpanded ? (
+            <BsChevronUp
+              style={{ width: "24px", height: "24px" }}
+            />
+          ) : (
+            <BsChevronDown
+              style={{
+                width: "24px",
+                height: "24px",
+                color: "#8D8D8D",
+              }}
+            />
+          )}
+        </ArrowBox>
+      </div>
+      <section {...getCollapseProps()}>
+        <div style={{ backgroundColor: "#FFFFFF" }}>
+          {lotSizeList.map((value) => (
+            <div style={{ position: "relative" }}>
+              <SelectList
+                onClick={() => handleLotSizeLeft(value)}
+              >
+                {value}
+              </SelectList>
+              {value == lotSizeLeft ? (
+                <ArrowBox>
+                  <GoCheck
+                    style={{ width: "24px", height: "24px" }}
+                  />
+                </ArrowBox>
+              ) : (
+                <></>
+              )}
+            </div>
+          ))}
+        </div>
+      </section>
+    </div>
+    </>
+  )
+}
+
+const LotSizeRight = () => {
+  const [isExpanded, setExpanded] = useState(false);
+  const { getCollapseProps, getToggleProps } = useCollapse({ isExpanded });
+
+  const [lotSizeRight, setLotSizeRight] = useState("Any");
+  const lotSizeList = [
+    "0 soft",
+    "1,000 soft",
+    "2,000 soft",
+    "3,000 soft",
+    "3,000+ soft",
+  ];
+
+  const handleLotSizeRight = (value: string) => {
+    setLotSizeRight(value);
+    setExpanded(false);
+  };
+
+  return (
+    <>
+    <div>
+      <div
+        style={{ position: "relative" }}
+        {...getToggleProps({
+          onClick: () =>
+            setExpanded((prevExpanded) => !prevExpanded),
+        })}
+      >
+        <InputIndividualBox
+          placeholder="Any"
+          value={lotSizeRight}
+          style={{ marginRight: "10px" }}
+        />
+        <ArrowBox>
+          {isExpanded ? (
+            <BsChevronUp
+              style={{ width: "24px", height: "24px" }}
+            />
+          ) : (
+            <BsChevronDown
+              style={{
+                width: "24px",
+                height: "24px",
+                color: "#8D8D8D",
+              }}
+            />
+          )}
+        </ArrowBox>
+      </div>
+      <section {...getCollapseProps()}>
+        <div style={{ backgroundColor: "#FFFFFF" }}>
+          {lotSizeList.map((value) => (
+            <div style={{ position: "relative" }}>
+              <SelectList
+                onClick={() => handleLotSizeRight(value)}
+              >
+                {value}
+              </SelectList>
+              {value == lotSizeRight ? (
+                <ArrowBox>
+                  <GoCheck
+                    style={{ width: "24px", height: "24px" }}
+                  />
+                </ArrowBox>
+              ) : (
+                <></>
+              )}
+            </div>
+          ))}
+        </div>
+      </section>
+    </div>
+    </>
+  )
+}
+
+const DaysOn = () => {
+  const [isExpanded, setExpanded] = useState(false);
+  const { getCollapseProps, getToggleProps } = useCollapse({ isExpanded });
+
+  const [daysOn, setDaysOn] = useState("Any");
+  const daysOnList = ["1 Day", "2 Days", "3 Days", "4 Days", "5+ Days"];
+
+  const handleDaysOn = (value: string) => {
+    setDaysOn(value);
+    setExpanded(false);
+  };
+
+  return (
+    <>
+    <div>
+      <div
+        style={{ position: "relative" }}
+        {...getToggleProps({
+          onClick: () =>
+            setExpanded((prevExpanded) => !prevExpanded),
+        })}
+      >
+        <InputIndividualBox
+          placeholder="Any"
+          value={daysOn}
+          style={{ marginRight: "10px" }}
+        />
+        <ArrowBox>
+          {isExpanded ? (
+            <BsChevronUp
+              style={{ width: "24px", height: "24px" }}
+            />
+          ) : (
+            <BsChevronDown
+              style={{
+                width: "24px",
+                height: "24px",
+                color: "#8D8D8D",
+              }}
+            />
+          )}
+        </ArrowBox>
+      </div>
+      <section {...getCollapseProps()}>
+        <div style={{ backgroundColor: "#FFFFFF" }}>
+          {daysOnList.map((value) => (
+            <div style={{ position: "relative" }}>
+              <SelectList
+                onClick={() => handleDaysOn(value)}
+              >
+                {value}
+              </SelectList>
+              {value == daysOn ? (
+                <ArrowBox>
+                  <GoCheck
+                    style={{ width: "24px", height: "24px" }}
+                  />
+                </ArrowBox>
+              ) : (
+                <></>
+              )}
+            </div>
+          ))}
+        </div>
+      </section>
+    </div>
+    </>
+  )
+}
+
+
 const AssetList: React.FC<AssetListProperties> = ({ history }: any) => {
   const [definition, setDefinition] = useState<Definition>(
     Definition.FOR_INVESTMENT
@@ -64,37 +509,13 @@ const AssetList: React.FC<AssetListProperties> = ({ history }: any) => {
   const [moreOption, setMoreOption] = useState(false);
   const [homeTypeOption, setHomeTypeOption] = useState(false);
   const [isExpanded, setExpanded] = useState(false);
-  const [isExpanded2, setExpanded2] = useState(false);
+  const [homeType, setHomeType] = useState(0);
 
   const { getCollapseProps, getToggleProps } = useCollapse({ isExpanded });
 
   const [hoaListValue, setHoaListValue] = useState("Any");
-  const [parkingSpots, setParkingSpots] = useState("Any");
-  const [squareLeft, setSquareLeft] = useState("Any");
-  const [squareRight, setSquareRight] = useState("Any");
-  const [lotSizeLeft, setLotSizeLeft] = useState("Any");
-  const [lotSizeRight, setLotSizeRight] = useState("Any");
-  const [daysOn, setDaysOn] = useState("Any");
 
   const hoaList = ["Any", "$50/Month"];
-  const parkingSpotsList = ["1+", "2+", "3+", "4+", "5+"];
-  const squareFeetList = [
-    "500",
-    "1000",
-    "1500",
-    "2000",
-    "2500",
-    "3000",
-    "3000+",
-  ];
-  const lotSizeList = [
-    "0 soft",
-    "1,000 soft",
-    "2,000 soft",
-    "3,000 soft",
-    "3,000+ soft",
-  ];
-  const daysOnList = ["1 Day", "2 Days", "3 Days", "4 Days", "5+ Days"];
 
   console.log(assets);
 
@@ -188,13 +609,13 @@ const AssetList: React.FC<AssetListProperties> = ({ history }: any) => {
               let price = res[i].sales.closePrice;
               price = price / 1000; //1000dollar -> 1Kdollar
               let priceLabel = "";
-              if (10000 > price && price >= 0) {
+              if (1000 > price && price >= 0) {
                 priceLabel =
                   price
                     .toFixed()
                     .toString()
                     .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",") + "K";
-              } else if (price >= 10000) {
+              } else if (price >= 1000) {
                 priceLabel =
                   (price / 1000)
                     .toFixed(1)
@@ -351,36 +772,6 @@ const AssetList: React.FC<AssetListProperties> = ({ history }: any) => {
     setExpanded(false);
   };
 
-  const handleParkingSpots = (value: string) => {
-    setParkingSpots(value);
-    setExpanded(false);
-  };
-
-  const handleSquareLeft = (value: string) => {
-    setSquareLeft(value);
-    setExpanded(false);
-  };
-
-  const handleSquareRight = (value: string) => {
-    setSquareRight(value);
-    setExpanded(false);
-  };
-
-  const handleLotSizeLeft = (value: string) => {
-    setLotSizeLeft(value);
-    setExpanded(false);
-  };
-
-  const handleLotSizeRight = (value: string) => {
-    setLotSizeRight(value);
-    setExpanded(false);
-  };
-
-  const handleDaysOn = (value: string) => {
-    setDaysOn(value);
-    setExpanded(false);
-  };
-
   return (
     <Container>
       <MapContainer>
@@ -390,11 +781,16 @@ const AssetList: React.FC<AssetListProperties> = ({ history }: any) => {
             onChange={(e: any) => setSearchValue(e.target.value)}
             placeholder="Las Vegas, NV"
           />
-          <SearchButton onClick={()=>setHomeTypeOption(!homeTypeOption)}>Home Type</SearchButton>
+          <SearchButton onClick={()=>{
+            setHomeTypeOption(!homeTypeOption)
+            setMoreOption(false)
+            setBBOption(false)
+            }}>Home Type</SearchButton>
           <SearchButton
             onClick={() => {
               setBBOption(true);
               setMoreOption(false);
+              setHomeTypeOption(false);
             }}
           >
             Bed & Baths
@@ -403,6 +799,7 @@ const AssetList: React.FC<AssetListProperties> = ({ history }: any) => {
             onClick={() => {
               setMoreOption(true);
               setBBOption(false);
+              setHomeTypeOption(false);
             }}
           >
             More
@@ -463,15 +860,18 @@ const AssetList: React.FC<AssetListProperties> = ({ history }: any) => {
           <HomeTypeOptionContainer>
             <div style={{display:"flex", justifyContent:"space-between", alignItems:"center"}}>
               <div>Residence</div>
-              <div style={{width:"16px", height:"16px", borderRadius:"8px", backgroundColor:"#C4C4C4"}}/>
+              {homeType == 0 ? <button style={{width:"16px", height:"16px", borderRadius:"8px", backgroundColor:"#4B4B4B", border:"2px solid #C4C4C4"}}/>:
+               <button onClick={()=>setHomeType(0)} style={{width:"16px", height:"16px", borderRadius:"8px", backgroundColor:"#C4C4C4", border:"2px solid #C4C4C4"}}/>}
             </div>
             <div style={{display:"flex", justifyContent:"space-between", alignItems:"center"}}>
               <div>Vacation</div>
-              <div style={{width:"16px", height:"16px", borderRadius:"8px", backgroundColor:"#C4C4C4"}}/>
+              {homeType == 1 ? <button style={{width:"16px", height:"16px", borderRadius:"8px", backgroundColor:"#4B4B4B", border:"2px solid #C4C4C4"}}/>:
+               <button onClick={()=>setHomeType(1)} style={{width:"16px", height:"16px", borderRadius:"8px", backgroundColor:"#C4C4C4", border:"2px solid #C4C4C4"}}/>}
             </div>
             <div style={{display:"flex", justifyContent:"space-between", alignItems:"center"}}>
               <div>Income</div>
-              <div style={{width:"16px", height:"16px", borderRadius:"8px", backgroundColor:"#C4C4C4"}}/>
+              {homeType == 2 ? <button style={{width:"16px", height:"16px", borderRadius:"8px", backgroundColor:"#4B4B4B", border:"2px solid #C4C4C4"}}/>:
+               <button onClick={()=>setHomeType(2)} style={{width:"16px", height:"16px", borderRadius:"8px", backgroundColor:"#C4C4C4", border:"2px solid #C4C4C4"}}/>}
             </div>
           </HomeTypeOptionContainer>
         </>:<></>}
@@ -480,7 +880,14 @@ const AssetList: React.FC<AssetListProperties> = ({ history }: any) => {
           <>
             <MoreOptionContainer>
               <MoreListContainer>
-                <MoreLeftContainer>Max HOA</MoreLeftContainer>
+              <MoreLeftContainer style={{display:"flex"}}>
+                  <div>Max HOA</div>
+                  <HelpMark>
+                    <div style={{marginLeft:"-3px", marginTop:"-1px"}}>
+                      ?
+                    </div>
+                  </HelpMark>
+                </MoreLeftContainer>
                 <MoreRightContainer>
                   <div
                     style={{ position: "relative" }}
@@ -548,54 +955,7 @@ const AssetList: React.FC<AssetListProperties> = ({ history }: any) => {
               <MoreListContainer>
                 <MoreLeftContainer>Parking Spots</MoreLeftContainer>
                 <MoreRightContainer>
-                  <div
-                    style={{ position: "relative" }}
-                    {...getToggleProps({
-                      onClick: () =>
-                        setExpanded((prevExpanded) => !prevExpanded),
-                    })}
-                  >
-                    <InputIndividualBox
-                      placeholder="Any"
-                      value={parkingSpots}
-                      style={{ marginRight: "10px" }}
-                    />
-                    <ArrowBox>
-                      {isExpanded2 ? (
-                        <BsChevronUp
-                          style={{ width: "24px", height: "24px" }}
-                        />
-                      ) : (
-                        <BsChevronDown
-                          style={{
-                            width: "24px",
-                            height: "24px",
-                            color: "#8D8D8D",
-                          }}
-                        />
-                      )}
-                    </ArrowBox>
-                  </div>
-                  <section {...getCollapseProps()}>
-                    <div style={{ backgroundColor: "#FFFFFF" }}>
-                      {parkingSpotsList.map((value) => (
-                        <div style={{ position: "relative" }}>
-                          <SelectList onClick={() => handleParkingSpots(value)}>
-                            {value}
-                          </SelectList>
-                          {value == parkingSpots ? (
-                            <ArrowBox>
-                              <GoCheck
-                                style={{ width: "24px", height: "24px" }}
-                              />
-                            </ArrowBox>
-                          ) : (
-                            <></>
-                          )}
-                        </div>
-                      ))}
-                    </div>
-                  </section>
+                  <ParkingSpots />
                   <CheckBoxContainer>
                     <input type="checkbox" name="houseOpen"></input>
                     <div>Must have garage</div>
@@ -614,111 +974,9 @@ const AssetList: React.FC<AssetListProperties> = ({ history }: any) => {
                 </MoreLeftContainer>
                 <MoreRightContainer>
                   <div style={{ display: "flex", width: "100%" }}>
-                    <div>
-                      <div
-                        style={{ position: "relative" }}
-                        {...getToggleProps({
-                          onClick: () =>
-                            setExpanded((prevExpanded) => !prevExpanded),
-                        })}
-                      >
-                        <InputIndividualBox
-                          placeholder="Any"
-                          value={squareLeft}
-                          style={{ marginRight: "10px" }}
-                        />
-                        <ArrowBox>
-                          {isExpanded ? (
-                            <BsChevronUp
-                              style={{ width: "24px", height: "24px" }}
-                            />
-                          ) : (
-                            <BsChevronDown
-                              style={{
-                                width: "24px",
-                                height: "24px",
-                                color: "#8D8D8D",
-                              }}
-                            />
-                          )}
-                        </ArrowBox>
-                      </div>
-                      <section {...getCollapseProps()}>
-                        <div style={{ backgroundColor: "#FFFFFF" }}>
-                          {squareFeetList.map((value) => (
-                            <div style={{ position: "relative" }}>
-                              <SelectList
-                                onClick={() => handleSquareLeft(value)}
-                              >
-                                {value}
-                              </SelectList>
-                              {value == squareLeft ? (
-                                <ArrowBox>
-                                  <GoCheck
-                                    style={{ width: "24px", height: "24px" }}
-                                  />
-                                </ArrowBox>
-                              ) : (
-                                <></>
-                              )}
-                            </div>
-                          ))}
-                        </div>
-                      </section>
-                    </div>
+                    <SquareFeetLeft />
                     <div style={{ margin: "5px", marginTop: "10px" }}>-</div>
-                    <div>
-                      <div
-                        style={{ position: "relative" }}
-                        {...getToggleProps({
-                          onClick: () =>
-                            setExpanded((prevExpanded) => !prevExpanded),
-                        })}
-                      >
-                        <InputIndividualBox
-                          placeholder="Any"
-                          value={squareRight}
-                          style={{ marginRight: "10px" }}
-                        />
-                        <ArrowBox>
-                          {isExpanded ? (
-                            <BsChevronUp
-                              style={{ width: "24px", height: "24px" }}
-                            />
-                          ) : (
-                            <BsChevronDown
-                              style={{
-                                width: "24px",
-                                height: "24px",
-                                color: "#8D8D8D",
-                              }}
-                            />
-                          )}
-                        </ArrowBox>
-                      </div>
-                      <section {...getCollapseProps()}>
-                        <div style={{ backgroundColor: "#FFFFFF" }}>
-                          {squareFeetList.map((value) => (
-                            <div style={{ position: "relative" }}>
-                              <SelectList
-                                onClick={() => handleSquareRight(value)}
-                              >
-                                {value}
-                              </SelectList>
-                              {value == squareRight ? (
-                                <ArrowBox>
-                                  <GoCheck
-                                    style={{ width: "24px", height: "24px" }}
-                                  />
-                                </ArrowBox>
-                              ) : (
-                                <></>
-                              )}
-                            </div>
-                          ))}
-                        </div>
-                      </section>
-                    </div>
+                    <SquareFeetRight />
                   </div>
                 </MoreRightContainer>
               </MoreListContainer>
@@ -734,111 +992,9 @@ const AssetList: React.FC<AssetListProperties> = ({ history }: any) => {
                 </MoreLeftContainer>
                 <MoreRightContainer>
                   <div style={{ display: "flex", width: "100%" }}>
-                    <div>
-                      <div
-                        style={{ position: "relative" }}
-                        {...getToggleProps({
-                          onClick: () =>
-                            setExpanded((prevExpanded) => !prevExpanded),
-                        })}
-                      >
-                        <InputIndividualBox
-                          placeholder="Any"
-                          value={lotSizeLeft}
-                          style={{ marginRight: "10px" }}
-                        />
-                        <ArrowBox>
-                          {isExpanded ? (
-                            <BsChevronUp
-                              style={{ width: "24px", height: "24px" }}
-                            />
-                          ) : (
-                            <BsChevronDown
-                              style={{
-                                width: "24px",
-                                height: "24px",
-                                color: "#8D8D8D",
-                              }}
-                            />
-                          )}
-                        </ArrowBox>
-                      </div>
-                      <section {...getCollapseProps()}>
-                        <div style={{ backgroundColor: "#FFFFFF" }}>
-                          {lotSizeList.map((value) => (
-                            <div style={{ position: "relative" }}>
-                              <SelectList
-                                onClick={() => handleLotSizeLeft(value)}
-                              >
-                                {value}
-                              </SelectList>
-                              {value == lotSizeLeft ? (
-                                <ArrowBox>
-                                  <GoCheck
-                                    style={{ width: "24px", height: "24px" }}
-                                  />
-                                </ArrowBox>
-                              ) : (
-                                <></>
-                              )}
-                            </div>
-                          ))}
-                        </div>
-                      </section>
-                    </div>
+                    <LotSizeLeft />
                     <div style={{ margin: "5px", marginTop: "10px" }}>-</div>
-                    <div>
-                      <div
-                        style={{ position: "relative" }}
-                        {...getToggleProps({
-                          onClick: () =>
-                            setExpanded((prevExpanded) => !prevExpanded),
-                        })}
-                      >
-                        <InputIndividualBox
-                          placeholder="Any"
-                          value={lotSizeRight}
-                          style={{ marginRight: "10px" }}
-                        />
-                        <ArrowBox>
-                          {isExpanded ? (
-                            <BsChevronUp
-                              style={{ width: "24px", height: "24px" }}
-                            />
-                          ) : (
-                            <BsChevronDown
-                              style={{
-                                width: "24px",
-                                height: "24px",
-                                color: "#8D8D8D",
-                              }}
-                            />
-                          )}
-                        </ArrowBox>
-                      </div>
-                      <section {...getCollapseProps()}>
-                        <div style={{ backgroundColor: "#FFFFFF" }}>
-                          {lotSizeList.map((value) => (
-                            <div style={{ position: "relative" }}>
-                              <SelectList
-                                onClick={() => handleLotSizeRight(value)}
-                              >
-                                {value}
-                              </SelectList>
-                              {value == lotSizeRight ? (
-                                <ArrowBox>
-                                  <GoCheck
-                                    style={{ width: "24px", height: "24px" }}
-                                  />
-                                </ArrowBox>
-                              ) : (
-                                <></>
-                              )}
-                            </div>
-                          ))}
-                        </div>
-                      </section>
-                    </div>
+                    <LotSizeRight />
                   </div>
                 </MoreRightContainer>
               </MoreListContainer>
@@ -931,7 +1087,14 @@ const AssetList: React.FC<AssetListProperties> = ({ history }: any) => {
                 </MoreRightContainer>
               </MoreListContainer>
               <MoreListContainer>
-                <MoreLeftContainer>Helipad Owned</MoreLeftContainer>
+                <MoreLeftContainer style={{display:"flex"}}>
+                  <div>Helipad Owned</div>
+                  <HelpMark>
+                    <div style={{marginLeft:"-3px", marginTop:"-1px"}}>
+                      ?
+                    </div>
+                  </HelpMark>
+                </MoreLeftContainer>
                 <MoreRightContainer>
                   <CheckBoxContainer>
                     <input type="checkbox" name="helipad-owned"></input>
@@ -944,54 +1107,7 @@ const AssetList: React.FC<AssetListProperties> = ({ history }: any) => {
               <MoreListContainer>
                 <MoreLeftContainer>Days On Helipad</MoreLeftContainer>
                 <MoreRightContainer>
-                  <div
-                    style={{ position: "relative" }}
-                    {...getToggleProps({
-                      onClick: () =>
-                        setExpanded((prevExpanded) => !prevExpanded),
-                    })}
-                  >
-                    <InputIndividualBox
-                      placeholder="Any"
-                      value={daysOn}
-                      style={{ marginRight: "10px" }}
-                    />
-                    <ArrowBox>
-                      {isExpanded ? (
-                        <BsChevronUp
-                          style={{ width: "24px", height: "24px" }}
-                        />
-                      ) : (
-                        <BsChevronDown
-                          style={{
-                            width: "24px",
-                            height: "24px",
-                            color: "#8D8D8D",
-                          }}
-                        />
-                      )}
-                    </ArrowBox>
-                  </div>
-                  <section {...getCollapseProps()}>
-                    <div style={{ backgroundColor: "#FFFFFF" }}>
-                      {daysOnList.map((value) => (
-                        <div style={{ position: "relative" }}>
-                          <SelectList onClick={() => handleDaysOn(value)}>
-                            {value}
-                          </SelectList>
-                          {value == daysOn ? (
-                            <ArrowBox>
-                              <GoCheck
-                                style={{ width: "24px", height: "24px" }}
-                              />
-                            </ArrowBox>
-                          ) : (
-                            <></>
-                          )}
-                        </div>
-                      ))}
-                    </div>
-                  </section>
+                  <DaysOn />
                 </MoreRightContainer>
               </MoreListContainer>
               <MoreListContainer>
@@ -1062,6 +1178,17 @@ const AssetList: React.FC<AssetListProperties> = ({ history }: any) => {
   );
 };
 
+const HelpMark = styled.button`
+  width: 20px;
+  height: 20px;
+  margin-left: 5px;
+  border-radius: 10px;
+  border: 3px solid #B69142;
+  color: #B69142;
+  font-weight: Bold;
+  background-color: white;
+`
+
 const SearchBar = styled.div`
   display: flex;
   width: 100%;
@@ -1119,10 +1246,12 @@ const HomeTypeOptionContainer = styled.div`
   position: absolute;
   z-index: 2;
   left: 330px;
-  width: 180px;
+  width: 230px;
   background-color: #ffffff;
   font-size: 16px;
   padding: 30px;
+  padding-top: 20px;
+  padding-bottom: 20px;
 `
 
 const MoreListContainer = styled.div`
