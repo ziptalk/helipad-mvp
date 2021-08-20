@@ -3,8 +3,10 @@ import AssetService from "./asset/AssetService";
 import UserService from "./user/UserService";
 import ContactService from "./contact/ContactService";
 import ProcessService from "./process/ProcessService";
+import AssetProcessService from "./assetProcess/AssetProcessService";
 import { MessageContainer } from "../model/MessageContainer";
 import User from "../model/User";
+import Process from "../model/Process";
 
 export default class FirebaseService {
   static async getAssetList(): Promise<Asset[]> {
@@ -13,6 +15,10 @@ export default class FirebaseService {
 
   static async getAsset(id: string): Promise<Asset> {
     return AssetService.getAsset(id);
+  }
+
+  static async getProcess(userId: string, assetId: string): Promise<Process> {
+    return AssetProcessService.getAssetProcess(userId, assetId);
   }
   static async getAssetListByNeighborhood(
     neighborhood: string
@@ -36,7 +42,7 @@ export default class FirebaseService {
   }
 
   static async getUserInfo(userId: string): Promise<User> {
-    return UserService.getUser(userId);
+    return await UserService.getUser(userId);
   }
 
   static async contactToAgent(userEmail: string, assetId: string) {
@@ -54,8 +60,25 @@ export default class FirebaseService {
     return AssetService.getSavedAsset(userId);
   }
 
-  static sendMessage(from: string, to: string, message: string) {
-    return ContactService.sendMessage(from, to, message);
+  static sendMessage(
+    from: string,
+    to: string,
+    message: string,
+    asset: string,
+    type: string
+  ) {
+    return ContactService.sendMessage(from, to, message, asset, type);
+  }
+
+  static contactUsSendMessage(
+    name: string,
+    email: string,
+    regard: string,
+    phone: string,
+    message: string,
+    date: Date
+  ){
+    return ContactService.contactUsSendMessage(name, email, regard, phone, message, date)
   }
 
   static getContactHistory(userId: string, agentId: string) {

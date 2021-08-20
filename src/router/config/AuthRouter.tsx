@@ -1,69 +1,43 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   BrowserRouter as Router,
   Route,
   Switch,
-  Redirect,
   RouteComponentProps,
 } from "react-router-dom";
 import PrivateRoutes from "./PrivateRouter/PrivateRoutes";
-import { AssetDetailRoutes, AssetRoutes } from "../../views/Asset";
-
-import { Login, Logout, RegisterForm } from "../../views/Auth/components";
+import { Logout } from "../../views/Auth/components";
+import LoginAndRegisterContainer from "../../views/Auth";
 import MyPage from "../../views/MyPage/components/mypage/MyPage";
-import Process from "../../views/MyPage/components/process/Process";
-import ContactHistory from "../../views/MyPage/components/mypage/ContactHistory";
-import Neighborhood from "../../views/Neighborhood/components/Neighborhood";
-import NeighborhoodDetail from "../../views/Neighborhood/components/NeighborhoodDetail";
-import { InviteCodeForm } from "../../components/landing/InviteCodeForm";
-
+import AccountPage from "../../views/Account/components/AccountPage";
+import ContactPage from "../../views/Contact/components/ContactPage";
+import WaitlistPage from "../../views/Waitlist/components/WaitlistPage";
+import VIPClientPage from "../../views/Waitlist/components/VIPClientPage";
 const AuthRouter = ({ match }: RouteComponentProps) => {
-  console.log("application match url : ", match.url);
+  const [isLandingPage, setIsLandingPage] = useState(false);
   return (
     <Switch>
-      <>
-        <section className="container">
-          <div className="routingContainer">
-            <Route path={`${match.url}/login`} component={Login} />
-            <Route
-              path={`${match.url}/registerForm`}
-              component={RegisterForm}
-            />
-            <PrivateRoutes path={`${match.url}/logout`} component={Logout} />
-            <PrivateRoutes path={`${match.url}/mypage`} component={MyPage} />
-
-            {/* <Redirect to="/asset/assetList" from="/" />
-            <Redirect to="/asset/neighborhood" from="/" /> */}
-          </div>
-        </section>
-      </>
+      <Route
+        path={`${match.url}/login`}
+        component={LoginAndRegisterContainer}
+      />
+      <Route
+        path={`${match.url}/registerForm`}
+        component={LoginAndRegisterContainer}
+      />
+      <Route path={`${match.url}/contact`} component={ContactPage} />
+      <Route path={`${match.url}/account`} component={AccountPage} />
+      <Route path={`${match.url}/logout`} component={Logout} />
+      <Route path={`${match.url}/waitlist`} component={WaitlistPage} />
+      <Route path={`${match.url}/vipclient`} render={(props) => (
+                  <VIPClientPage
+                    isLandingPage={isLandingPage}
+                    setIsLandingPage={setIsLandingPage}
+                  />
+                )}/>
+      {/* <PrivateRoutes path={`${match.url}/logout`} component={Logout} /> */}
+      <PrivateRoutes path={`${match.url}/mypage`} component={MyPage} />
     </Switch>
-
-    // <Router>
-    //   <Switch>
-    //     <section className="container">
-    //       <HeaderContainer />
-    //       <div className="routingContainer">
-    //         <PrivateRoutes path="/asset" component={AssetRoutes} />
-    //         <Route exact path="/" component={InviteCodeForm} />
-    //         <Route path="/login" component={Login} />
-    //         <PrivateRoutes path="/logout" component={Logout} />
-    //         <Route path="/signup" component={SignUp} />
-    //         <Route path="/registerForm" component={RegisterForm} />
-    //         <PrivateRoutes path="/mypage" component={MyPage} />
-    //         <PrivateRoutes path="/process" component={Process} />
-    //         <PrivateRoutes path="/contact" component={ContactHistory} />
-    //         <PrivateRoutes path="/neighborhood" component={Neighborhood} />
-    //         <PrivateRoutes
-    //           path="/neighborhoodInfo/:id"
-    //           component={NeighborhoodDetail}
-    //         />
-    //         <Redirect to="/asset" from="/" />
-    //         <Redirect to="/neighborhood" from="/" />
-    //       </div>
-    //     </section>
-    //   </Switch>
-    // </Router>
   );
 };
 

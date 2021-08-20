@@ -20,14 +20,19 @@ export default class AssetService {
 
   static async getAssetListByNeighborhood(neighborhood: string) {
     console.log("neighborhood :", neighborhood);
-    let store = await assetStore
-      .where("neighborhood", "==", neighborhood)
-      .get();
-    console.log(
-      "firestore result:",
-      store.docs.map((snapshot) => Asset.fromObject(snapshot.data()))
-    );
-    return store.docs.map((snapshot) => Asset.fromObject(snapshot.data()));
+    if(neighborhood == undefined){
+      let store =  await assetStore.get();
+      return store.docs.map((snapshot) => Asset.fromObject(snapshot.data()));
+    }else{
+      let store = await assetStore
+        .where("neighborhood", "==", neighborhood)
+        .get();
+      console.log(
+        "firestore result:",
+        store.docs.map((snapshot) => Asset.fromObject(snapshot.data()))
+      );
+      return store.docs.map((snapshot) => Asset.fromObject(snapshot.data()));
+    }
   }
 
   static async saveOrUnSaveAsset(
@@ -80,8 +85,11 @@ export default class AssetService {
   private static async getAssetDocumentId(assetId: string): Promise<string> {
     let assetDocument = await assetStore.where("id", "==", assetId).get();
     if (assetDocument.size === 0) {
-      throw Error("Cannot find asset id " + assetId);
+      // throw Error("Cannot find asset id " + assetId);
+      // alert("Cannot find asset id " + assetId)
+      return assetId
+    }else{
+      return assetDocument.docs[0].id;
     }
-    return assetDocument.docs[0].id;
   }
 }

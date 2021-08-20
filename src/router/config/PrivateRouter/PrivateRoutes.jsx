@@ -8,7 +8,7 @@ const PrivateRoutes = ({ component: Component, ...parentProps }) => {
     console.log("Render loading page...");
     return <></>;
   }
-
+  console.log("parentProps:", { ...parentProps });
   return (
     <Route
       {...parentProps}
@@ -17,7 +17,7 @@ const PrivateRoutes = ({ component: Component, ...parentProps }) => {
           <Component {...routeProps} />
         ) : (
           <>
-            {alert("로그인 후 이용 가능합니다")}
+            {console.log("routeProps", routeProps)}
             <Redirect
               to={{ pathname: "/", state: { prevPath: routeProps.location } }}
             />

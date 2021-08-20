@@ -2,7 +2,7 @@ import FirebaseService from "../service/FirebaseService";
 
 export default class SignUpUseCase {
   static async withEmail({ ...props }) {
-    await FirebaseService.signUpWithEmailAndPassword({ ...props });
+    return await FirebaseService.signUpWithEmailAndPassword({ ...props });
   }
 }
 

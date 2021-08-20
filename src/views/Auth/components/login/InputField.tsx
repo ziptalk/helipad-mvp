@@ -12,7 +12,7 @@ const Title = styled.div`
   font-size: 20px;
 `;
 
-const Input = styled.input`
+const Input: any = styled.input`
   height: 45px;
   border: 1px solid #ebebeb;
 `;
@@ -31,8 +31,11 @@ const InputField: React.FC<InputFieldProps> = ({ title, type, onChange }) => {
   };
   return (
     <Container>
-      <Title>{title}</Title>
-      <Input type={type.valueOf()} onChange={handleOnChange} />
+      <Input
+        type={type.valueOf()}
+        placeHolder={title}
+        onChange={handleOnChange}
+      />
     </Container>
   );
 };

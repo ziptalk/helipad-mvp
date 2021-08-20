@@ -7,6 +7,11 @@
   pointer-events: none;
 }
 
+@font-face {
+  font-family: "Poppins";
+  src: url("./font/Poppins/Poppins-Regular.ttf");
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
@@ -27,11 +32,12 @@
 .App-link {
   color: #61dafb;
 }
-
+.container {
+  /* max-width: 1904px; */
+  /* margin: 0 auto; */
+}
 .routingContainer {
-  width: 100%;
-  display: flex;
-  justify-content: center;
+  margin: 0 auto;
 }
 
 @keyframes App-logo-spin {

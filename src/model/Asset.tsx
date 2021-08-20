@@ -107,25 +107,25 @@ export default class Asset {
     );
   }
 
-  toMap(): Map<string, any> {
-    let map = new Map<string, any>();
-    map.set(COLUMNS.FOR_INVESTMENT, this.forInvestment);
-    map.set(COLUMNS.PRICE, this.price);
-    map.set(COLUMNS.STATUS, this.status);
-    map.set(COLUMNS.DAYS_ON_MARKET, this.daysOnMarket);
-    map.set(COLUMNS.TAX_PER_MONTH, this.taxPerMonth);
+  // toMap(): Map<string, any> {
+  //   let map = new Map<string, any>();
+  //   map.set(COLUMNS.FOR_INVESTMENT, this.forInvestment);
+  //   map.set(COLUMNS.PRICE, this.price);
+  //   map.set(COLUMNS.STATUS, this.status);
+  //   map.set(COLUMNS.DAYS_ON_MARKET, this.daysOnMarket);
+  //   map.set(COLUMNS.TAX_PER_MONTH, this.taxPerMonth);
 
-    map.set(COLUMNS.MIN_DOWN_PYMT, this.minDownPymt);
-    map.set(COLUMNS.COMPASS_TYPE, this.compassType);
-    map.set(COLUMNS.MLS_TYPE, this.mlsType);
-    map.set(COLUMNS.EXPECTED_MONTHLY_PAYMENT, this.expectedMonthlyPayment);
+  //   map.set(COLUMNS.MIN_DOWN_PYMT, this.minDownPymt);
+  //   map.set(COLUMNS.COMPASS_TYPE, this.compassType);
+  //   map.set(COLUMNS.MLS_TYPE, this.mlsType);
+  //   map.set(COLUMNS.EXPECTED_MONTHLY_PAYMENT, this.expectedMonthlyPayment);
 
-    map.set(COLUMNS.INFORMATION, this.information);
-    map.set(COLUMNS.AMENITIES, this.amenities);
-    map.set(COLUMNS.NEIGHBORHOOD, this.neighborhood);
-    map.set(COLUMNS.HOAFEE, this.hoaFee);
-    map.set(COLUMNS.LOTSIZE, this.lotSize);
-    map.set(COLUMNS.BUILDING_INFORMATION, this.buildingInformation.toMap());
-    return map;
-  }
+  //   map.set(COLUMNS.INFORMATION, this.information);
+  //   map.set(COLUMNS.AMENITIES, this.amenities);
+  //   map.set(COLUMNS.NEIGHBORHOOD, this.neighborhood);
+  //   map.set(COLUMNS.HOAFEE, this.hoaFee);
+  //   map.set(COLUMNS.LOTSIZE, this.lotSize);
+  //   map.set(COLUMNS.BUILDING_INFORMATION, this.buildingInformation.toMap());
+  //   return map;
+  // }
 }

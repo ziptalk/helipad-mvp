@@ -7,7 +7,8 @@ import React, {
 } from "react";
 import LoginUseCase from "../../../domain/LoginUseCase";
 import { firebase } from "../../../shared/Firebase";
-
+import GetUserInfo from "../../../domain/GetUserInfo";
+import User from "../../../model/User";
 type State = {
   invitationCode: {
     validation: boolean;
@@ -48,8 +49,11 @@ type ContextProps = {
   authenticated: boolean;
   setUser: any;
   loadingAuthState: boolean;
-  inviteCodeValidation: boolean;
+  inviteCodeValidation: string;
   setInviteCodeValidation: any;
+  headerMode: string;
+  setHeaderMode: any;
+  userInfo: User;
 };
 
 export const AuthContext = React.createContext<Partial<ContextProps>>({});
@@ -58,13 +62,19 @@ export const AuthProvider = ({ children }: any) => {
   // TODO : remove dependency between view and firebase
   const [user, setUser] = useState(null);
   const [loadingAuthState, setLoadingAuthState] = useState(true);
-  const [inviteCodeValidation, setInviteCodeValidation] = useState(true);
+  const [inviteCodeValidation, setInviteCodeValidation] = useState("default");
+  const [headerMode, setHeaderMode] = useState("inviteCodeForm");
+  const [userInfo, setUserInfo] = useState<User>({
+    firstName: "",
+    lastName: "",
+    email: "",
+    isAgent: false,
+  });
   useEffect(() => {
     firebase.auth().onAuthStateChanged((user: any) => {
       setUser(user);
       setLoadingAuthState(false);
-      console.log(user, "ap user");
-      console.log(user !== null, "ap authenticated");
+      GetUserInfo.execute(user.uid).then((result) => setUserInfo(result));
     });
   }, []);
 
@@ -79,6 +89,9 @@ export const AuthProvider = ({ children }: any) => {
         loadingAuthState,
         inviteCodeValidation,
         setInviteCodeValidation,
+        headerMode,
+        setHeaderMode,
+        userInfo,
       }}
     >
       {children}
