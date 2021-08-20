@@ -23,6 +23,7 @@ const DoubleRangeSlider = ({ assetData }: any) => {
   const [currentMax, setCurrentMax] = useState(100);
   const [inputMax, setInputMax] = useState(100);
   const [fullAssets, setFullAssets] = useState<Asset[]>([]);
+  const [listingState, setListingState] = useState(0);
 
   const [x, setX] = useState(10000000);
 
@@ -101,6 +102,14 @@ const DoubleRangeSlider = ({ assetData }: any) => {
         xStep={minValueBetween}
         onChange={handleChange}
       />
+      <div style={{display:"flex", position:"relative", height:"50px", paddingTop:"15px"}}>
+        {listingState == 0 ? <>
+        <ListingButton style={{marginLeft:"30px", backgroundColor:"#AD0606", color:"white", zIndex:10}}>789 Agent Listings</ListingButton>
+        <ListingButton onClick={()=>setListingState(1)} style={{marginLeft:"190px", zIndex:9}}>33 Other Listings</ListingButton></> : <>
+        <ListingButton onClick={()=>setListingState(0)} style={{marginLeft:"30px", zIndex:9}}>789 Agent Listings</ListingButton>
+        <ListingButton style={{marginLeft:"190px", backgroundColor:"#AD0606", color:"white", zIndex:10}}>33 Other Listings</ListingButton></>}
+        
+      </div>
       <div style={{ display: "flex" }}>
         <div
           style={{
@@ -140,6 +149,17 @@ const DoubleRangeSlider = ({ assetData }: any) => {
     </div>
   );
 };
+
+const ListingButton = styled.button`
+  position: absolute;
+  border: 0;
+  height: 42px;
+  border-radius: 21px;
+  width: 195px;
+  font-size: 14px;
+  text-align: center;
+  background-color: #C4C4C4;
+`
 
 const Container = styled.div`
   display: grid;
