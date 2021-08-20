@@ -30,7 +30,7 @@ const LoginAndRegisterContainer = ({ match }: any) => {
   }
   return (
     <Container>
-      {inviteCodeValidation !== "valid" ? (
+      {/* {inviteCodeValidation !== "valid" ? (
         <>
           {alert("please enter invite code")}
           <Redirect to="/" />
@@ -40,7 +40,11 @@ const LoginAndRegisterContainer = ({ match }: any) => {
           selectedCategory={selectedCategory}
           setSelectedCategory={setSelectedCategory}
         />
-      )}
+      )} */}
+      <LoginAndRegisterPresenter
+        selectedCategory={selectedCategory}
+        setSelectedCategory={setSelectedCategory}
+      />
     </Container>
   );
 };
@@ -49,6 +53,7 @@ const Container = styled.div`
   max-width: 100vw;
   width: 100%;
   height: 100%;
+  max-height: 1200px;
   margin: 0 auto;
 `;
 
