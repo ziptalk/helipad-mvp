@@ -609,13 +609,13 @@ const AssetList: React.FC<AssetListProperties> = ({ history }: any) => {
               let price = res[i].sales.closePrice;
               price = price / 1000; //1000dollar -> 1Kdollar
               let priceLabel = "";
-              if (10000 > price && price >= 0) {
+              if (1000 > price && price >= 0) {
                 priceLabel =
                   price
                     .toFixed()
                     .toString()
                     .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",") + "K";
-              } else if (price >= 10000) {
+              } else if (price >= 1000) {
                 priceLabel =
                   (price / 1000)
                     .toFixed(1)
