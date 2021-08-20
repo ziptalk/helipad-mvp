@@ -57,9 +57,6 @@ const HeaderContainer = ({ isLandingPage, dashboardPage }: any) => {
     };
   }, []);
 
-  if (scrollMove) {
-    console.log("scroll");
-  }
   const onClickUserIcon = () => {};
   return (
     <HeaderPresenter

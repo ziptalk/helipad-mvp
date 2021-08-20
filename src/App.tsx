@@ -6,7 +6,7 @@ import ProcessRouter from "./router/config/ProcessRouter";
 import InviteCodeFormContainer from "./components/landing/InviteCodeForm//InviteCodeFormContainer";
 import HeaderContainer from "./components/header/HeaderContainer";
 import FooterPresenter from "./components/FooterPresenter";
-import Waitlist from "./views/Waitlist";
+import { WaitlistPage } from "./views/Waitlist";
 import DashboardContainer from "./views/Dashboard";
 import HomePageContainer from "./views/Homepage";
 import {
@@ -35,6 +35,7 @@ function App() {
               isLandingPage={isLandingPage}
             />
             <div className="routingContainer">
+              <Route exact path="/" component={HomePageContainer} />
               <Route
                 exact
                 path="/aboutus"
@@ -55,8 +56,8 @@ function App() {
                   />
                 )}
               />
-              <Route exact path="/" component={HomePageContainer} />
-              <Route path="/waitlist" component={Waitlist} />
+
+              <Route path="/waitlist" component={WaitlistPage} />
               <Route path="/auth" component={AuthRouter} />
               <Route path="/asset" component={AssetRouter} />
               {/* <Route path="/faq" component={FAQ} /> */}

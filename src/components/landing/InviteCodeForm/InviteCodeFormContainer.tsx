@@ -34,9 +34,9 @@ const InviteCodeFormContainer = ({ isLandingPage, setIsLandingPage }: any) => {
   if (loadingAuthState) {
     return <></>;
   }
-  if (authenticated) {
-    return <Redirect to="/asset/neighborhood"></Redirect>;
-  }
+  // if (authenticated) {
+  //   return <Redirect to="/auth/login"></Redirect>;
+  // }
 
   const handleOnChange = (event: any) => {
     const inviteCode = event.target.value;

@@ -15,8 +15,8 @@ const Main = () => {
           </TitleBlock>
         </TitleWrapper>
         <ButtonWrapper>
-          <StyledLink to="">JOIN THE WAITLIST</StyledLink>
-          <StyledLink to="">VIP 코드 입력</StyledLink>
+          <StyledLink to="/auth/waitlist">JOIN THE WAITLIST</StyledLink>
+          <StyledLink to="/auth/vipclient">VIP 코드 입력</StyledLink>
         </ButtonWrapper>
         <ArrowWrapper>
           <StyledArrow></StyledArrow>

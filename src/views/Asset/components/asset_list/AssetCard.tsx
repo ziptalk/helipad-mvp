@@ -372,7 +372,7 @@ const ContainerContent = styled.div`
   // position: relative;
   // top:100px;
   // margin-top:60px;
-  padding-top: 120px;
+  padding-top: 140px;
   // padding-bottom:20px;
 `;
 const ContainerContent2 = styled.div`

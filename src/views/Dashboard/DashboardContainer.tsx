@@ -62,7 +62,6 @@ const DashboardContainer = ({ setDashboardPage, match }: Props) => {
         </SideBar>
 
         <ContentContainer>
-          <Route exact path="/" component={App} />
           <Route
             exact
             path="/dashboard"
@@ -104,7 +103,7 @@ const Container = styled.div`
   width: 100%;
   height: 100%;
   /* max-width: 1904px; */
-  max-width: 1500px;
+  max-width: 1904px;
   display: flex;
   margin: 0 auto;
 `;

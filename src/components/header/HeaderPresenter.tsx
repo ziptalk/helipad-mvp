@@ -32,6 +32,7 @@ const HeaderPresenter = ({
 }: any) => {
   console.log("header username:", userInfo);
   console.log("header mode:", headerMode);
+  console.log("authenticated:", authenticated);
   const renderByHeaderMode = () => {
     switch (headerMode) {
       default:
@@ -47,12 +48,12 @@ const HeaderPresenter = ({
                 판매
               </CategoryName>
             </StyledLink>
-            <StyledLink to="">
+            <StyledLink to="/">
               <CategoryName scrollMove={scrollMove} color={headerMode}>
                 임대 관리
               </CategoryName>
             </StyledLink>
-            <StyledLink to="/asset/neighborhood">
+            <StyledLink to="/asset/assetList">
               <CategoryName scrollMove={scrollMove} color={headerMode}>
                 매물 찾기
               </CategoryName>
@@ -78,15 +79,26 @@ const HeaderPresenter = ({
         color={headerMode}
         isLandingPage={isLandingPage}
       >
-        <Link to="/asset/neighborhood">
+        <Link to="/">
           <BlackLogo scrollMove={scrollMove} color={headerMode} />
         </Link>
         <MenuBlock>
           {renderByHeaderMode()}
-          <BlackChatBot></BlackChatBot>
-          <StyledLink to="">
-            <LoginButton>SIGN IN</LoginButton>
-          </StyledLink>
+          {/* <BlackChatBot></BlackChatBot> */}
+          {authenticated ? (
+            <Link to="/auth/logout">
+              <LoginButton onClick={() => console.log("signout")}>
+                SIGN OUT
+              </LoginButton>
+            </Link>
+          ) : (
+            <Link to="/auth/login">
+              <LoginButton onClick={() => console.log("signin")}>
+                SIGN IN
+              </LoginButton>
+            </Link>
+          )}
+
           <IconBlock>
             {authenticated ? (
               <IconBlock>
@@ -180,21 +192,25 @@ const Container: any = styled.div`
   background-color: ${(props: any) => props.color === "homepage" && "black"};
   position: ${(props: any) =>
     (props.color === "inviteCodeForm" ||
+      props.color === "homepage" ||
       props.color === "neighborhoodList" ||
       props.color === "contactForm") &&
     "fixed"};
   top: ${(props: any) =>
     (props.color === "inviteCodeForm" ||
+      props.color === "homepage" ||
       props.color === "neighborhoodList" ||
       props.color === "contactForm") &&
     "0px"};
   text-align: ${(props: any) =>
     (props.color === "inviteCodeForm" ||
+      props.color === "homepage" ||
       props.color === "neighborhoodList" ||
       props.color === "contactForm") &&
     "center"};
   z-index: ${(props: any) =>
     (props.color === "inviteCodeForm" ||
+      props.color === "homepage" ||
       props.color === "neighborhoodList" ||
       props.color === "contactForm") &&
     3};
@@ -415,6 +431,7 @@ const LoginButton = styled.button`
   color: #ffffff;
   margin-right: 40px;
   border: none;
+  cursor: pointer;
 `;
 
 export default HeaderPresenter;

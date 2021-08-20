@@ -1,2 +1,3 @@
-import Waitlist from "./Waitlist";
-export default Waitlist;
+import WaitlistPage from "./components/WaitlistPage";
+
+export { WaitlistPage };
