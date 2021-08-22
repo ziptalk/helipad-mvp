@@ -12,9 +12,11 @@ export const Header = () => {
 
   const selectEnglish = () => {
     console.log("select EN");
+    localStorage.setItem('language', 'en')
   };
   const selectKorean = () => {
     console.log("select KOR");
+    localStorage.setItem('language', 'ko')
   };
   return (
     <Container>

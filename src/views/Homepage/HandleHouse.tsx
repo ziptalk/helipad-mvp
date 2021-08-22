@@ -1,7 +1,34 @@
 import styled from "styled-components";
 import iphone1 from "../../images/Homepage/HandleHouse/iphone1.png";
 import iphone2 from "../../images/Homepage/HandleHouse/iphone2.png";
+import React, { useContext, useEffect, useState } from "react";
+import { useTranslation } from 'react-i18next';
+import { Languages, languages } from '../../Locales/i18n';
+
 const HandleHouse = () => {
+  const { t, i18n } = useTranslation();
+  
+  const handleChangeLanguage = (lang: Languages) => {
+    i18n.changeLanguage(lang);
+  }
+
+  useEffect(()=>{
+    function checkLanguage(){
+      let currentLanguage = localStorage.getItem('language');
+      console.log(currentLanguage)
+
+      if(currentLanguage=="en" || currentLanguage=="ko"){
+        handleChangeLanguage(currentLanguage)
+      }
+    }
+
+    window.addEventListener('storage', checkLanguage)
+
+    return () => {
+      window.removeEventListener('storage', checkLanguage)
+    }
+  },[])
+
   return (
     <Container>
       <BgContainer>
@@ -14,15 +41,12 @@ const HandleHouse = () => {
             <ImageBlock1 imgPath={iphone1}></ImageBlock1>
             <ImageBlock2 imgPath={iphone2}></ImageBlock2>
             <Category>부동산 운용</Category>
-            <Title>We'll handle the house</Title>
+            <Title>{t('main_12')}</Title>
             <SubTitle>
-              Worried that you won’t be able to take care of the house? Let our
-              experienced property managers take care of repairs, maintenance,
-              tenant issues, and more.
+            {t('main_13')}
             </SubTitle>
             <SubTitle>
-              Helipad will take care of all the work and even connect you to be
-              able to have your home well taken care of.
+            {t('main_14')}
             </SubTitle>
           </TitleWrapper>
         </ContentContainer>

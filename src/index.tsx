@@ -5,6 +5,8 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { AuthProvider } from "./router/config/Provider/AuthProvider";
 import "./language.ts";
+import './Locales/i18n'; // 추가
+
 ReactDOM.render(
   <AuthProvider>
     <App />

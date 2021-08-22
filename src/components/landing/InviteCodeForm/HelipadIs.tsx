@@ -1,7 +1,35 @@
 import styled from "styled-components";
 import { ReactComponent as LineSvg } from "../../../images/InviteCodeForm/ic_line.svg";
 import HelipasIsImage from "../../../images/InviteCodeForm/helipadIs.jpg";
+import { useTranslation } from 'react-i18next';
+import { Languages, languages } from '../../../Locales/i18n';
+import React, { useContext, useEffect, useState } from "react";
+
+
 const HelipadIs = () => {
+  const { t, i18n } = useTranslation();
+  
+  const handleChangeLanguage = (lang: Languages) => {
+    i18n.changeLanguage(lang);
+  }
+
+  useEffect(()=>{
+    function checkLanguage(){
+      let currentLanguage = localStorage.getItem('language');
+      console.log(currentLanguage)
+
+      if(currentLanguage=="en" || currentLanguage=="ko"){
+        handleChangeLanguage(currentLanguage)
+      }
+    }
+
+    window.addEventListener('storage', checkLanguage)
+
+    return () => {
+      window.removeEventListener('storage', checkLanguage)
+    }
+  },[])
+
   return (
     <Container>
       <TextContainer>
@@ -11,27 +39,19 @@ const HelipadIs = () => {
             HELIPAD IS
           </Category>
           <Title>
-            Helipad will help you own the house or profitable investment
-            property you want in the United States.
+          {t('about_us_1')}
           </Title>
 
           <Content>
-            US Real Estate transactions made simple and safe for foreign
-            investors.
+          {t('about_us_2')}
           </Content>
 
           <ListContent>
-            Whether you purchase your US home to live in, or investment property
-            to produce rental income or value appreciation
+          {t('about_us_3')}
           </ListContent>
 
           <Content>
-            Helipad is the first online platform that enables foreign investors
-            to complete buying, selling, or renting transactions of the US real
-            estate properties in a safe and easy way online but at the higher
-            level of personalized services just for you. Owning your dream home
-            or profitable investment property in the US shouldn’t be
-            complicated.
+          {t('about_us_4')}
           </Content>
         </Text>
       </TextContainer>

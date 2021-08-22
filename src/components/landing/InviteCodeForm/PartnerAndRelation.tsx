@@ -2,7 +2,34 @@ import styled from "styled-components";
 import { ReactComponent as LineSvg } from "../../../images/InviteCodeForm/ic_line.svg";
 import OurPartners from "../../../images/InviteCodeForm/ourPartners.jpg";
 import OurRelationships from "../../../images/InviteCodeForm/ourRelationships.jpg";
+import React, { useContext, useEffect, useState } from "react";
+import { useTranslation } from 'react-i18next';
+import { Languages, languages } from '../../../Locales/i18n';
+
 const PartnerAndRelation = () => {
+  const { t, i18n } = useTranslation();
+  
+  const handleChangeLanguage = (lang: Languages) => {
+    i18n.changeLanguage(lang);
+  }
+
+  useEffect(()=>{
+    function checkLanguage(){
+      let currentLanguage = localStorage.getItem('language');
+      console.log(currentLanguage)
+
+      if(currentLanguage=="en" || currentLanguage=="ko"){
+        handleChangeLanguage(currentLanguage)
+      }
+    }
+
+    window.addEventListener('storage', checkLanguage)
+
+    return () => {
+      window.removeEventListener('storage', checkLanguage)
+    }
+  },[])
+
   return (
     <Container>
       <Section>
@@ -10,18 +37,14 @@ const PartnerAndRelation = () => {
           <Text>
             <Category>
               <Line />
-              OUR PARTNERS
+              {t('partner_1')}
             </Category>
             <Title>
-              Experience an exceptional level of service based on Helipad's
-              trust, knowledge, and experience.
+            {t('partner_2')}
             </Title>
 
             <Content>
-              Helipad has established various professional relationship with
-              contractors, financial advisors, CPA’s, attorneys to bring you the
-              exceptional level of services based on trust, knowledge, and
-              experience.
+            {t('partner_3')}
             </Content>
           </Text>
         </TextContainer>
@@ -33,17 +56,13 @@ const PartnerAndRelation = () => {
           <Text>
             <Category>
               <Line />
-              OUR RELATIONSHIPS
+              {t('relationship_1')}
             </Category>
             <Title>
-              Helipad efficiently supports customers with professional financial
-              advisory services.
+            {t('relationship_2')}
             </Title>
             <Content>
-              We work with local financial advisors overseas such as private
-              bankers and local real estate professionals to better assist our
-              clients in efficient ways. Ask your financial advisors about our
-              services.
+            {t('relationship_3')}
             </Content>
           </Text>
         </TextContainer>

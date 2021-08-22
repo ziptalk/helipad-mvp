@@ -1,6 +1,9 @@
 import styled from "styled-components";
 import { ReactComponent as MoreInfoSvg } from "../../images/Homepage/moreInfo.svg";
-import { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { useTranslation } from 'react-i18next';
+import { Languages, languages } from '../../Locales/i18n';
+
 enum CategoryItem {
   Purchase = "구매",
   Sale = "판매",
@@ -11,6 +14,28 @@ enum CategoryItem {
 }
 const ServiceGuidance = () => {
   const [selectedCategory, setSelectedCategory] = useState("");
+  const { t, i18n } = useTranslation();
+  
+  const handleChangeLanguage = (lang: Languages) => {
+    i18n.changeLanguage(lang);
+  }
+
+  useEffect(()=>{
+    function checkLanguage(){
+      let currentLanguage = localStorage.getItem('language');
+      console.log(currentLanguage)
+
+      if(currentLanguage=="en" || currentLanguage=="ko"){
+        handleChangeLanguage(currentLanguage)
+      }
+    }
+
+    window.addEventListener('storage', checkLanguage)
+
+    return () => {
+      window.removeEventListener('storage', checkLanguage)
+    }
+  },[])
 
   const onClickCategory = (e: any) => {
     console.log("onClickCategory", e.target.id);
@@ -23,8 +48,7 @@ const ServiceGuidance = () => {
           <MoreWrapper margin={-44}>
             <MoreTitle>부동산 구매</MoreTitle>
             <MoreContent>
-              Find your next Vacation Home, Rental property, home for your
-              child, or new move.
+            {t('mouse_over_1')}
             </MoreContent>
           </MoreWrapper>
         );
@@ -33,8 +57,7 @@ const ServiceGuidance = () => {
           <MoreWrapper margin={-27}>
             <MoreTitle>부동산 판매</MoreTitle>
             <MoreContent>
-              List your US home or property for sale, or let us help you get
-              tenants.
+            {t('mouse_over_2')}
             </MoreContent>
           </MoreWrapper>
         );
@@ -44,7 +67,7 @@ const ServiceGuidance = () => {
           <MoreWrapper margin={-10}>
             <MoreTitle>송금</MoreTitle>
             <MoreContent>
-              Get help with international finance and transfers.
+            {t('mouse_over_3')}
             </MoreContent>
           </MoreWrapper>
         );
@@ -53,7 +76,7 @@ const ServiceGuidance = () => {
           <MoreWrapper margin={7}>
             <MoreTitle>부동산 법인 설립</MoreTitle>
             <MoreContent>
-              Incorporate in the US for tax and liability purposes.
+            {t('mouse_over_4')}
             </MoreContent>
           </MoreWrapper>
         );
@@ -61,14 +84,14 @@ const ServiceGuidance = () => {
         return (
           <MoreWrapper margin={24}>
             <MoreTitle>부동산 운용</MoreTitle>
-            <MoreContent>Let us help you manage your property.</MoreContent>
+            <MoreContent>{t('mouse_over_5')}</MoreContent>
           </MoreWrapper>
         );
       case CategoryItem.Distribution:
         return (
           <MoreWrapper margin={41}>
             <MoreTitle>수익 분배 및 보고</MoreTitle>
-            <MoreContent>Get transparent financial reporting.</MoreContent>
+            <MoreContent>{t('mouse_over_6')}</MoreContent>
           </MoreWrapper>
         );
       default:
@@ -83,7 +106,7 @@ const ServiceGuidance = () => {
         </TitleWrapper>
         <Divider></Divider>
         <CategoryWrapper>
-          <MouseOverGuideButton>Mouse Over for More Info</MouseOverGuideButton>
+          <MouseOverGuideButton>{t('mouse_over_info')}</MouseOverGuideButton>
           <Category id={CategoryItem.Purchase} onMouseOver={onClickCategory}>
             부동산 구매
           </Category>

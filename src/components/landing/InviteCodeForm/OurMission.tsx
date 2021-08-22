@@ -1,7 +1,33 @@
 import styled from "styled-components";
 import { ReactComponent as LineSvg } from "../../../images/InviteCodeForm/ic_line.svg";
 import WorldMapImage from "../../../images/InviteCodeForm/worldMap.jpg";
+import { useTranslation } from 'react-i18next';
+import { Languages, languages } from '../../../Locales/i18n';
+import React, { useContext, useEffect, useState } from "react";
+
 const OurMission = () => {
+  const { t, i18n } = useTranslation();
+  
+  const handleChangeLanguage = (lang: Languages) => {
+    i18n.changeLanguage(lang);
+  }
+
+  useEffect(()=>{
+    function checkLanguage(){
+      let currentLanguage = localStorage.getItem('language');
+      console.log(currentLanguage)
+
+      if(currentLanguage=="en" || currentLanguage=="ko"){
+        handleChangeLanguage(currentLanguage)
+      }
+    }
+
+    window.addEventListener('storage', checkLanguage)
+
+    return () => {
+      window.removeEventListener('storage', checkLanguage)
+    }
+  },[])
   return (
     <Container>
       <Category>
@@ -9,16 +35,15 @@ const OurMission = () => {
         OUR MISSION
       </Category>
 
-      <Title>Mission statement</Title>
+      <Title>{t('mission_1')}</Title>
       <ContentBlock>
-        <SubTitle>Areas Serving</SubTitle>
+        <SubTitle>{t('mission_2')}</SubTitle>
 
         <Content>
-          Investors from South Korea (coming soon: Vietnam, Japan)
+        {t('mission_3')}
         </Content>
         <Content>
-          Real estate brokerages in Southern California (Coming soon: San Diege,
-          Las Vegas, San Francisco/San Jose, Hawaii, New York, Seattle
+        {t('mission_4')}
         </Content>
       </ContentBlock>
       <ImageContainer imgPath={WorldMapImage}></ImageContainer>
