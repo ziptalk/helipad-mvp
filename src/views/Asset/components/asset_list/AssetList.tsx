@@ -1480,11 +1480,11 @@ const AssetList: React.FC<AssetListProperties> = ({ history }: any) => {
                   </CheckBoxContainer>
                   <CheckBoxContainer>
                     <input type="checkbox" name="amenities"></input>
-                    <div>{t('option_27')}l</div>
+                    <div>{t('option_27')}</div>
                   </CheckBoxContainer>
                   <CheckBoxContainer>
                     <input type="checkbox" name="amenities"></input>
-                    <div>{t('option_28')}t</div>
+                    <div>{t('option_28')}</div>
                   </CheckBoxContainer>
                 </MoreRightContainer>
               </MoreListContainer>
