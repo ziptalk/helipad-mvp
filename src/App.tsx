@@ -9,6 +9,8 @@ import FooterPresenter from "./components/FooterPresenter";
 import { WaitlistPage } from "./views/Waitlist";
 import DashboardContainer from "./views/Dashboard";
 import HomePageContainer from "./views/Homepage";
+import { Container as PropertyManagementContainer } from "./views/PropertyManagement";
+import { Container as SellPageContainer } from "./views/SellPage";
 import {
   BrowserRouter as Router,
   Route,
@@ -56,7 +58,11 @@ function App() {
                   />
                 )}
               />
-
+              <Route
+                path="/propertyManagement"
+                component={PropertyManagementContainer}
+              />
+              <Route path="/sellpage" component={SellPageContainer} />
               <Route path="/waitlist" component={WaitlistPage} />
               <Route path="/auth" component={AuthRouter} />
               <Route path="/asset" component={AssetRouter} />

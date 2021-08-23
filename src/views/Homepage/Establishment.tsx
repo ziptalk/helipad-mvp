@@ -4,44 +4,40 @@ import { ReactComponent as FinaSvg } from "../../images/Homepage/fina.svg";
 import Fina from "../../images/Homepage/fina.png";
 import Ellipse from "../../images/Homepage/Ellipse.jpg";
 import React, { useContext, useEffect, useState } from "react";
-import { useTranslation } from 'react-i18next';
-import { Languages, languages } from '../../Locales/i18n';
+import { useTranslation } from "react-i18next";
+import { Languages, languages } from "../../Locales/i18n";
 
 const Establishment = () => {
   const { t, i18n } = useTranslation();
-  
+
   const handleChangeLanguage = (lang: Languages) => {
     i18n.changeLanguage(lang);
-  }
+  };
 
-  useEffect(()=>{
-    function checkLanguage(){
-      let currentLanguage = localStorage.getItem('language');
-      console.log(currentLanguage)
+  useEffect(() => {
+    function checkLanguage() {
+      let currentLanguage = localStorage.getItem("language");
+      console.log(currentLanguage);
 
-      if(currentLanguage=="en" || currentLanguage=="ko"){
-        handleChangeLanguage(currentLanguage)
+      if (currentLanguage == "en" || currentLanguage == "ko") {
+        handleChangeLanguage(currentLanguage);
       }
     }
 
-    window.addEventListener('storage', checkLanguage)
+    window.addEventListener("storage", checkLanguage);
 
     return () => {
-      window.removeEventListener('storage', checkLanguage)
-    }
-  },[])
+      window.removeEventListener("storage", checkLanguage);
+    };
+  }, []);
 
   return (
     <Container>
       <ContentContainer>
         <TitleWrapper>
           <Category>부동산 법인 설립</Category>
-          <Title>
-            {t('main_5')}
-          </Title>
-          <SubTitle>
-          {t('main_6')}
-          </SubTitle>
+          <Title>{t("main_5")}</Title>
+          <SubTitle>{t("main_6")}</SubTitle>
         </TitleWrapper>
         <ContentWrapper>
           {/* <StyledImg /> */}
@@ -49,22 +45,20 @@ const Establishment = () => {
           {/* <ImageBgBlock imgPath={Ellipse}></ImageBgBlock> */}
           <ContentBlock>
             <Item>
-              <ItemTitle>{t('main_7')}</ItemTitle>
-              <ItemSubTitle>
-              {t('main_8')}
-              </ItemSubTitle>
-              <More>{t('main_9')}</More>
+              <ItemTitle>{t("main_7")}</ItemTitle>
+              <ItemSubTitle>{t("main_8")}</ItemSubTitle>
+              <More>{t("main_9")}</More>
             </Item>
             <Item>
-              <ItemTitle>{t('main_10')}</ItemTitle>
+              <ItemTitle>{t("main_10")}</ItemTitle>
             </Item>
             <Item>
-              <ItemTitle>{t('main_11')}</ItemTitle>
+              <ItemTitle>{t("main_11")}</ItemTitle>
             </Item>
           </ContentBlock>
         </ContentWrapper>
         <ButtonWrapper>
-          <StyledLink to="">가입하기</StyledLink>
+          <StyledLink to="/auth/contact">가입하기</StyledLink>
         </ButtonWrapper>
       </ContentContainer>
     </Container>
