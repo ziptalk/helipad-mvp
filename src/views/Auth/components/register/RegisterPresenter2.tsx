@@ -3,11 +3,13 @@ import { RiKakaoTalkFill } from "react-icons/ri";
 import { InputField, InputType } from "./InputField";
 import CheckField from "./CheckField";
 import { Link } from "react-router-dom";
-import {useState, useEffect} from "react";
+import {useState, useEffect, useContext} from "react";
 import Group from "../../../../images/Group2.png";
 import { StepButton } from "@material-ui/core";
 import { Slider, Rail, Handles, Tracks, Ticks } from "react-compound-slider";
 import Congratulation from "../../../../images/Congratulation.png";
+import { useTranslation } from 'react-i18next';
+import { Languages, languages } from '../../../../Locales/i18n';
 
 interface HandleInf {
   handle : {
@@ -45,7 +47,12 @@ export function Handle(handle: HandleInf) {
       {...handle.getHandleProps(handle.handle.id)}
     >
       <div style={{ fontFamily: 'Poppins', fontSize: 12, marginTop: -35, backgroundColor:"#6C63FF", color:"#FFFFFF", width:"50px", padding:"2px", marginLeft:"-15px", borderRadius:"5px" }}>
-        ${handle.handle.value}
+        ${1000000 > handle.handle.value && handle.handle.value >= 1000 ? 
+        <>{(handle.handle.value/1000).toFixed(0).toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}K</> 
+        : <>{handle.handle.value >= 1000000 ? 
+        <>{(handle.handle.value/1000000).toFixed(1).toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}M</>:
+        <>{handle.handle.value.toString()}</>}
+        </>}
       </div>
     </div>
   )
@@ -94,6 +101,28 @@ const RegisterPresenter2 = ({
   const [pageState, setPageState] = useState(-1);
   const [password2, setPassword2] = useState('');
   const [passwordConfirm2, setPasswordConfirm2] = useState('');
+    const { t, i18n } = useTranslation();
+  
+  const handleChangeLanguage = (lang: Languages) => {
+    i18n.changeLanguage(lang);
+  }
+
+  useEffect(()=>{
+    function checkLanguage(){
+      let currentLanguage = localStorage.getItem('language');
+      console.log(currentLanguage)
+
+      if(currentLanguage=="en" || currentLanguage=="ko"){
+        handleChangeLanguage(currentLanguage)
+      }
+    }
+
+    window.addEventListener('storage', checkLanguage)
+
+    return () => {
+      window.removeEventListener('storage', checkLanguage)
+    }
+  },[])
 
   const nextOnClick = () => {
     let tmpState = pageState;
@@ -122,18 +151,21 @@ const RegisterPresenter2 = ({
       <img style={{width:"83px", marginBottom:"30px"}} src={Group}/>:<></>}
       </>}
       {pageState<3&&pageState!=-1?<>
-      <MainText>Just a few things to setup your</MainText>
-      <MainText>account...</MainText></>
+      <div style={{width:"100%", display:"flex", justifyContent:"center"}}>
+        <MainText>{t('register_1')}</MainText>
+      </div>
+      {/* <MainText>account...</MainText> */}
+      </>
       :<></>}
         {pageState == 0 ? <>
           <WhiteBox>
             <StepMark>Step {pageState+1} of 3</StepMark>
           <QuestionTitleContainer>
           <QuestionTitle>
-            Why are you interested in a home in the U.S.?
+          {t('register_2')}
           </QuestionTitle>
           <QuestionLittleTitle>
-            (check all that apply)
+          {t('register_3')}
           </QuestionLittleTitle>
         </QuestionTitleContainer>
         <QuestionContentContainer>
@@ -142,7 +174,7 @@ const RegisterPresenter2 = ({
               {/* <Question>Investment</Question> */}
               <CheckField
                 name="interestHome"
-                value="Investment"
+                value={t('register_4')}
                 onChange={handleInterestHome}
               />
             </QuestionItem>
@@ -150,7 +182,7 @@ const RegisterPresenter2 = ({
               {/* <Question>Rental Income Opportunity</Question> */}
               <CheckField
                 name="interestHome"
-                value="Rental Income Opportunity"
+                value={t('register_5')}
                 onChange={handleInterestHome}
               />
             </QuestionItem>
@@ -158,7 +190,7 @@ const RegisterPresenter2 = ({
               {/* <Question>Second Home</Question> */}
               <CheckField
                 name="interestHome"
-                value="Second Home"
+                value={t('register_6')}
                 onChange={handleInterestHome}
               />
             </QuestionItem>
@@ -166,7 +198,7 @@ const RegisterPresenter2 = ({
               {/* <Question>Relocating to U.S.</Question> */}
               <CheckField
                 name="interestHome"
-                value="Relocating to U.S."
+                value={t('register_7')}
                 onChange={handleInterestHome}
               />
             </QuestionItem>
@@ -174,7 +206,7 @@ const RegisterPresenter2 = ({
               {/* <Question>Child's U.S. Education</Question> */}
               <CheckField
                 name="interestHome"
-                value="Child’s U.S. Education"
+                value={t('register_8')}
                 onChange={handleInterestHome}
               />
             </QuestionItem>
@@ -182,7 +214,7 @@ const RegisterPresenter2 = ({
               {/* <Question>Child's U.S. Education</Question> */}
               <CheckField
                 name="interestHome"
-                value="Rather not say"
+                value={t('register_9')}
                 onChange={handleInterestHome}
               />
             </QuestionItem>
@@ -191,7 +223,7 @@ const RegisterPresenter2 = ({
         {/* <NextButton onClick={nextOnClick}>Next -</NextButton> */}
         <div style={{width:"100%", display:"flex", justifyContent:"center"}}>
           <NextButton style={{backgroundColor:"#B7B7B7", width:"160px", marginRight:"10px"}} onClick={backOnClick}>Back</NextButton>
-          <NextButton style={{width:"160px"}} onClick={nextOnClick}>Next</NextButton>
+          <NextButton style={{width:"160px"}} onClick={nextOnClick}>{t('register_10')}</NextButton>
         </div>
         </WhiteBox></>:<>
         {pageState==1?<>
@@ -199,18 +231,18 @@ const RegisterPresenter2 = ({
         <StepMark>Step {pageState+1} of 3</StepMark>
           <QuestionTitleContainer>
           <QuestionTitle>
-            What types of properties are you looking for?
+          {t('register_12')}
           </QuestionTitle>
         </QuestionTitleContainer>
         <div style={{width:"100%", display:"flex", justifyContent:"center", marginTop:"-50px"}}>
         <QuestionContentContainer style={{display:"block", width:"450px"}}>
-          <QuestionSubTitle>1. Residential</QuestionSubTitle>
+          <QuestionSubTitle>{t('register_13')}</QuestionSubTitle>
           <QuestionList>
             <QuestionItem>
               {/* <Question>Single Family Home</Question> */}
               <CheckField
                 name="property_residential"
-                value="Single Family Home"
+                value={t('register_14')}
                 onChange={handleInterestProperty}
               />
             </QuestionItem>
@@ -218,18 +250,18 @@ const RegisterPresenter2 = ({
               {/* <Question>Townhouse / Condo</Question> */}
               <CheckField
                 name="property_residential"
-                value="Townhouse / Condo"
+                value={t('register_15')}
                 onChange={handleInterestProperty}
               />
             </QuestionItem>
           </QuestionList>
-          <QuestionSubTitle>2. Commercial</QuestionSubTitle>
+          <QuestionSubTitle>{t('register_16')}</QuestionSubTitle>
           <QuestionList>
             <QuestionItem>
               {/* <Question>Multifamily units</Question> */}
               <CheckField
                 name="property_commercial"
-                value="Multifamily units"
+                value={t('register_17')}
                 onChange={handleInterestProperty}
               />
             </QuestionItem>
@@ -237,8 +269,7 @@ const RegisterPresenter2 = ({
               {/* <Question>Retail</Question> */}
               <CheckField
                 name="property_commercial"
-                value="Retail
-          "
+                value={t('register_18')}
                 onChange={handleInterestProperty}
               />
             </QuestionItem>
@@ -246,7 +277,7 @@ const RegisterPresenter2 = ({
               {/* <Question>Industrial</Question> */}
               <CheckField
                 name="property_commercial"
-                value="Industrial"
+                value={t('register_19')}
                 onChange={handleInterestProperty}
               />
             </QuestionItem>
@@ -254,16 +285,16 @@ const RegisterPresenter2 = ({
               {/* <Question>Land</Question> */}
               <CheckField
                 name="property_commercial"
-                value="Land"
+                value={t('register_20')}
                 onChange={handleInterestProperty}
               />
             </QuestionItem>
           </QuestionList>
-          <QuestionSubTitle>3. Price Range</QuestionSubTitle>
+          <QuestionSubTitle>{t('register_21')}</QuestionSubTitle>
           <Slider
             rootStyle={sliderStyle}
-            domain={[0, 100]} // [min, max]
-            values={[20, 60]} // slider values
+            domain={[0, 20000000]} // [min, max]
+            values={[5000000, 15000000]} // slider values
           >
             <Rail>
               {({ getRailProps }) => (
@@ -307,8 +338,8 @@ const RegisterPresenter2 = ({
         </QuestionContentContainer>
         </div>
         <div style={{width:"100%", display:"flex", justifyContent:"center"}}>
-          <NextButton style={{backgroundColor:"#B7B7B7", width:"160px", marginRight:"10px"}} onClick={backOnClick}>Back</NextButton>
-          <NextButton style={{width:"160px"}} onClick={nextOnClick}>Next</NextButton>
+          <NextButton style={{backgroundColor:"#B7B7B7", width:"160px", marginRight:"10px"}} onClick={backOnClick}>{t('register_22')}</NextButton>
+          <NextButton style={{width:"160px"}} onClick={nextOnClick}>{t('register_23')}</NextButton>
         </div>
         </WhiteBox>
         </>:<>{pageState==2?<>
@@ -316,10 +347,10 @@ const RegisterPresenter2 = ({
         <StepMark>Step {pageState+1} of 3</StepMark>
           <QuestionTitleContainer>
           <QuestionTitle>
-            What is your preferred area?
+          {t('register_32')}
           </QuestionTitle>
           <QuestionLittleTitle>
-            (check all that apply)
+          {t('register_33')}
           </QuestionLittleTitle>
         </QuestionTitleContainer>
         <QuestionContentContainer>
@@ -328,8 +359,7 @@ const RegisterPresenter2 = ({
               {/* <Question>CA – Los Angeles</Question> */}
               <CheckField
                 name="preferredArea"
-                value="CA – Los Angeles
-          "
+                value={t('register_34')}
                 onChange={handlePreferredArea}
               />
             </QuestionItem>
@@ -337,8 +367,7 @@ const RegisterPresenter2 = ({
               {/* <Question>CA – Orange County</Question> */}
               <CheckField
                 name="preferredArea"
-                value="CA – Orange County
-          "
+                value={t('register_35')}
                 onChange={handlePreferredArea}
               />
             </QuestionItem>
@@ -346,8 +375,7 @@ const RegisterPresenter2 = ({
               {/* <Question>CA – San Diego</Question> */}
               <CheckField
                 name="preferredArea"
-                value="CA – San Diego
-          "
+                value={t('register_36')}
                 onChange={handlePreferredArea}
               />
             </QuestionItem>
@@ -355,8 +383,7 @@ const RegisterPresenter2 = ({
               {/* <Question>CA – San Francisco</Question> */}
               <CheckField
                 name="preferredArea"
-                value="CA – San Francisco
-          "
+                value={t('register_37')}
                 onChange={handlePreferredArea}
               />
             </QuestionItem>
@@ -364,8 +391,7 @@ const RegisterPresenter2 = ({
               {/* <Question>NV – Las Vegas</Question> */}
               <CheckField
                 name="preferredArea"
-                value="NV – Las Vegas
-          "
+                value={t('register_38')}
                 onChange={handlePreferredArea}
               />
             </QuestionItem>
@@ -373,8 +399,7 @@ const RegisterPresenter2 = ({
               {/* <Question>New York</Question> */}
               <CheckField
                 name="preferredArea"
-                value="New York
-          "
+                value={t('register_39')}
                 onChange={handlePreferredArea}
               />
             </QuestionItem>
@@ -382,13 +407,12 @@ const RegisterPresenter2 = ({
               {/* <Question>New Jersey</Question> */}
               <CheckField
                 name="preferredArea"
-                value="New Jersey
-          "
+                value={t('register_40')}
                 onChange={handlePreferredArea}
               />
             </QuestionItem>
             <OtherBlock>
-              <OtherTitle>Others (fill in)</OtherTitle>
+              <OtherTitle>{t('register_41')}</OtherTitle>
               <OtherInput
                 type="text"
                 value={preferredAreaOther}
@@ -398,8 +422,8 @@ const RegisterPresenter2 = ({
           </QuestionList>
         </QuestionContentContainer>
         <div style={{width:"100%", display:"flex", justifyContent:"center"}}>
-          <NextButton style={{backgroundColor:"#B7B7B7", width:"160px", marginRight:"10px"}} onClick={backOnClick}>Back</NextButton>
-          <NextButton style={{width:"160px"}} onClick={nextOnClick}>Finish</NextButton>
+          <NextButton style={{backgroundColor:"#B7B7B7", width:"160px", marginRight:"10px"}} onClick={backOnClick}>{t('register_42')}</NextButton>
+          <NextButton style={{width:"160px"}} onClick={nextOnClick}>{t('register_43')}</NextButton>
         </div>
         </WhiteBox>
         </>:<>{pageState==-1?<>
@@ -479,11 +503,11 @@ const RegisterPresenter2 = ({
     </Container>
     </WhiteBox>
         </>:<> 
-        <div style={{fontSize:"65px", fontWeight:"bold"}}>Congratulations!</div>
+        <div style={{fontSize:"65px", fontWeight:"bold"}}>{t('register_44')}</div>
         <img src={Congratulation}/>
         <div style={{width:"100%"}}>
           {/* <Link to="/asset/assetList"> */}
-            <NextButton onClick={onTrySignUp}>Get Started!</NextButton>
+            <NextButton onClick={onTrySignUp}>{t('register_45')}</NextButton>
           {/* </Link> */}
         </div></>}
         </>}</>}
@@ -514,6 +538,7 @@ const MainText = styled.div`
   font-size: 36px;
   color: #000000;
   font-weight: bold;
+  width: 550px;
 `
 
 const WhiteBox = styled.div`

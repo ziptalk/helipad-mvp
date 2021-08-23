@@ -10,6 +10,10 @@ import { ReactComponent as ContactUsSvg } from "../../images/Header/ic_contactUs
 import BlackChatBot from "../BlackChatBot";
 import { ReactComponent as SearchSvg } from "../../images/Header/ic_search.svg";
 import DropdownMenu from "../DropdownMenu";
+import { useTranslation } from 'react-i18next';
+import { Languages, languages } from '../../Locales/i18n';
+import {useState, useEffect, useContext} from "react";
+
 enum DropDownMenu {
   ACCOUNT = "Account",
   MYPAGE = "My Page",
@@ -30,6 +34,29 @@ const HeaderPresenter = ({
   dashboardPage,
   userInfo,
 }: any) => {
+  const { t, i18n } = useTranslation();
+  
+  const handleChangeLanguage = (lang: Languages) => {
+    i18n.changeLanguage(lang);
+  }
+
+  useEffect(()=>{
+    function checkLanguage(){
+      let currentLanguage = localStorage.getItem('language');
+      console.log(currentLanguage)
+
+      if(currentLanguage=="en" || currentLanguage=="ko"){
+        handleChangeLanguage(currentLanguage)
+      }
+    }
+
+    window.addEventListener('storage', checkLanguage)
+
+    return () => {
+      window.removeEventListener('storage', checkLanguage)
+    }
+  },[])
+
   console.log("header username:", userInfo);
   console.log("header mode:", headerMode);
   console.log("authenticated:", authenticated);
@@ -40,27 +67,33 @@ const HeaderPresenter = ({
           <CategoryContainer authenticated={authenticated}>
             <StyledLink to="/asset/assetList">
               <CategoryName primary scrollMove={scrollMove} color={headerMode}>
-                구매
+                {t('navigation_1')}
               </CategoryName>
             </StyledLink>
             <StyledLink to="/asset/assetList">
               <CategoryName primary scrollMove={scrollMove} color={headerMode}>
-                판매
+              {t('navigation_2')}
               </CategoryName>
             </StyledLink>
             <StyledLink to="/">
+              {t('navigation_3') == "임대 관리" ? <>
               <CategoryName scrollMove={scrollMove} color={headerMode}>
-                임대 관리
+              {t('navigation_3')}
+              </CategoryName></>:<>
+              <CategoryName style={{width:"170px"}} scrollMove={scrollMove} color={headerMode}>
+              {t('navigation_3')}
               </CategoryName>
+              </>}
+              
             </StyledLink>
             <StyledLink to="/asset/assetList">
               <CategoryName scrollMove={scrollMove} color={headerMode}>
-                매물 찾기
+              {t('navigation_4')}
               </CategoryName>
             </StyledLink>
             <StyledLink to="/aboutus">
               <CategoryName scrollMove={scrollMove} color={headerMode}>
-                회사 소개
+              {t('navigation_5')}
               </CategoryName>
             </StyledLink>
           </CategoryContainer>
@@ -306,6 +339,7 @@ const CategoryName: any = styled.div`
   font-weight: 500;
   line-height: 27px;
   letter-spacing: 0px;
+  display: inline-block;
 
   color: ${(props: any) =>
     props.color === "homepage"
