@@ -699,7 +699,7 @@ const Detail: React.FC<DetailProps> = ({ data }) => {
                 </StatusItem>
                 <StatusItem>
                   <StatusCategory>Lot Size</StatusCategory>
-                  <StatusContent>{data.lotSize} ft<sup>2</sup></StatusContent>
+                  <StatusContent>{data.lotSize.toString().split('X')[0]} X {data.lotSize.toString().split('X')[1]} ft<sup>2</sup></StatusContent>
                 </StatusItem>
                 <StatusItem>
                   <StatusCategory>MLS Type</StatusCategory>
@@ -725,7 +725,7 @@ const Detail: React.FC<DetailProps> = ({ data }) => {
               </StatusItem> */}
               </Status>
             </StatusContainer>
-            {userInfo?.isAgent === true && (
+            {userInfo?.isAgent === false && (
               <Contact
                 agent={data.agent}
                 assetId="test_id_1"

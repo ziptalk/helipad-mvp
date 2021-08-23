@@ -1,9 +1,11 @@
-import { useRef } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import checkButtonImg from "../../../../images/Potential/checkButtonImg.svg";
 import { FcGoogle } from "react-icons/fc";
 import kakao_login from "../../../../images/kakao_login.png";
+import { useTranslation } from 'react-i18next';
+import { Languages, languages } from '../../../../Locales/i18n';
 
 type Props = {
   onChangeInputValue: (event: React.ChangeEvent<HTMLInputElement>) => void;
@@ -21,10 +23,33 @@ const LoginPresenter = ({
   loginResult,
   emailInput,
 }: Props) => {
+  const { t, i18n } = useTranslation();
+  
+  const handleChangeLanguage = (lang: Languages) => {
+    i18n.changeLanguage(lang);
+  }
+
+  useEffect(()=>{
+    function checkLanguage(){
+      let currentLanguage = localStorage.getItem('language');
+      console.log(currentLanguage)
+
+      if(currentLanguage=="en" || currentLanguage=="ko"){
+        handleChangeLanguage(currentLanguage)
+      }
+    }
+
+    window.addEventListener('storage', checkLanguage)
+
+    return () => {
+      window.removeEventListener('storage', checkLanguage)
+    }
+  },[])
+
   return (
     <Container>
       <SocialContainer>
-        <SocialText>You can sign in with social</SocialText>
+        <SocialText>{t('login_4')}</SocialText>
         <SocialIcon>
           <FcGoogle
             className="googleIcon"
@@ -70,16 +95,16 @@ const LoginPresenter = ({
       <RememberContainer>
         <Remember id="remember"></Remember>
         <RememberLabel htmlFor="remember"></RememberLabel>
-        <RememberText htmlFor="remember">Remember Me</RememberText>
+        <RememberText htmlFor="remember">{t('login_7')}</RememberText>
       </RememberContainer>
       <ButtonContainer>
-        <LoginButton onClick={onClickLogin}>Login</LoginButton>
+        <LoginButton onClick={onClickLogin}>{t('login_8')}</LoginButton>
         <KakaoLoginButton
           imgPath={kakao_login}
           onClick={onClickKakaoLogin}
         ></KakaoLoginButton>
         <RegisterButton>
-          <Link to="/auth/registerForm">Registration</Link>
+          <Link to="/auth/registerForm">{t('login_9')}</Link>
         </RegisterButton>
       </ButtonContainer>
     </Container>

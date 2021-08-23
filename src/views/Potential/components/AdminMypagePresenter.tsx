@@ -1,7 +1,10 @@
 import styled from "styled-components";
-import { useEffect, useState } from "react";
 import AdminContentPresenter from "./AdminContentPresenter";
 import { PagingContainer } from "./Pagination/index";
+import { useTranslation } from 'react-i18next';
+import { Languages, languages } from '../../../Locales/i18n';
+import {useState, useEffect, useContext} from "react";
+
 enum SelectedCategory {
   POTENTIAL = "Potential",
   INESCROW = "In Escrow",
@@ -28,6 +31,28 @@ const AdminMypagePresenter = ({
   //   getEscrowList();
   // }, []);
   const [click, setClick] = useState(false);
+  const { t, i18n } = useTranslation();
+  
+  const handleChangeLanguage = (lang: Languages) => {
+    i18n.changeLanguage(lang);
+  }
+
+  useEffect(()=>{
+    function checkLanguage(){
+      let currentLanguage = localStorage.getItem('language');
+      console.log(currentLanguage)
+
+      if(currentLanguage=="en" || currentLanguage=="ko"){
+        handleChangeLanguage(currentLanguage)
+      }
+    }
+
+    window.addEventListener('storage', checkLanguage)
+
+    return () => {
+      window.removeEventListener('storage', checkLanguage)
+    }
+  },[])
 
   const onClickEvent = () => {
     setClick(!click);
@@ -114,20 +139,20 @@ const AdminMypagePresenter = ({
       <Header>Admin Mypage</Header>
       {renderSelectedCategory(selectedCategory)}
       <TitleContainer>
-        <Title id="no">No.</Title>
-        <Title id="name">Name</Title>
-        <Title id="listing">Listing</Title>
+        <Title id="no">{t('favorite_1')}</Title>
+        <Title id="name">{t('favorite_2')}</Title>
+        <Title id="listing">{t('favorite_3')}</Title>
         <Title id="request">
-          Requested helipad
-          <br /> contact date
+        {t('favorite_4')}
+          <br /> {t('favorite_4_2')}
         </Title>
         <Title id="initial">
-          Helipad initial <br />
-          contact date
+        {t('favorite_5')} <br />
+        {t('favorite_5_2')}
         </Title>
         <Title id="accepted">
-          Offer accepted <br />
-          date
+        {t('favorite_6')} <br />
+        {t('favorite_6_2')}
         </Title>
         <Title id="escrow">In Escrow</Title>
       </TitleContainer>

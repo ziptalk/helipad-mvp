@@ -5,6 +5,10 @@ import RegisterContainer2 from "./register/RegisterContainer2";
 
 import { Link } from "react-router-dom";
 import loginImage from "../../../images/loginImage.png";
+import { useTranslation } from 'react-i18next';
+import { Languages, languages } from '../../../Locales/i18n';
+import { useState, useEffect, useContext } from "react";
+
 enum SelectedCategory {
   TITLE = "Login/Register",
   LOGIN = "Login",
@@ -14,20 +18,44 @@ const LoginAndRegisterPresenter = ({
   selectedCategory,
   setSelectedCategory,
 }: any) => {
+  const { t, i18n } = useTranslation();
+  
+  const handleChangeLanguage = (lang: Languages) => {
+    i18n.changeLanguage(lang);
+  }
+
+  useEffect(()=>{
+    function checkLanguage(){
+      let currentLanguage = localStorage.getItem('language');
+      console.log(currentLanguage)
+
+      if(currentLanguage=="en" || currentLanguage=="ko"){
+        handleChangeLanguage(currentLanguage)
+      }
+    }
+
+    window.addEventListener('storage', checkLanguage)
+
+    return () => {
+      window.removeEventListener('storage', checkLanguage)
+    }
+  },[])
+
   console.log("selectedCategory", selectedCategory);
+
   const renderSelectedItem = () => {
     switch (selectedCategory) {
       case SelectedCategory.LOGIN:
         return (
           <Category>
             <Link to="/auth/login">
-              <SelectedItem>{SelectedCategory.LOGIN}</SelectedItem>
+              <SelectedItem>{t('login_2')}</SelectedItem>
             </Link>
             <Link to="/auth/registerForm">
               <Item
                 onClick={() => setSelectedCategory(SelectedCategory.REGISTER)}
               >
-                {SelectedCategory.REGISTER}
+                {t('login_3')}
               </Item>
             </Link>
           </Category>
@@ -38,11 +66,11 @@ const LoginAndRegisterPresenter = ({
           <Category>
             <Link to="/auth/login">
               <Item onClick={() => setSelectedCategory(SelectedCategory.LOGIN)}>
-                {SelectedCategory.LOGIN}
+              {t('login_2')}
               </Item>
             </Link>
             <Link to="/auth/registerForm">
-              <SelectedItem>{SelectedCategory.REGISTER}</SelectedItem>
+              <SelectedItem>{t('login_3')}</SelectedItem>
             </Link>
           </Category>
         );
@@ -57,7 +85,7 @@ const LoginAndRegisterPresenter = ({
         <Container selectedCategory={selectedCategory}>
           <FormContainer>
             <HeaderContainer>
-              <Title>{SelectedCategory.TITLE}</Title>
+              <Title>{t('login_1')}</Title>
               {renderSelectedItem()}
             </HeaderContainer>
             {selectedCategory === SelectedCategory.LOGIN && <LoginContainer />}

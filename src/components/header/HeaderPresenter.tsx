@@ -85,7 +85,6 @@ const HeaderPresenter = ({
               ) : (
                 <>
                   <CategoryName
-                    style={{ width: "170px" }}
                     scrollMove={scrollMove}
                     color={headerMode}
                   >
@@ -347,7 +346,6 @@ const CategoryName: any = styled.div`
   font-weight: 500;
   line-height: 27px;
   letter-spacing: 0px;
-  display: inline-block;
 
   color: ${(props: any) =>
     props.color === "homepage"
