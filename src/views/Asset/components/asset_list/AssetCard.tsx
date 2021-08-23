@@ -112,7 +112,7 @@ const AssetCard = ({ data }: AssetCardProps) => {
                           textAlign: "center",
                           alignItems: "center",
                           paddingTop: "6px",
-                          marginLeft: "70%",
+                          marginLeft: "90%",
                           border: 0,
                         }}
                       >
@@ -131,7 +131,7 @@ const AssetCard = ({ data }: AssetCardProps) => {
                           textAlign: "center",
                           alignItems: "center",
                           paddingTop: "6px",
-                          marginLeft: "70%",
+                          marginLeft: "90%",
                           border: 0,
                         }}
                       >
@@ -140,7 +140,7 @@ const AssetCard = ({ data }: AssetCardProps) => {
                         />
                       </button>
                     )}
-                    {onGoing ? (
+                    {/* {onGoing ? (
                       <button
                         onClick={onGoingOnClick}
                         style={{
@@ -178,7 +178,7 @@ const AssetCard = ({ data }: AssetCardProps) => {
                           style={{ fontSize: "20px", color: "white" }}
                         />
                       </button>
-                    )}
+                    )} */}
                   </>
                 )}
               </div>

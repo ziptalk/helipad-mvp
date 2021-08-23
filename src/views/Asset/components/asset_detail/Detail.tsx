@@ -691,19 +691,21 @@ const Detail: React.FC<DetailProps> = ({ data }) => {
 
                 <StatusItem>
                   <StatusCategory>Estimated Property Tax</StatusCategory>
-                  <StatusContent>{data.taxPerMonth}</StatusContent>
+                  <StatusContent>{data.taxPerMonth.toFixed(2)}%</StatusContent>
                 </StatusItem>
                 <StatusItem>
                   <StatusCategory>HOA Fees</StatusCategory>
-                  <StatusContent>{data.hoaFee} / month</StatusContent>
+                  <StatusContent>${data.hoaFee.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")} / Month</StatusContent>
                 </StatusItem>
                 <StatusItem>
                   <StatusCategory>Lot Size</StatusCategory>
-                  <StatusContent>{data.lotSize} SF</StatusContent>
+                  <StatusContent>{data.lotSize} ft<sup>2</sup></StatusContent>
                 </StatusItem>
                 <StatusItem>
                   <StatusCategory>MLS Type</StatusCategory>
-                  <StatusContent>{data.mlsType}</StatusContent>
+                  <StatusContent>
+                    {data.mlsType == "mls Type" ? <>MLS Type</> :<>{data.mlsType}</>}
+                  </StatusContent>
                 </StatusItem>
                 <StatusItem>
                   <StatusCategory>Year Built</StatusCategory>
