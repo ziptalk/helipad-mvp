@@ -25,6 +25,9 @@ export default class FirebaseService {
   ): Promise<Asset[]> {
     return AssetService.getAssetListByNeighborhood(neighborhood);
   }
+  static async signUpWithKakao(token: string) {
+    return UserService.signUpWithKakao(token);
+  }
   static async signUpWithEmailAndPassword({ ...props }) {
     return UserService.signUpWithEmailAndPassword(props);
   }
@@ -77,8 +80,15 @@ export default class FirebaseService {
     phone: string,
     message: string,
     date: Date
-  ){
-    return ContactService.contactUsSendMessage(name, email, regard, phone, message, date)
+  ) {
+    return ContactService.contactUsSendMessage(
+      name,
+      email,
+      regard,
+      phone,
+      message,
+      date
+    );
   }
 
   static getContactHistory(userId: string, agentId: string) {

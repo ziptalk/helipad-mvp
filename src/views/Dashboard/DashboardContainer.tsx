@@ -13,7 +13,7 @@ import {
   RouteComponentProps,
 } from "react-router-dom";
 import styled from "styled-components";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { ReactComponent as LogoSvg } from "../../images/Dashboard/logo.svg";
 import { ReactComponent as DashboardSvg } from "../../images/Dashboard/dashboard.svg";
 import { ReactComponent as PropertiesSvg } from "../../images/Dashboard/properties.svg";
@@ -25,77 +25,60 @@ type Props = {
   setDashboardPage: (param: boolean) => void;
   match: RouteComponentProps;
 };
+
 const DashboardContainer = ({ setDashboardPage, match }: Props) => {
+  const [selectedCategory, setSelectedCategory] = useState("");
+  const renderByCategory = () => {
+    switch (selectedCategory) {
+      case "dashboardHome":
+        return <DashboardHome setDashboardPage={setDashboardPage} />;
+      case "properties":
+        return <Properties setDashboardPage={setDashboardPage} />;
+      case "escrowInProcess":
+        return <EscrowInProcess setDashboardPage={setDashboardPage} />;
+      case "myAgent":
+        return <MyAgent setDashboardPage={setDashboardPage} />;
+      case "faq":
+        return <Faq setDashboardPage={setDashboardPage} />;
+      default:
+        return <DashboardHome setDashboardPage={setDashboardPage} />;
+    }
+  };
   useEffect(() => {
+    console.log("setDashboardPage(true);");
     setDashboardPage(true);
-    return () => {
-      setDashboardPage(false);
-    };
   });
 
   return (
-    <Router>
-      <Container>
-        <SideBar>
-          <SideBarContent>
-            <StyledLink to="/">
-              <LogoWrapper>
-                <StyledLogo />
-              </LogoWrapper>
-            </StyledLink>
-            <StyledLink to="/dashboard/dashboardHome">
-              <StyledDashboard />
-            </StyledLink>
-            <StyledLink to="/dashboard/properties">
-              <StyledProperties />
-            </StyledLink>
-            <StyledLink to={`/dashboard/escrowInProcess`}>
-              <StyledEscrow />
-            </StyledLink>
-            <StyledLink to={`/dashboard/myAgent`}>
-              <StyledMyAgent />
-            </StyledLink>
-            <StyledLink to={`/dashboard/faq`}>
-              <StyledFaq />
-            </StyledLink>
-          </SideBarContent>
-        </SideBar>
-
-        <ContentContainer>
-          <Route
-            exact
-            path="/dashboard"
-            render={() => <DashboardHome setDashboardPage={setDashboardPage} />}
-          />
-          <Route
-            exact
-            path={`${match.match.url}/dashboardHome`}
-            // path="/dashboard/dashboardHome"
-
-            render={() => <DashboardHome setDashboardPage={setDashboardPage} />}
-          />
-
-          <Route
-            exact
-            path={`${match.match.url}/properties`}
-            render={() => <Properties setDashboardPage={setDashboardPage} />}
-          />
-          <Route
-            exact
-            path={`${match.match.url}/escrowInProcess`}
-            render={() => (
-              <EscrowInProcess setDashboardPage={setDashboardPage} />
-            )}
-          />
-          <Route
-            exact
-            path={`${match.match.url}/myAgent`}
-            render={() => <MyAgent setDashboardPage={setDashboardPage} />}
-          />
-          <Route exact path={`${match.match.url}/faq`} render={() => <Faq />} />
-        </ContentContainer>
-      </Container>
-    </Router>
+    <Container>
+      <SideBar>
+        <SideBarContent>
+          <StyledLink to="/">
+            <LogoWrapper>
+              <StyledLogo />
+            </LogoWrapper>
+          </StyledLink>
+          <Category onClick={() => setSelectedCategory("dashboardHome")}>
+            <StyledDashboard />
+          </Category>
+          <Category onClick={() => setSelectedCategory("properties")}>
+            <StyledProperties />
+          </Category>
+          <Category onClick={() => setSelectedCategory("escrowInProcess")}>
+            <StyledEscrow />
+          </Category>
+          <Category onClick={() => setSelectedCategory("myAgent")}>
+            <StyledMyAgent />
+          </Category>
+          <Category onClick={() => setSelectedCategory("faq")}>
+            <StyledFaq />
+          </Category>
+        </SideBarContent>
+      </SideBar>
+      <Router>
+        <ContentContainer>{renderByCategory()}</ContentContainer>
+      </Router>
+    </Container>
   );
 };
 
@@ -120,6 +103,7 @@ const SideBarContent = styled.div`
   flex-direction: column;
   justify-content: space-around;
 `;
+const Category: any = styled.div``;
 const LogoWrapper = styled.div`
   min-height: 130px;
   padding: 29px 0px;
