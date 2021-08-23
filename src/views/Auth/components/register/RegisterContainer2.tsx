@@ -4,7 +4,8 @@ import SignUpUseCase, { ErrorCode } from "../../../../domain/SignUpUseCase";
 import CheckboxField from "./CheckField";
 import { useHistory } from "react-router";
 import MypageListDomain from "../../../../domain/MypageList";
-
+import { CgArrowsExpandDownLeft } from "react-icons/cg";
+const { Kakao }: any = window;
 type InterestPropertyProps = {
   residential: string[];
   commercial: string[];
@@ -37,7 +38,78 @@ const RegisterContainer2 = () => {
     history.push("/auth/login");
     window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
   };
+  const onClickKakaoLogin = () => {
+    if (!Kakao.Auth) {
+      Kakao.init("14e388b73f0f4f68a25b96d3c70a54f4");
+    }
 
+    Kakao.Auth.loginForm({
+      success: function (authObj: any) {
+        Kakao.API.request({
+          url: "/v2/user/me",
+          success: function (res: any) {
+            console.log("Kakao 사용자 정보", res);
+            const uid = res.id;
+            const email = res.kakao_account.email;
+            const nickname = res.profile.nickname;
+          },
+          fail: function (err: any) {
+            console.log(err);
+          },
+        });
+      },
+      fail: function (err: any) {
+        console.log(err);
+      },
+    });
+  };
+  // const onClickKakaoLogin = () => {
+  //   console.log("click kakao signup");
+  // if (!Kakao) {
+  //   console.log("Kakao 인스턴스가 존재하지 않습니다.");
+  // }
+  // Kakao.Auth.login({
+  //   success: function (authObj: any) {
+  //     const accessToken = authObj.accessToken;
+  //     // Kakao.API.request("");
+  //     Kakao.API.request({
+  //       url: "/v2/user/me",
+  //       success: function (res: any) {
+  //         console.log("Kakao 사용자 정보", res);
+  //       },
+  //       fail: function (err: any) {
+  //         console.log(err);
+  //       },
+  //     });
+  //   },
+  //   fail: function (err: any) {
+  //     console.log(err);
+  //   },
+  // });
+  // };
+  // const onClickKakaoLogin = () => {
+  //   console.log("onClickKakaoLogin");
+  //   Kakao.Auth.login({
+  //     success: function (authObj: any) {
+  //       const accessToken = authObj.accessToken;
+  //       Kakao.API.request({
+  //         url: "/v2/user/me",
+  //         success: function (res: any) {
+  //           console.log("Kakao 사용자 정보", res);
+  //         },
+  //         fail: function (err: any) {
+  //           console.log(err);
+  //         },
+  //       });
+  //       // console.log("authObj", authObj);
+  //       // const accessToken = authObj.accessToken;
+  //       // SignUpUseCase.signUpWithKakao(accessToken);
+  //     },
+  //     fail: function (err: any) {
+  //       console.log(err);
+  //     },
+  //   });
+  // };
   const onError = (error: any) => {
     switch (error.code) {
       case ErrorCode.EMAIL_ALREADY_IN_USE:
@@ -205,6 +277,7 @@ const RegisterContainer2 = () => {
       handlePreferredArea={handlePreferredArea}
       handlePreferredAreaOther={handlePreferredAreaOther}
       onTrySignUp={onTrySignUp}
+      onClickKakaoLogin={onClickKakaoLogin}
     />
   );
 };

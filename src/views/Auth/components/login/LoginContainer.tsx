@@ -2,6 +2,7 @@ import LoginPresenter from "./LoginPresenter";
 import { useRef, useState, useEffect, useContext } from "react";
 import { AuthContext } from "../../../../router/config/Provider/AuthProvider";
 import LoginUseCase, { ErrorCode } from "../../../../domain/LoginUseCase";
+import SignUpUseCase from "../../../../domain/SignUpUseCase";
 import { Link, useHistory } from "react-router-dom";
 import axios from "axios";
 
@@ -34,20 +35,24 @@ const LoginContainer = () => {
   };
   // const onClickKakaoLogin = () => {
   //   Kakao.Auth.login({
-  //     success: (res: any) => {
-  //       setKakaoLogin(true);
+  //     success: function (authObj: any) {
+  //       const accessToken = authObj.accessToken;
+  //       SignUpUseCase.signUpWithKakao(accessToken);
   //     },
-  //     fail: (res: any) => {
-  //       setKakaoLogin(false);
-  //       console.log("fail");
+  //     fail: function (err: any) {
+  //       console.log(err);
   //     },
   //   });
   // };
   const onClickKakaoLogin = () => {
-    Kakao.Auth.login({
+    if (!Kakao) {
+      Kakao.init("14e388b73f0f4f68a25b96d3c70a54f4");
+    }
+
+    Kakao.Auth.loginForm({
       success: function (authObj: any) {
-        const accessToken = authObj.accessToken;
-        // Kakao.API.request("");
+        console.log(authObj);
+        Kakao.Auth.setAccessToken(authObj.access_token);
         Kakao.API.request({
           url: "/v2/user/me",
           success: function (res: any) {
@@ -57,33 +62,36 @@ const LoginContainer = () => {
             console.log(err);
           },
         });
-        // axios
-        //   .get("https://kapi.kakao.com/v2/user/me", {
-        //     headers: {
-        //       Authorization: `Bearer ${accessToken}`,
-        //       contentType: "application/x-www-form-urlencoded;charset=utf-8",
-        //     },
-        //   })
-        //   .then((res: any) => console.log(res));
       },
       fail: function (err: any) {
         console.log(err);
       },
     });
-    // Kakao.Auth.authorize({
-    //   redirectUri: "http://localhost:3000",
-    // });
   };
-  // function onClickKakaoLogin() {
+
+  // const onClickKakaoLogin = () => {
+  //   if (!Kakao) {
+  //     console.log("Kakao 인스턴스가 존재하지 않습니다.");
+  //   }
   //   Kakao.Auth.login({
   //     success: function (authObj: any) {
-  //       // alert(JSON.stringify(authObj));
+  //       const accessToken = authObj.accessToken;
+  //       // Kakao.API.request("");
+  //       Kakao.API.request({
+  //         url: "/v2/user/me",
+  //         success: function (res: any) {
+  //           console.log("Kakao 사용자 정보", res);
+  //         },
+  //         fail: function (err: any) {
+  //           console.log(err);
+  //         },
+  //       });
   //     },
   //     fail: function (err: any) {
-  //       // alert(JSON.stringify(err));
+  //       console.log(err);
   //     },
   //   });
-  // }
+  // };
   const onClickLogin = () => {
     LoginUseCase.execute({
       email: userInfo.email,

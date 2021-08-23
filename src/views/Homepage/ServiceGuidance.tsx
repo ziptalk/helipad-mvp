@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import { ReactComponent as MoreInfoSvg } from "../../images/Homepage/moreInfo.svg";
 import React, { useContext, useEffect, useState } from "react";
-import { useTranslation } from 'react-i18next';
-import { Languages, languages } from '../../Locales/i18n';
+import { useTranslation } from "react-i18next";
+import { Languages, languages } from "../../Locales/i18n";
 
 enum CategoryItem {
   Purchase = "구매",
@@ -15,27 +15,27 @@ enum CategoryItem {
 const ServiceGuidance = () => {
   const [selectedCategory, setSelectedCategory] = useState("");
   const { t, i18n } = useTranslation();
-  
+
   const handleChangeLanguage = (lang: Languages) => {
     i18n.changeLanguage(lang);
-  }
+  };
 
-  useEffect(()=>{
-    function checkLanguage(){
-      let currentLanguage = localStorage.getItem('language');
-      console.log(currentLanguage)
+  useEffect(() => {
+    function checkLanguage() {
+      let currentLanguage = localStorage.getItem("language");
+      console.log(currentLanguage);
 
-      if(currentLanguage=="en" || currentLanguage=="ko"){
-        handleChangeLanguage(currentLanguage)
+      if (currentLanguage == "en" || currentLanguage == "ko") {
+        handleChangeLanguage(currentLanguage);
       }
     }
 
-    window.addEventListener('storage', checkLanguage)
+    window.addEventListener("storage", checkLanguage);
 
     return () => {
-      window.removeEventListener('storage', checkLanguage)
-    }
-  },[])
+      window.removeEventListener("storage", checkLanguage);
+    };
+  }, []);
 
   const onClickCategory = (e: any) => {
     console.log("onClickCategory", e.target.id);
@@ -47,18 +47,14 @@ const ServiceGuidance = () => {
         return (
           <MoreWrapper margin={-44}>
             <MoreTitle>부동산 구매</MoreTitle>
-            <MoreContent>
-            {t('mouse_over_1')}
-            </MoreContent>
+            <MoreContent>{t("mouse_over_1")}</MoreContent>
           </MoreWrapper>
         );
       case CategoryItem.Sale:
         return (
           <MoreWrapper margin={-27}>
             <MoreTitle>부동산 판매</MoreTitle>
-            <MoreContent>
-            {t('mouse_over_2')}
-            </MoreContent>
+            <MoreContent>{t("mouse_over_2")}</MoreContent>
           </MoreWrapper>
         );
 
@@ -66,32 +62,28 @@ const ServiceGuidance = () => {
         return (
           <MoreWrapper margin={-10}>
             <MoreTitle>송금</MoreTitle>
-            <MoreContent>
-            {t('mouse_over_3')}
-            </MoreContent>
+            <MoreContent>{t("mouse_over_3")}</MoreContent>
           </MoreWrapper>
         );
       case CategoryItem.Corporation:
         return (
           <MoreWrapper margin={7}>
             <MoreTitle>부동산 법인 설립</MoreTitle>
-            <MoreContent>
-            {t('mouse_over_4')}
-            </MoreContent>
+            <MoreContent>{t("mouse_over_4")}</MoreContent>
           </MoreWrapper>
         );
       case CategoryItem.Operation:
         return (
           <MoreWrapper margin={24}>
             <MoreTitle>부동산 운용</MoreTitle>
-            <MoreContent>{t('mouse_over_5')}</MoreContent>
+            <MoreContent>{t("mouse_over_5")}</MoreContent>
           </MoreWrapper>
         );
       case CategoryItem.Distribution:
         return (
           <MoreWrapper margin={41}>
             <MoreTitle>수익 분배 및 보고</MoreTitle>
-            <MoreContent>{t('mouse_over_6')}</MoreContent>
+            <MoreContent>{t("mouse_over_6")}</MoreContent>
           </MoreWrapper>
         );
       default:
@@ -106,7 +98,7 @@ const ServiceGuidance = () => {
         </TitleWrapper>
         <Divider></Divider>
         <CategoryWrapper>
-          <MouseOverGuideButton>{t('mouse_over_info')}</MouseOverGuideButton>
+          {/* <MouseOverGuideButton>{t('mouse_over_info')}</MouseOverGuideButton> */}
           <Category id={CategoryItem.Purchase} onMouseOver={onClickCategory}>
             부동산 구매
           </Category>

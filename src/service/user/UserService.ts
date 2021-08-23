@@ -5,6 +5,7 @@ import User from "../../model/User";
 import { setTokenSourceMapRange } from "typescript";
 import { dividerChecker } from "../../views/MyPage/components/process/processService";
 import { resolveAny } from "dns";
+import { AiOutlineConsoleSql } from "react-icons/ai";
 
 export default class UserService {
   static logInWithEmailAndPassword(email: string, password: string) {
@@ -40,6 +41,24 @@ export default class UserService {
   //     isAgent
   //   );
   // }
+  static async signUpWithKakao(token: string) {
+    console.log("token", token);
+    await firebase
+      .auth()
+      .signInWithCustomToken(token)
+      .then((userCredential: any) => {
+        // Signed in
+        var user = userCredential.user;
+        console.log("kakao login:", user);
+        // ...
+      })
+      .catch((error: any) => {
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        console.log("signup with kakao error");
+        // ...
+      });
+  }
   static async signUpWithEmailAndPassword({ ...props }) {
     let { email, password } = props;
 

@@ -4,6 +4,9 @@ export default class SignUpUseCase {
   static async withEmail({ ...props }) {
     return await FirebaseService.signUpWithEmailAndPassword({ ...props });
   }
+  static async signUpWithKakao(token: string) {
+    return await FirebaseService.signUpWithKakao(token);
+  }
 }
 
 export enum ErrorCode {

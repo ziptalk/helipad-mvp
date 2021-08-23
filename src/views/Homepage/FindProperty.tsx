@@ -1,45 +1,70 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import iphoneImg from "../../images/Homepage/iphone-image.jpg";
-import React, { useContext, useEffect, useState } from "react";
-import { useTranslation } from 'react-i18next';
-import { Languages, languages } from '../../Locales/i18n';
+import React, { useContext, useEffect, useState, useRef } from "react";
+import { useTranslation } from "react-i18next";
+import { Languages, languages } from "../../Locales/i18n";
+import { MutableRefObject } from "react";
 
 const FindProperty = () => {
   const { t, i18n } = useTranslation();
-  
   const handleChangeLanguage = (lang: Languages) => {
     i18n.changeLanguage(lang);
-  }
+  };
+  const iphoneElement = useRef() as MutableRefObject<HTMLImageElement>;
 
-  useEffect(()=>{
-    function checkLanguage(){
-      let currentLanguage = localStorage.getItem('language');
-      console.log(currentLanguage)
+  // console.log(iphoneElement.current?.getBoundingClientRect());
+  // const elementCoordination =
+  //   iphoneElement.current && iphoneElement.current.getBoundingClientRect();
+  // if (elementCoordination.top < 0) {
+  //   console.log("!!!!!!!!!!!!!!");
+  // }
 
-      if(currentLanguage=="en" || currentLanguage=="ko"){
-        handleChangeLanguage(currentLanguage)
+  useEffect(() => {
+    window.addEventListener("scroll", () => {
+      const elementCoordination = iphoneElement.current.getBoundingClientRect();
+      if (
+        elementCoordination.top < 0 &&
+        elementCoordination.top > -elementCoordination.height
+      ) {
+        console.log("아이폰 애니매이션 시작");
+        window.removeEventListener("scroll", () => {});
+      } else {
+        console.log("아이폰 애니메이션 종료");
+      }
+    });
+
+    return () => {
+      window.removeEventListener("scroll", () => {});
+    };
+  }, []);
+
+  useEffect(() => {
+    function checkLanguage() {
+      let currentLanguage = localStorage.getItem("language");
+      console.log(currentLanguage);
+
+      if (currentLanguage == "en" || currentLanguage == "ko") {
+        handleChangeLanguage(currentLanguage);
       }
     }
 
-    window.addEventListener('storage', checkLanguage)
+    window.addEventListener("storage", checkLanguage);
 
     return () => {
-      window.removeEventListener('storage', checkLanguage)
-    }
-  },[])
+      window.removeEventListener("storage", checkLanguage);
+    };
+  }, []);
 
   return (
     <Container>
       <ContentContainer>
-        <PhoneImage imgPath={iphoneImg} />
+        <PhoneImage ref={iphoneElement} imgPath={iphoneImg} />
         <ContentBlock>
           <TitleWrapper>
             <Category>부동산구매</Category>
-            <Title>{t('main_1')}</Title>
-            <SubTitle>
-            {t('main_2')}
-            </SubTitle>
+            <Title>{t("main_1")}</Title>
+            <SubTitle>{t("main_2")}</SubTitle>
           </TitleWrapper>
           <ButtonWrapper>
             <StyledLink to="">가입하기</StyledLink>
