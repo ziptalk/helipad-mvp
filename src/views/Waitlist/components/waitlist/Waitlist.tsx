@@ -53,6 +53,7 @@ const Waitlist = () => {
   }, [user]);
 
   return (
+    <div style={{width:"100%", display:"flex", justifyContent:"center"}}>
     <Container>
       <img style={{paddingTop:"132px"}} src={Group}/>
       <MainText>{t('waitlist_1')}</MainText>
@@ -72,6 +73,7 @@ const Waitlist = () => {
         <JoinButton>{t('waitlist_4')}</JoinButton>
       </InputContainer>
     </Container>
+    </div>
   );
 };
 const Container = styled.div`

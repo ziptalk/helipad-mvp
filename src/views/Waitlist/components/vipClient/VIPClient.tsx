@@ -66,6 +66,7 @@ const VIPClient = ({
   }, [user]);
 
   return (
+    <div style={{width:"100%", display:"flex", justifyContent:"center"}}>
     <Container>
       <img style={{paddingTop:"132px"}} src={Group}/>
       <MainText>{t('vip_1')}</MainText>
@@ -88,6 +89,7 @@ const VIPClient = ({
         <JoinButton onClick={checkInviteCode}>{t('vip_5')}</JoinButton>
       </InputContainer>
     </Container>
+    </div>
   );
 };
 const Container = styled.div`
