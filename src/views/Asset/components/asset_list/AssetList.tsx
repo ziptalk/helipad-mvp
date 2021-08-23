@@ -50,6 +50,28 @@ const ParkingSpots = () => {
     setParkingSpots(value);
     setExpanded(false);
   };
+  const { t, i18n } = useTranslation();
+  
+  const handleChangeLanguage = (lang: Languages) => {
+    i18n.changeLanguage(lang);
+  }
+
+  useEffect(()=>{
+    function checkLanguage(){
+      let currentLanguage = localStorage.getItem('language');
+      console.log(currentLanguage)
+
+      if(currentLanguage=="en" || currentLanguage=="ko"){
+        handleChangeLanguage(currentLanguage)
+      }
+    }
+
+    window.addEventListener('storage', checkLanguage)
+
+    return () => {
+      window.removeEventListener('storage', checkLanguage)
+    }
+  },[])
 
   return (
     <>
@@ -1124,7 +1146,7 @@ const AssetList: React.FC<AssetListProperties> = ({ history }: any) => {
             setHomeTypeOption(!homeTypeOption)
             setMoreOption(false)
             setBBOption(false)
-            }}>Home Type</SearchButton>
+            }}>{t('search_1')}</SearchButton>
           <SearchButton
             onClick={() => {
               setBBOption(true);
@@ -1132,7 +1154,7 @@ const AssetList: React.FC<AssetListProperties> = ({ history }: any) => {
               setHomeTypeOption(false);
             }}
           >
-            Bed & Baths
+            {t('search_2')}
           </SearchButton>
           <SearchButton
             onClick={() => {
@@ -1141,9 +1163,9 @@ const AssetList: React.FC<AssetListProperties> = ({ history }: any) => {
               setHomeTypeOption(false);
             }}
           >
-            More
+            {t('search_3')}
           </SearchButton>
-          <SearchButton>Save Search</SearchButton>
+          <SearchButton>{t('search_4')}</SearchButton>
         </SearchBar>
         {bbOption ? (
           // <BBOptionContainer>
@@ -1194,7 +1216,7 @@ const AssetList: React.FC<AssetListProperties> = ({ history }: any) => {
           <MoreOptionContainer>
           <MoreListContainer>
                 <MoreLeftContainer style={{color:"#8D8D8D"}}>
-                  Rooms
+                {t('option_8')}
                 </MoreLeftContainer>
                 <MoreRightContainer>
                   <div style={{ display: "flex", width: "100%" }}>
@@ -1206,7 +1228,7 @@ const AssetList: React.FC<AssetListProperties> = ({ history }: any) => {
               </MoreListContainer>
               <MoreListContainer>
                 <MoreLeftContainer style={{color:"#8D8D8D"}}>
-                  Bathrooms
+                {t('option_9')}
                 </MoreLeftContainer>
                 <MoreRightContainer>
                   <div style={{ display: "flex", width: "100%" }}>
@@ -1218,7 +1240,7 @@ const AssetList: React.FC<AssetListProperties> = ({ history }: any) => {
               </MoreListContainer>
               <MoreListContainer>
                 <MoreLeftContainer style={{color:"#8D8D8D"}}>
-                  Square Footage
+                {t('option_10')}
                 </MoreLeftContainer>
                 <MoreRightContainer>
                   <div style={{ display: "flex", width: "100%" }}>
@@ -1239,9 +1261,9 @@ const AssetList: React.FC<AssetListProperties> = ({ history }: any) => {
                 </MoreRightContainer>
               </MoreListContainer>
               <BottomContainer>
-                <div>Reset all filters</div>
+                <div>{t('option_39')}</div>
                 <MoreDoneButton onClick={() => setBBOption(false)}>
-                  Done
+                {t('option_40')}
                 </MoreDoneButton>
               </BottomContainer>
           </MoreOptionContainer>
@@ -1252,7 +1274,7 @@ const AssetList: React.FC<AssetListProperties> = ({ history }: any) => {
         {homeTypeOption ? <>
           <HomeTypeOptionContainer>
             <div style={{display:"flex", justifyContent:"space-between", alignItems:"center", marginBottom:"5px"}}>
-              <div style={{paddingBottom:"3px"}}>Residence</div>
+              <div style={{paddingBottom:"3px"}}>{t('option_1')}</div>
               <CheckBoxContainer2>
                 <input type="checkbox" name="residence"></input>
               </CheckBoxContainer2>
@@ -1260,7 +1282,7 @@ const AssetList: React.FC<AssetListProperties> = ({ history }: any) => {
                <button onClick={()=>setHomeType(0)} style={{width:"16px", height:"16px", borderRadius:"8px", backgroundColor:"#C4C4C4", border:"2px solid #C4C4C4"}}/>} */}
             </div>
             <div style={{display:"flex", justifyContent:"space-between", alignItems:"center", marginBottom:"5px"}}>
-              <div style={{paddingBottom:"3px"}}>Vacation</div>
+              <div style={{paddingBottom:"3px"}}>{t('option_2')}</div>
               <CheckBoxContainer2>
                 <input type="checkbox" name="vacation"></input>
               </CheckBoxContainer2>
@@ -1268,7 +1290,7 @@ const AssetList: React.FC<AssetListProperties> = ({ history }: any) => {
                <button onClick={()=>setHomeType(1)} style={{width:"16px", height:"16px", borderRadius:"8px", backgroundColor:"#C4C4C4", border:"2px solid #C4C4C4"}}/>} */}
             </div>
             <div style={{display:"flex", justifyContent:"space-between", alignItems:"center"}}>
-              <div style={{paddingBottom:"3px"}}>Income</div>
+              <div style={{paddingBottom:"3px"}}>{t('option_3')}</div>
               <CheckBoxContainer2>
                 <input type="checkbox" name="income"></input>
               </CheckBoxContainer2>
@@ -1283,7 +1305,7 @@ const AssetList: React.FC<AssetListProperties> = ({ history }: any) => {
             <MoreOptionContainer>
               <MoreListContainer>
               <MoreLeftContainer style={{display:"flex"}}>
-                  <div>Max HOA</div>
+                  <div>{t('option_12')}</div>
                   <HelpMark>
                     <div style={{marginLeft:"-3px", marginTop:"-1px"}}>
                       ?
@@ -1342,25 +1364,25 @@ const AssetList: React.FC<AssetListProperties> = ({ history }: any) => {
                 </MoreRightContainer>
               </MoreListContainer>
               <MoreListContainer>
-                <MoreLeftContainer>Tours</MoreLeftContainer>
+                <MoreLeftContainer>{t('option_13')}</MoreLeftContainer>
                 <MoreRightContainer>
                   <CheckBoxContainer>
                     <input type="checkbox" name="houseOpen"></input>
-                    <div>Must have open house</div>
+                    <div>{t('option_14')}</div>
                   </CheckBoxContainer>
                   <CheckBoxContainer>
                     <input type="checkbox" name="houseOpen"></input>
-                    <div>Must have 3D Tour</div>
+                    <div>{t('option_15')}</div>
                   </CheckBoxContainer>
                 </MoreRightContainer>
               </MoreListContainer>
               <MoreListContainer>
-                <MoreLeftContainer>Parking Spots</MoreLeftContainer>
+                <MoreLeftContainer>{t('option_16')}</MoreLeftContainer>
                 <MoreRightContainer>
                   <ParkingSpots />
                   <CheckBoxContainer>
                     <input type="checkbox" name="houseOpen"></input>
-                    <div>Must have garage</div>
+                    <div>{t('option_17')}</div>
                   </CheckBoxContainer>
                 </MoreRightContainer>
               </MoreListContainer>
@@ -1373,7 +1395,7 @@ const AssetList: React.FC<AssetListProperties> = ({ history }: any) => {
                     color:"#8D8D8D"
                   }}
                 >
-                  Square Feet
+                  {t('option_18')}
                 </MoreLeftContainer>
                 <MoreRightContainer>
                   <div style={{ display: "flex", width: "100%" }}>
@@ -1392,7 +1414,7 @@ const AssetList: React.FC<AssetListProperties> = ({ history }: any) => {
                     color:"#8D8D8D"
                   }}
                 >
-                  Lot Size
+                  {t('option_19')}
                 </MoreLeftContainer>
                 <MoreRightContainer>
                   <div style={{ display: "flex", width: "100%" }}>
@@ -1411,7 +1433,7 @@ const AssetList: React.FC<AssetListProperties> = ({ history }: any) => {
                     color:"#8D8D8D"
                   }}
                 >
-                  Year Built
+                  {t('option_20')}
                 </MoreLeftContainer>
                 <MoreRightContainer>
                   <div style={{ display: "flex", width: "100%" }}>
@@ -1432,68 +1454,68 @@ const AssetList: React.FC<AssetListProperties> = ({ history }: any) => {
                 </MoreRightContainer>
               </MoreListContainer>
               <MoreListContainer>
-                <MoreLeftContainer>Basement</MoreLeftContainer>
+                <MoreLeftContainer>{t('option_21')}</MoreLeftContainer>
                 <MoreRightContainer>
                   <CheckBoxContainer>
                     <input type="checkbox" name="basement"></input>
-                    <div>Has Basement</div>
+                    <div>{t('option_22')}</div>
                   </CheckBoxContainer>
                 </MoreRightContainer>
               </MoreListContainer>
               <MoreListContainer>
-                <MoreLeftContainer>Number Of Stories</MoreLeftContainer>
+                <MoreLeftContainer>{t('option_23')}</MoreLeftContainer>
                 <MoreRightContainer>
                   <CheckBoxContainer>
                     <input type="checkbox" name="stories"></input>
-                    <div>Single-story only</div>
+                    <div>{t('option_24')}</div>
                   </CheckBoxContainer>
                 </MoreRightContainer>
               </MoreListContainer>
               <MoreListContainer>
-                <MoreLeftContainer>Other Amenities</MoreLeftContainer>
+                <MoreLeftContainer>{t('option_25')}</MoreLeftContainer>
                 <MoreRightContainer>
                   <CheckBoxContainer>
                     <input type="checkbox" name="amenities"></input>
-                    <div>Must have A/C</div>
+                    <div>{t('option_26')}</div>
                   </CheckBoxContainer>
                   <CheckBoxContainer>
                     <input type="checkbox" name="amenities"></input>
-                    <div>Must have pool</div>
+                    <div>{t('option_27')}l</div>
                   </CheckBoxContainer>
                   <CheckBoxContainer>
                     <input type="checkbox" name="amenities"></input>
-                    <div>Waterfront</div>
+                    <div>{t('option_28')}t</div>
                   </CheckBoxContainer>
                 </MoreRightContainer>
               </MoreListContainer>
               <MoreListContainer>
-                <MoreLeftContainer>View</MoreLeftContainer>
+                <MoreLeftContainer>{t('option_29')}</MoreLeftContainer>
                 <MoreRightContainer>
                   <div style={{ display: "flex" }}>
                     <CheckBoxContainer>
                       <input type="checkbox" name="view"></input>
-                      <div>City</div>
+                      <div>{t('option_30')}</div>
                     </CheckBoxContainer>
                     <CheckBoxContainer>
                       <input type="checkbox" name="view"></input>
-                      <div>Mountain</div>
+                      <div>{t('option_31')}</div>
                     </CheckBoxContainer>
                   </div>
                   <div style={{ display: "flex" }}>
                     <CheckBoxContainer>
                       <input type="checkbox" name="view"></input>
-                      <div>Park</div>
+                      <div>{t('option_32')}</div>
                     </CheckBoxContainer>
                     <CheckBoxContainer>
                       <input type="checkbox" name="view"></input>
-                      <div>Water</div>
+                      <div>{t('option_33')}</div>
                     </CheckBoxContainer>
                   </div>
                 </MoreRightContainer>
               </MoreListContainer>
               <MoreListContainer>
                 <MoreLeftContainer style={{display:"flex"}}>
-                  <div>Helipad Owned</div>
+                  <div>{t('option_34')}</div>
                   <HelpMark>
                     <div style={{marginLeft:"-3px", marginTop:"-1px"}}>
                       ?
@@ -1504,30 +1526,30 @@ const AssetList: React.FC<AssetListProperties> = ({ history }: any) => {
                   <CheckBoxContainer>
                     <input type="checkbox" name="helipad-owned"></input>
                     <div>
-                      Move-in ready homes, evaluated and repaired by Helipad
+                    {t('option_35')}
                     </div>
                   </CheckBoxContainer>
                 </MoreRightContainer>
               </MoreListContainer>
               <MoreListContainer>
-                <MoreLeftContainer>Days On Helipad</MoreLeftContainer>
+                <MoreLeftContainer>{t('option_36')}</MoreLeftContainer>
                 <MoreRightContainer>
                   <DaysOn />
                 </MoreRightContainer>
               </MoreListContainer>
               <MoreListContainer>
-                <MoreLeftContainer>Keywords</MoreLeftContainer>
+                <MoreLeftContainer>{t('option_37')}</MoreLeftContainer>
                 <MoreRightContainer>
                   <InputIndividualBox
-                    placeholder="Keywords"
+                    placeholder={t('option_38')}
                     style={{ marginRight: "10px" }}
                   />
                 </MoreRightContainer>
               </MoreListContainer>
               <BottomContainer>
-                <div>Reset all filters</div>
+                <div>{t('option_39')}</div>
                 <MoreDoneButton onClick={() => setMoreOption(false)}>
-                  Done
+                {t('option_40')}
                 </MoreDoneButton>
               </BottomContainer>
             </MoreOptionContainer>
