@@ -187,10 +187,10 @@ const Contact: React.FC<ContactFieldProps> = ({
   return (
     <>
       {/* <button onClick={copyFirebaseOnClick}>파베 복사</button> */}
-      {isAgent ? (
+      {!isAgent ? (
         <Link to={`/process/adminprocess/${assetId}`}>
           <Send onClick={escrowProcessOnClick}>
-            <div>Proceed to Escrow Process</div>
+            <div>Submit Offer</div>
             <BsArrowRight
               style={{ marginLeft: "10px", width: "33px", height: "33px" }}
             />
@@ -207,7 +207,7 @@ const Contact: React.FC<ContactFieldProps> = ({
             }}
             onClick={escrowProcessOnClick}
           >
-            <div>Proceed to Escrow Process</div>
+            <div>Submit Offer</div>
             <BsArrowRight
               style={{ marginLeft: "10px", width: "33px", height: "33px" }}
             />

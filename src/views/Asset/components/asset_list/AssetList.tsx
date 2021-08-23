@@ -483,6 +483,310 @@ const DaysOn = () => {
   )
 }
 
+const RoomsLeft = () => {
+  const [isExpanded, setExpanded] = useState(false);
+  const { getCollapseProps, getToggleProps } = useCollapse({ isExpanded });
+
+  const [roomsLeft, setRoomsLeft] = useState("Any");
+  const roomsList = [
+    "1",
+    "2",
+    "3",
+    "4",
+    "5+",
+  ];
+
+  const handleRoomsLeft = (value: string) => {
+    setRoomsLeft(value);
+    setExpanded(false);
+  };
+
+  return (
+    <>
+    <div>
+      <div
+        style={{ position: "relative" }}
+        {...getToggleProps({
+          onClick: () =>
+            setExpanded((prevExpanded) => !prevExpanded),
+        })}
+      >
+        <InputIndividualBox
+          placeholder="Any"
+          value={roomsLeft}
+          style={{ marginRight: "10px" }}
+        />
+        <ArrowBox>
+          {isExpanded ? (
+            <BsChevronUp
+              style={{ width: "24px", height: "24px" }}
+            />
+          ) : (
+            <BsChevronDown
+              style={{
+                width: "24px",
+                height: "24px",
+                color: "#8D8D8D",
+              }}
+            />
+          )}
+        </ArrowBox>
+      </div>
+      <section {...getCollapseProps()}>
+        <div style={{ backgroundColor: "#FFFFFF" }}>
+          {roomsList.map((value) => (
+            <div style={{ position: "relative" }}>
+              <SelectList
+                onClick={() => handleRoomsLeft(value)}
+              >
+                {value}
+              </SelectList>
+              {value == roomsLeft ? (
+                <ArrowBox>
+                  <GoCheck
+                    style={{ width: "24px", height: "24px" }}
+                  />
+                </ArrowBox>
+              ) : (
+                <></>
+              )}
+            </div>
+          ))}
+        </div>
+      </section>
+    </div>
+    </>
+  )
+}
+
+const RoomsRight = () => {
+  const [isExpanded, setExpanded] = useState(false);
+  const { getCollapseProps, getToggleProps } = useCollapse({ isExpanded });
+
+  const [roomsRight, setRoomsRight] = useState("Any");
+  const roomsList = [
+    "1",
+    "2",
+    "3",
+    "4",
+    "5+",
+  ];
+
+  const handleRoomsRight = (value: string) => {
+    setRoomsRight(value);
+    setExpanded(false);
+  };
+
+  return (
+    <>
+    <div>
+      <div
+        style={{ position: "relative" }}
+        {...getToggleProps({
+          onClick: () =>
+            setExpanded((prevExpanded) => !prevExpanded),
+        })}
+      >
+        <InputIndividualBox
+          placeholder="Any"
+          value={roomsRight}
+          style={{ marginRight: "10px" }}
+        />
+        <ArrowBox>
+          {isExpanded ? (
+            <BsChevronUp
+              style={{ width: "24px", height: "24px" }}
+            />
+          ) : (
+            <BsChevronDown
+              style={{
+                width: "24px",
+                height: "24px",
+                color: "#8D8D8D",
+              }}
+            />
+          )}
+        </ArrowBox>
+      </div>
+      <section {...getCollapseProps()}>
+        <div style={{ backgroundColor: "#FFFFFF" }}>
+          {roomsList.map((value) => (
+            <div style={{ position: "relative" }}>
+              <SelectList
+                onClick={() => handleRoomsRight(value)}
+              >
+                {value}
+              </SelectList>
+              {value == roomsRight ? (
+                <ArrowBox>
+                  <GoCheck
+                    style={{ width: "24px", height: "24px" }}
+                  />
+                </ArrowBox>
+              ) : (
+                <></>
+              )}
+            </div>
+          ))}
+        </div>
+      </section>
+    </div>
+    </>
+  )
+}
+
+const BathroomsLeft = () => {
+  const [isExpanded, setExpanded] = useState(false);
+  const { getCollapseProps, getToggleProps } = useCollapse({ isExpanded });
+
+  const [bathroomsLeft, setBathroomsLeft] = useState("Any");
+  const roomsList = [
+    "1",
+    "2",
+    "3",
+    "4",
+    "5+",
+  ];
+
+  const handleBathroomsLeft = (value: string) => {
+    setBathroomsLeft(value);
+    setExpanded(false);
+  };
+
+  return (
+    <>
+    <div>
+      <div
+        style={{ position: "relative" }}
+        {...getToggleProps({
+          onClick: () =>
+            setExpanded((prevExpanded) => !prevExpanded),
+        })}
+      >
+        <InputIndividualBox
+          placeholder="Any"
+          value={bathroomsLeft}
+          style={{ marginRight: "10px" }}
+        />
+        <ArrowBox>
+          {isExpanded ? (
+            <BsChevronUp
+              style={{ width: "24px", height: "24px" }}
+            />
+          ) : (
+            <BsChevronDown
+              style={{
+                width: "24px",
+                height: "24px",
+                color: "#8D8D8D",
+              }}
+            />
+          )}
+        </ArrowBox>
+      </div>
+      <section {...getCollapseProps()}>
+        <div style={{ backgroundColor: "#FFFFFF" }}>
+          {roomsList.map((value) => (
+            <div style={{ position: "relative" }}>
+              <SelectList
+                onClick={() => handleBathroomsLeft(value)}
+              >
+                {value}
+              </SelectList>
+              {value == bathroomsLeft ? (
+                <ArrowBox>
+                  <GoCheck
+                    style={{ width: "24px", height: "24px" }}
+                  />
+                </ArrowBox>
+              ) : (
+                <></>
+              )}
+            </div>
+          ))}
+        </div>
+      </section>
+    </div>
+    </>
+  )
+}
+
+const BathroomsRight = () => {
+  const [isExpanded, setExpanded] = useState(false);
+  const { getCollapseProps, getToggleProps } = useCollapse({ isExpanded });
+
+  const [bathroomsRight, setBathroomsRight] = useState("Any");
+  const roomsList = [
+    "1",
+    "2",
+    "3",
+    "4",
+    "5+",
+  ];
+
+  const handleBathroomsRight = (value: string) => {
+    setBathroomsRight(value);
+    setExpanded(false);
+  };
+
+  return (
+    <>
+    <div>
+      <div
+        style={{ position: "relative" }}
+        {...getToggleProps({
+          onClick: () =>
+            setExpanded((prevExpanded) => !prevExpanded),
+        })}
+      >
+        <InputIndividualBox
+          placeholder="Any"
+          value={bathroomsRight}
+          style={{ marginRight: "10px" }}
+        />
+        <ArrowBox>
+          {isExpanded ? (
+            <BsChevronUp
+              style={{ width: "24px", height: "24px" }}
+            />
+          ) : (
+            <BsChevronDown
+              style={{
+                width: "24px",
+                height: "24px",
+                color: "#8D8D8D",
+              }}
+            />
+          )}
+        </ArrowBox>
+      </div>
+      <section {...getCollapseProps()}>
+        <div style={{ backgroundColor: "#FFFFFF" }}>
+          {roomsList.map((value) => (
+            <div style={{ position: "relative" }}>
+              <SelectList
+                onClick={() => handleBathroomsRight(value)}
+              >
+                {value}
+              </SelectList>
+              {value == bathroomsRight ? (
+                <ArrowBox>
+                  <GoCheck
+                    style={{ width: "24px", height: "24px" }}
+                  />
+                </ArrowBox>
+              ) : (
+                <></>
+              )}
+            </div>
+          ))}
+        </div>
+      </section>
+    </div>
+    </>
+  )
+}
+
 
 const AssetList: React.FC<AssetListProperties> = ({ history }: any) => {
   const [definition, setDefinition] = useState<Definition>(
@@ -842,71 +1146,134 @@ const AssetList: React.FC<AssetListProperties> = ({ history }: any) => {
           <SearchButton>Save Search</SearchButton>
         </SearchBar>
         {bbOption ? (
-          <BBOptionContainer>
-            <NumberSelectContainer>
-              <NumberButton style={{ borderLeft: "1px solid black" }}>
-                방
-              </NumberButton>
-              {roomNumber.map((value, index) => (
-                <>
-                  {roomState == index ? (
-                    <NumberButton
-                      style={{ backgroundColor: "black", color: "white" }}
-                    >
-                      {value}+
-                    </NumberButton>
-                  ) : (
-                    <NumberButton onClick={() => setRoomState(index)}>
-                      {value}+
-                    </NumberButton>
-                  )}
-                </>
-              ))}
-            </NumberSelectContainer>
-            <NumberSelectContainer style={{ marginBottom: "18px" }}>
-              <NumberButton style={{ borderLeft: "1px solid black" }}>
-                화
-              </NumberButton>
-              {roomNumber.map((value, index) => (
-                <>
-                  {bathroomState == index ? (
-                    <NumberButton
-                      style={{ backgroundColor: "black", color: "white" }}
-                    >
-                      {value}+
-                    </NumberButton>
-                  ) : (
-                    <NumberButton onClick={() => setBathroomState(index)}>
-                      {value}+
-                    </NumberButton>
-                  )}
-                </>
-              ))}
-            </NumberSelectContainer>
-            <div style={{ width: "100%", float: "right", textAlign: "right" }}>
-              <SaveButton onClick={() => setBBOption(false)}>Save</SaveButton>
-            </div>
-          </BBOptionContainer>
+          // <BBOptionContainer>
+          //   <NumberSelectContainer>
+          //     <NumberButton style={{ borderLeft: "1px solid black" }}>
+          //       방
+          //     </NumberButton>
+          //     {roomNumber.map((value, index) => (
+          //       <>
+          //         {roomState == index ? (
+          //           <NumberButton
+          //             style={{ backgroundColor: "black", color: "white" }}
+          //           >
+          //             {value}+
+          //           </NumberButton>
+          //         ) : (
+          //           <NumberButton onClick={() => setRoomState(index)}>
+          //             {value}+
+          //           </NumberButton>
+          //         )}
+          //       </>
+          //     ))}
+          //   </NumberSelectContainer>
+          //   <NumberSelectContainer style={{ marginBottom: "18px" }}>
+          //     <NumberButton style={{ borderLeft: "1px solid black" }}>
+          //       화
+          //     </NumberButton>
+          //     {roomNumber.map((value, index) => (
+          //       <>
+          //         {bathroomState == index ? (
+          //           <NumberButton
+          //             style={{ backgroundColor: "black", color: "white" }}
+          //           >
+          //             {value}+
+          //           </NumberButton>
+          //         ) : (
+          //           <NumberButton onClick={() => setBathroomState(index)}>
+          //             {value}+
+          //           </NumberButton>
+          //         )}
+          //       </>
+          //     ))}
+          //   </NumberSelectContainer>
+          //   <div style={{ width: "100%", float: "right", textAlign: "right" }}>
+          //     <SaveButton onClick={() => setBBOption(false)}>Save</SaveButton>
+          //   </div>
+          // </BBOptionContainer>
+          <MoreOptionContainer>
+          <MoreListContainer>
+                <MoreLeftContainer style={{color:"#8D8D8D"}}>
+                  Rooms
+                </MoreLeftContainer>
+                <MoreRightContainer>
+                  <div style={{ display: "flex", width: "100%" }}>
+                    <RoomsLeft />
+                    <div style={{ margin: "5px", marginTop: "10px" }}>-</div>
+                    <RoomsRight />
+                  </div>
+                </MoreRightContainer>
+              </MoreListContainer>
+              <MoreListContainer>
+                <MoreLeftContainer style={{color:"#8D8D8D"}}>
+                  Bathrooms
+                </MoreLeftContainer>
+                <MoreRightContainer>
+                  <div style={{ display: "flex", width: "100%" }}>
+                    <BathroomsLeft />
+                    <div style={{ margin: "5px", marginTop: "10px" }}>-</div>
+                    <BathroomsRight />
+                  </div>
+                </MoreRightContainer>
+              </MoreListContainer>
+              <MoreListContainer>
+                <MoreLeftContainer style={{color:"#8D8D8D"}}>
+                  Square Footage
+                </MoreLeftContainer>
+                <MoreRightContainer>
+                  <div style={{ display: "flex", width: "100%" }}>
+                    <div>
+                      <InputIndividualBox
+                        placeholder="Min"
+                        style={{ marginRight: "10px" }}
+                      />
+                    </div>
+                    <div style={{ margin: "5px", marginTop: "10px" }}>-</div>
+                    <div>
+                      <InputIndividualBox
+                        placeholder="Max"
+                        style={{ marginRight: "10px" }}
+                      />
+                    </div>
+                  </div>
+                </MoreRightContainer>
+              </MoreListContainer>
+              <BottomContainer>
+                <div>Reset all filters</div>
+                <MoreDoneButton onClick={() => setBBOption(false)}>
+                  Done
+                </MoreDoneButton>
+              </BottomContainer>
+          </MoreOptionContainer>
         ) : (
           <></>
         )}
 
         {homeTypeOption ? <>
           <HomeTypeOptionContainer>
-            <div style={{display:"flex", justifyContent:"space-between", alignItems:"center"}}>
-              <div>Residence</div>
-              {homeType == 0 ? <button style={{width:"16px", height:"16px", borderRadius:"8px", backgroundColor:"#4B4B4B", border:"2px solid #C4C4C4"}}/>:
-               <button onClick={()=>setHomeType(0)} style={{width:"16px", height:"16px", borderRadius:"8px", backgroundColor:"#C4C4C4", border:"2px solid #C4C4C4"}}/>}
+            <div style={{display:"flex", justifyContent:"space-between", alignItems:"center", marginBottom:"5px"}}>
+              <div style={{paddingBottom:"3px"}}>Residence</div>
+              <CheckBoxContainer2>
+                <input type="checkbox" name="residence"></input>
+              </CheckBoxContainer2>
+              {/* {homeType == 0 ? <button style={{width:"16px", height:"16px", borderRadius:"8px", backgroundColor:"#4B4B4B", border:"2px solid #C4C4C4"}}/>:
+               <button onClick={()=>setHomeType(0)} style={{width:"16px", height:"16px", borderRadius:"8px", backgroundColor:"#C4C4C4", border:"2px solid #C4C4C4"}}/>} */}
+            </div>
+            <div style={{display:"flex", justifyContent:"space-between", alignItems:"center", marginBottom:"5px"}}>
+              <div style={{paddingBottom:"3px"}}>Vacation</div>
+              <CheckBoxContainer2>
+                <input type="checkbox" name="vacation"></input>
+              </CheckBoxContainer2>
+              {/* {homeType == 1 ? <button style={{width:"16px", height:"16px", borderRadius:"8px", backgroundColor:"#4B4B4B", border:"2px solid #C4C4C4"}}/>:
+               <button onClick={()=>setHomeType(1)} style={{width:"16px", height:"16px", borderRadius:"8px", backgroundColor:"#C4C4C4", border:"2px solid #C4C4C4"}}/>} */}
             </div>
             <div style={{display:"flex", justifyContent:"space-between", alignItems:"center"}}>
-              <div>Vacation</div>
-              {homeType == 1 ? <button style={{width:"16px", height:"16px", borderRadius:"8px", backgroundColor:"#4B4B4B", border:"2px solid #C4C4C4"}}/>:
-               <button onClick={()=>setHomeType(1)} style={{width:"16px", height:"16px", borderRadius:"8px", backgroundColor:"#C4C4C4", border:"2px solid #C4C4C4"}}/>}
-            </div>
-            <div style={{display:"flex", justifyContent:"space-between", alignItems:"center"}}>
-              <div>Income</div>
-              {homeType == 2 ? <button style={{width:"16px", height:"16px", borderRadius:"8px", backgroundColor:"#4B4B4B", border:"2px solid #C4C4C4"}}/>:
-               <button onClick={()=>setHomeType(2)} style={{width:"16px", height:"16px", borderRadius:"8px", backgroundColor:"#C4C4C4", border:"2px solid #C4C4C4"}}/>}
+              <div style={{paddingBottom:"3px"}}>Income</div>
+              <CheckBoxContainer2>
+                <input type="checkbox" name="income"></input>
+              </CheckBoxContainer2>
+              {/* {homeType == 2 ? <button style={{width:"16px", height:"16px", borderRadius:"8px", backgroundColor:"#4B4B4B", border:"2px solid #C4C4C4"}}/>:
+               <button onClick={()=>setHomeType(2)} style={{width:"16px", height:"16px", borderRadius:"8px", backgroundColor:"#C4C4C4", border:"2px solid #C4C4C4"}}/>} */}
             </div>
           </HomeTypeOptionContainer>
         </>:<></>}
@@ -1003,6 +1370,7 @@ const AssetList: React.FC<AssetListProperties> = ({ history }: any) => {
                     flexDirection: "row-reverse",
                     fontWeight: 400,
                     paddingRight: "50px",
+                    color:"#8D8D8D"
                   }}
                 >
                   Square Feet
@@ -1021,6 +1389,7 @@ const AssetList: React.FC<AssetListProperties> = ({ history }: any) => {
                     flexDirection: "row-reverse",
                     fontWeight: 400,
                     paddingRight: "50px",
+                    color:"#8D8D8D"
                   }}
                 >
                   Lot Size
@@ -1039,6 +1408,7 @@ const AssetList: React.FC<AssetListProperties> = ({ history }: any) => {
                     flexDirection: "row-reverse",
                     fontWeight: 400,
                     paddingRight: "50px",
+                    color:"#8D8D8D"
                   }}
                 >
                   Year Built
@@ -1228,8 +1598,9 @@ const HelpMark = styled.button`
 const SearchBar = styled.div`
   display: flex;
   width: 100%;
-  height: 66px;
+  height: 90px;
   background-color: white;
+  align-items: center;
   padding-left: 33px;
   padding-top: 17px;
   padding-bottom: 17px;
@@ -1237,18 +1608,19 @@ const SearchBar = styled.div`
 `;
 
 const SearchWindow = styled.input`
-  width: 307px;
-  height: 32px;
+  width: 400px;
+  height: 42px;
   padding-left: 18px;
-  font-size: 12px;
+  font-size: 16px;
   color: #9a9292;
 `;
 
 const SearchButton = styled.button`
   border: 1px solid black;
+  height: 70%;
   padding-left: 12px;
   padding-right: 12px;
-  font-size: 12px;
+  font-size: 16px;
   color: black;
   margin-left: 22px;
   font-weight: 500;
@@ -1326,6 +1698,15 @@ const CheckBoxContainer = styled.div`
     // flex: 1;
   }
 `;
+
+const CheckBoxContainer2 = styled.div`
+  input {
+    min-width: 20px;
+    min-height: 20px;
+    margin-right: 10px;
+    // flex: 1;
+  }
+`
 
 const NumberSelectContainer = styled.div`
   height: 42px;

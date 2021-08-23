@@ -9,6 +9,10 @@ import RangeSlider, {
   RangeSliderPosition,
   RangeSliderProps,
 } from "../asset_slider";
+import useCollapse from "react-collapsed";
+import { BsChevronDown, BsArrowRight, BsChevronUp } from "react-icons/bs";
+import { GoCheck } from "react-icons/go";
+
 
 const DoubleRangeSlider = ({ assetData }: any) => {
   const [assets, setAssets] = useState<Asset[]>([]);
@@ -27,6 +31,26 @@ const DoubleRangeSlider = ({ assetData }: any) => {
 
   const [x, setX] = useState(10000000);
 
+  const [isExpanded, setExpanded] = useState(false);
+  const { getCollapseProps, getToggleProps } = useCollapse({ isExpanded });
+
+  const [parkingSpots, setParkingSpots] = useState("Homes for You");
+  const parkingSpotsList = [
+    "Homes for You",
+    "Price (High to Low)",
+    "Price (Low to High)",
+    "Newest",
+    "Bedrooms",
+    "Bathrooms",
+    "Square Feet",
+    "Lot Size",
+  ];
+
+  const handleParkingSpots = (value: string) => {
+    setParkingSpots(value);
+    setExpanded(false);
+  };
+
   useEffect(() => {
     let tmpAsset: Asset[] = [];
     fullAssets.map((asset) => {
@@ -42,28 +66,28 @@ const DoubleRangeSlider = ({ assetData }: any) => {
   useEffect(() => {
     async function wholeFunction() {
       // GetAsset.getAssetListByNeighborhood(history).then((value) => {
-        console.log(assetData);
+      console.log(assetData);
 
-        setAssets(assetData);
-        setFullAssets(assetData);
-        console.log("data", assetData);
+      setAssets(assetData);
+      setFullAssets(assetData);
+      console.log("data", assetData);
 
-        var priceList: number[] = [];
+      var priceList: number[] = [];
 
-        assetData.map((assetDatas: any) => {
-          priceList.push(assetDatas.price);
-        });
+      assetData.map((assetDatas: any) => {
+        priceList.push(assetDatas.price);
+      });
 
-        var maxValue = Math.max.apply(null, priceList);
-        var minValue = Math.min.apply(null, priceList);
-        var stepValue = Math.floor((maxValue - minValue) / 100);
-        var xValue = (maxValue + minValue) / 2;
+      var maxValue = Math.max.apply(null, priceList);
+      var minValue = Math.min.apply(null, priceList);
+      var stepValue = Math.floor((maxValue - minValue) / 100);
+      var xValue = (maxValue + minValue) / 2;
 
-        setCurrentMax(maxValue);
-        setCurrentMin(minValue);
-        setMinValueBetween(stepValue);
-        // setX(xValue)
-        setX(maxValue);
+      setCurrentMax(maxValue);
+      setCurrentMin(minValue);
+      setMinValueBetween(stepValue);
+      // setX(xValue)
+      setX(maxValue);
       // }
     }
     wholeFunction();
@@ -102,14 +126,115 @@ const DoubleRangeSlider = ({ assetData }: any) => {
         xStep={minValueBetween}
         onChange={handleChange}
       />
-      <div style={{display:"flex", position:"relative", height:"50px", paddingTop:"15px"}}>
-        {listingState == 0 ? <>
-        <ListingButton style={{marginLeft:"30px", backgroundColor:"#AD0606", color:"white", zIndex:10}}>789 Agent Listings</ListingButton>
-        <ListingButton onClick={()=>setListingState(1)} style={{marginLeft:"190px", zIndex:9}}>33 Other Listings</ListingButton></> : <>
-        <ListingButton onClick={()=>setListingState(0)} style={{marginLeft:"30px", zIndex:9}}>789 Agent Listings</ListingButton>
-        <ListingButton style={{marginLeft:"190px", backgroundColor:"#AD0606", color:"white", zIndex:10}}>33 Other Listings</ListingButton></>}
-        
+      <div style={{ display: "flex", justifyContent: "space-between" }}>
+        <div
+          style={{
+            display: "flex",
+            position: "relative",
+            height: "50px",
+            paddingTop: "15px",
+          }}
+        >
+          {listingState == 0 ? (
+            <>
+              <ListingButton
+                style={{
+                  marginLeft: "30px",
+                  backgroundColor: "#AD0606",
+                  color: "white",
+                  zIndex: 10,
+                }}
+              >
+                789 Agent Listings
+              </ListingButton>
+              <ListingButton
+                onClick={() => setListingState(1)}
+                style={{ marginLeft: "190px", zIndex: 9 }}
+              >
+                33 Other Listings
+              </ListingButton>
+            </>
+          ) : (
+            <>
+              <ListingButton
+                onClick={() => setListingState(0)}
+                style={{ marginLeft: "30px", zIndex: 9 }}
+              >
+                789 Agent Listings
+              </ListingButton>
+              <ListingButton
+                style={{
+                  marginLeft: "190px",
+                  backgroundColor: "#AD0606",
+                  color: "white",
+                  zIndex: 10,
+                }}
+              >
+                33 Other Listings
+              </ListingButton>
+            </>
+          )}
+        </div>
+
+        <div>
+          <div
+            style={{ position: "relative" }}
+            {...getToggleProps({
+              onClick: () => setExpanded((prevExpanded) => !prevExpanded),
+            })}
+          >
+            <div
+              style={{
+                fontSize: "14px",
+                padding: "20px",
+                paddingLeft: "5px",
+                color: "#B69142",
+                paddingRight: "50px",
+              }}
+            >
+              Sort by {parkingSpots}
+            </div>
+            <ArrowBox>
+              {isExpanded ? (
+                <BsChevronUp 
+                style={{
+                  width: "12px",
+                  height: "16px",
+                  color: "#B69142",
+                }}
+                />
+              ) : (
+                <BsChevronDown
+                  style={{
+                    width: "12px",
+                    height: "16px",
+                    color: "#B69142",
+                  }}
+                />
+              )}
+            </ArrowBox>
+          </div>
+          <section {...getCollapseProps()}>
+            <div style={{ backgroundColor: "#FFFFFF" }}>
+              {parkingSpotsList.map((value) => (
+                <div style={{ position: "relative" }}>
+                  <SelectList onClick={() => handleParkingSpots(value)}>
+                    {value}
+                  </SelectList>
+                  {value == parkingSpots ? (
+                    <ArrowBox>
+                      <GoCheck style={{ width: "24px", height: "24px" }} />
+                    </ArrowBox>
+                  ) : (
+                    <></>
+                  )}
+                </div>
+              ))}
+            </div>
+          </section>
+        </div>
       </div>
+
       <div style={{ display: "flex" }}>
         <div
           style={{
@@ -130,16 +255,6 @@ const DoubleRangeSlider = ({ assetData }: any) => {
           <div style={{ fontWeight: 400 }}>Homes</div>
         </div>
         {/* <div style={{fontSize:"14px", padding:"20px", paddingLeft:"5px"}}></div> */}
-        <div
-          style={{
-            fontSize: "14px",
-            padding: "20px",
-            paddingLeft: "5px",
-            color: "#B69142",
-          }}
-        >
-          Sort by Recommended
-        </div>
       </div>
       <Container>
         {assets.map((asset) => (
@@ -158,12 +273,34 @@ const ListingButton = styled.button`
   width: 195px;
   font-size: 14px;
   text-align: center;
-  background-color: #C4C4C4;
-`
+  background-color: #c4c4c4;
+`;
 
 const Container = styled.div`
   display: grid;
   grid-template-columns: 50% 50%;
   grid-auto-rows: minmax(300px, auto);
 `;
+
+const ArrowBox = styled.div`
+  position: absolute;
+  right: 30px;
+  top: 20px;
+  font-weight: bold;
+  font-style: bold;
+`;
+
+const SelectList = styled.button`
+  width: 100%;
+  border: 0;
+  border-bottom: 1px solid white;
+  background-color: transparent;
+  font-size: 16px;
+  text-align: left;
+  height: 56px;
+  padding: 16px;
+  position: relative;
+`;
+
+
 export default DoubleRangeSlider;

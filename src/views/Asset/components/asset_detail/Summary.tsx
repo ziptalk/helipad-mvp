@@ -78,14 +78,14 @@ const Summary: React.FC<SummaryProps> = ({ data }) => {
             <Divider />
             <RoomInfo>
               <RoomInfoContent>
-                {data.buildingInformation.square}
+                {data.buildingInformation.square.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")} ft<sup>2</sup>
               </RoomInfoContent>
               <RoomInfoTitle>Square</RoomInfoTitle>
             </RoomInfo>
             <Divider />
             <RoomInfo>
               <RoomInfoContent>
-                {Math.floor(data.buildingInformation.square / 3.3)}
+                {Math.floor(data.buildingInformation.square / 3.3).toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}
               </RoomInfoContent>
               <RoomInfoTitle>Pyung</RoomInfoTitle>
             </RoomInfo>
@@ -98,13 +98,13 @@ const Summary: React.FC<SummaryProps> = ({ data }) => {
               <RoomInfoTitle>Favorite</RoomInfoTitle>
             </ClickableRoomInfo>
             <Divider />
-            <ClickableRoomInfo>
+            {/* <ClickableRoomInfo>
               <RoomInfoContent>
                 <FaHelicopter />
               </RoomInfoContent>
               <RoomInfoTitle>Ongoing</RoomInfoTitle>
             </ClickableRoomInfo>
-            <Divider />
+            <Divider /> */}
             <ClickableRoomInfo>
               <RoomInfoContent>
                 <FaShareAlt />
