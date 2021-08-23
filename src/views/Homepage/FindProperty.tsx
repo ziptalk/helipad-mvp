@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import iphoneImg from "../../images/Homepage/iphone-image.jpg";
+import iphoneImg from "../../images/Homepage/iphone-image.png";
 import React, { useContext, useEffect, useState, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { Languages, languages } from "../../Locales/i18n";

@@ -38,20 +38,6 @@ const FindBuyer = () => {
           <SubTitle>{t("main_4")}</SubTitle>
         </TitleWrapper>
         <ContentWrapper>
-          <NavigationBlock>
-            <Nav>
-              Looking
-              <StyledArrow />
-            </Nav>
-            <Nav>
-              Location
-              <StyledArrow />
-            </Nav>
-            <Nav>
-              Property
-              <StyledArrow />
-            </Nav>
-          </NavigationBlock>
           <ContentBlock imgPath={findBuyer}></ContentBlock>
         </ContentWrapper>
       </ContentContainer>
