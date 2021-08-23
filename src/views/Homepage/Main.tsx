@@ -86,7 +86,7 @@ const TitleWrapper = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
-  margin-bottom: 250px;
+  margin-bottom: 130px;
 `;
 const TitleBlock = styled.div`
   display: flex;

@@ -19,12 +19,169 @@ import { FiCalendar } from "react-icons/fi";
 import { FcCheckmark } from "react-icons/fc";
 import { BsCheck, BsFillTrashFill } from "react-icons/bs";
 import { processStore } from "../../../../shared/Firebase";
+import { BsChevronDown, BsArrowRight, BsChevronUp } from "react-icons/bs";
+import { GoCheck } from "react-icons/go";
+import useCollapse from "react-collapsed";
+import { Link } from "react-router-dom";
 
 import "react-datepicker/dist/react-datepicker.css";
 
 interface MatchParams {
   assetId: string;
 }
+
+const RoomsLeft = () => {
+  const [isExpanded, setExpanded] = useState(false);
+  const { getCollapseProps, getToggleProps } = useCollapse({ isExpanded });
+
+  const [roomsLeft, setRoomsLeft] = useState("Any");
+  const roomsList = [
+    "1",
+    "2",
+    "3",
+    "4",
+    "5+",
+  ];
+
+  const handleRoomsLeft = (value: string) => {
+    setRoomsLeft(value);
+    setExpanded(false);
+  };
+
+  return (
+    <>
+    <div>
+      <div
+        style={{ position: "relative" }}
+        {...getToggleProps({
+          onClick: () =>
+            setExpanded((prevExpanded) => !prevExpanded),
+        })}
+      >
+        <InputIndividualBox
+          placeholder="Any"
+          value={roomsLeft}
+          style={{ marginRight: "10px" }}
+        />
+        <ArrowBox>
+          {isExpanded ? (
+            <BsChevronUp
+              style={{ width: "24px", height: "24px" }}
+            />
+          ) : (
+            <BsChevronDown
+              style={{
+                width: "24px",
+                height: "24px",
+                color: "#8D8D8D",
+              }}
+            />
+          )}
+        </ArrowBox>
+      </div>
+      <section {...getCollapseProps()}>
+        <div style={{ backgroundColor: "#FFFFFF" }}>
+          {roomsList.map((value) => (
+            <div style={{ position: "relative" }}>
+              <SelectList
+                onClick={() => handleRoomsLeft(value)}
+              >
+                {value}
+              </SelectList>
+              {value == roomsLeft ? (
+                <ArrowBox>
+                  <GoCheck
+                    style={{ width: "24px", height: "24px" }}
+                  />
+                </ArrowBox>
+              ) : (
+                <></>
+              )}
+            </div>
+          ))}
+        </div>
+      </section>
+    </div>
+    </>
+  )
+}
+
+const RoomsRight = () => {
+  const [isExpanded, setExpanded] = useState(false);
+  const { getCollapseProps, getToggleProps } = useCollapse({ isExpanded });
+
+  const [roomsRight, setRoomsRight] = useState("Any");
+  const roomsList = [
+    "1",
+    "2",
+    "3",
+    "4",
+    "5+",
+  ];
+
+  const handleRoomsRight = (value: string) => {
+    setRoomsRight(value);
+    setExpanded(false);
+  };
+
+  return (
+    <>
+    <div>
+      <div
+        style={{ position: "relative" }}
+        {...getToggleProps({
+          onClick: () =>
+            setExpanded((prevExpanded) => !prevExpanded),
+        })}
+      >
+        <InputIndividualBox
+          placeholder="Any"
+          value={roomsRight}
+          style={{ marginRight: "10px" }}
+        />
+        <ArrowBox>
+          {isExpanded ? (
+            <BsChevronUp
+              style={{ width: "24px", height: "24px" }}
+            />
+          ) : (
+            <BsChevronDown
+              style={{
+                width: "24px",
+                height: "24px",
+                color: "#8D8D8D",
+              }}
+            />
+          )}
+        </ArrowBox>
+      </div>
+      <section {...getCollapseProps()}>
+        <div style={{ backgroundColor: "#FFFFFF" }}>
+          {roomsList.map((value) => (
+            <div style={{ position: "relative" }}>
+              <SelectList
+                onClick={() => handleRoomsRight(value)}
+              >
+                {value}
+              </SelectList>
+              {value == roomsRight ? (
+                <ArrowBox>
+                  <GoCheck
+                    style={{ width: "24px", height: "24px" }}
+                  />
+                </ArrowBox>
+              ) : (
+                <></>
+              )}
+            </div>
+          ))}
+        </div>
+      </section>
+    </div>
+    </>
+  )
+}
+
 
 const NormalUserProcess = ({ match }: RouteComponentProps<MatchParams>) => {
   let id = match.params.assetId;
@@ -41,6 +198,7 @@ const NormalUserProcess = ({ match }: RouteComponentProps<MatchParams>) => {
   const [deadline, setDeadline] = useState("");
   const [day, setDay] = useState(-1);
   const [today, setToday] = useState("");
+  const [bbOption, setBBOption] = useState(false);
 
   useEffect(() => {
     setHeaderMode("");
@@ -260,6 +418,73 @@ const NormalUserProcess = ({ match }: RouteComponentProps<MatchParams>) => {
 
   return (
     <>
+    <MoreOptionContainer>
+          <MoreListContainer>
+                <MoreLeftContainer style={{color:"#8D8D8D"}}>
+                  Finance Amount
+                </MoreLeftContainer>
+                <MoreRightContainer>
+                  <div style={{ display: "flex", width: "100%" }}>
+                    <RoomsLeft />
+                    <div style={{ margin: "5px", marginTop: "10px" }}>-</div>
+                    <RoomsRight />
+                  </div>
+                </MoreRightContainer>
+              </MoreListContainer>
+              <MoreListContainer>
+                <MoreLeftContainer style={{color:"#8D8D8D"}}>
+                  Offer Range
+                </MoreLeftContainer>
+                <MoreRightContainer>
+                <div style={{ display: "flex", width: "100%" }}>
+                    <div>
+                      <InputIndividualBox
+                        placeholder="Min"
+                        style={{ marginRight: "10px" }}
+                      />
+                    </div>
+                    <div style={{ margin: "5px", marginTop: "10px" }}>-</div>
+                    <div>
+                      <InputIndividualBox
+                        placeholder="Max"
+                        style={{ marginRight: "10px" }}
+                      />
+                    </div>
+                  </div>
+                </MoreRightContainer>
+              </MoreListContainer>
+              <MoreListContainer>
+                <MoreLeftContainer style={{color:"#8D8D8D"}}>
+                  Contingencies
+                </MoreLeftContainer>
+                <MoreRightContainer>
+                  <div style={{ display: "flex", width: "100%" }}>
+                    <div>
+                      <InputIndividualBox
+                        placeholder="Min"
+                        style={{ marginRight: "10px" }}
+                      />
+                    </div>
+                    <div style={{ margin: "5px", marginTop: "10px" }}>-</div>
+                    <div>
+                      <InputIndividualBox
+                        placeholder="Max"
+                        style={{ marginRight: "10px" }}
+                      />
+                    </div>
+                  </div>
+                </MoreRightContainer>
+              </MoreListContainer>
+              <BottomContainer>
+                <div>Reset all filters</div>
+                <Link to="/dashboard">
+                  <MoreDoneButton>
+                    Submit
+                  </MoreDoneButton>
+                </Link>
+              </BottomContainer>
+          </MoreOptionContainer>
+
       <Container>
         <Summary data={asset} />
         {/* <SaveButton onClick={saveOnClick}>Save</SaveButton> */}
@@ -296,7 +521,13 @@ const NormalUserProcess = ({ match }: RouteComponentProps<MatchParams>) => {
               government/private banker
             </AnnounceSentence>
           </AnnounceBox>
+
+          
+
         </DescriptionBox>
+
+        
+
         {processError ? (
           <></>
         ) : (
@@ -693,6 +924,7 @@ const ProcessBox = styled.div`
   margin-left: 230px;
   border-left: 1px solid black;
   margin-bottom: 100px;
+  margin-top: 70px;
 `;
 
 const DeadlineContainer = styled.div`
@@ -830,6 +1062,96 @@ const TodayTag = styled.div`
     width: 0;
     border-radius: 4px;
   }
+`;
+
+const InputIndividualBox = styled.input`
+  width: 100%;
+  height: 44px;
+  padding: 16px;
+  // border: 1px solid #B69142;
+  border: 1px solid #eaeaea;
+  margin-bottom: 10px;
+  font-size: 16px;
+  color: #212121;
+  font-family: Poppins;
+  &:focus {
+    outline: 1px solid #b69142;
+  }
+`;
+
+const SelectList = styled.button`
+  width: 100%;
+  border: 0;
+  border-bottom: 1px solid white;
+  background-color: transparent;
+  font-size: 16px;
+  text-align: left;
+  height: 56px;
+  padding: 16px;
+  position: relative;
+`;
+
+const ArrowBox = styled.div`
+  position: absolute;
+  right: 15px;
+  top: 11px;
+  font-weight: bold;
+  font-style: bold;
+`;
+
+const BottomContainer = styled.div`
+  width: 100%;
+  height: 60px;
+  background-color: #b69142;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  padding-left: 20px;
+  padding-right: 20px;
+  align-items: center;
+  font-size: 16px;
+`;
+
+const MoreDoneButton = styled.button`
+  width: 75px;
+  height: 44px;
+  border: 0;
+  background-color: #ffffff;
+  font-weight: bold;
+  font-size: 16px;
+`;
+
+const MoreListContainer = styled.div`
+  width: 490px;
+  margin: 10px;
+  display: flex;
+  margin-left: 20px;
+  margin-right: 20px;
+`;
+
+const MoreLeftContainer = styled.div`
+  display: flex;
+  width: 36%;
+  height: auto;
+  text-align: left;
+  align-items: center;
+  font-weight: bold;
+  padding-right: 10px;
+`;
+
+const MoreRightContainer = styled.div`
+  width: 65%;
+  text-align: left;
+`;
+
+const MoreOptionContainer = styled.div`
+  position: absolute;
+  z-index: 1;
+  left: 1000px;
+  top: 350px;
+  width: 530px;
+  background-color: #ffffff;
+  font-size: 16px;
 `;
 
 export default NormalUserProcess;

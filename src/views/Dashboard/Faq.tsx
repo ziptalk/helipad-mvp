@@ -1,15 +1,10 @@
 import { useEffect } from "react";
 import styled from "styled-components";
-const Faq = ({ setDashboardPage }: any) => {
-  useEffect(() => {
-    setDashboardPage(true);
-    return () => {
-      setDashboardPage(false);
-    };
-  }, []);
+import faq from "../../images/Dashboard/faqScreen.png";
+const Faq = () => {
   return (
     <Container>
-      <div>FAQ page</div>
+      <ImageWrapper imgPath={faq}></ImageWrapper>
     </Container>
   );
 };

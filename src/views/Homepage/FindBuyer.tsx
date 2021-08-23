@@ -1,43 +1,41 @@
 import styled from "styled-components";
-import findBuyer from "../../images/Homepage/findBuyer.jpg";
+import findBuyer from "../../images/Homepage/FindBuyer/findBuyer.png";
 import { ReactComponent as ArrowSvg } from "../../images/Homepage/FindBuyer/navArrow.svg";
 import React, { useContext, useEffect, useState } from "react";
-import { useTranslation } from 'react-i18next';
-import { Languages, languages } from '../../Locales/i18n';
+import { useTranslation } from "react-i18next";
+import { Languages, languages } from "../../Locales/i18n";
 
 const FindBuyer = () => {
   const { t, i18n } = useTranslation();
-  
+
   const handleChangeLanguage = (lang: Languages) => {
     i18n.changeLanguage(lang);
-  }
+  };
 
-  useEffect(()=>{
-    function checkLanguage(){
-      let currentLanguage = localStorage.getItem('language');
-      console.log(currentLanguage)
+  useEffect(() => {
+    function checkLanguage() {
+      let currentLanguage = localStorage.getItem("language");
+      console.log(currentLanguage);
 
-      if(currentLanguage=="en" || currentLanguage=="ko"){
-        handleChangeLanguage(currentLanguage)
+      if (currentLanguage == "en" || currentLanguage == "ko") {
+        handleChangeLanguage(currentLanguage);
       }
     }
 
-    window.addEventListener('storage', checkLanguage)
+    window.addEventListener("storage", checkLanguage);
 
     return () => {
-      window.removeEventListener('storage', checkLanguage)
-    }
-  },[])
+      window.removeEventListener("storage", checkLanguage);
+    };
+  }, []);
 
   return (
     <Container>
       <ContentContainer>
         <TitleWrapper>
           <Category>부동산 판매</Category>
-          <Title>{t('main_3')}</Title>
-          <SubTitle>
-          {t('main_4')}
-          </SubTitle>
+          <Title>{t("main_3")}</Title>
+          <SubTitle>{t("main_4")}</SubTitle>
         </TitleWrapper>
         <ContentWrapper>
           <NavigationBlock>
@@ -75,18 +73,21 @@ const Container = styled.div`
 const ContentContainer = styled.div`
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 0.5fr 1.2fr;
+  grid-template-columns: 0.8fr 1fr;
   max-width: 1904px;
   width: 80vw;
   height: 100%;
 
   align-items: center;
   justify-items: center;
-  gap: 50px;
+  gap: 30px;
 `;
 const TitleWrapper = styled.div`
-  max-width: 269px;
-  justify-self: end;
+  /* max-width: 269px; */
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
 `;
 const Category = styled.div`
   font-size: 28px;
@@ -94,24 +95,27 @@ const Category = styled.div`
   font-weight: 700;
   line-height: 41px;
   letter-spacing: 0px;
-  text-align: left;
+
   color: #b69142;
 `;
 const Title = styled.div`
+  max-width: 473px;
   font-size: 72px;
   font-style: normal;
   font-weight: 600;
   line-height: 87px;
   letter-spacing: 0px;
-  text-align: left;
+  text-align: right;
+  margin-bottom: 20px;
 `;
 const SubTitle = styled.div`
+  max-width: 300px;
   font-size: 18px;
   font-style: normal;
   font-weight: 600;
   line-height: 29px;
   letter-spacing: 0px;
-  text-align: left;
+  text-align: right;
 `;
 const ContentWrapper = styled.div``;
 const NavigationBlock = styled.div`

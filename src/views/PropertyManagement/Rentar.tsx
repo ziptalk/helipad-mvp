@@ -12,14 +12,15 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   background-color: black;
+  margin-bottom: 100px;
 `;
 const Content: any = styled.img.attrs((props: any) => ({
   src: props.imgPath,
 }))`
-  max-width: 1463px;
+  max-width: 1904px;
   background-color: black;
-  width: 100%;
+  width: 70vw;
   height: auto;
-  padding: 30px;
+  padding: 50px 0;
 `;
 export default Rentar;

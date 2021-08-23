@@ -725,10 +725,10 @@ const Detail: React.FC<DetailProps> = ({ data }) => {
               </StatusItem> */}
               </Status>
             </StatusContainer>
-            {userInfo?.isAgent === false && (
+            {userInfo?.isAgent === true && (
               <Contact
                 agent={data.agent}
-                assetId={data.id}
+                assetId="test_id_1"
                 buildingInformation={data}
               />
             )}

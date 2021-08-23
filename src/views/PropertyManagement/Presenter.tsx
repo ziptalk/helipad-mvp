@@ -24,6 +24,8 @@ const Presenter = () => {
 const Container = styled.div``;
 const ContentContainer = styled.div`
   margin: 0 auto;
-  max-width: 1904px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 export default Presenter;

@@ -20,24 +20,24 @@ const FindProperty = () => {
   //   console.log("!!!!!!!!!!!!!!");
   // }
 
-  useEffect(() => {
-    window.addEventListener("scroll", () => {
-      const elementCoordination = iphoneElement.current.getBoundingClientRect();
-      if (
-        elementCoordination.top < 0 &&
-        elementCoordination.top > -elementCoordination.height
-      ) {
-        console.log("아이폰 애니매이션 시작");
-        window.removeEventListener("scroll", () => {});
-      } else {
-        console.log("아이폰 애니메이션 종료");
-      }
-    });
+  // useEffect(() => {
+  //   window.addEventListener("scroll", () => {
+  //     const elementCoordination = iphoneElement.current.getBoundingClientRect();
+  //     if (
+  //       elementCoordination.top < 0 &&
+  //       elementCoordination.top > -elementCoordination.height
+  //     ) {
+  //       console.log("아이폰 애니매이션 시작");
+  //       window.removeEventListener("scroll", () => {});
+  //     } else {
+  //       console.log("아이폰 애니메이션 종료");
+  //     }
+  //   });
 
-    return () => {
-      window.removeEventListener("scroll", () => {});
-    };
-  }, []);
+  //   return () => {
+  //     window.removeEventListener("scroll", () => {});
+  //   };
+  // }, []);
 
   useEffect(() => {
     function checkLanguage() {

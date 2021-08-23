@@ -191,9 +191,9 @@ const Contact: React.FC<ContactFieldProps> = ({
         <Link to={`/process/adminprocess/${assetId}`}>
           <Send onClick={escrowProcessOnClick}>
             <div>Submit Offer</div>
-            <BsArrowRight
+            {/* <BsArrowRight
               style={{ marginLeft: "10px", width: "33px", height: "33px" }}
-            />
+            /> */}
           </Send>
         </Link>
       ) : (
@@ -208,9 +208,9 @@ const Contact: React.FC<ContactFieldProps> = ({
             onClick={escrowProcessOnClick}
           >
             <div>Submit Offer</div>
-            <BsArrowRight
+            {/* <BsArrowRight
               style={{ marginLeft: "10px", width: "33px", height: "33px" }}
-            />
+            /> */}
           </Send>
         </Link>
       )}

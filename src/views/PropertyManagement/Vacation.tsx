@@ -12,13 +12,14 @@ const Container = styled.div`
 
   display: flex;
   justify-content: center;
+  margin-bottom: 100px;
 `;
 const Content: any = styled.img.attrs((props: any) => ({
   src: props.imgPath,
 }))`
-  max-width: 978px;
-  width: 100%;
+  max-width: 1904px;
+  width: 70vw;
   height: auto;
-  padding: 30px;
+  padding: 50px 0;
 `;
 export default Vacation;

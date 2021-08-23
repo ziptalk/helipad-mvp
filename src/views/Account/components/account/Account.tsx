@@ -3,7 +3,8 @@ import { useState, useEffect, useContext } from "react";
 import { AuthContext } from "../../../../router/config/Provider/AuthProvider";
 import { userStore, firebase } from "../../../../shared/Firebase";
 import { useHistory } from "react-router-dom";
-
+import { useTranslation } from 'react-i18next';
+import { Languages, languages } from '../../../../Locales/i18n';
 
 const Account = () => {
     const { user } = useContext(AuthContext);
@@ -19,6 +20,28 @@ const Account = () => {
   const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const { t, i18n } = useTranslation();
+  
+  const handleChangeLanguage = (lang: Languages) => {
+    i18n.changeLanguage(lang);
+  }
+
+  useEffect(()=>{
+    function checkLanguage(){
+      let currentLanguage = localStorage.getItem('language');
+      console.log(currentLanguage)
+
+      if(currentLanguage=="en" || currentLanguage=="ko"){
+        handleChangeLanguage(currentLanguage)
+      }
+    }
+
+    window.addEventListener('storage', checkLanguage)
+
+    return () => {
+      window.removeEventListener('storage', checkLanguage)
+    }
+  },[])
 
   async function getUserInfo() {
     if (user) {
@@ -33,8 +56,16 @@ const Account = () => {
             console.log(dataResult.isAgent);
             setFixedFirstName(dataResult.firstName)
             setFixedLastName(dataResult.lastName)
+            if(!dataResult.firstName){
+              setFixedFirstName(t('account_3'))
+            }
+            if(!dataResult.lastName){
+              setFixedLastName(t('account_4'))
+            }
             if(dataResult.phone){
                 setFixedPhone(dataResult.phone)
+            }else{
+              setFixedPhone(t('account_6'))
             }
             if(dataResult.searchNotifications){
                 if(dataResult.searchNotifications == 'Immediately'){
@@ -184,11 +215,11 @@ const Account = () => {
 
   return (
     <Container>
-      <AccountTitle>ACCOUNT</AccountTitle>
+      <AccountTitle>{t('account_1')}</AccountTitle>
       <InputContainer>
         <InputHalfBox>
           <InputBox>
-            <BoxTitle>Profile</BoxTitle>
+            <BoxTitle>{t('account_2')}</BoxTitle>
             <div style={{ display: "flex" }}>
               <InputIndividualBox
                 placeholder={fixedFirstName}
@@ -209,34 +240,33 @@ const Account = () => {
               style={{ backgroundColor: "#F4F4F4" }}
             />
             <InputIndividualBox value={phone} onChange={handlePhone} placeholder={fixedPhone} />
-            <SaveButton onClick={saveOnClick}>Save</SaveButton>
+            <SaveButton onClick={saveOnClick}>{t('account_7')}</SaveButton>
           </InputBox>
 
           <InputBox>
-            <BoxTitle>Change password</BoxTitle>
-            <SubTitle>Current Password</SubTitle>
+            <BoxTitle>{t('account_8')}</BoxTitle>
+            <SubTitle>{t('account_9')}</SubTitle>
             <InputIndividualBox value={currentPassword} onChange={handleCurrentPassword} placeholder="********" />
-            <SubTitle>New Password</SubTitle>
+            <SubTitle>{t('account_10')}</SubTitle>
             <InputIndividualBox value={newPassword} onChange={handleNewPassword} placeholder="********" />
-            <SubTitle>Confirm Password</SubTitle>
+            <SubTitle>{t('account_11')}</SubTitle>
             <InputIndividualBox value={confirmPassword} onChange={handleConfirmPassword} placeholder="********" />
-            <SaveButton onClick={()=>changePassword(currentPassword, newPassword)}>Save</SaveButton>
+            <SaveButton onClick={()=>changePassword(currentPassword, newPassword)}>{t('account_12')}</SaveButton>
           </InputBox>
         </InputHalfBox>
 
         <InputHalfBox>
           <InputBox>
-            <BoxTitle>My Agent</BoxTitle>
+            <BoxTitle>{t('account_13')}</BoxTitle>
             <div style={{ display: "flex" }}>
-              <Description>You aren't connected to any agents yet.</Description>
-              <LinkComment>Browse agents.</LinkComment>
+              <Description>{t('account_14')}</Description>
+              <LinkComment>{t('account_15')}</LinkComment>
             </div>
           </InputBox>
           <InputBox>
-            <BoxTitle>Default Saved Search Notifications</BoxTitle>
+            <BoxTitle>{t('account_16')}</BoxTitle>
             <Description>
-              How often would you like to receive updates on future Saved
-              Searches?
+            {t('account_17')}
             </Description>
             <div
               style={{
@@ -251,7 +281,7 @@ const Account = () => {
                 <CheckBox onClick={() => setSaveSearchOften(0)} />
               )}
               <CheckboxItem style={{ height: "24px" }}>
-                Immediately
+              {t('account_18')}
               </CheckboxItem>
             </div>
             <div style={{ display: "flex", marginBottom: "10px" }}>
@@ -260,7 +290,7 @@ const Account = () => {
               ) : (
                 <CheckBox onClick={() => setSaveSearchOften(1)} />
               )}
-              <CheckboxItem style={{ height: "24px" }}>Daily</CheckboxItem>
+              <CheckboxItem style={{ height: "24px" }}>{t('account_19')}</CheckboxItem>
             </div>
             <div style={{ display: "flex", marginBottom: "10px" }}>
               {savedSearchOften == 2 ? (
@@ -268,23 +298,23 @@ const Account = () => {
               ) : (
                 <CheckBox onClick={() => setSaveSearchOften(2)} />
               )}
-              <CheckboxItem style={{ height: "24px" }}>Never</CheckboxItem>
+              <CheckboxItem style={{ height: "24px" }}>{t('account_20')}</CheckboxItem>
             </div>
-            <SaveButton onClick={oftenSaveOnClick}>Save</SaveButton>
+            <SaveButton onClick={oftenSaveOnClick}>{t('account_12')}</SaveButton>
           </InputBox>
           <InputBox>
-            <BoxTitle>Delete Account</BoxTitle>
+            <BoxTitle>{t('account_21')}</BoxTitle>
             <Description>
-              Once you delete your Helipad Account, it cannot be reactivated.
+            {t('account_22')}
             </Description>
-            <DeleteButton>Delete your account</DeleteButton>
+            <DeleteButton>{t('account_23')}</DeleteButton>
           </InputBox>
           <InputBox>
-            <BoxTitle>Sign Out</BoxTitle>
+            <BoxTitle>{t('account_24')}</BoxTitle>
             <Description>
-              If you Sign out, you can sign back in anytime.
+            {t('account_25')}
             </Description>
-            <SaveButton onClick={signOutOnclick} style={{ marginTop: "20px" }}>Sign Out</SaveButton>
+            <SaveButton onClick={signOutOnclick} style={{ marginTop: "20px" }}>{t('account_26')}</SaveButton>
           </InputBox>
         </InputHalfBox>
       </InputContainer>
