@@ -106,13 +106,24 @@ const ServiceGuidance = () => {
         <Divider></Divider>
         <CategoryWrapper>
           {/* <MouseOverGuideButton>{t('mouse_over_info')}</MouseOverGuideButton> */}
-          <Category
-            id={CategoryItem.Purchase}
-            onMouseOver={onMouseOverCategory}
-            onMouseLeave={onMouseLeaveCategory}
-          >
-            부동산 구매
-          </Category>
+          {selectedCategory === CategoryItem.Purchase ? (
+            <SelectedCategory
+              id={CategoryItem.Purchase}
+              onMouseOver={onMouseOverCategory}
+              onMouseLeave={onMouseLeaveCategory}
+            >
+              부동산 구매
+            </SelectedCategory>
+          ) : (
+            <Category
+              id={CategoryItem.Purchase}
+              onMouseOver={onMouseOverCategory}
+              onMouseLeave={onMouseLeaveCategory}
+            >
+              부동산 구매
+            </Category>
+          )}
+
           <Category
             id={CategoryItem.Sale}
             onMouseOver={onMouseOverCategory}
@@ -245,7 +256,9 @@ const Category = styled.div`
   letter-spacing: 0px;
   text-align: center;
 `;
-
+const SelectedCategory = styled(Category)`
+  background: #ac7600;
+`;
 const MoreWrapper: any = styled.div`
   position: relative;
   margin-top: 25px;
