@@ -1,10 +1,7 @@
 import escrow from "../../images/Dashboard/escrow.jpg";
 import styled from "styled-components";
 import { useEffect } from "react";
-const EscrowInProcess = ({ setDashboardPage }: any) => {
-  useEffect(() => {
-    setDashboardPage(true);
-  }, []);
+const EscrowInProcess = () => {
   return (
     <Container>
       <ImageWrapper imgPath={escrow}></ImageWrapper>

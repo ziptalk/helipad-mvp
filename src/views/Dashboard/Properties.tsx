@@ -1,10 +1,7 @@
 import property from "../../images/Dashboard/propertydetails.jpg";
 import styled from "styled-components";
 import { useEffect } from "react";
-const Properties = ({ setDashboardPage }: any) => {
-  useEffect(() => {
-    setDashboardPage(true);
-  }, []);
+const Properties = () => {
   return (
     <Container>
       <ImageWrapper imgPath={property}></ImageWrapper>

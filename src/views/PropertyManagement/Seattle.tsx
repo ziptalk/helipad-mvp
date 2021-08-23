@@ -12,14 +12,15 @@ const Container = styled.div`
   background-color: black;
   display: flex;
   justify-content: center;
+  margin-bottom: 100px;
 `;
 const Content: any = styled.img.attrs((props: any) => ({
   src: props.imgPath,
 }))`
   background-color: black;
-  max-width: 978px;
-  width: 100%;
+  max-width: 1904px;
+  width: 60vw;
   height: auto;
-  padding: 30px;
+  padding: 50px 0;
 `;
 export default Seattle;

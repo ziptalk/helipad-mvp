@@ -1,10 +1,7 @@
 import myAgent from "../../images/Dashboard/myAgent.jpg";
 import styled from "styled-components";
 import { useEffect } from "react";
-const MyAgent = ({ setDashboardPage }: any) => {
-  useEffect(() => {
-    setDashboardPage(true);
-  }, []);
+const MyAgent = () => {
   return (
     <Container>
       <ImageWrapper imgPath={myAgent}></ImageWrapper>
