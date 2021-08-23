@@ -1,10 +1,7 @@
 import homeScreen from "../../images/Dashboard/dashboard_home_screen.jpg";
 import styled from "styled-components";
 import { useEffect } from "react";
-const DashboardHome = ({ setDashboardPage }: any) => {
-  useEffect(() => {
-    setDashboardPage(true);
-  }, []);
+const DashboardHome = () => {
   return (
     <Container>
       <ImageWrapper imgPath={homeScreen}></ImageWrapper>

@@ -13,7 +13,10 @@ enum CategoryItem {
   Distribution = "분배 및 보고",
 }
 const ServiceGuidance = () => {
-  const [selectedCategory, setSelectedCategory] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState(
+    CategoryItem.Purchase
+  );
+
   const { t, i18n } = useTranslation();
 
   const handleChangeLanguage = (lang: Languages) => {
@@ -31,16 +34,20 @@ const ServiceGuidance = () => {
     }
 
     window.addEventListener("storage", checkLanguage);
-
     return () => {
       window.removeEventListener("storage", checkLanguage);
     };
   }, []);
 
-  const onClickCategory = (e: any) => {
-    console.log("onClickCategory", e.target.id);
+  const onMouseOverCategory = (e: any) => {
     setSelectedCategory(e.target.id);
+
+    e.target.classList.add("over");
   };
+  const onMouseLeaveCategory = (e: any) => {
+    e.target.classList.remove("over");
+  };
+
   const renderInfoByCategory = () => {
     switch (selectedCategory) {
       case CategoryItem.Purchase:
@@ -99,26 +106,47 @@ const ServiceGuidance = () => {
         <Divider></Divider>
         <CategoryWrapper>
           {/* <MouseOverGuideButton>{t('mouse_over_info')}</MouseOverGuideButton> */}
-          <Category id={CategoryItem.Purchase} onMouseOver={onClickCategory}>
+          <Category
+            id={CategoryItem.Purchase}
+            onMouseOver={onMouseOverCategory}
+            onMouseLeave={onMouseLeaveCategory}
+          >
             부동산 구매
           </Category>
-          <Category id={CategoryItem.Sale} onMouseOver={onClickCategory}>
+          <Category
+            id={CategoryItem.Sale}
+            onMouseOver={onMouseOverCategory}
+            onMouseLeave={onMouseLeaveCategory}
+          >
             부동산 판매
           </Category>
-          <Category id={CategoryItem.SendMoney} onMouseOver={onClickCategory}>
+          <Category
+            id={CategoryItem.SendMoney}
+            onMouseOver={onMouseOverCategory}
+            onMouseLeave={onMouseLeaveCategory}
+          >
             송금
           </Category>
-          <Category id={CategoryItem.Corporation} onMouseOver={onClickCategory}>
+          <Category
+            id={CategoryItem.Corporation}
+            onMouseOver={onMouseOverCategory}
+            onMouseLeave={onMouseLeaveCategory}
+          >
             부동산
             <br />
             법인 설립
           </Category>
-          <Category id={CategoryItem.Operation} onMouseOver={onClickCategory}>
+          <Category
+            id={CategoryItem.Operation}
+            onMouseOver={onMouseOverCategory}
+            onMouseLeave={onMouseLeaveCategory}
+          >
             부동산 운용
           </Category>
           <Category
             id={CategoryItem.Distribution}
-            onMouseOver={onClickCategory}
+            onMouseOver={onMouseOverCategory}
+            onMouseLeave={onMouseLeaveCategory}
           >
             수익 분배 <br />및 보고
           </Category>
@@ -142,6 +170,9 @@ const ContentContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  .over {
+    background-color: #ac7600;
+  }
 `;
 const TitleWrapper = styled.div`
   margin-top: 60px;
@@ -243,6 +274,10 @@ const MoreWrapper: any = styled.div`
     /* margin-left: -100px; */
     margin-left: ${(props: any) => `${props.margin}%`};
     margin-top: -16px;
+  }
+
+  .over {
+    background-color: brown;
   }
 `;
 const MoreTitle = styled.div`
