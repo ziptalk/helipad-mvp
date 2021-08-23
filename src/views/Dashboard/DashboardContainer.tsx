@@ -56,6 +56,9 @@ const DashboardContainer = ({ setDashboardPage, match }: Props) => {
   };
   useEffect(() => {
     setDashboardPage(true);
+    return () => {
+      setDashboardPage(false);
+    };
   }, []);
   const onClickCategory = () => {};
   return (

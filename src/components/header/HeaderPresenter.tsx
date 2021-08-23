@@ -93,12 +93,12 @@ const HeaderPresenter = ({
                 </>
               )}
             </StyledLink>
-            <StyledLink to="/asset/assetList">
+            <StyledLink to="/aboutus">
               <CategoryName scrollMove={scrollMove} color={headerMode}>
                 {t("navigation_4")}
               </CategoryName>
             </StyledLink>
-            <StyledLink to="/aboutus">
+            <StyledLink to="/dashboard">
               <CategoryName scrollMove={scrollMove} color={headerMode}>
                 {t("navigation_5")}
               </CategoryName>
