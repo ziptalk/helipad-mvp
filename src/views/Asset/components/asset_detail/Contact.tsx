@@ -187,8 +187,8 @@ const Contact: React.FC<ContactFieldProps> = ({
   return (
     <>
       {/* <button onClick={copyFirebaseOnClick}>파베 복사</button> */}
-      {!isAgent ? (
-        <Link to={`/process/adminprocess/${assetId}`}>
+      {isAgent ? (
+        <Link to={`/process/userprocess/${assetId}`}>
           <Send onClick={escrowProcessOnClick}>
             <div>Submit Offer</div>
             {/* <BsArrowRight
