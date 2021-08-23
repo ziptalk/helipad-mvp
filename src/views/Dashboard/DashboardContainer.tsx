@@ -165,7 +165,10 @@ const StyledLink = styled(Link)`
 `;
 const Item: any = styled.img.attrs((props: any) => ({
   src: props.imgPath,
-}))``;
+}))`
+  width: 100%;
+  height: auto;
+`;
 const ContentContainer = styled.div`
   width: 100%;
   height: 100vh;
