@@ -3,19 +3,41 @@ import { Link } from "react-router-dom";
 import { ReactComponent as FinaSvg } from "../../images/Homepage/fina.svg";
 import Fina from "../../images/Homepage/fina.png";
 import Ellipse from "../../images/Homepage/Ellipse.jpg";
+import React, { useContext, useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { Languages, languages } from "../../Locales/i18n";
+
 const Establishment = () => {
+  const { t, i18n } = useTranslation();
+
+  const handleChangeLanguage = (lang: Languages) => {
+    i18n.changeLanguage(lang);
+  };
+
+  useEffect(() => {
+    function checkLanguage() {
+      let currentLanguage = localStorage.getItem("language");
+      console.log(currentLanguage);
+
+      if (currentLanguage == "en" || currentLanguage == "ko") {
+        handleChangeLanguage(currentLanguage);
+      }
+    }
+
+    window.addEventListener("storage", checkLanguage);
+
+    return () => {
+      window.removeEventListener("storage", checkLanguage);
+    };
+  }, []);
+
   return (
     <Container>
       <ContentContainer>
         <TitleWrapper>
           <Category>부동산 법인 설립</Category>
-          <Title>
-            Experienced experts in Tax and Legal, ready to help you.
-          </Title>
-          <SubTitle>
-            Our experts at Helipad have been helping clients purchase US
-            property for years. Let us leverage our expertise for you.
-          </SubTitle>
+          <Title>{t("main_5")}</Title>
+          <SubTitle>{t("main_6")}</SubTitle>
         </TitleWrapper>
         <ContentWrapper>
           {/* <StyledImg /> */}
@@ -23,23 +45,20 @@ const Establishment = () => {
           {/* <ImageBgBlock imgPath={Ellipse}></ImageBgBlock> */}
           <ContentBlock>
             <Item>
-              <ItemTitle>US Entity Formation</ItemTitle>
-              <ItemSubTitle>
-                Establish a Limited Liability company in the US to reduce risk
-                and protect your most valuable assets.
-              </ItemSubTitle>
-              <More>Learn more</More>
+              <ItemTitle>{t("main_7")}</ItemTitle>
+              <ItemSubTitle>{t("main_8")}</ItemSubTitle>
+              <More>{t("main_9")}</More>
             </Item>
             <Item>
-              <ItemTitle>US Tax Advisory</ItemTitle>
+              <ItemTitle>{t("main_10")}</ItemTitle>
             </Item>
             <Item>
-              <ItemTitle>International Funds Transfer Advisory</ItemTitle>
+              <ItemTitle>{t("main_11")}</ItemTitle>
             </Item>
           </ContentBlock>
         </ContentWrapper>
         <ButtonWrapper>
-          <StyledLink to="">가입하기</StyledLink>
+          <StyledLink to="/auth/contact">가입하기</StyledLink>
         </ButtonWrapper>
       </ContentContainer>
     </Container>

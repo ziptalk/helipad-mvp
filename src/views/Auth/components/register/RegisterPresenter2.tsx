@@ -3,23 +3,23 @@ import { RiKakaoTalkFill } from "react-icons/ri";
 import { InputField, InputType } from "./InputField";
 import CheckField from "./CheckField";
 import { Link } from "react-router-dom";
-import {useState, useEffect} from "react";
+import { useState, useEffect } from "react";
 import Group from "../../../../images/Group2.png";
 import { StepButton } from "@material-ui/core";
 import { Slider, Rail, Handles, Tracks, Ticks } from "react-compound-slider";
 import Congratulation from "../../../../images/Congratulation.png";
 
 interface HandleInf {
-  handle : {
+  handle: {
     id: any;
     value: any;
     percent: any;
   };
-  getHandleProps : any;
+  getHandleProps: any;
 }
 
 interface TrackInf {
-  source : any;
+  source: any;
   target: any;
   getTrackProps: any;
 }
@@ -29,26 +29,38 @@ export function Handle(handle: HandleInf) {
     <div
       style={{
         left: `${handle.handle.percent}%`,
-        position: 'absolute',
+        position: "absolute",
         marginLeft: -15,
         marginTop: 30,
         zIndex: 2,
         width: 20,
         height: 20,
         border: 0,
-        textAlign: 'center',
-        cursor: 'pointer',
-        borderRadius: '50%',
-        backgroundColor: '#FFFFFF',
-        color: '#333',
+        textAlign: "center",
+        cursor: "pointer",
+        borderRadius: "50%",
+        backgroundColor: "#FFFFFF",
+        color: "#333",
       }}
       {...handle.getHandleProps(handle.handle.id)}
     >
-      <div style={{ fontFamily: 'Poppins', fontSize: 12, marginTop: -35, backgroundColor:"#6C63FF", color:"#FFFFFF", width:"50px", padding:"2px", marginLeft:"-15px", borderRadius:"5px" }}>
+      <div
+        style={{
+          fontFamily: "Poppins",
+          fontSize: 12,
+          marginTop: -35,
+          backgroundColor: "#6C63FF",
+          color: "#FFFFFF",
+          width: "50px",
+          padding: "2px",
+          marginLeft: "-15px",
+          borderRadius: "5px",
+        }}
+      >
         ${handle.handle.value}
       </div>
     </div>
-  )
+  );
 }
 
 // function Track(track: TrackInf) {
@@ -70,7 +82,6 @@ export function Handle(handle: HandleInf) {
 //   )
 // }
 
-
 const RegisterPresenter2 = ({
   setLastName,
   setFirstName,
@@ -90,200 +101,249 @@ const RegisterPresenter2 = ({
   handlePreferredArea,
   handlePreferredAreaOther,
   onTrySignUp,
+  onClickKakaoLogin,
 }: any) => {
   const [pageState, setPageState] = useState(-1);
-  const [password2, setPassword2] = useState('');
-  const [passwordConfirm2, setPasswordConfirm2] = useState('');
+  const [password2, setPassword2] = useState("");
+  const [passwordConfirm2, setPasswordConfirm2] = useState("");
 
   const nextOnClick = () => {
     let tmpState = pageState;
-    setPageState(tmpState+1);
-  }
+    setPageState(tmpState + 1);
+  };
 
   const nextOnClick2 = () => {
-    if(password2!=passwordConfirm2){
+    if (password2 != passwordConfirm2) {
       alert("Password != PasswordConfirmation");
-    }else{
+    } else {
       let tmpState = pageState;
-      setPageState(tmpState+1);
+      setPageState(tmpState + 1);
     }
-  }
+  };
 
   const backOnClick = () => {
     let tmpState = pageState;
-    setPageState(tmpState-1);
-  }
+    setPageState(tmpState - 1);
+  };
 
-  return (<>
-    <NewContainer>
-      {pageState==0 ? 
-      <img style={{objectFit:"none", marginBottom:"30px"}} src={Group}/>:<>
-      {pageState>2?
-      <img style={{width:"83px", marginBottom:"30px"}} src={Group}/>:<></>}
-      </>}
-      {pageState<3&&pageState!=-1?<>
-      <MainText>Just a few things to setup your</MainText>
-      <MainText>account...</MainText></>
-      :<></>}
-        {pageState == 0 ? <>
-          <WhiteBox>
-            <StepMark>Step {pageState+1} of 3</StepMark>
-          <QuestionTitleContainer>
-          <QuestionTitle>
-            Why are you interested in a home in the U.S.?
-          </QuestionTitle>
-          <QuestionLittleTitle>
-            (check all that apply)
-          </QuestionLittleTitle>
-        </QuestionTitleContainer>
-        <QuestionContentContainer>
-          <QuestionList>
-            <QuestionItem>
-              {/* <Question>Investment</Question> */}
-              <CheckField
-                name="interestHome"
-                value="Investment"
-                onChange={handleInterestHome}
+  return (
+    <>
+      <NewContainer>
+        {pageState == 0 ? (
+          <img
+            style={{ objectFit: "none", marginBottom: "30px" }}
+            src={Group}
+          />
+        ) : (
+          <>
+            {pageState > 2 ? (
+              <img
+                style={{ width: "83px", marginBottom: "30px" }}
+                src={Group}
               />
-            </QuestionItem>
-            <QuestionItem>
-              {/* <Question>Rental Income Opportunity</Question> */}
-              <CheckField
-                name="interestHome"
-                value="Rental Income Opportunity"
-                onChange={handleInterestHome}
-              />
-            </QuestionItem>
-            <QuestionItem>
-              {/* <Question>Second Home</Question> */}
-              <CheckField
-                name="interestHome"
-                value="Second Home"
-                onChange={handleInterestHome}
-              />
-            </QuestionItem>
-            <QuestionItem>
-              {/* <Question>Relocating to U.S.</Question> */}
-              <CheckField
-                name="interestHome"
-                value="Relocating to U.S."
-                onChange={handleInterestHome}
-              />
-            </QuestionItem>
-            <QuestionItem>
-              {/* <Question>Child's U.S. Education</Question> */}
-              <CheckField
-                name="interestHome"
-                value="Child’s U.S. Education"
-                onChange={handleInterestHome}
-              />
-            </QuestionItem>
-            <QuestionItem>
-              {/* <Question>Child's U.S. Education</Question> */}
-              <CheckField
-                name="interestHome"
-                value="Rather not say"
-                onChange={handleInterestHome}
-              />
-            </QuestionItem>
-          </QuestionList>
-        </QuestionContentContainer>
-        {/* <NextButton onClick={nextOnClick}>Next -</NextButton> */}
-        <div style={{width:"100%", display:"flex", justifyContent:"center"}}>
-          <NextButton style={{backgroundColor:"#B7B7B7", width:"160px", marginRight:"10px"}} onClick={backOnClick}>Back</NextButton>
-          <NextButton style={{width:"160px"}} onClick={nextOnClick}>Next</NextButton>
-        </div>
-        </WhiteBox></>:<>
-        {pageState==1?<>
-        <WhiteBox>
-        <StepMark>Step {pageState+1} of 3</StepMark>
-          <QuestionTitleContainer>
-          <QuestionTitle>
-            What types of properties are you looking for?
-          </QuestionTitle>
-        </QuestionTitleContainer>
-        <div style={{width:"100%", display:"flex", justifyContent:"center", marginTop:"-50px"}}>
-        <QuestionContentContainer style={{display:"block", width:"450px"}}>
-          <QuestionSubTitle>1. Residential</QuestionSubTitle>
-          <QuestionList>
-            <QuestionItem>
-              {/* <Question>Single Family Home</Question> */}
-              <CheckField
-                name="property_residential"
-                value="Single Family Home"
-                onChange={handleInterestProperty}
-              />
-            </QuestionItem>
-            <QuestionItem>
-              {/* <Question>Townhouse / Condo</Question> */}
-              <CheckField
-                name="property_residential"
-                value="Townhouse / Condo"
-                onChange={handleInterestProperty}
-              />
-            </QuestionItem>
-          </QuestionList>
-          <QuestionSubTitle>2. Commercial</QuestionSubTitle>
-          <QuestionList>
-            <QuestionItem>
-              {/* <Question>Multifamily units</Question> */}
-              <CheckField
-                name="property_commercial"
-                value="Multifamily units"
-                onChange={handleInterestProperty}
-              />
-            </QuestionItem>
-            <QuestionItem>
-              {/* <Question>Retail</Question> */}
-              <CheckField
-                name="property_commercial"
-                value="Retail
-          "
-                onChange={handleInterestProperty}
-              />
-            </QuestionItem>
-            <QuestionItem>
-              {/* <Question>Industrial</Question> */}
-              <CheckField
-                name="property_commercial"
-                value="Industrial"
-                onChange={handleInterestProperty}
-              />
-            </QuestionItem>
-            <QuestionItem>
-              {/* <Question>Land</Question> */}
-              <CheckField
-                name="property_commercial"
-                value="Land"
-                onChange={handleInterestProperty}
-              />
-            </QuestionItem>
-          </QuestionList>
-          <QuestionSubTitle>3. Price Range</QuestionSubTitle>
-          <Slider
-            rootStyle={sliderStyle}
-            domain={[0, 100]} // [min, max]
-            values={[20, 60]} // slider values
-          >
-            <Rail>
-              {({ getRailProps }) => (
-                <div style={railStyle} {...getRailProps()} /> // render your clickable rail!
-              )}
-            </Rail>
-            <Handles>
-              {({ handles, getHandleProps }) => (
-                <div className="slider-handles">
-                  {handles.map(handle => (
-                    <Handle
-                      key={handle.id}
-                      handle={handle}
-                      getHandleProps={getHandleProps}
+            ) : (
+              <></>
+            )}
+          </>
+        )}
+        {pageState < 3 && pageState != -1 ? (
+          <>
+            <MainText>Just a few things to setup your</MainText>
+            <MainText>account...</MainText>
+          </>
+        ) : (
+          <></>
+        )}
+        {pageState == 0 ? (
+          <>
+            <WhiteBox>
+              <StepMark>Step {pageState + 1} of 3</StepMark>
+              <QuestionTitleContainer>
+                <QuestionTitle>
+                  Why are you interested in a home in the U.S.?
+                </QuestionTitle>
+                <QuestionLittleTitle>
+                  (check all that apply)
+                </QuestionLittleTitle>
+              </QuestionTitleContainer>
+              <QuestionContentContainer>
+                <QuestionList>
+                  <QuestionItem>
+                    {/* <Question>Investment</Question> */}
+                    <CheckField
+                      name="interestHome"
+                      value="Investment"
+                      onChange={handleInterestHome}
                     />
-                  ))}
-                </div>
-              )}
-            </Handles>
-            {/* <Tracks right={false}>
+                  </QuestionItem>
+                  <QuestionItem>
+                    {/* <Question>Rental Income Opportunity</Question> */}
+                    <CheckField
+                      name="interestHome"
+                      value="Rental Income Opportunity"
+                      onChange={handleInterestHome}
+                    />
+                  </QuestionItem>
+                  <QuestionItem>
+                    {/* <Question>Second Home</Question> */}
+                    <CheckField
+                      name="interestHome"
+                      value="Second Home"
+                      onChange={handleInterestHome}
+                    />
+                  </QuestionItem>
+                  <QuestionItem>
+                    {/* <Question>Relocating to U.S.</Question> */}
+                    <CheckField
+                      name="interestHome"
+                      value="Relocating to U.S."
+                      onChange={handleInterestHome}
+                    />
+                  </QuestionItem>
+                  <QuestionItem>
+                    {/* <Question>Child's U.S. Education</Question> */}
+                    <CheckField
+                      name="interestHome"
+                      value="Child’s U.S. Education"
+                      onChange={handleInterestHome}
+                    />
+                  </QuestionItem>
+                  <QuestionItem>
+                    {/* <Question>Child's U.S. Education</Question> */}
+                    <CheckField
+                      name="interestHome"
+                      value="Rather not say"
+                      onChange={handleInterestHome}
+                    />
+                  </QuestionItem>
+                </QuestionList>
+              </QuestionContentContainer>
+              {/* <NextButton onClick={nextOnClick}>Next -</NextButton> */}
+              <div
+                style={{
+                  width: "100%",
+                  display: "flex",
+                  justifyContent: "center",
+                }}
+              >
+                <NextButton
+                  style={{
+                    backgroundColor: "#B7B7B7",
+                    width: "160px",
+                    marginRight: "10px",
+                  }}
+                  onClick={backOnClick}
+                >
+                  Back
+                </NextButton>
+                <NextButton style={{ width: "160px" }} onClick={nextOnClick}>
+                  Next
+                </NextButton>
+              </div>
+            </WhiteBox>
+          </>
+        ) : (
+          <>
+            {pageState == 1 ? (
+              <>
+                <WhiteBox>
+                  <StepMark>Step {pageState + 1} of 3</StepMark>
+                  <QuestionTitleContainer>
+                    <QuestionTitle>
+                      What types of properties are you looking for?
+                    </QuestionTitle>
+                  </QuestionTitleContainer>
+                  <div
+                    style={{
+                      width: "100%",
+                      display: "flex",
+                      justifyContent: "center",
+                      marginTop: "-50px",
+                    }}
+                  >
+                    <QuestionContentContainer
+                      style={{ display: "block", width: "450px" }}
+                    >
+                      <QuestionSubTitle>1. Residential</QuestionSubTitle>
+                      <QuestionList>
+                        <QuestionItem>
+                          {/* <Question>Single Family Home</Question> */}
+                          <CheckField
+                            name="property_residential"
+                            value="Single Family Home"
+                            onChange={handleInterestProperty}
+                          />
+                        </QuestionItem>
+                        <QuestionItem>
+                          {/* <Question>Townhouse / Condo</Question> */}
+                          <CheckField
+                            name="property_residential"
+                            value="Townhouse / Condo"
+                            onChange={handleInterestProperty}
+                          />
+                        </QuestionItem>
+                      </QuestionList>
+                      <QuestionSubTitle>2. Commercial</QuestionSubTitle>
+                      <QuestionList>
+                        <QuestionItem>
+                          {/* <Question>Multifamily units</Question> */}
+                          <CheckField
+                            name="property_commercial"
+                            value="Multifamily units"
+                            onChange={handleInterestProperty}
+                          />
+                        </QuestionItem>
+                        <QuestionItem>
+                          {/* <Question>Retail</Question> */}
+                          <CheckField
+                            name="property_commercial"
+                            value="Retail
+          "
+                            onChange={handleInterestProperty}
+                          />
+                        </QuestionItem>
+                        <QuestionItem>
+                          {/* <Question>Industrial</Question> */}
+                          <CheckField
+                            name="property_commercial"
+                            value="Industrial"
+                            onChange={handleInterestProperty}
+                          />
+                        </QuestionItem>
+                        <QuestionItem>
+                          {/* <Question>Land</Question> */}
+                          <CheckField
+                            name="property_commercial"
+                            value="Land"
+                            onChange={handleInterestProperty}
+                          />
+                        </QuestionItem>
+                      </QuestionList>
+                      <QuestionSubTitle>3. Price Range</QuestionSubTitle>
+                      <Slider
+                        rootStyle={sliderStyle}
+                        domain={[0, 100]} // [min, max]
+                        values={[20, 60]} // slider values
+                      >
+                        <Rail>
+                          {({ getRailProps }) => (
+                            <div style={railStyle} {...getRailProps()} /> // render your clickable rail!
+                          )}
+                        </Rail>
+                        <Handles>
+                          {({ handles, getHandleProps }) => (
+                            <div className="slider-handles">
+                              {handles.map((handle) => (
+                                <Handle
+                                  key={handle.id}
+                                  handle={handle}
+                                  getHandleProps={getHandleProps}
+                                />
+                              ))}
+                            </div>
+                          )}
+                        </Handles>
+                        {/* <Tracks right={false}>
               {({ tracks, getTrackProps }) => (
                 <div className="slider-tracks">
                   {tracks.map(({ id, source, target }) => (
@@ -297,203 +357,320 @@ const RegisterPresenter2 = ({
                 </div>
               )}
             </Tracks> */}
-            {/* <Ticks count={10}>
+                        {/* <Ticks count={10}>
               {({ ticks }) => (
                 // render your (optional) ticks!
                 // count prop = auto generate approximately 10 uniformly spaced, human-readable ticks
               )}
             </Ticks> */}
-          </Slider>
-        </QuestionContentContainer>
-        </div>
-        <div style={{width:"100%", display:"flex", justifyContent:"center"}}>
-          <NextButton style={{backgroundColor:"#B7B7B7", width:"160px", marginRight:"10px"}} onClick={backOnClick}>Back</NextButton>
-          <NextButton style={{width:"160px"}} onClick={nextOnClick}>Next</NextButton>
-        </div>
-        </WhiteBox>
-        </>:<>{pageState==2?<>
-        <WhiteBox>
-        <StepMark>Step {pageState+1} of 3</StepMark>
-          <QuestionTitleContainer>
-          <QuestionTitle>
-            What is your preferred area?
-          </QuestionTitle>
-          <QuestionLittleTitle>
-            (check all that apply)
-          </QuestionLittleTitle>
-        </QuestionTitleContainer>
-        <QuestionContentContainer>
-          <QuestionList>
-            <QuestionItem>
-              {/* <Question>CA – Los Angeles</Question> */}
-              <CheckField
-                name="preferredArea"
-                value="CA – Los Angeles
+                      </Slider>
+                    </QuestionContentContainer>
+                  </div>
+                  <div
+                    style={{
+                      width: "100%",
+                      display: "flex",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <NextButton
+                      style={{
+                        backgroundColor: "#B7B7B7",
+                        width: "160px",
+                        marginRight: "10px",
+                      }}
+                      onClick={backOnClick}
+                    >
+                      Back
+                    </NextButton>
+                    <NextButton
+                      style={{ width: "160px" }}
+                      onClick={nextOnClick}
+                    >
+                      Next
+                    </NextButton>
+                  </div>
+                </WhiteBox>
+              </>
+            ) : (
+              <>
+                {pageState == 2 ? (
+                  <>
+                    <WhiteBox>
+                      <StepMark>Step {pageState + 1} of 3</StepMark>
+                      <QuestionTitleContainer>
+                        <QuestionTitle>
+                          What is your preferred area?
+                        </QuestionTitle>
+                        <QuestionLittleTitle>
+                          (check all that apply)
+                        </QuestionLittleTitle>
+                      </QuestionTitleContainer>
+                      <QuestionContentContainer>
+                        <QuestionList>
+                          <QuestionItem>
+                            {/* <Question>CA – Los Angeles</Question> */}
+                            <CheckField
+                              name="preferredArea"
+                              value="CA – Los Angeles
           "
-                onChange={handlePreferredArea}
-              />
-            </QuestionItem>
-            <QuestionItem>
-              {/* <Question>CA – Orange County</Question> */}
-              <CheckField
-                name="preferredArea"
-                value="CA – Orange County
+                              onChange={handlePreferredArea}
+                            />
+                          </QuestionItem>
+                          <QuestionItem>
+                            {/* <Question>CA – Orange County</Question> */}
+                            <CheckField
+                              name="preferredArea"
+                              value="CA – Orange County
           "
-                onChange={handlePreferredArea}
-              />
-            </QuestionItem>
-            <QuestionItem>
-              {/* <Question>CA – San Diego</Question> */}
-              <CheckField
-                name="preferredArea"
-                value="CA – San Diego
+                              onChange={handlePreferredArea}
+                            />
+                          </QuestionItem>
+                          <QuestionItem>
+                            {/* <Question>CA – San Diego</Question> */}
+                            <CheckField
+                              name="preferredArea"
+                              value="CA – San Diego
           "
-                onChange={handlePreferredArea}
-              />
-            </QuestionItem>
-            <QuestionItem>
-              {/* <Question>CA – San Francisco</Question> */}
-              <CheckField
-                name="preferredArea"
-                value="CA – San Francisco
+                              onChange={handlePreferredArea}
+                            />
+                          </QuestionItem>
+                          <QuestionItem>
+                            {/* <Question>CA – San Francisco</Question> */}
+                            <CheckField
+                              name="preferredArea"
+                              value="CA – San Francisco
           "
-                onChange={handlePreferredArea}
-              />
-            </QuestionItem>
-            <QuestionItem>
-              {/* <Question>NV – Las Vegas</Question> */}
-              <CheckField
-                name="preferredArea"
-                value="NV – Las Vegas
+                              onChange={handlePreferredArea}
+                            />
+                          </QuestionItem>
+                          <QuestionItem>
+                            {/* <Question>NV – Las Vegas</Question> */}
+                            <CheckField
+                              name="preferredArea"
+                              value="NV – Las Vegas
           "
-                onChange={handlePreferredArea}
-              />
-            </QuestionItem>
-            <QuestionItem>
-              {/* <Question>New York</Question> */}
-              <CheckField
-                name="preferredArea"
-                value="New York
+                              onChange={handlePreferredArea}
+                            />
+                          </QuestionItem>
+                          <QuestionItem>
+                            {/* <Question>New York</Question> */}
+                            <CheckField
+                              name="preferredArea"
+                              value="New York
           "
-                onChange={handlePreferredArea}
-              />
-            </QuestionItem>
-            <QuestionItem>
-              {/* <Question>New Jersey</Question> */}
-              <CheckField
-                name="preferredArea"
-                value="New Jersey
+                              onChange={handlePreferredArea}
+                            />
+                          </QuestionItem>
+                          <QuestionItem>
+                            {/* <Question>New Jersey</Question> */}
+                            <CheckField
+                              name="preferredArea"
+                              value="New Jersey
           "
-                onChange={handlePreferredArea}
-              />
-            </QuestionItem>
-            <OtherBlock>
-              <OtherTitle>Others (fill in)</OtherTitle>
-              <OtherInput
-                type="text"
-                value={preferredAreaOther}
-                onChange={(e) => handlePreferredAreaOther(e.target.value)}
-              ></OtherInput>
-            </OtherBlock>
-          </QuestionList>
-        </QuestionContentContainer>
-        <div style={{width:"100%", display:"flex", justifyContent:"center"}}>
-          <NextButton style={{backgroundColor:"#B7B7B7", width:"160px", marginRight:"10px"}} onClick={backOnClick}>Back</NextButton>
-          <NextButton style={{width:"160px"}} onClick={nextOnClick}>Finish</NextButton>
-        </div>
-        </WhiteBox>
-        </>:<>{pageState==-1?<>
-        <WhiteBox>
-          <QuestionTitle>Register</QuestionTitle>
-          <Container>
-      <InputContainer>
-        <NameContainer>
-          <InputField
-            type={InputType.TEXT}
-            title="last name"
-            onChange={(name: string) => setLastName(name)}
-          />
-          <InputField
-            type={InputType.TEXT}
-            title="first name"
-            onChange={(name: string) => setFirstName(name)}
-          />
-          {/* <Name placeholder="Last name" style={{ marginRight: "20px" }}>
+                              onChange={handlePreferredArea}
+                            />
+                          </QuestionItem>
+                          <OtherBlock>
+                            <OtherTitle>Others (fill in)</OtherTitle>
+                            <OtherInput
+                              type="text"
+                              value={preferredAreaOther}
+                              onChange={(e) =>
+                                handlePreferredAreaOther(e.target.value)
+                              }
+                            ></OtherInput>
+                          </OtherBlock>
+                        </QuestionList>
+                      </QuestionContentContainer>
+                      <div
+                        style={{
+                          width: "100%",
+                          display: "flex",
+                          justifyContent: "center",
+                        }}
+                      >
+                        <NextButton
+                          style={{
+                            backgroundColor: "#B7B7B7",
+                            width: "160px",
+                            marginRight: "10px",
+                          }}
+                          onClick={backOnClick}
+                        >
+                          Back
+                        </NextButton>
+                        <NextButton
+                          style={{ width: "160px" }}
+                          onClick={nextOnClick}
+                        >
+                          Finish
+                        </NextButton>
+                      </div>
+                    </WhiteBox>
+                  </>
+                ) : (
+                  <>
+                    {pageState == -1 ? (
+                      <>
+                        <WhiteBox>
+                          <QuestionTitle>Register</QuestionTitle>
+                          <Container>
+                            <InputContainer>
+                              <NameContainer>
+                                <InputField
+                                  type={InputType.TEXT}
+                                  title="last name"
+                                  onChange={(name: string) => setLastName(name)}
+                                />
+                                <InputField
+                                  type={InputType.TEXT}
+                                  title="first name"
+                                  onChange={(name: string) =>
+                                    setFirstName(name)
+                                  }
+                                />
+                                {/* <Name placeholder="Last name" style={{ marginRight: "20px" }}>
           </Name>
           <Name placeholder="First name">
           </Name> */}
-        </NameContainer>
-        <KakaoTitle>
-          <RiKakaoTalkFill style={{ fontSize: "20px", marginRight: "10px" }} />
-          <div>Kakao Talk ID</div>
-        </KakaoTitle>
-        <InputField
-          type={InputType.TEXT}
-          title="kakao ID"
-          onChange={(kakaoId: string) => setKakaoId(kakaoId)}
-        />
-        <InputField
-          type={InputType.EMAIL}
-          title="email"
-          onChange={(email: string) => setEmail(email)}
-        />
-        <InputField
-          type={InputType.PASSWORD}
-          title="password"
-          onChange={(password: string) => {
-            setPassword(password);
-            setPassword2(password);
-          }}
-        />
-        <InputField
-          type={InputType.PASSWORD}
-          title="password confirmation"
-          onChange={(password: string) => {  
-            setPasswordConfirm(password)
-            setPasswordConfirm2(password)
-          }}
-        />
+                              </NameContainer>
+                              <KakaoTitle>
+                                <RiKakaoTalkFill
+                                  style={{
+                                    fontSize: "20px",
+                                    marginRight: "10px",
+                                  }}
+                                />
+                                <div>Kakao Talk ID</div>
+                              </KakaoTitle>
+                              <InputField
+                                type={InputType.TEXT}
+                                title="kakao ID"
+                                onChange={(kakaoId: string) =>
+                                  setKakaoId(kakaoId)
+                                }
+                              />
+                              <InputField
+                                type={InputType.EMAIL}
+                                title="email"
+                                onChange={(email: string) => setEmail(email)}
+                              />
+                              <InputField
+                                type={InputType.PASSWORD}
+                                title="password"
+                                onChange={(password: string) => {
+                                  setPassword(password);
+                                  setPassword2(password);
+                                }}
+                              />
+                              <InputField
+                                type={InputType.PASSWORD}
+                                title="password confirmation"
+                                onChange={(password: string) => {
+                                  setPasswordConfirm(password);
+                                  setPasswordConfirm2(password);
+                                }}
+                              />
 
-        <BankerOrAgentContainer>
-          <BankerOrAgentCheckButton
-            onChange={(e) => {
-              setIsAgent(e.target.checked);
-            }}
-          ></BankerOrAgentCheckButton>
-          <BankerOrAgentContent>
-            I'm private banker or real estate agent
-          </BankerOrAgentContent>
-        </BankerOrAgentContainer>
-      </InputContainer>
-      <ButtonContainer style={{marginTop:"20px"}}>
-        <RegisterButton onClick={nextOnClick2}>Sign Up</RegisterButton>
-        <div style={{width:"410px", alignItems:"left", textAlign:"left"}}>
-        <RegisterButton style={{width:"170px", backgroundColor:"#FEE500", marginTop:"20px", fontWeight:400}}>
-          <RiKakaoTalkFill style={{ fontSize: "23px", marginRight: "5px" }} />
-          카카오 로그인</RegisterButton>
-        </div>
-        {/* <Link to="/auth/login">
+                              <BankerOrAgentContainer>
+                                <BankerOrAgentCheckButton
+                                  onChange={(e) => {
+                                    setIsAgent(e.target.checked);
+                                  }}
+                                ></BankerOrAgentCheckButton>
+                                <BankerOrAgentContent>
+                                  I'm private banker or real estate agent
+                                </BankerOrAgentContent>
+                              </BankerOrAgentContainer>
+                            </InputContainer>
+                            <ButtonContainer style={{ marginTop: "20px" }}>
+                              <RegisterButton onClick={nextOnClick2}>
+                                Sign Up
+                              </RegisterButton>
+                              <div
+                                onClick={onClickKakaoLogin}
+                                style={{
+                                  width: "410px",
+                                  alignItems: "left",
+                                  textAlign: "left",
+                                }}
+                              >
+                                <RegisterButton
+                                  style={{
+                                    width: "170px",
+                                    backgroundColor: "#FEE500",
+                                    marginTop: "20px",
+                                    fontWeight: 400,
+                                  }}
+                                >
+                                  <RiKakaoTalkFill
+                                    style={{
+                                      fontSize: "23px",
+                                      marginRight: "5px",
+                                    }}
+                                  />
+                                  카카오 로그인
+                                </RegisterButton>
+                              </div>
+                              {/* <Link to="/auth/login">
           <LoginButton>Login</LoginButton>
         </Link> */}
-      </ButtonContainer>
-    </Container>
-    </WhiteBox>
-        </>:<> 
-        <div style={{fontSize:"65px", fontWeight:"bold"}}>Congratulations!</div>
-        <img src={Congratulation}/>
-        <div style={{width:"100%"}}>
-          {/* <Link to="/asset/assetList"> */}
-            <NextButton onClick={onTrySignUp}>Get Started!</NextButton>
-          {/* </Link> */}
-        </div></>}
-        </>}</>}
-        </>}
-      <StepContainer>
-        {pageState == 0 ? <StepButton2 style={{backgroundColor:"#170505"}}/> : <StepButton2 onClick={()=>{setPageState(0)}}/>}
-        {pageState == 1 ? <StepButton2 style={{backgroundColor:"#170505"}}/> : <StepButton2 onClick={()=>{setPageState(1)}}/>}
-        {pageState == 2 ? <StepButton2 style={{backgroundColor:"#170505"}}/> : <StepButton2 onClick={()=>{setPageState(2)}}/>}
-      </StepContainer>
-    </NewContainer>
+                            </ButtonContainer>
+                          </Container>
+                        </WhiteBox>
+                      </>
+                    ) : (
+                      <>
+                        <div style={{ fontSize: "65px", fontWeight: "bold" }}>
+                          Congratulations!
+                        </div>
+                        <img src={Congratulation} />
+                        <div style={{ width: "100%" }}>
+                          {/* <Link to="/asset/assetList"> */}
+                          <NextButton onClick={onTrySignUp}>
+                            Get Started!
+                          </NextButton>
+                          {/* </Link> */}
+                        </div>
+                      </>
+                    )}
+                  </>
+                )}
+              </>
+            )}
+          </>
+        )}
+        <StepContainer>
+          {pageState == 0 ? (
+            <StepButton2 style={{ backgroundColor: "#170505" }} />
+          ) : (
+            <StepButton2
+              onClick={() => {
+                setPageState(0);
+              }}
+            />
+          )}
+          {pageState == 1 ? (
+            <StepButton2 style={{ backgroundColor: "#170505" }} />
+          ) : (
+            <StepButton2
+              onClick={() => {
+                setPageState(1);
+              }}
+            />
+          )}
+          {pageState == 2 ? (
+            <StepButton2 style={{ backgroundColor: "#170505" }} />
+          ) : (
+            <StepButton2
+              onClick={() => {
+                setPageState(2);
+              }}
+            />
+          )}
+        </StepContainer>
+      </NewContainer>
     </>
   );
 };
@@ -502,19 +679,19 @@ const NewContainer = styled.div`
   // height: 932px;
   width: 972px;
   border-radius: 30px;
-  background-color: #F2F2F2;
+  background-color: #f2f2f2;
   margin-top: 36px;
   padding: 44px;
   // display: flex;
-  text-align:center;
+  text-align: center;
   padding-bottom: 25px;
-`
+`;
 
 const MainText = styled.div`
   font-size: 36px;
   color: #000000;
   font-weight: bold;
-`
+`;
 
 const WhiteBox = styled.div`
   margin-top: 40px;
@@ -522,26 +699,26 @@ const WhiteBox = styled.div`
   padding-bottom: 46px;
   background-color: white;
   position: relative;
-`
+`;
 
 const NextButton = styled.button`
   border: 0;
-  background-color: #FBBB00;
+  background-color: #fbbb00;
   color: white;
   width: 248px;
   height: 42px;
   border-radius: 25px;
   text-align: center;
-  margin-top: 60px
-`
+  margin-top: 60px;
+`;
 const StepButton2 = styled.button`
   width: 17px;
   height: 17px;
   border-radius: 10px;
-  background-color: #C4C4C4;
-  margin: 8px; 
+  background-color: #c4c4c4;
+  margin: 8px;
   border: 0;
-`
+`;
 
 const StepMark = styled.div`
   border: 0;
@@ -557,18 +734,16 @@ const StepMark = styled.div`
   margin-top: -25px;
   padding-top: 8px;
   margin-left: 320px;
-`
+`;
 const StepContainer = styled.div`
   display: flex;
   width: 100%;
   margin-top: 20px;
   justify-content: center;
   // justify-content: space-around;
-`
+`;
 
-const QuestionBox = styled.div`
-
-`
+const QuestionBox = styled.div``;
 
 const Container = styled.div``;
 const InputContainer = styled.div`
@@ -691,7 +866,7 @@ const QuestionTitle = styled.div`
 const QuestionLittleTitle = styled.div`
   font-size: 18px;
   padding-top: 10px;
-`
+`;
 const QuestionIcon = styled.div`
   width: 44px;
   height: 100%;
@@ -801,22 +976,23 @@ const OtherInput = styled.input.attrs({
   width: 200px;
 `;
 
-const sliderStyle = {  // Give the slider some width
-  position: 'relative',
-  width: '100%',
+const sliderStyle = {
+  // Give the slider some width
+  position: "relative",
+  width: "100%",
   height: 80,
   border: 0,
-  marginTop: '40px',
-  marginLeft:"0px"
-}
+  marginTop: "40px",
+  marginLeft: "0px",
+};
 
 const railStyle = {
-  position: 'absolute',
-  width: '100%',
+  position: "absolute",
+  width: "100%",
   height: 20,
   marginTop: 30,
   borderRadius: 5,
-  backgroundColor: '#E2E0FF',
-}
+  backgroundColor: "#E2E0FF",
+};
 
 export default RegisterPresenter2;

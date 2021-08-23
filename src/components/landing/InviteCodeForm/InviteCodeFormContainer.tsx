@@ -6,7 +6,7 @@ import { AuthContext } from "../../../router/config/Provider/AuthProvider";
 import styled from "styled-components";
 import InviteCodeFormPresenter from "./InviteCodeFormPresenter";
 import InviteCodeFormEtcPresenter from "./InviteCodeFormEtcPresenter";
-import VideoPlayerPresenter from "../../../views/Homepage/videoPlayerPresenter";
+
 import HelipadIs from "./HelipadIs";
 import OurMission from "./OurMission";
 import OurArea from "./OurArea";

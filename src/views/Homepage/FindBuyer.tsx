@@ -1,16 +1,42 @@
 import styled from "styled-components";
 import findBuyer from "../../images/Homepage/findBuyer.jpg";
 import { ReactComponent as ArrowSvg } from "../../images/Homepage/FindBuyer/navArrow.svg";
+import React, { useContext, useEffect, useState } from "react";
+import { useTranslation } from 'react-i18next';
+import { Languages, languages } from '../../Locales/i18n';
+
 const FindBuyer = () => {
+  const { t, i18n } = useTranslation();
+  
+  const handleChangeLanguage = (lang: Languages) => {
+    i18n.changeLanguage(lang);
+  }
+
+  useEffect(()=>{
+    function checkLanguage(){
+      let currentLanguage = localStorage.getItem('language');
+      console.log(currentLanguage)
+
+      if(currentLanguage=="en" || currentLanguage=="ko"){
+        handleChangeLanguage(currentLanguage)
+      }
+    }
+
+    window.addEventListener('storage', checkLanguage)
+
+    return () => {
+      window.removeEventListener('storage', checkLanguage)
+    }
+  },[])
+
   return (
     <Container>
       <ContentContainer>
         <TitleWrapper>
           <Category>부동산 판매</Category>
-          <Title>Find the Right Buyer</Title>
+          <Title>{t('main_3')}</Title>
           <SubTitle>
-            Let Helipad market your property in the best way possible and stand
-            out among the crowd.
+          {t('main_4')}
           </SubTitle>
         </TitleWrapper>
         <ContentWrapper>

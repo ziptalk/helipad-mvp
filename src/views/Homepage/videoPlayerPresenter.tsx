@@ -8,11 +8,12 @@ const VideoPlayerPresenter = () => {
   useEffect(() => {
     console.log("videoFileUrl", videoFileUrl);
     videoUrl && setVideoFileUrl(videoUrl);
+    console.log("video");
   }, []);
   return (
     <Container>
-      <video id="video" muted autoPlay={true} loop={true}>
-        <source src={videoFileUrl} type="video/mp4" />
+      <video id="video" muted autoPlay loop={true}>
+        <source src={videoUrl} type="video/mp4" />
       </video>
     </Container>
   );

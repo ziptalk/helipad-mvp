@@ -1,21 +1,51 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { ReactComponent as ArrowSvg } from "../../images/Homepage/arrow.svg";
+import React, { useContext, useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { Languages, languages } from "../../Locales/i18n";
+
 const Main = () => {
+  const { t, i18n } = useTranslation();
+
+  const handleChangeLanguage = (lang: Languages) => {
+    i18n.changeLanguage(lang);
+  };
+
+  useEffect(() => {
+    function checkLanguage() {
+      let currentLanguage = localStorage.getItem("language");
+      console.log(currentLanguage);
+
+      if (currentLanguage == "en" || currentLanguage == "ko") {
+        handleChangeLanguage(currentLanguage);
+      }
+    }
+
+    window.addEventListener("storage", checkLanguage);
+
+    return () => {
+      window.removeEventListener("storage", checkLanguage);
+    };
+  }, []);
+
   return (
     <Container>
       <ContentContainer>
         <TitleWrapper>
           <TitleBlock>
-            <Title>미국 부동산 투자가</Title>
-            <Title>쉬워진다.</Title>
+            <Title>
+              미국 부동산 투자가 <b>쉬워진다.</b>
+            </Title>
             <Divider></Divider>
-            <SubTitle>다음 미국 부동산을 찾고, 구매하고, 관리할 수 있</SubTitle>
-            <SubTitle>도록 도와드리겠습니다.</SubTitle>
+            <SubTitle>
+              다음 미국 부동산을 찾고, 구매하고, 관리할 수 있도록
+              도와드리겠습니다.
+            </SubTitle>
           </TitleBlock>
         </TitleWrapper>
         <ButtonWrapper>
-          <StyledLink to="/auth/waitlist">JOIN THE WAITLIST</StyledLink>
+          <StyledLink to="/auth/waitlist">{t("join_the_waitlist")}</StyledLink>
           <StyledLink to="/auth/vipclient">VIP 코드 입력</StyledLink>
         </ButtonWrapper>
         <ArrowWrapper>
@@ -34,13 +64,13 @@ const Container = styled.div`
   position: absolute;
   top: 0px;
   width: 100%;
-  height: 100vh;
+  height: 90vh;
 `;
 const ContentContainer = styled.div`
   margin: 0 auto;
   max-width: 1904px;
   width: 100%;
-  height: 100vh;
+  height: 90vh;
 
   /* background-color: black; */
   background: transparent;
@@ -54,16 +84,18 @@ const TitleWrapper = styled.div`
   margin-top: 100px;
   /* background-color: yellow; */
   width: 100%;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-areas: "first second";
+  display: flex;
+  justify-content: center;
   margin-bottom: 250px;
 `;
 const TitleBlock = styled.div`
-  grid-area: second;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `;
 const Title = styled.div`
-  font-size: clamp(48px, 3.5vw, 72px);
+  font-size: clamp(48px, 3.7vw, 72px);
   font-style: normal;
   font-weight: 500;
   line-height: 100px;
@@ -78,7 +110,7 @@ const Divider = styled.div`
   margin-bottom: 37px;
 `;
 const SubTitle = styled.div`
-  font-size: clamp(24px, 1.8vw, 36px);
+  font-size: clamp(16px, 1.8vw, 24px);
   font-style: normal;
   font-weight: 400;
   line-height: 52px;
@@ -110,6 +142,9 @@ const StyledLink = styled(Link)`
   letter-spacing: 0px;
   text-align: center;
 `;
-const ArrowWrapper = styled.div``;
+const ArrowWrapper = styled.div`
+  position: absolute;
+  bottom: 2vh;
+`;
 const StyledArrow = styled(ArrowSvg)``;
 export default Main;

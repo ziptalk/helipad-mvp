@@ -4,10 +4,34 @@ import { AuthContext } from "../../../../router/config/Provider/AuthProvider";
 import { userStore, firebase } from "../../../../shared/Firebase";
 import { useHistory } from "react-router-dom";
 import Group from "../../../../images/Group.png";
+import { useTranslation } from 'react-i18next';
+import { Languages, languages } from '../../../../Locales/i18n';
 
 
 const Waitlist = () => {
     const { user } = useContext(AuthContext);
+    const { t, i18n } = useTranslation();
+  
+  const handleChangeLanguage = (lang: Languages) => {
+    i18n.changeLanguage(lang);
+  }
+
+  useEffect(()=>{
+    function checkLanguage(){
+      let currentLanguage = localStorage.getItem('language');
+      console.log(currentLanguage)
+
+      if(currentLanguage=="en" || currentLanguage=="ko"){
+        handleChangeLanguage(currentLanguage)
+      }
+    }
+
+    window.addEventListener('storage', checkLanguage)
+
+    return () => {
+      window.removeEventListener('storage', checkLanguage)
+    }
+  },[])
 
   async function getUserInfo() {
     if (user) {
@@ -31,19 +55,21 @@ const Waitlist = () => {
   return (
     <Container>
       <img style={{paddingTop:"132px"}} src={Group}/>
-      <MainText>Join the Waitlist</MainText>
+      <MainText>{t('waitlist_1')}</MainText>
       <div style={{display:"flex", width:"100%", justifyContent:'center'}}>
         <MiddleLine/>
       </div>
       <ContextBox>
-        <div>Helipad is a full service international real estate brokerage that helps</div>
-        <div style={{marginBottom:"30px"}}>buyers from Asia buy US properties.</div>
-        <div>We have only offered this service to referral-only high net worth private</div>
-        <div>banking clients inthe past, and now are opening up our client base.</div>
+        <div style={{display:"flex", justifyContent:"center", marginBottom:"30px"}}>
+          <div style={{width:"850px"}}>{t('waitlist_2')}</div>
+          </div>
+          <div style={{display:"flex", justifyContent:"center"}}>
+          <div style={{width:"870px"}}>{t('waitlist_3')}</div>
+          </div>
       </ContextBox>
       <InputContainer>
         <InputBox placeholder="Email"/>
-        <JoinButton>Join the Waitlist</JoinButton>
+        <JoinButton>{t('waitlist_4')}</JoinButton>
       </InputContainer>
     </Container>
   );

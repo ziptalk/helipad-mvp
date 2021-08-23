@@ -4,6 +4,8 @@ import "react-dropdown/style.css";
 import styled from "styled-components";
 import UnopDropdown from "unop-react-dropdown";
 import User from "../model/User";
+import { useTranslation } from "react-i18next";
+
 type DropdownMenuProps = {
   mypageOrRegister: string;
   signOutOrSignIn: string;
@@ -26,6 +28,9 @@ const DropdownMenu = ({
   Component,
   setGlobalIconCategory,
 }: any) => {
+  const [language, setLanguage] = useState("english");
+  const { t, i18n } = useTranslation();
+
   const history = useHistory();
   const onClick = (event: any) => {
     const clickedButton = event.target.innerText;
@@ -53,10 +58,22 @@ const DropdownMenu = ({
       case MenuName.KOREAN:
         window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
         setGlobalIconCategory(MenuName.KOREAN);
+        localStorage.setItem('language', 'ko')
+        i18n.changeLanguage('ko', (err, t) => {
+          if (err) return console.log('something went wrong loading', err);
+          t('key'); // -> same as i18next.t
+        });
+        console.log("korean")
         break;
       case MenuName.ENGLISH:
         window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
         setGlobalIconCategory(MenuName.ENGLISH);
+        localStorage.setItem('language', 'en')
+        i18n.changeLanguage('en', (err, t) => {
+          if (err) return console.log('something went wrong loading', err);
+          t('key'); // -> same as i18next.t
+        });
+        console.log("english")
         break;
       default:
         console.log("default");

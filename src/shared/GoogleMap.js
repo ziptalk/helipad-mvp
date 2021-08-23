@@ -48,15 +48,21 @@ export class MapContainer extends React.Component {
               <Marker
                 key="marker_1"
                 icon={{
-                  url: "https://ifh.cc/g/IlY3eY.png",
+                  url: "https://ifh.cc/g/EGgW8m.png",
                   anchor: new window.google.maps.Point(17, 46),
-                  scaledSize: new window.google.maps.Size(50, 37),
+                  scaledSize: new window.google.maps.Size(80, 50),
                 }}
                 position={{
                   lat: asset.assetLat,
                   lng: asset.assetLng,
                 }}
-                label={asset.assetLabel}
+                label={{
+                  text:asset.assetLabel, 
+                  fontSize:"20px",
+                  fontWeight:"bold",
+                  color:"white",
+                  fontFamily:"Poppins"
+                }}
                 onClick={() => this.onclickToLink(asset.assetId)}
               ></Marker>
             ))}

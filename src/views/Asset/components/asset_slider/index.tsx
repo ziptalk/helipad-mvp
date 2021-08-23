@@ -477,9 +477,9 @@ class RangeSlider extends React.Component<RangeSliderProps, RangeSliderState> {
             ${valuemin?.toLocaleString("en-AU")}
           </div>
           {/* <div>${valuenow}</div> */}
-          <div style={{ marginRight: "30px", color: "#A3A3A3" }}>
+          {/* <div style={{ marginRight: "30px", color: "#A3A3A3" }}>
             ${valuemax?.toLocaleString("en-AU")}
-          </div>
+          </div> */}
         </div>
       </>
     );
