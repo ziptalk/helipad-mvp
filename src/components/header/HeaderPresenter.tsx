@@ -10,9 +10,9 @@ import { ReactComponent as ContactUsSvg } from "../../images/Header/ic_contactUs
 import BlackChatBot from "../BlackChatBot";
 import { ReactComponent as SearchSvg } from "../../images/Header/ic_search.svg";
 import DropdownMenu from "../DropdownMenu";
-import { useTranslation } from 'react-i18next';
-import { Languages, languages } from '../../Locales/i18n';
-import {useState, useEffect, useContext} from "react";
+import { useTranslation } from "react-i18next";
+import { Languages, languages } from "../../Locales/i18n";
+import { useState, useEffect, useContext } from "react";
 
 enum DropDownMenu {
   ACCOUNT = "Account",
@@ -35,27 +35,27 @@ const HeaderPresenter = ({
   userInfo,
 }: any) => {
   const { t, i18n } = useTranslation();
-  
+
   const handleChangeLanguage = (lang: Languages) => {
     i18n.changeLanguage(lang);
-  }
+  };
 
-  useEffect(()=>{
-    function checkLanguage(){
-      let currentLanguage = localStorage.getItem('language');
-      console.log(currentLanguage)
+  useEffect(() => {
+    function checkLanguage() {
+      let currentLanguage = localStorage.getItem("language");
+      console.log(currentLanguage);
 
-      if(currentLanguage=="en" || currentLanguage=="ko"){
-        handleChangeLanguage(currentLanguage)
+      if (currentLanguage == "en" || currentLanguage == "ko") {
+        handleChangeLanguage(currentLanguage);
       }
     }
 
-    window.addEventListener('storage', checkLanguage)
+    window.addEventListener("storage", checkLanguage);
 
     return () => {
-      window.removeEventListener('storage', checkLanguage)
-    }
-  },[])
+      window.removeEventListener("storage", checkLanguage);
+    };
+  }, []);
 
   console.log("header username:", userInfo);
   console.log("header mode:", headerMode);
@@ -67,33 +67,41 @@ const HeaderPresenter = ({
           <CategoryContainer authenticated={authenticated}>
             <StyledLink to="/asset/assetList">
               <CategoryName primary scrollMove={scrollMove} color={headerMode}>
-                {t('navigation_1')}
+                {t("navigation_1")}
               </CategoryName>
             </StyledLink>
-            <StyledLink to="/asset/assetList">
+            <StyledLink to="/sellpage">
               <CategoryName primary scrollMove={scrollMove} color={headerMode}>
-              {t('navigation_2')}
+                {t("navigation_2")}
               </CategoryName>
             </StyledLink>
-            <StyledLink to="/">
-              {t('navigation_3') == "임대 관리" ? <>
-              <CategoryName scrollMove={scrollMove} color={headerMode}>
-              {t('navigation_3')}
-              </CategoryName></>:<>
-              <CategoryName style={{width:"170px"}} scrollMove={scrollMove} color={headerMode}>
-              {t('navigation_3')}
-              </CategoryName>
-              </>}
-              
+            <StyledLink to="/propertyManagement">
+              {t("navigation_3") == "임대 관리" ? (
+                <>
+                  <CategoryName scrollMove={scrollMove} color={headerMode}>
+                    {t("navigation_3")}
+                  </CategoryName>
+                </>
+              ) : (
+                <>
+                  <CategoryName
+                    style={{ width: "170px" }}
+                    scrollMove={scrollMove}
+                    color={headerMode}
+                  >
+                    {t("navigation_3")}
+                  </CategoryName>
+                </>
+              )}
             </StyledLink>
             <StyledLink to="/asset/assetList">
               <CategoryName scrollMove={scrollMove} color={headerMode}>
-              {t('navigation_4')}
+                {t("navigation_4")}
               </CategoryName>
             </StyledLink>
             <StyledLink to="/aboutus">
               <CategoryName scrollMove={scrollMove} color={headerMode}>
-              {t('navigation_5')}
+                {t("navigation_5")}
               </CategoryName>
             </StyledLink>
           </CategoryContainer>

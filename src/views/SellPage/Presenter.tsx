@@ -36,8 +36,8 @@ const ContentContainer = styled.div`
 const TitleWrapper = styled.div`
   position: absolute;
   z-index: 1;
-  top: clamp(350px, 30vh, 450px);
-  left: clamp(200px, 20vw, 300px);
+  top: clamp(380px, 30vh, 650px);
+  left: clamp(200px, 20vw, 350px);
 `;
 const Title = styled.div`
   font-size: clamp(48px, 3.7vw, 72px);
