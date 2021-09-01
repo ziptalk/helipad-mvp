@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { ReactComponent as WhiteLogoSvg } from "../../images/Header/ic_logo_white.svg";
 import { ReactComponent as BlackLogoSvg } from "../../images/Header/ic_logo_black.svg";
+// import { ReactComponent as BlackLogoSvg } from "../../images/Header/ic_newLogo_black.svg";
 import { ReactComponent as BlackUserSvg } from "../../images/Header/ic_blackUser.svg";
 import { ReactComponent as WhiteUserSvg } from "../../images/Header/ic_whiteUser.svg";
 import { ReactComponent as BlackGlobalSvg } from "../../images/Header/ic_blackGlobal.svg";
@@ -57,9 +58,9 @@ const HeaderPresenter = ({
     };
   }, []);
 
-  console.log("header username:", userInfo);
-  console.log("header mode:", headerMode);
-  console.log("authenticated:", authenticated);
+  // console.log("header username:", userInfo);
+  // console.log("header mode:", headerMode);
+  // console.log("authenticated:", authenticated);
   const renderByHeaderMode = () => {
     switch (headerMode) {
       default:
@@ -84,10 +85,7 @@ const HeaderPresenter = ({
                 </>
               ) : (
                 <>
-                  <CategoryName
-                    scrollMove={scrollMove}
-                    color={headerMode}
-                  >
+                  <CategoryName scrollMove={scrollMove} color={headerMode}>
                     {t("navigation_3")}
                   </CategoryName>
                 </>
@@ -320,6 +318,22 @@ const MenuBlock = styled.div`
   display: flex;
   align-items: center;
 `;
+const LogoStyledLink = styled(Link)`
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+`;
+const LogoTitle: any = styled.div`
+  font-size: clamp(16px, 1.2vw, 24px);
+  font-weight: bold;
+  color: ${(props: any) =>
+    props.color === "contactForm" || props.color === "homepage"
+      ? "white"
+      : props.color === "neighborhoodList"
+      ? "black"
+      : "black"};
+  color: ${(props: any) => props.scrollMove && "black"};
+`;
 const BlackLogo: any = styled(BlackLogoSvg)`
   margin-left: 1vw;
   position: relative;
@@ -334,7 +348,7 @@ const BlackLogo: any = styled(BlackLogoSvg)`
 
   @media ${({ theme }) => theme.mediaQueryOnDevice.notebookS} {
     margin-left: 4vw;
-    width: 150px;
+    width: 120px;
   }
 `;
 const CategoryName: any = styled.div`
